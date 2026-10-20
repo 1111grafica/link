@@ -31,16 +31,13 @@
             /* Atmósfera Pastel Veraniega / Primaveral */
             --bg-base: #F4F8F1;
             --bg-card: #FFFFFF;
-            --bg-card-hover: #FFFFFF;
             --border-card: rgba(140, 195, 120, 0.65);
-            --border-card-hover: rgba(233, 137, 183, 0.95);
 
             --text-main: #142211;
             --text-muted: #4D6048;
             --text-light: #6F846A;
 
             --shadow-card: 0 4px 16px -2px rgba(60, 105, 45, 0.10), 0 2px 6px rgba(0, 0, 0, 0.04);
-            --shadow-hover: 0 14px 32px -4px rgba(233, 137, 183, 0.28), 0 4px 12px rgba(160, 209, 143, 0.2);
             --spring: cubic-bezier(0.16, 1, 0.3, 1);
         }
 
@@ -57,7 +54,8 @@
         }
 
         body {
-            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-feature-settings: "cv02", "cv03", "cv04", "cv11";
             background: transparent;
             color: var(--text-main);
             min-height: 100vh;
@@ -69,6 +67,8 @@
             overflow-x: hidden;
             position: relative;
             letter-spacing: -0.015em;
+            text-rendering: optimizeLegibility;
+            -webkit-font-smoothing: antialiased;
         }
 
         body.preload * {
@@ -76,7 +76,7 @@
             animation: none !important;
         }
 
-        /* FONDO LUMINOSO & DERIVA DIAGONAL CON ISOTIPO 1111 */
+        /* FONDO LUMINOSO & DERIVA DIAGONAL */
         .ambient-canvas {
             position: fixed;
             top: 0;
@@ -87,6 +87,7 @@
             background: radial-gradient(circle at 50% 12%, #FFFFFF 0%, #F3F8F0 45%, #E6F1E1 100%);
             overflow: hidden;
             pointer-events: none;
+            transform: translateZ(0);
         }
 
         .spring-spotlight {
@@ -99,6 +100,7 @@
             background: radial-gradient(ellipse at 50% 30%, rgba(233, 137, 183, 0.28) 0%, rgba(160, 209, 143, 0.22) 45%, transparent 75%);
             filter: blur(80px);
             z-index: 1;
+            will-change: transform;
         }
 
         .summer-sun-glow {
@@ -110,9 +112,9 @@
             background: radial-gradient(circle, rgba(255, 237, 160, 0.32) 0%, rgba(160, 209, 143, 0.15) 50%, transparent 80%);
             filter: blur(85px);
             z-index: 1;
+            will-change: transform;
         }
 
-        /* PATRÓN REPETITIVO DEL 1111 CON PRESENCIA ORIGINAL */
         .stencil-1111-pattern {
             position: absolute;
             top: -20%;
@@ -125,6 +127,7 @@
             background-size: 190px auto;
             transform: rotate(-14deg);
             animation: patternDrift 45s infinite linear;
+            will-change: background-position;
         }
 
         @keyframes patternDrift {
@@ -148,12 +151,13 @@
             align-items: center;
             justify-content: space-between;
             background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(12px);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
             border: 1.5px solid var(--border-card);
             border-radius: 999px;
             padding: 4px 6px;
             margin-bottom: 2px;
-            box-shadow: 0 3px 12px rgba(60, 105, 45, 0.08);
+            box-shadow: 0 3px 12px rgba(60, 105, 45, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.9);
         }
 
         .lang-badge-hint {
@@ -258,9 +262,7 @@
             max-width: 92%;
         }
 
-        /* =========================================================
-           BARRA REDES SOCIALES: PROPORCIÓN Y EQUILIBRIO PERFECTO
-           ========================================================= */
+        /* BARRA REDES SOCIALES */
         .social-bar {
             display: flex;
             align-items: center;
@@ -280,9 +282,10 @@
             border: 1.5px solid var(--border-card);
             color: var(--brand-green-deep);
             text-decoration: none;
-            box-shadow: 0 4px 12px rgba(60, 105, 45, 0.08);
+            box-shadow: 0 4px 12px rgba(60, 105, 45, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.9);
             transition: all 0.22s var(--spring);
             flex-shrink: 0;
+            transform: translateZ(0);
         }
 
         .social-btn:hover {
@@ -292,7 +295,6 @@
             box-shadow: 0 6px 16px var(--brand-pink-glow);
         }
 
-        /* TAMAÑO Y CENTRADO ÓPTICO EQUIVALENTE PARA LOS 3 ICONOS */
         .social-btn svg {
             width: 21px;
             height: 21px;
@@ -300,9 +302,7 @@
             flex-shrink: 0;
         }
 
-        /* =========================================================
-           TARJETAS / BOTONES INTERACTIVOS CON COLORIMETRÍA PROPIA
-           ========================================================= */
+        /* TARJETAS / BOTONES INTERACTIVOS */
         .btn-card {
             display: flex;
             align-items: center;
@@ -314,23 +314,24 @@
             border-radius: 18px;
             text-decoration: none;
             color: var(--text-main);
-            box-shadow: var(--shadow-card);
-            transition: all 0.25s var(--spring);
+            box-shadow: var(--shadow-card), inset 0 1px 0 rgba(255, 255, 255, 0.85);
+            transition: transform 0.22s var(--spring), box-shadow 0.22s ease;
             position: relative;
             user-select: none;
             cursor: pointer;
+            transform: translateZ(0);
         }
 
         .btn-card:hover {
             transform: translateY(-2px);
         }
 
-        /* 1. WHATSAPP HERO (VERDE ESMERALDA) */
+        /* 1. WHATSAPP HERO */
         .btn-card.hero-featured {
             background: linear-gradient(135deg, #FFFFFF 0%, #F2F9EE 100%);
             border: 1.8px solid var(--brand-green-deep);
             border-left: 6px solid var(--brand-green-deep);
-            box-shadow: 0 10px 26px -2px rgba(65, 123, 46, 0.22);
+            box-shadow: 0 10px 26px -2px rgba(65, 123, 46, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.9);
         }
         .btn-card.hero-featured:hover {
             border-color: var(--brand-green-deep);
@@ -346,7 +347,7 @@
             color: #FFFFFF;
         }
 
-        /* 2. INSTAGRAM (MAGENTA EDITORIAL) */
+        /* 2. INSTAGRAM */
         .btn-card.card-insta {
             border-left: 5px solid #E1306C;
             background: linear-gradient(135deg, #FFFFFF 0%, #FDF4F7 100%);
@@ -365,7 +366,7 @@
             color: #FFFFFF;
         }
 
-        /* 3. TRABAJOS DE GRÁFICA (VERDE BOSQUE) */
+        /* 3. TRABAJOS DE GRÁFICA */
         .btn-card.card-print {
             border-left: 5px solid #387D25;
             background: linear-gradient(135deg, #FFFFFF 0%, #F4F9F2 100%);
@@ -384,7 +385,7 @@
             color: #FFFFFF;
         }
 
-        /* 4. DISEÑO GRÁFICO PDF (ROSA PROFUNDO DGI) */
+        /* 4. DISEÑO GRÁFICO PDF */
         .btn-card.card-pdf {
             border-left: 5px solid var(--brand-pink-deep);
             background: linear-gradient(135deg, #FFFFFF 0%, #FDF2F8 100%);
@@ -403,7 +404,7 @@
             color: #FFFFFF;
         }
 
-        /* 5. SOLUCIONES DIGITALES & SOFTWARE (AZUL TECNOLÓGICO) */
+        /* 5. SOLUCIONES DIGITALES & SOFTWARE (DIRECTO A CLIENTES.HTML) */
         .btn-card.card-soft {
             border-left: 5px solid #0284C7;
             background: linear-gradient(135deg, #FFFFFF 0%, #F0F9FF 100%);
@@ -422,7 +423,7 @@
             color: #FFFFFF;
         }
 
-        /* 6. CORREO ELECTRÓNICO (GRAFITO / SLATE) */
+        /* 6. CORREO ELECTRÓNICO */
         .btn-card.card-mail {
             border-left: 5px solid #475569;
             background: linear-gradient(135deg, #FFFFFF 0%, #F8FAFC 100%);
@@ -528,6 +529,7 @@
             inset: 0;
             background: rgba(20, 32, 18, 0.70);
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             z-index: 2000;
             display: none;
             align-items: center;
@@ -551,7 +553,7 @@
             max-height: 86vh;
             overflow-y: auto;
             padding: 20px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.24);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.24), inset 0 1px 0 rgba(255, 255, 255, 0.9);
             display: flex;
             flex-direction: column;
             gap: 12px;
@@ -607,6 +609,7 @@
             max-height: 52vh;
             overflow-y: auto;
             padding-right: 2px;
+            contain: content;
         }
 
         .gallery-item-wrap {
@@ -621,6 +624,7 @@
             background: linear-gradient(90deg, #F0F6EE 25%, #E6F0E3 50%, #F0F6EE 75%);
             background-size: 200% 100%;
             animation: skeletonGlow 1.4s infinite ease-in-out;
+            transform: translateZ(0);
         }
 
         @keyframes skeletonGlow {
@@ -651,123 +655,13 @@
             opacity: 1;
         }
 
-        /* TARJETAS DENTRO DEL MODAL DE SOFTWARE (COLORIMETRÍA INDIVIDUAL) */
-        .software-cards-list {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .software-card-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 12px 14px;
-            border-radius: 16px;
-            background: #FFFFFF;
-            border: 1.5px solid var(--border-card);
-            text-decoration: none;
-            color: var(--text-main);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-            transition: all 0.22s var(--spring);
-        }
-
-        .software-card-item:hover {
-            transform: translateY(-2px);
-        }
-
-        .software-card-item.soft-baldoria {
-            border-left: 5px solid #FF616F;
-            background: linear-gradient(135deg, #FFFFFF 0%, #FFF5F6 100%);
-        }
-        .software-card-item.soft-baldoria:hover {
-            border-color: #FF616F;
-            box-shadow: 0 8px 20px rgba(255, 97, 111, 0.25);
-        }
-
-        .software-card-item.soft-blackcenter {
-            background: linear-gradient(135deg, #12151D 0%, #1A1F2B 100%);
-            border: 1.5px solid #FFC700;
-            border-left: 5px solid #FFC700;
-            color: #FFFFFF;
-        }
-        .software-card-item.soft-blackcenter:hover {
-            border-color: #FFFFFF;
-            box-shadow: 0 8px 24px rgba(255, 199, 0, 0.35);
-        }
-        .software-card-item.soft-blackcenter .soft-name { color: #FFFFFF; }
-        .software-card-item.soft-blackcenter .soft-tag { color: #CBD5E1; }
-        .software-card-item.soft-blackcenter .soft-badge-link {
-            color: #FFC700;
-            background: rgba(255, 199, 0, 0.15);
-            border-color: #FFC700;
-        }
-
-        .software-card-item.soft-alvear {
-            border-left: 5px solid #8E6847;
-            background: linear-gradient(135deg, #FFFFFF 0%, #FAF6F0 100%);
-        }
-        .software-card-item.soft-alvear:hover {
-            border-color: #8E6847;
-            box-shadow: 0 8px 20px rgba(142, 104, 71, 0.25);
-        }
-
-        .software-card-item.soft-frimaq {
-            border-left: 5px solid #0284C7;
-            background: linear-gradient(135deg, #FFFFFF 0%, #F0F9FF 100%);
-        }
-        .software-card-item.soft-frimaq:hover {
-            border-color: #0284C7;
-            box-shadow: 0 8px 20px rgba(2, 132, 199, 0.25);
-        }
-
-        .software-card-item.soft-fourseasons {
-            border-left: 5px solid #8B5CF6;
-            background: linear-gradient(135deg, #FFFFFF 0%, #FDF4FF 100%);
-        }
-        .software-card-item.soft-fourseasons:hover {
-            border-color: #8B5CF6;
-            box-shadow: 0 8px 20px rgba(139, 92, 246, 0.25);
-        }
-
-        .soft-meta {
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-        }
-
-        .soft-name {
-            font-family: 'Outfit', sans-serif;
-            font-size: 0.95rem;
-            font-weight: 800;
-        }
-
-        .soft-tag {
-            font-size: 0.72rem;
-            color: var(--text-muted);
-            font-weight: 600;
-        }
-
-        .soft-badge-link {
-            font-size: 0.74rem;
-            font-weight: 800;
-            color: var(--brand-pink-deep);
-            background: #FCE7F3;
-            border: 1px solid #F472B6;
-            padding: 5px 12px;
-            border-radius: 999px;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            white-space: nowrap;
-        }
-
         /* LIGHTBOX PRO */
         .lightbox-overlay {
             position: fixed;
             inset: 0;
             background: rgba(12, 18, 11, 0.94);
             backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             z-index: 5000;
             display: none;
             align-items: center;
@@ -956,24 +850,21 @@
                 Identidad visual, impresiones premium y herramientas digitales para potenciar tu negocio.
             </p>
 
-            <!-- BARRA DE REDES SOCIALES IDENTICAMENTE PROPORCIONADAS -->
+            <!-- BARRA DE REDES SOCIALES -->
             <div class="social-bar">
-                <!-- WhatsApp con trazado oficial completo y proporcionado -->
-                <a href="https://wa.me/5491131933611" target="_blank" rel="noopener noreferrer" class="social-btn" id="socialWspTop" aria-label="WhatsApp">
+                <a href="https://wa.me/5491131933611" target="_blank" rel="noopener noreferrer" class="social-btn" id="socialWspTop" aria-label="WhatsApp" onclick="playClickSound()">
                     <svg viewBox="0 0 24 24" fill="currentColor">
                         <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.41a8.17 8.17 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.44 0-2.85-.38-4.09-1.1l-.29-.17-3.05.8 1.05-2.97-.19-.31a8.163 8.163 0 0 1-1.25-4.49c0-4.54 3.7-8.24 8.24-8.24m4.53 11.37c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.25-.75-.67-1.26-1.5-1.4-1.76-.15-.25-.02-.39.11-.51.11-.11.25-.29.37-.43.13-.14.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.34-.76-1.84-.2-.49-.4-.42-.56-.43h-.47c-.17 0-.44.06-.67.31-.23.25-.87.85-.87 2.08 0 1.22.89 2.41 1.02 2.58.13.17 1.76 2.68 4.26 3.76.6.26 1.06.41 1.42.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.07-.1-.23-.17-.48-.29"/>
                     </svg>
                 </a>
-                <!-- Instagram -->
-                <a href="https://www.instagram.com/1111.grafica" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Instagram">
+                <a href="https://www.instagram.com/1111.grafica" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Instagram" onclick="playClickSound()">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
                         <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
                         <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
                     </svg>
                 </a>
-                <!-- Correo Electrónico -->
-                <a href="mailto:onceonce.grafica@gmail.com" class="social-btn" aria-label="Email">
+                <a href="mailto:onceonce.grafica@gmail.com" class="social-btn" aria-label="Email" onclick="playClickSound()">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
                         <polyline points="22,6 12,13 2,6"/>
@@ -982,8 +873,8 @@
             </div>
         </header>
 
-        <!-- BOTÓN 1: WHATSAPP DIRECTO (ÍCONO EN 32PX PROMINENTE) -->
-        <a href="https://wa.me/5491131933611" target="_blank" rel="noopener noreferrer" class="btn-card hero-featured" id="btnWspMain">
+        <!-- BOTÓN 1: WHATSAPP DIRECTO -->
+        <a href="https://wa.me/5491131933611" target="_blank" rel="noopener noreferrer" class="btn-card hero-featured" id="btnWspMain" onclick="playClickSound()">
             <div class="icon-box">
                 <svg viewBox="0 0 24 24" fill="currentColor" style="width: 32px; height: 32px;"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.099.824z"/></svg>
             </div>
@@ -998,7 +889,7 @@
         </a>
 
         <!-- BOTÓN 2: INSTAGRAM OFICIAL -->
-        <a href="https://www.instagram.com/1111.grafica" target="_blank" rel="noopener noreferrer" class="btn-card card-insta">
+        <a href="https://www.instagram.com/1111.grafica" target="_blank" rel="noopener noreferrer" class="btn-card card-insta" onclick="playClickSound()">
             <div class="icon-box">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
             </div>
@@ -1009,8 +900,8 @@
             <div class="arrow-box"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></div>
         </a>
 
-        <!-- BOTÓN 3: TRABAJOS DE GRÁFICA (GALERÍA DINÁMICA DE 50 FOTOS) -->
-        <div class="btn-card card-print" onclick="openGalleryModal()">
+        <!-- BOTÓN 3: TRABAJOS DE GRÁFICA (GALERÍA 50 FOTOS ACELERADA) -->
+        <div class="btn-card card-print" onclick="openGalleryModal(); playClickSound();">
             <div class="icon-box">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
             </div>
@@ -1025,7 +916,7 @@
         </div>
 
         <!-- BOTÓN 4: PORTFOLIO DE DISEÑO GRÁFICO EN PDF -->
-        <a href="https://onceoncegrafica-1111.github.io/1111grafica/Portfolio%20DGI%202026.pdf" class="btn-card card-pdf" id="btnPortfolioPdf">
+        <a href="https://onceoncegrafica-1111.github.io/1111grafica/Portfolio%20DGI%202026.pdf" target="_blank" rel="noopener noreferrer" class="btn-card card-pdf" id="btnPortfolioPdf" onclick="playClickSound()">
             <div class="icon-box">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
             </div>
@@ -1039,8 +930,8 @@
             <div class="arrow-box"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></div>
         </a>
 
-        <!-- BOTÓN 5: SOLUCIONES DIGITALES & SOFTWARE (CON CASOS REALES Y COLOR PROPIO) -->
-        <div class="btn-card card-soft" onclick="openSoftwareModal()">
+        <!-- BOTÓN 5: SOLUCIONES DIGITALES (CONECTADO DIRECTO A CLIENTES.HTML) -->
+        <a href="clientes.html" class="btn-card card-soft" onclick="playClickSound()">
             <div class="icon-box">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
             </div>
@@ -1052,10 +943,10 @@
                 <span class="btn-desc" id="t_btn5_desc">Páginas web, catálogos online y automatizaciones fáciles</span>
             </div>
             <div class="arrow-box"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></div>
-        </div>
+        </a>
 
         <!-- BOTÓN 6: CORREO ELECTRÓNICO -->
-        <a href="mailto:onceonce.grafica@gmail.com" class="btn-card card-mail">
+        <a href="mailto:onceonce.grafica@gmail.com" class="btn-card card-mail" onclick="playClickSound()">
             <div class="icon-box">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
             </div>
@@ -1078,12 +969,12 @@
 
     </main>
 
-    <!-- MODAL 1: GALERÍA DE 50 FOTOS (SHUFFLE ALEATORIO CADA VEZ) -->
+    <!-- MODAL: GALERÍA DE TRABAJOS (OPTIMIZADA) -->
     <div class="modal-backdrop" id="galleryModal" onclick="closeOnBackdrop(event, 'galleryModal')">
         <div class="modal-box">
             <div class="modal-header">
                 <h3 class="modal-title" id="t_modal_title">Galería de Trabajos</h3>
-                <button type="button" class="btn-close-modal" onclick="closeModal('galleryModal')">✕</button>
+                <button type="button" class="btn-close-modal" onclick="closeModal('galleryModal'); playClickSound();">✕</button>
             </div>
             <p style="font-size:0.82rem; color:var(--text-muted);" id="t_modal_desc">
                 Conocé nuestros proyectos reales de cartelería, impresiones y rotulación. Tocá cualquier foto para ampliar.
@@ -1091,95 +982,80 @@
 
             <div class="gallery-grid-dynamic" id="dynamicGalleryGrid"></div>
 
-            <a href="https://www.instagram.com/1111.grafica" target="_blank" rel="noopener noreferrer" style="background: linear-gradient(135deg, var(--brand-green) 0%, var(--brand-green-deep) 100%); color: #FFFFFF; font-size: 0.88rem; font-weight: 800; text-align: center; text-decoration: none; padding: 12px; border-radius: 14px; box-shadow: 0 4px 14px rgba(65, 123, 46, 0.3);" id="t_modal_btn">
+            <a href="https://www.instagram.com/1111.grafica" target="_blank" rel="noopener noreferrer" style="background: linear-gradient(135deg, var(--brand-green) 0%, var(--brand-green-deep) 100%); color: #FFFFFF; font-size: 0.88rem; font-weight: 800; text-align: center; text-decoration: none; padding: 12px; border-radius: 14px; box-shadow: 0 4px 14px rgba(65, 123, 46, 0.3);" id="t_modal_btn" onclick="playClickSound()">
                 Ver más en Instagram ↗
-            </a>
-        </div>
-    </div>
-
-    <!-- MODAL 2: ORDEN Y COLORIMETRÍA INDIVIDUAL POR MARCA (SINCRONIZADO) -->
-    <div class="modal-backdrop" id="softwareModal" onclick="closeOnBackdrop(event, 'softwareModal')">
-        <div class="modal-box">
-            <div class="modal-header">
-                <h3 class="modal-title" id="t_soft_title">Páginas Web & Software</h3>
-                <button type="button" class="btn-close-modal" onclick="closeModal('softwareModal')">✕</button>
-            </div>
-            <p style="font-size:0.82rem; color:var(--text-muted);" id="t_soft_desc">
-                Desarrollamos soluciones digitales, cartas interactivas y webs de alto rendimiento para comercios y marcas:
-            </p>
-
-            <div class="software-cards-list">
-                <!-- 1. BALDORIA MADRID (CORAL) -->
-                <a href="https://onceoncegrafica-1111.github.io/baldoriamadrid/" target="_blank" rel="noopener noreferrer" class="software-card-item soft-baldoria">
-                    <div class="soft-meta">
-                        <span class="soft-name">Baldoria Madrid</span>
-                        <span class="soft-tag">Gastronomía & Carta Online</span>
-                    </div>
-                    <span class="soft-badge-link">Ver Web ↗</span>
-                </a>
-
-                <!-- 2. BLACK CENTER CARS (GT4 ORO & TITANIO) -->
-                <a href="https://onceoncegrafica-1111.github.io/blackcenter/" target="_blank" rel="noopener noreferrer" class="software-card-item soft-blackcenter">
-                    <div class="soft-meta">
-                        <span class="soft-name">Black Center Cars</span>
-                        <span class="soft-tag">Detailing Ejecutivo & Telemetría GT4</span>
-                    </div>
-                    <span class="soft-badge-link">Ver Web ↗</span>
-                </a>
-
-                <!-- 3. PELUQUERÍA ALVEAR (SEPIA & BRONCE) -->
-                <a href="https://onceoncegrafica-1111.github.io/peluqueriaalvear/" target="_blank" rel="noopener noreferrer" class="software-card-item soft-alvear">
-                    <div class="soft-meta">
-                        <span class="soft-name">Peluquería Alvear</span>
-                        <span class="soft-tag">Servicios, Estilo & Reservas</span>
-                    </div>
-                    <span class="soft-badge-link">Ver Web ↗</span>
-                </a>
-
-                <!-- 4. FRIMAQ (AZUL ACERO) -->
-                <a href="https://onceoncegrafica-1111.github.io/frimaq/" target="_blank" rel="noopener noreferrer" class="software-card-item soft-frimaq">
-                    <div class="soft-meta">
-                        <span class="soft-name">Frimaq Maquinarias</span>
-                        <span class="soft-tag">Catálogo Industrial & Empresa</span>
-                    </div>
-                    <span class="soft-badge-link">Ver Web ↗</span>
-                </a>
-
-                <!-- 5. FOUR SEASONS MX (VIOLETA LUXURY) -->
-                <a href="https://onceoncegrafica-1111.github.io/fourseasonsmx/" target="_blank" rel="noopener noreferrer" class="software-card-item soft-fourseasons">
-                    <div class="soft-meta">
-                        <span class="soft-name">Four Seasons MX</span>
-                        <span class="soft-tag">Hotelería, Lujo & Experiencias</span>
-                    </div>
-                    <span class="soft-badge-link">Ver Web ↗</span>
-                </a>
-            </div>
-
-            <!-- COTIZAR SOFTWARE POR WHATSAPP (MENSAJE ADAPTADO AL IDIOMA) -->
-            <a href="https://wa.me/5491131933611" target="_blank" rel="noopener noreferrer" style="background: linear-gradient(135deg, var(--brand-pink) 0%, var(--brand-pink-deep) 100%); color: #FFFFFF; font-size: 0.88rem; font-weight: 800; text-align: center; text-decoration: none; padding: 12px; border-radius: 14px; box-shadow: 0 4px 14px var(--brand-pink-glow);" id="t_soft_cta">
-                Cotizar mi Página Web por WhatsApp ↗
             </a>
         </div>
     </div>
 
     <!-- LIGHTBOX PRO INTERACTIVO -->
     <div class="lightbox-overlay" id="lightboxView" onclick="closeLightboxOnBg(event)">
-        <button type="button" class="lb-close-btn" onclick="closeLightbox()" title="Cerrar (Esc)">✕</button>
-        <button type="button" class="lb-nav-btn lb-prev" onclick="navLightbox(-1, event)" title="Anterior">‹</button>
+        <button type="button" class="lb-close-btn" onclick="closeLightbox(); playClickSound();" title="Cerrar (Esc)">✕</button>
+        <button type="button" class="lb-nav-btn lb-prev" onclick="navLightbox(-1, event); playClickSound();" title="Anterior">‹</button>
         
         <div class="lightbox-container" id="lightboxContainer" onclick="event.stopPropagation()">
             <img src="" alt="Trabajo 1111 Gráfica" class="lightbox-img-full" id="lightboxImg">
             <span class="lb-counter" id="lightboxCounter">1 / 50</span>
         </div>
 
-        <button type="button" class="lb-nav-btn lb-next" onclick="navLightbox(1, event)" title="Siguiente">›</button>
+        <button type="button" class="lb-nav-btn lb-next" onclick="navLightbox(1, event); playClickSound();" title="Siguiente">›</button>
     </div>
 
-    <!-- SCRIPT DE FOTOS REALES, NAVEGACIÓN Y TRADUCCIÓN COMPLETA -->
+    <!-- MOTOR WEB AUDIO API + WEB WORKER INLINE DE GALERÍA + TRADUCCIONES -->
     <script>
-        const TOTAL_PHOTOS = 50;
+        /* =========================================================
+           1. MOTOR WEB AUDIO API (Baja latencia tipo GT4)
+           ========================================================= */
+        let audioCtx = null;
+        let soundBuffer = null;
+        const fallbackAudio = new Audio("./mine_gran_turismo_4_menu.mp3");
+        fallbackAudio.volume = 0.5;
 
-        // Estructura optimizada con tus carpetas miniaturas (8KB) e imagenes (HD)
+        async function initAudioEngine() {
+            try {
+                const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+                if (!AudioContextClass) return;
+                audioCtx = new AudioContextClass();
+                const res = await fetch("./mine_gran_turismo_4_menu.mp3");
+                if (res.ok) {
+                    const arrayBuffer = await res.arrayBuffer();
+                    soundBuffer = await audioCtx.decodeAudioData(arrayBuffer);
+                }
+            } catch(e) {}
+        }
+
+        function playClickSound() {
+            try {
+                if (audioCtx && soundBuffer) {
+                    if (audioCtx.state === 'suspended') audioCtx.resume();
+                    const source = audioCtx.createBufferSource();
+                    const gainNode = audioCtx.createGain();
+                    gainNode.gain.value = 0.5;
+                    source.buffer = soundBuffer;
+                    source.connect(gainNode);
+                    gainNode.connect(audioCtx.destination);
+                    source.start(0);
+                    return;
+                }
+            } catch(e) {}
+
+            try {
+                const click = fallbackAudio.cloneNode();
+                click.volume = 0.5;
+                click.play().catch(() => {});
+            } catch(e) {}
+        }
+
+        window.addEventListener('pointerdown', () => {
+            if (!audioCtx) initAudioEngine();
+            else if (audioCtx.state === 'suspended') audioCtx.resume();
+        }, { once: true });
+
+
+        /* =========================================================
+           2. GESTIÓN MULTIHILO DE LA GALERÍA (Web Worker Inline)
+           ========================================================= */
+        const TOTAL_PHOTOS = 50;
         const GITHUB_PHOTOS = Array.from({ length: TOTAL_PHOTOS }, (_, i) => ({
             id: i + 1,
             thumb: `https://cdn.jsdelivr.net/gh/onceoncegrafica-1111/1111grafica@main/miniaturas/foto_${i + 1}.webp`,
@@ -1188,51 +1064,58 @@
             fallbackFull: `./imagenes/foto_${i + 1}.webp`
         }));
 
-        let activeShuffledPhotos = [];
+        let activeShuffledPhotos = [...GITHUB_PHOTOS];
         let currentPhotoIndex = 0;
+        let galleryWorker = null;
 
-        // PRECARGA INVISIBLE EN SEGUNDO PLANO
-        function startBackgroundPreload() {
-            setTimeout(() => {
-                GITHUB_PHOTOS.slice(0, 18).forEach(item => {
-                    const preloadImg = new Image();
-                    preloadImg.src = item.thumb;
-                });
-            }, 1200);
-        }
-
-        // ALGORITMO FISHER-YATES: ORDEN ALEATORIO
-        function shuffleArray(arr) {
-            const copy = [...arr];
-            for (let i = copy.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [copy[i], copy[j]] = [copy[j], copy[i]];
+        function initGalleryWorker() {
+            const workerScript = `
+                self.onmessage = function(e) {
+                    if (e.data.action === 'shuffle') {
+                        const copy = [...e.data.photos];
+                        for (let i = copy.length - 1; i > 0; i--) {
+                            const j = Math.floor(Math.random() * (i + 1));
+                            const temp = copy[i];
+                            copy[i] = copy[j];
+                            copy[j] = temp;
+                        }
+                        self.postMessage({ action: 'shuffled', result: copy });
+                    }
+                };
+            `;
+            try {
+                const blob = new Blob([workerScript], { type: 'application/javascript' });
+                galleryWorker = new Worker(URL.createObjectURL(blob));
+                galleryWorker.onmessage = function(e) {
+                    if (e.data.action === 'shuffled') {
+                        activeShuffledPhotos = e.data.result;
+                        populateGalleryGrid(activeShuffledPhotos);
+                    }
+                };
+            } catch(e) {
+                galleryWorker = null;
             }
-            return copy;
         }
 
-        // RENDERIZADO DE LA GRILLA
-        function renderShuffledGallery() {
+        function populateGalleryGrid(photos) {
             const container = document.getElementById('dynamicGalleryGrid');
             container.innerHTML = '';
 
-            activeShuffledPhotos = shuffleArray(GITHUB_PHOTOS);
-
-            activeShuffledPhotos.forEach((item, index) => {
+            photos.forEach((item, index) => {
                 const wrap = document.createElement('div');
                 wrap.className = 'gallery-item-wrap';
-                wrap.onclick = () => openLightbox(index);
+                wrap.onclick = () => {
+                    playClickSound();
+                    openLightbox(index);
+                };
 
                 const img = document.createElement('img');
                 img.alt = `Trabajo 1111 Gráfica #${item.id}`;
                 img.loading = 'lazy';
                 img.decoding = 'async';
 
-                img.onload = function() {
-                    wrap.classList.add('loaded');
-                };
+                img.onload = () => wrap.classList.add('loaded');
 
-                // Si por alguna razón la miniatura tarda, recurre a la imagen principal
                 img.onerror = function() {
                     if (!this.dataset.triedOriginal) {
                         this.dataset.triedOriginal = "true";
@@ -1246,21 +1129,32 @@
                 };
 
                 img.src = item.thumb;
-
                 wrap.appendChild(img);
                 container.appendChild(wrap);
             });
         }
 
-        // CONTROL DEL LIGHTBOX
+        function requestShuffledGallery() {
+            if (galleryWorker) {
+                galleryWorker.postMessage({ action: 'shuffle', photos: GITHUB_PHOTOS });
+            } else {
+                // Fallback directo en hilo principal
+                const copy = [...GITHUB_PHOTOS];
+                for (let i = copy.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [copy[i], copy[j]] = [copy[j], copy[i]];
+                }
+                activeShuffledPhotos = copy;
+                populateGalleryGrid(activeShuffledPhotos);
+            }
+        }
+
+        /* LIGHTBOX PRO */
         function openLightbox(index) {
             currentPhotoIndex = index;
             updateLightboxContent();
             document.getElementById('lightboxView').classList.add('active');
-
-            try {
-                history.pushState({ lbOpen: true }, '');
-            } catch(e) {}
+            try { history.pushState({ lbOpen: true }, ''); } catch(e) {}
         }
 
         function updateLightboxContent() {
@@ -1271,7 +1165,7 @@
             img.src = item.full;
             counter.innerText = `${currentPhotoIndex + 1} / ${activeShuffledPhotos.length}`;
 
-            // Precarga la foto siguiente en silencio para fluidez
+            // Precarga anticipada de la siguiente imagen
             const nextIdx = (currentPhotoIndex + 1) % activeShuffledPhotos.length;
             const nextCache = new Image();
             nextCache.src = activeShuffledPhotos[nextIdx].full;
@@ -1297,14 +1191,14 @@
             const lb = document.getElementById('lightboxView');
             if (lb.classList.contains('active')) {
                 if (e.key === 'Escape') closeLightbox();
-                if (e.key === 'ArrowLeft') navLightbox(-1);
-                if (e.key === 'ArrowRight') navLightbox(1);
+                if (e.key === 'ArrowLeft') { navLightbox(-1); playClickSound(); }
+                if (e.key === 'ArrowRight') { navLightbox(1); playClickSound(); }
             }
         });
 
         window.addEventListener('popstate', () => closeLightbox());
 
-        // DESLIZAR CON EL DEDO (SWIPE)
+        // GESTOS TÁCTILES SWIPE
         let touchStartX = 0;
         let touchEndX = 0;
         const lbView = document.getElementById('lightboxView');
@@ -1315,18 +1209,14 @@
 
         lbView.addEventListener('touchend', (e) => {
             touchEndX = e.changedTouches[0].screenX;
-            if (touchEndX < touchStartX - 45) navLightbox(1);
-            if (touchEndX > touchStartX + 45) navLightbox(-1);
+            if (touchEndX < touchStartX - 45) { navLightbox(1); playClickSound(); }
+            if (touchEndX > touchStartX + 45) { navLightbox(-1); playClickSound(); }
         }, { passive: true });
 
         // MODALES
         function openGalleryModal() {
-            renderShuffledGallery();
+            requestShuffledGallery();
             document.getElementById('galleryModal').classList.add('active');
-        }
-
-        function openSoftwareModal() {
-            document.getElementById('softwareModal').classList.add('active');
         }
 
         function closeModal(id) {
@@ -1337,9 +1227,9 @@
             if (e.target.id === id) closeModal(id);
         }
 
-        // =========================================================================
-        // TRADUCCIONES TRILINGÜES CON MENSAJES DE WHATSAPP DINÁMICOS
-        // =========================================================================
+        /* =========================================================
+           3. DICCIONARIO TRILINGÜE
+           ========================================================= */
         const TRANSLATIONS = {
             es: {
                 langHint: "🌐 Idioma",
@@ -1363,13 +1253,7 @@
                 modal_title: "Galería de Trabajos",
                 modal_desc: "Conocé nuestros proyectos reales de cartelería, impresiones y rotulación. Tocá cualquier foto para ampliar.",
                 modal_btn: "Ver más en Instagram ↗",
-                soft_title: "Páginas Web & Software",
-                soft_desc: "Desarrollamos soluciones digitales, cartas interactivas y webs de alto rendimiento para comercios y marcas:",
-                soft_cta: "Cotizar mi Página Web por WhatsApp ↗",
-                
-                // Mensajes de WhatsApp en Español
-                wsp_main_msg: "¡Hola! Me contacto desde la web de 1111 Gráfica y quisiera hacer una consulta.",
-                wsp_soft_msg: "¡Hola! Ví sus trabajos de páginas web y quiero cotizar un proyecto."
+                wsp_main_msg: "¡Hola! Me contacto desde la web de 1111 Gráfica y quisiera hacer una consulta."
             },
             pt: {
                 langHint: "🌐 Idioma",
@@ -1393,13 +1277,7 @@
                 modal_title: "Galeria de Trabalhos",
                 modal_desc: "Conheça nossos projetos reais de sinalização e impressão. Toque em qualquer foto para ampliar.",
                 modal_btn: "Ver mais no Instagram ↗",
-                soft_title: "Sites & Softwares Desenvolvidos",
-                soft_desc: "Desenvolvemos soluções digitais, cardápios interativos e sites rápidos para comércios e marcas:",
-                soft_cta: "Solicitar meu Site no WhatsApp ↗",
-                
-                // Mensajes de WhatsApp en Portugués
-                wsp_main_msg: "Olá! Estou entrando em contato pelo site da 1111 Gráfica e gostaria de fazer uma consulta.",
-                wsp_soft_msg: "Olá! Vi os projetos de sites e softwares de vocês e gostaria de solicitar um orçamento."
+                wsp_main_msg: "Olá! Estou entrando em contato pelo site da 1111 Gráfica e gostaria de fazer uma consulta."
             },
             en: {
                 langHint: "🌐 Language",
@@ -1423,17 +1301,12 @@
                 modal_title: "Portfolio Showcase",
                 modal_desc: "Explore real signage and print branding projects. Tap any photo to expand.",
                 modal_btn: "Explore more on Instagram ↗",
-                soft_title: "Websites & Digital Software",
-                soft_desc: "We build custom digital menus, websites, and business software tools:",
-                soft_cta: "Get a Website Quote on WhatsApp ↗",
-                
-                // Mensajes de WhatsApp en Inglés
-                wsp_main_msg: "Hello! I am reaching out from the 1111 Gráfica website and would like to make an inquiry.",
-                wsp_soft_msg: "Hello! I saw your website and software projects and would like to request a quote."
+                wsp_main_msg: "Hello! I am reaching out from the 1111 Gráfica website and would like to make an inquiry."
             }
         };
 
         function setLanguage(lang) {
+            playClickSound();
             const data = TRANSLATIONS[lang] || TRANSLATIONS.es;
 
             document.getElementById('uiLangHint').innerText = data.langHint;
@@ -1465,17 +1338,10 @@
             document.getElementById('t_modal_desc').innerText = data.modal_desc;
             document.getElementById('t_modal_btn').innerText = data.modal_btn;
 
-            document.getElementById('t_soft_title').innerText = data.soft_title;
-            document.getElementById('t_soft_desc').innerText = data.soft_desc;
-            document.getElementById('t_soft_cta').innerText = data.soft_cta;
-
-            // ACTUALIZACIÓN DINÁMICA DE ENLACES DE WHATSAPP AL IDIOMA SELECCIONADO
             const wspBase = "https://wa.me/5491131933611?text=";
             document.getElementById('btnWspMain').href = wspBase + encodeURIComponent(data.wsp_main_msg);
             document.getElementById('socialWspTop').href = wspBase + encodeURIComponent(data.wsp_main_msg);
-            document.getElementById('t_soft_cta').href = wspBase + encodeURIComponent(data.wsp_soft_msg);
 
-            // Resaltar botón de idioma activo
             document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
             if (lang === 'es') document.getElementById('btnLangEs').classList.add('active');
             if (lang === 'pt') document.getElementById('btnLangPt').classList.add('active');
@@ -1486,7 +1352,7 @@
             } catch(e) {}
         }
 
-        // INICIALIZACIÓN
+        /* INICIALIZACIÓN */
         window.addEventListener('DOMContentLoaded', () => {
             if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
             requestAnimationFrame(() => document.body.classList.remove('preload'));
@@ -1495,9 +1361,17 @@
             try {
                 savedLang = localStorage.getItem('1111_preferred_lang') || 'es';
             } catch(e) {}
-            setLanguage(savedLang);
 
-            startBackgroundPreload();
+            setLanguage(savedLang);
+            initGalleryWorker();
+
+            // Precarga en segundo plano
+            setTimeout(() => {
+                GITHUB_PHOTOS.slice(0, 15).forEach(item => {
+                    const img = new Image();
+                    img.src = item.thumb;
+                });
+            }, 1200);
         });
     </script>
 </body>

@@ -436,7 +436,7 @@
             display: block;
         }
 
-        /* BOTÓN VOLVER (CORREGIDO AL HUB OFICIAL) */
+        /* BOTÓN VOLVER */
         .btn-back-hub {
             display: flex;
             align-items: center;
@@ -549,9 +549,7 @@
             </div>
 
             <!-- CONTENEDOR DINÁMICO DE TARJETAS -->
-            <div class="software-cards-list" id="cardsListContainer">
-                <!-- Se renderiza de inmediato con respaldo local y luego sincroniza vía Worker -->
-            </div>
+            <div class="software-cards-list" id="cardsListContainer"></div>
         </section>
 
         <!-- BOTÓN PRINCIPAL: COTIZAR POR WHATSAPP -->
@@ -560,7 +558,7 @@
             <span id="uiBtnCta">Crear mi Link Personalizado en WhatsApp ↗</span>
         </a>
 
-        <!-- ENLACE DE REGRESO CORREGIDO AL HUB OFICIAL -->
+        <!-- ENLACE DE REGRESO -->
         <a href="./" class="btn-back-hub" id="uiBackHub" onclick="playClickSound()">
             ← Ver Hub Oficial de 1111 Gráfica
         </a>
@@ -577,10 +575,10 @@
 
     </main>
 
-    <!-- MOTOR WEB AUDIO API + WEB WORKER INLINE + TRADUCCIONES -->
+    <!-- MOTOR WEB AUDIO API + SINCRONIZACIÓN SHEETS DIRECTA + TRADUCCIONES -->
     <script>
         /* =========================================================
-           1. MOTOR WEB AUDIO API (Ultra baja latencia, estilo Arcade)
+           1. MOTOR WEB AUDIO API
            ========================================================= */
         let audioCtx = null;
         let soundBuffer = null;
@@ -597,9 +595,7 @@
                     const arrayBuffer = await res.arrayBuffer();
                     soundBuffer = await audioCtx.decodeAudioData(arrayBuffer);
                 }
-            } catch (e) {
-                // Silencioso, usará fallback
-            }
+            } catch (e) {}
         }
 
         function playClickSound() {
@@ -626,12 +622,10 @@
             } catch(e) {}
         }
 
-        // Inicialización pasiva de audio al primer contacto
         window.addEventListener('pointerdown', () => {
             if (!audioCtx) initAudioEngine();
             else if (audioCtx.state === 'suspended') audioCtx.resume();
         }, { once: true });
-
 
         /* =========================================================
            2. DICCIONARIO TRILINGÜE
@@ -681,9 +675,9 @@
                 num: "01",
                 title: "Baldoria Madrid",
                 cat: "Gastronomía · Carta",
-                sub_es: "Carta digital, reservas en tiempo real y minijuego interactivo.",
-                sub_pt: "Cardápio digital, reservas em tempo real e jogo interativo.",
-                sub_en: "Interactive digital menu, real-time table booking & game.",
+                sub_es: "Menú digital, datos de contacto y minijuego de beneficios",
+                sub_pt: "Menu digital, informações de contato e minijogo de benefícios.",
+                sub_en: "Digital menu, contact information, and benefits minigame",
                 url: "https://onceoncegrafica-1111.github.io/baldoriamadrid/",
                 color: "#FF4757",
                 isDark: false
@@ -691,43 +685,43 @@
             {
                 num: "02",
                 title: "Black Center Cars",
-                cat: "Detailing · GT4",
-                sub_es: "Mantenimiento estético, telemetría GT4, música y turnos directos.",
-                sub_pt: "Estética automotiva, telemetria GT4, música e agendamento direto.",
-                sub_en: "Executive auto detailing, GT4 telemetry, music & direct bookings.",
+                cat: "Detailing · Vehículos",
+                sub_es: "Mantenimiento estético vehícular, (música y contactos directos)",
+                sub_pt: "Manutenção estética do veículo (música e contatos diretos)",
+                sub_en: "Vehicle aesthetic maintenance (music and direct contacts)",
                 url: "https://onceoncegrafica-1111.github.io/blackcenter/",
                 color: "#FFC700",
                 isDark: true
             },
             {
                 num: "03",
+                title: "Flor de Buenos Aires",
+                cat: "Turismo",
+                sub_es: "Escapadas y turismo tradicional y de lujo, con contactos directos.",
+                sub_pt: "Escapadas turísticas e turismo tradicional e de luxo, com contatos diretos.",
+                sub_en: "Getaways and traditional and luxury tourism, with direct contacts.",
+                url: "https://onceoncegrafica-1111.github.io/flordebuenosaires/",
+                color: "#E2103F",
+                isDark: false
+            },
+            {
+                num: "04",
                 title: "Peluquería Alvear",
-                cat: "Estilo · Turnos",
+                cat: "Peluquería · Turnos",
                 sub_es: "Catálogo tradicional de servicios, galería interactiva y reservas.",
-                sub_pt: "Catálogo tradicional de serviços, galeria interativa e reservas.",
-                sub_en: "Traditional grooming catalog, interactive gallery & appointments.",
+                sub_pt: "Catálogo de serviços tradicional, galeria interativa e reservas.",
+                sub_en: "Traditional service catalog, interactive gallery and reservations.",
                 url: "https://onceoncegrafica-1111.github.io/peluqueriaalvear/",
                 color: "#8E6847",
                 isDark: false
             },
             {
-                num: "04",
-                title: "Dabiens & Co.",
-                cat: "Diseño · Deco",
-                sub_es: "Muebles a medida de autor, catálogo de diseño y cotizaciones directas.",
-                sub_pt: "Móveis sob medida, catálogo de design e orçamentos diretos.",
-                sub_en: "Custom artisan furniture, design catalog & direct quotations.",
-                url: "https://onceoncegrafica-1111.github.io/dabiens-co/",
-                color: "#B67341",
-                isDark: false
-            },
-            {
                 num: "05",
                 title: "Frimaq Maquinarias",
-                cat: "Industria · B2B",
-                sub_es: "Catálogo industrial de maquinaria pesada y canal de presupuestos.",
-                sub_pt: "Catálogo industrial de maquinário pesado e orçamentos diretos.",
-                sub_en: "Heavy industrial machinery catalog & direct quotation system.",
+                cat: "Industria · Regrigeración",
+                sub_es: "Catálogo industrial de maquinaria y canal de presupuestos.",
+                sub_pt: "Catálogo de máquinas industriais e canal de cotação.",
+                sub_en: "Industrial machinery catalog and quotation channel.",
                 url: "https://onceoncegrafica-1111.github.io/frimaq/",
                 color: "#0284C7",
                 isDark: false
@@ -735,10 +729,10 @@
             {
                 num: "06",
                 title: "Four Seasons MX",
-                cat: "Hospitality · Lujo",
+                cat: "Hotelería",
                 sub_es: "Experiencia inmersiva para turismo premium y hotelería.",
-                sub_pt: "Experiência imersiva para turismo de luxo e hotelaria.",
-                sub_en: "Immersive luxury digital experience for hospitality.",
+                sub_pt: "Experiência imersiva para turismo e hotelaria de alto padrão.",
+                sub_en: "Immersive experience for premium tourism and hospitality.",
                 url: "https://onceoncegrafica-1111.github.io/fourseasonsmx/",
                 color: "#244122",
                 isDark: false
@@ -746,10 +740,10 @@
             {
                 num: "07",
                 title: "Cristel Extensions",
-                cat: "Hair Studio · Belgrano",
-                sub_es: "Técnica rusa de nanocápsulas invisibles y cabello 100% virgen eslavo.",
-                sub_pt: "Técnica russa de nanocápsulas invisíveis e cabelo 100% virgem eslavo.",
-                sub_en: "Invisible Russian nanocapsules & 100% virgin Slavic hair.",
+                cat: "Hair Studio · Extensiones",
+                sub_es: "Técnica rusa de nanocápsulas invisibles y cabello 100% virgen de origen eslavo.",
+                sub_pt: "Técnica russa de nanocápsulas invisíveis e cabelo 100% virgem de origem eslava.",
+                sub_en: "Russian technique of invisible nanocapsules and 100% virgin hair of Slavic origin.",
                 url: "https://cristelextensions.github.io/link/",
                 color: "#D4AF37",
                 isDark: true
@@ -769,7 +763,7 @@
             };
         }
 
-        /* RENDERIZADO VISUAL INTELIGENTE */
+        /* RENDERIZADO VISUAL */
         function renderCards(lang) {
             const container = document.getElementById('cardsListContainer');
             if (!container) return;
@@ -824,88 +818,35 @@
         }
 
         /* =========================================================
-           3. WEB WORKER EN SEGUNDO PLANO (Sheets Parser Off-Thread)
+           3. CONEXIÓN DIRECTA EN TIEMPO REAL CON GOOGLE SHEETS
            ========================================================= */
         const SHEET_ID = '12WChaJERJOmnYB6K3IMgpB6lYxDrYBWR9OToha6do4';
 
-        function startSheetsWorker() {
-            const workerCode = `
-                self.onmessage = async function(e) {
-                    const sheetUrl = "https://docs.google.com/spreadsheets/d/" + e.data.sheetId + "/gviz/tq?tqx=out:json";
-                    try {
-                        const response = await fetch(sheetUrl);
-                        if (!response.ok) return;
-                        const text = await response.text();
-                        const jsonStr = text.substring(text.indexOf('{'), text.lastIndexOf('}') + 1);
-                        const json = JSON.parse(jsonStr);
-                        const rows = json.table && json.table.rows;
-                        if (!rows || rows.length === 0) return;
-
-                        const loaded = [];
-                        rows.forEach(r => {
-                            if (!r || !r.c) return;
-                            const val = idx => (r.c[idx] && r.c[idx].v !== null && r.c[idx].v !== undefined) ? String(r.c[idx].v).trim() : '';
-                            const num = val(0);
-                            const title = val(1);
-                            if (!title || title.toLowerCase() === 'titulo' || num.toLowerCase() === 'numero') return;
-
-                            loaded.push({
-                                num: num.padStart(2, '0'),
-                                title: title,
-                                cat: val(2),
-                                sub_es: val(3),
-                                sub_pt: val(4) || val(3),
-                                sub_en: val(5) || val(3),
-                                url: val(6),
-                                color: val(7) || '#417B2E',
-                                isDark: val(8).toUpperCase() === 'SI' || val(8).toUpperCase() === 'YES'
-                            });
-                        });
-
-                        if (loaded.length > 0) {
-                            self.postMessage({ success: true, data: loaded });
-                        }
-                    } catch (err) {
-                        self.postMessage({ success: false });
-                    }
-                };
-            `;
-
+        async function syncSheetsData() {
+            // Se agrega _t para anular el caché del navegador y gid=0 para apuntar directo a Hoja 1
+            const sheetUrl = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&gid=0&_t=${Date.now()}`;
             try {
-                const blob = new Blob([workerCode], { type: 'application/javascript' });
-                const worker = new Worker(URL.createObjectURL(blob));
-
-                worker.onmessage = function(e) {
-                    if (e.data && e.data.success && e.data.data.length > 0) {
-                        currentProjects = e.data.data;
-                        renderCards(activeLang);
-                    }
-                };
-
-                worker.postMessage({ sheetId: SHEET_ID });
-            } catch(e) {
-                // Fallback directo si el navegador bloquea Workers locales
-                fetchFallbackDirect();
-            }
-        }
-
-        async function fetchFallbackDirect() {
-            try {
-                const response = await fetch(`https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`);
+                const response = await fetch(sheetUrl);
                 if (!response.ok) return;
                 const text = await response.text();
                 const jsonStr = text.substring(text.indexOf('{'), text.lastIndexOf('}') + 1);
                 const json = JSON.parse(jsonStr);
                 const rows = json.table && json.table.rows;
-                if (!rows) return;
+                if (!rows || rows.length === 0) return;
 
                 const loaded = [];
                 rows.forEach(r => {
                     if (!r || !r.c) return;
-                    const val = idx => (r.c[idx] && r.c[idx].v !== null) ? String(r.c[idx].v).trim() : '';
+                    const val = idx => (r.c[idx] && r.c[idx].v !== null && r.c[idx].v !== undefined) ? String(r.c[idx].v).trim() : '';
                     const num = val(0);
                     const title = val(1);
-                    if (!title || title.toLowerCase() === 'titulo') return;
+                    if (!title || title.toLowerCase() === 'titulo' || num.toLowerCase() === 'numero') return;
+
+                    let urlVal = val(6);
+                    if (urlVal && !urlVal.startsWith('http://') && !urlVal.startsWith('https://') && !urlVal.startsWith('#')) {
+                        urlVal = 'https://' + urlVal;
+                    }
+
                     loaded.push({
                         num: num.padStart(2, '0'),
                         title: title,
@@ -913,16 +854,19 @@
                         sub_es: val(3),
                         sub_pt: val(4) || val(3),
                         sub_en: val(5) || val(3),
-                        url: val(6),
+                        url: urlVal || '#',
                         color: val(7) || '#417B2E',
                         isDark: val(8).toUpperCase() === 'SI' || val(8).toUpperCase() === 'YES'
                     });
                 });
+
                 if (loaded.length > 0) {
                     currentProjects = loaded;
                     renderCards(activeLang);
                 }
-            } catch(e) {}
+            } catch (err) {
+                console.warn("Aviso de sincronización Sheets:", err);
+            }
         }
 
         /* GESTOR DE IDIOMAS */
@@ -955,7 +899,7 @@
             } catch(e) {}
         }
 
-        /* INICIALIZACIÓN ÓPTIMA */
+        /* INICIALIZACIÓN */
         window.addEventListener('DOMContentLoaded', () => {
             let savedLang = 'es';
             try {
@@ -964,7 +908,7 @@
 
             activeLang = savedLang;
             setLanguage(savedLang);
-            startSheetsWorker();
+            syncSheetsData();
         });
     </script>
 </body>

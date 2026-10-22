@@ -11,9 +11,6 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='50' fill='%23A0D18F'/><text x='50%' y='58%' dominant-baseline='middle' text-anchor='middle' font-size='32' font-family='sans-serif' font-weight='900' fill='%23E989B7'>1111</text></svg>" type="image/svg+xml">
 
-    <!-- LIBRERÍA OFICIAL DE GOOGLE PARA CONEXIÓN DIRECTA CON SHEETS -->
-    <script src="https://www.gstatic.com/charts/loader.js"></script>
-
     <!-- FUENTES CORPORATIVAS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -287,7 +284,6 @@
             display: flex;
             flex-direction: column;
             gap: 12px;
-            contain: content;
         }
 
         .software-card-item {
@@ -578,7 +574,6 @@
 
     </main>
 
-    <!-- MOTOR WEB AUDIO API + SINCRONIZACIÓN OFICIAL GOOGLE CHARTS -->
     <script>
         /* =========================================================
            1. MOTOR WEB AUDIO API
@@ -672,7 +667,7 @@
             }
         };
 
-        /* CLIENTES BASE REALES (NUNCA QUEDA VACÍO NI EN CARGANDO) */
+        /* CLIENTES BASE REALES (FALLBACK INMEDIATO) */
         let currentProjects = [
             {
                 num: "01",
@@ -821,66 +816,64 @@
         }
 
         /* =========================================================
-           3. CONEXIÓN OFICIAL DIRECTA CON GOOGLE SHEETS
+           3. CONEXIÓN DIRECTA Y SIN CACHÉ CON GOOGLE SHEETS
            ========================================================= */
         const SHEET_ID = '12WChaJERJOmnYB6K3IMgpB6lYxDrYBWR9OToha6do4';
 
-        function initGoogleSheetsConnection() {
-            if (typeof google === 'undefined' || !google.charts) return;
+        async function initGoogleSheetsConnection() {
+            try {
+                // Parámetro de tiempo dinámico (&t=...) que anula el caché y actualiza al segundo
+                const endpoint = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&gid=0&headers=1&t=${Date.now()}`;
+                const response = await fetch(endpoint);
+                if (!response.ok) return;
 
-            google.charts.load('current');
-            google.charts.setOnLoadCallback(() => {
-                const query = new google.visualization.Query(
-                    `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?gid=0&headers=1&tq=`
-                );
-                query.send(handleGoogleSheetsResponse);
-            });
-        }
+                const rawText = await response.text();
+                const jsonStart = rawText.indexOf('{');
+                const jsonEnd = rawText.lastIndexOf('}');
+                if (jsonStart === -1 || jsonEnd === -1) return;
 
-        function handleGoogleSheetsResponse(response) {
-            if (response.isError()) {
-                console.warn('Aviso Google Sheets:', response.getMessage());
-                return;
-            }
+                const payload = JSON.parse(rawText.substring(jsonStart, jsonEnd + 1));
+                if (!payload.table || !payload.table.rows || payload.table.rows.length === 0) return;
 
-            const data = response.getDataTable();
-            const totalRows = data.getNumberOfRows();
-            if (totalRows === 0) return;
+                const loaded = [];
+                payload.table.rows.forEach((row, index) => {
+                    if (!row || !row.c) return;
 
-            const loaded = [];
-            for (let i = 0; i < totalRows; i++) {
-                const getVal = (col) => {
-                    const v = data.getValue(i, col);
-                    return v !== null && v !== undefined ? String(v).trim() : '';
-                };
+                    const getVal = (col) => {
+                        const cell = row.c[col];
+                        return (cell && cell.v !== null && cell.v !== undefined) ? String(cell.v).trim() : '';
+                    };
 
-                const num = getVal(0);
-                const title = getVal(1);
-                if (!title) continue;
+                    const num = getVal(0);
+                    const title = getVal(1);
+                    if (!title) return; // Omite filas vacías
 
-                let urlVal = getVal(6);
-                if (urlVal && !urlVal.startsWith('http://') && !urlVal.startsWith('https://') && !urlVal.startsWith('#')) {
-                    urlVal = 'https://' + urlVal;
-                }
+                    let urlVal = getVal(6);
+                    if (urlVal && !urlVal.startsWith('http://') && !urlVal.startsWith('https://') && !urlVal.startsWith('#')) {
+                        urlVal = 'https://' + urlVal;
+                    }
 
-                const isDarkVal = getVal(8).toUpperCase();
+                    const isDarkVal = getVal(8).toUpperCase();
 
-                loaded.push({
-                    num: num ? num.padStart(2, '0') : String(i + 1).padStart(2, '0'),
-                    title: title,
-                    cat: getVal(2),
-                    sub_es: getVal(3),
-                    sub_pt: getVal(4) || getVal(3),
-                    sub_en: getVal(5) || getVal(3),
-                    url: urlVal || '#',
-                    color: getVal(7) || '#417B2E',
-                    isDark: isDarkVal === 'SI' || isDarkVal === 'YES'
+                    loaded.push({
+                        num: num ? num.padStart(2, '0') : String(index + 1).padStart(2, '0'),
+                        title: title,
+                        cat: getVal(2),
+                        sub_es: getVal(3),
+                        sub_pt: getVal(4) || getVal(3),
+                        sub_en: getVal(5) || getVal(3),
+                        url: urlVal || '#',
+                        color: getVal(7) || '#417B2E',
+                        isDark: (isDarkVal === 'SI' || isDarkVal === 'YES')
+                    });
                 });
-            }
 
-            if (loaded.length > 0) {
-                currentProjects = loaded;
-                renderCards(activeLang);
+                if (loaded.length > 0) {
+                    currentProjects = loaded;
+                    renderCards(activeLang);
+                }
+            } catch (err) {
+                console.warn('Google Sheets sync aviso:', err);
             }
         }
 
@@ -924,7 +917,7 @@
             activeLang = savedLang;
             setLanguage(savedLang);
 
-            // Inicia la conexión oficial con Google Sheets
+            // Sincronización en tiempo real con Google Sheets
             initGoogleSheetsConnection();
         });
     </script>

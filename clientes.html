@@ -575,7 +575,7 @@
 
     </main>
 
-    <!-- MOTOR WEB AUDIO API + SINCRONIZACIÓN SHEETS DIRECTA + TRADUCCIONES -->
+    <!-- MOTOR WEB AUDIO API + SINCRONIZACIÓN INFALIBLE CON SHEETS + TRADUCCIONES -->
     <script>
         /* =========================================================
            1. MOTOR WEB AUDIO API
@@ -669,11 +669,11 @@
             }
         };
 
-        /* PROYECTOS PRECARGADOS (RESPALDO INMEDIATO SIN ESPERAS) */
+        /* PROYECTOS PRECARGADOS (RESPALDO INMEDIATO) */
         let currentProjects = [
             {
                 num: "01",
-                title: "Baldoria Madrid",
+                title: "Baldoria Madrd España",
                 cat: "Gastronomía · Carta",
                 sub_es: "Menú digital, datos de contacto y minijuego de beneficios",
                 sub_pt: "Menu digital, informações de contato e minijogo de benefícios.",
@@ -818,20 +818,14 @@
         }
 
         /* =========================================================
-           3. CONEXIÓN DIRECTA EN TIEMPO REAL CON GOOGLE SHEETS
+           3. CONEXIÓN DIRECTA NATIVA (JSONP: CERO BLOQUEOS CORS)
            ========================================================= */
         const SHEET_ID = '12WChaJERJOmnYB6K3IMgpB6lYxDrYBWR9OToha6do4';
 
-        async function syncSheetsData() {
-            // Se agrega _t para anular el caché del navegador y gid=0 para apuntar directo a Hoja 1
-            const sheetUrl = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&gid=0&_t=${Date.now()}`;
+        // Esta función la ejecuta Google directamente al entregar los datos
+        window.onSheetsDataLoaded = function(json) {
             try {
-                const response = await fetch(sheetUrl);
-                if (!response.ok) return;
-                const text = await response.text();
-                const jsonStr = text.substring(text.indexOf('{'), text.lastIndexOf('}') + 1);
-                const json = JSON.parse(jsonStr);
-                const rows = json.table && json.table.rows;
+                const rows = json && json.table && json.table.rows;
                 if (!rows || rows.length === 0) return;
 
                 const loaded = [];
@@ -865,8 +859,19 @@
                     renderCards(activeLang);
                 }
             } catch (err) {
-                console.warn("Aviso de sincronización Sheets:", err);
+                console.error("Error al procesar Sheets:", err);
             }
+        };
+
+        function syncSheetsData() {
+            // Se inyecta como script para burlar los bloqueos de seguridad del navegador
+            const old = document.getElementById('sheets-sync-script');
+            if (old) old.remove();
+
+            const script = document.createElement('script');
+            script.id = 'sheets-sync-script';
+            script.src = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=responseHandler:onSheetsDataLoaded&gid=0&_t=${Date.now()}`;
+            document.body.appendChild(script);
         }
 
         /* GESTOR DE IDIOMAS */

@@ -575,7 +575,7 @@
 
     </main>
 
-    <!-- MOTOR WEB AUDIO API + SINCRONIZACIÓN INFALIBLE CON SHEETS + TRADUCCIONES -->
+    <!-- MOTOR WEB AUDIO API + SINCRONIZACIÓN INSTANTÁNEA DUAL -->
     <script>
         /* =========================================================
            1. MOTOR WEB AUDIO API
@@ -669,84 +669,18 @@
             }
         };
 
-        /* PROYECTOS PRECARGADOS (RESPALDO INMEDIATO) */
+        /* PROYECTOS INICIALES (SE REEMPLAZAN DE INMEDIATO CON LO QUE HAYA EN SHEETS) */
         let currentProjects = [
             {
                 num: "01",
-                title: "Baldoria Madrd España",
-                cat: "Gastronomía · Carta",
-                sub_es: "Menú digital, datos de contacto y minijuego de beneficios",
-                sub_pt: "Menu digital, informações de contato e minijogo de benefícios.",
-                sub_en: "Digital menu, contact information, and benefits minigame",
-                url: "https://onceoncegrafica-1111.github.io/baldoriamadrid/",
+                title: "Cargando...",
+                cat: "Gastronomía",
+                sub_es: "Conectando en vivo...",
+                sub_pt: "Conectando em tempo real...",
+                sub_en: "Connecting live...",
+                url: "#",
                 color: "#FF4757",
                 isDark: false
-            },
-            {
-                num: "02",
-                title: "Black Center Cars",
-                cat: "Detailing · Vehículos",
-                sub_es: "Mantenimiento estético vehícular, (música y contactos directos)",
-                sub_pt: "Manutenção estética do veículo (música e contatos diretos)",
-                sub_en: "Vehicle aesthetic maintenance (music and direct contacts)",
-                url: "https://onceoncegrafica-1111.github.io/blackcenter/",
-                color: "#FFC700",
-                isDark: true
-            },
-            {
-                num: "03",
-                title: "Flor de Buenos Aires",
-                cat: "Turismo",
-                sub_es: "Escapadas y turismo tradicional y de lujo, con contactos directos.",
-                sub_pt: "Escapadas turísticas e turismo tradicional e de luxo, com contatos diretos.",
-                sub_en: "Getaways and traditional and luxury tourism, with direct contacts.",
-                url: "https://onceoncegrafica-1111.github.io/flordebuenosaires/",
-                color: "#E2103F",
-                isDark: false
-            },
-            {
-                num: "04",
-                title: "Peluquería Alvear",
-                cat: "Peluquería · Turnos",
-                sub_es: "Catálogo tradicional de servicios, galería interactiva y reservas.",
-                sub_pt: "Catálogo de serviços tradicional, galeria interativa e reservas.",
-                sub_en: "Traditional service catalog, interactive gallery and reservations.",
-                url: "https://onceoncegrafica-1111.github.io/peluqueriaalvear/",
-                color: "#8E6847",
-                isDark: false
-            },
-            {
-                num: "05",
-                title: "Frimaq Maquinarias",
-                cat: "Industria · Regrigeración",
-                sub_es: "Catálogo industrial de maquinaria y canal de presupuestos.",
-                sub_pt: "Catálogo de máquinas industriais e canal de cotação.",
-                sub_en: "Industrial machinery catalog and quotation channel.",
-                url: "https://onceoncegrafica-1111.github.io/frimaq/",
-                color: "#0284C7",
-                isDark: false
-            },
-            {
-                num: "06",
-                title: "Four Seasons MX",
-                cat: "Hotelería",
-                sub_es: "Experiencia inmersiva para turismo premium y hotelería.",
-                sub_pt: "Experiência imersiva para turismo e hotelaria de alto padrão.",
-                sub_en: "Immersive experience for premium tourism and hospitality.",
-                url: "https://onceoncegrafica-1111.github.io/fourseasonsmx/",
-                color: "#244122",
-                isDark: false
-            },
-            {
-                num: "07",
-                title: "Cristel Extensions",
-                cat: "Hair Studio · Extensiones",
-                sub_es: "Técnica rusa de nanocápsulas invisibles y cabello 100% virgen de origen eslavo.",
-                sub_pt: "Técnica russa de nanocápsulas invisíveis e cabelo 100% virgem de origem eslava.",
-                sub_en: "Russian technique of invisible nanocapsules and 100% virgin hair of Slavic origin.",
-                url: "https://cristelextensions.github.io/link/",
-                color: "#D4AF37",
-                isDark: true
             }
         ];
 
@@ -818,12 +752,11 @@
         }
 
         /* =========================================================
-           3. CONEXIÓN DIRECTA NATIVA (JSONP: CERO BLOQUEOS CORS)
+           3. PROCESADOR Y CONEXIÓN INSTANTÁNEA EN TIEMPO REAL
            ========================================================= */
         const SHEET_ID = '12WChaJERJOmnYB6K3IMgpB6lYxDrYBWR9OToha6do4';
 
-        // Esta función la ejecuta Google directamente al entregar los datos
-        window.onSheetsDataLoaded = function(json) {
+        function processGoogleSheetsData(json) {
             try {
                 const rows = json && json.table && json.table.rows;
                 if (!rows || rows.length === 0) return;
@@ -859,19 +792,42 @@
                     renderCards(activeLang);
                 }
             } catch (err) {
-                console.error("Error al procesar Sheets:", err);
+                console.error("Error al renderizar Sheets:", err);
             }
-        };
+        }
 
-        function syncSheetsData() {
-            // Se inyecta como script para burlar los bloqueos de seguridad del navegador
+        // Definición de métodos oficiales de Google para ejecución inmediata
+        window.onSheetsDataLoaded = processGoogleSheetsData;
+        window.google = window.google || {};
+        window.google.visualization = window.google.visualization || {};
+        window.google.visualization.Query = window.google.visualization.Query || {};
+        window.google.visualization.Query.setResponse = processGoogleSheetsData;
+
+        async function syncSheetsData() {
+            const cacheKey = Date.now();
+            const gvizUrl = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json;responseHandler:onSheetsDataLoaded&gid=0&_t=${cacheKey}`;
+
+            // Canal 1: Script Tag (Inmune a CORS, responde al instante)
             const old = document.getElementById('sheets-sync-script');
             if (old) old.remove();
-
             const script = document.createElement('script');
             script.id = 'sheets-sync-script';
-            script.src = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=responseHandler:onSheetsDataLoaded&gid=0&_t=${Date.now()}`;
+            script.src = gvizUrl;
             document.body.appendChild(script);
+
+            // Canal 2: Fetch paralelo directo con extracción rápida de JSON
+            try {
+                const res = await fetch(`https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&gid=0&_t=${cacheKey}`);
+                if (res.ok) {
+                    const txt = await res.text();
+                    const start = txt.indexOf('{');
+                    const end = txt.lastIndexOf('}');
+                    if (start !== -1 && end !== -1) {
+                        const parsed = JSON.parse(txt.substring(start, end + 1));
+                        processGoogleSheetsData(parsed);
+                    }
+                }
+            } catch (e) {}
         }
 
         /* GESTOR DE IDIOMAS */

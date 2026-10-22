@@ -11,6 +11,9 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='50' fill='%23A0D18F'/><text x='50%' y='58%' dominant-baseline='middle' text-anchor='middle' font-size='32' font-family='sans-serif' font-weight='900' fill='%23E989B7'>1111</text></svg>" type="image/svg+xml">
 
+    <!-- LIBRERÍA OFICIAL DE GOOGLE PARA CONEXIÓN DIRECTA CON SHEETS -->
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+
     <!-- FUENTES CORPORATIVAS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -575,7 +578,7 @@
 
     </main>
 
-    <!-- MOTOR WEB AUDIO API + SINCRONIZACIÓN SHEETS DIRECTA + TRADUCCIONES -->
+    <!-- MOTOR WEB AUDIO API + SINCRONIZACIÓN OFICIAL GOOGLE CHARTS -->
     <script>
         /* =========================================================
            1. MOTOR WEB AUDIO API
@@ -669,7 +672,7 @@
             }
         };
 
-        /* PROYECTOS PRECARGADOS (RESPALDO INMEDIATO SIN ESPERAS) */
+        /* CLIENTES BASE REALES (NUNCA QUEDA VACÍO NI EN CARGANDO) */
         let currentProjects = [
             {
                 num: "01",
@@ -818,54 +821,66 @@
         }
 
         /* =========================================================
-           3. CONEXIÓN DIRECTA EN TIEMPO REAL CON GOOGLE SHEETS
+           3. CONEXIÓN OFICIAL DIRECTA CON GOOGLE SHEETS
            ========================================================= */
         const SHEET_ID = '12WChaJERJOmnYB6K3IMgpB6lYxDrYBWR9OToha6do4';
 
-        async function syncSheetsData() {
-            // Se agrega _t para anular el caché del navegador y gid=0 para apuntar directo a Hoja 1
-            const sheetUrl = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&gid=0&_t=${Date.now()}`;
-            try {
-                const response = await fetch(sheetUrl);
-                if (!response.ok) return;
-                const text = await response.text();
-                const jsonStr = text.substring(text.indexOf('{'), text.lastIndexOf('}') + 1);
-                const json = JSON.parse(jsonStr);
-                const rows = json.table && json.table.rows;
-                if (!rows || rows.length === 0) return;
+        function initGoogleSheetsConnection() {
+            if (typeof google === 'undefined' || !google.charts) return;
 
-                const loaded = [];
-                rows.forEach(r => {
-                    if (!r || !r.c) return;
-                    const val = idx => (r.c[idx] && r.c[idx].v !== null && r.c[idx].v !== undefined) ? String(r.c[idx].v).trim() : '';
-                    const num = val(0);
-                    const title = val(1);
-                    if (!title || title.toLowerCase() === 'titulo' || num.toLowerCase() === 'numero') return;
+            google.charts.load('current');
+            google.charts.setOnLoadCallback(() => {
+                const query = new google.visualization.Query(
+                    `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?gid=0&headers=1&tq=`
+                );
+                query.send(handleGoogleSheetsResponse);
+            });
+        }
 
-                    let urlVal = val(6);
-                    if (urlVal && !urlVal.startsWith('http://') && !urlVal.startsWith('https://') && !urlVal.startsWith('#')) {
-                        urlVal = 'https://' + urlVal;
-                    }
+        function handleGoogleSheetsResponse(response) {
+            if (response.isError()) {
+                console.warn('Aviso Google Sheets:', response.getMessage());
+                return;
+            }
 
-                    loaded.push({
-                        num: num.padStart(2, '0'),
-                        title: title,
-                        cat: val(2),
-                        sub_es: val(3),
-                        sub_pt: val(4) || val(3),
-                        sub_en: val(5) || val(3),
-                        url: urlVal || '#',
-                        color: val(7) || '#417B2E',
-                        isDark: val(8).toUpperCase() === 'SI' || val(8).toUpperCase() === 'YES'
-                    });
-                });
+            const data = response.getDataTable();
+            const totalRows = data.getNumberOfRows();
+            if (totalRows === 0) return;
 
-                if (loaded.length > 0) {
-                    currentProjects = loaded;
-                    renderCards(activeLang);
+            const loaded = [];
+            for (let i = 0; i < totalRows; i++) {
+                const getVal = (col) => {
+                    const v = data.getValue(i, col);
+                    return v !== null && v !== undefined ? String(v).trim() : '';
+                };
+
+                const num = getVal(0);
+                const title = getVal(1);
+                if (!title) continue;
+
+                let urlVal = getVal(6);
+                if (urlVal && !urlVal.startsWith('http://') && !urlVal.startsWith('https://') && !urlVal.startsWith('#')) {
+                    urlVal = 'https://' + urlVal;
                 }
-            } catch (err) {
-                console.warn("Aviso de sincronización Sheets:", err);
+
+                const isDarkVal = getVal(8).toUpperCase();
+
+                loaded.push({
+                    num: num ? num.padStart(2, '0') : String(i + 1).padStart(2, '0'),
+                    title: title,
+                    cat: getVal(2),
+                    sub_es: getVal(3),
+                    sub_pt: getVal(4) || getVal(3),
+                    sub_en: getVal(5) || getVal(3),
+                    url: urlVal || '#',
+                    color: getVal(7) || '#417B2E',
+                    isDark: isDarkVal === 'SI' || isDarkVal === 'YES'
+                });
+            }
+
+            if (loaded.length > 0) {
+                currentProjects = loaded;
+                renderCards(activeLang);
             }
         }
 
@@ -908,7 +923,9 @@
 
             activeLang = savedLang;
             setLanguage(savedLang);
-            syncSheetsData();
+
+            // Inicia la conexión oficial con Google Sheets
+            initGoogleSheetsConnection();
         });
     </script>
 </body>

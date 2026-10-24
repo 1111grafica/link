@@ -715,6 +715,17 @@
             },
             {
                 num: "05",
+                title: "Alfajores Orense",
+                cat: "Alfajores argentinos",
+                sub_es: "Enlaces directos, historia de la empresa y sabores emblemáticos",
+                sub_pt: "Links diretos, história da empresa e sabores icônicos",
+                sub_en: "Direct links, company history and iconic flavors",
+                url: "https://onceoncegrafica-1111.github.io/orense/",
+                color: "#3C2B20",
+                isDark: true
+            },
+            {
+                num: "06",
                 title: "Frimaq Maquinarias",
                 cat: "Industria · Regrigeración",
                 sub_es: "Catálogo industrial de maquinaria y canal de presupuestos.",
@@ -725,7 +736,7 @@
                 isDark: false
             },
             {
-                num: "06",
+                num: "07",
                 title: "Four Seasons MX",
                 cat: "Hotelería",
                 sub_es: "Experiencia inmersiva para turismo premium y hotelería.",
@@ -736,7 +747,7 @@
                 isDark: false
             },
             {
-                num: "07",
+                num: "08",
                 title: "Cristel Extensions",
                 cat: "Hair Studio · Extensiones",
                 sub_es: "Técnica rusa de nanocápsulas invisibles y cabello 100% virgen de origen eslavo.",
@@ -779,19 +790,27 @@
 
                 let cardStyle, numStyle, catStyle, tagStyle, nameStyle, linkStyle;
 
+                // Definición de colores con prioridad a los ingresados en Google Sheets
+                const nameColor = item.textColor || (item.isDark ? '#FFFFFF' : 'var(--text-main)');
+                const tagColor = item.subColor || (item.textColor ? item.textColor : (item.isDark ? '#CBD5E1' : 'var(--text-muted)'));
+                
+                const catTextColor = item.catColor || hex;
+                const catBorderColor = item.catColor || (item.isDark ? hex : `rgba(${r}, ${g}, ${b}, 0.50)`);
+                const catBgColor = item.catBg || (item.isDark ? `rgba(${r}, ${g}, ${b}, 0.20)` : `rgba(${r}, ${g}, ${b}, 0.16)`);
+
                 if (item.isDark) {
                     cardStyle = `background: linear-gradient(135deg, #0B0B0E 0%, #15161C 100%); border: 2px solid ${hex}; border-left: 7px solid ${hex}; color: #FFFFFF; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45), 0 0 16px rgba(${r}, ${g}, ${b}, 0.22);`;
                     numStyle = `background: rgba(${r}, ${g}, ${b}, 0.22); border-color: ${hex}; color: ${hex};`;
-                    catStyle = `background: rgba(${r}, ${g}, ${b}, 0.20); color: ${hex}; border-color: ${hex};`;
-                    tagStyle = `color: #CBD5E1;`;
-                    nameStyle = `color: #FFFFFF;`;
+                    catStyle = `background: ${catBgColor}; color: ${catTextColor}; border-color: ${catBorderColor};`;
+                    tagStyle = `color: ${tagColor};`;
+                    nameStyle = `color: ${nameColor};`;
                     linkStyle = `color: ${hex}; background: rgba(${r}, ${g}, ${b}, 0.18); border-color: ${hex};`;
                 } else {
                     cardStyle = `background: linear-gradient(135deg, rgba(${r}, ${g}, ${b}, 0.08) 0%, rgba(${r}, ${g}, ${b}, 0.18) 100%); border: 2px solid rgba(${r}, ${g}, ${b}, 0.50); border-left: 7px solid ${hex};`;
                     numStyle = `background: rgba(${r}, ${g}, ${b}, 0.18); border-color: rgba(${r}, ${g}, ${b}, 0.50); color: ${hex};`;
-                    catStyle = `background: rgba(${r}, ${g}, ${b}, 0.16); color: ${hex}; border-color: rgba(${r}, ${g}, ${b}, 0.50);`;
-                    tagStyle = `color: var(--text-muted);`;
-                    nameStyle = `color: var(--text-main);`;
+                    catStyle = `background: ${catBgColor}; color: ${catTextColor}; border-color: ${catBorderColor};`;
+                    tagStyle = `color: ${tagColor};`;
+                    nameStyle = `color: ${nameColor};`;
                     linkStyle = `color: ${hex}; background: #FFFFFF; border-color: rgba(${r}, ${g}, ${b}, 0.50);`;
                 }
 
@@ -855,6 +874,12 @@
 
                     const isDarkVal = getVal(8).toUpperCase();
 
+                    // Lectura de colores opcionales configurables desde Sheets
+                    const colorTexto = getVal(9);     // Col J: Color_Texto
+                    const colorCat = getVal(10);      // Col K: Color_Categoria
+                    const fondoCat = getVal(11);      // Col L: Fondo_Categoria (opcional)
+                    const colorSub = getVal(12);      // Col M: Color_Subtitulo (opcional)
+
                     loaded.push({
                         num: num ? num.padStart(2, '0') : String(index + 1).padStart(2, '0'),
                         title: title,
@@ -864,7 +889,11 @@
                         sub_en: getVal(5) || getVal(3),
                         url: urlVal || '#',
                         color: getVal(7) || '#417B2E',
-                        isDark: (isDarkVal === 'SI' || isDarkVal === 'YES')
+                        isDark: (isDarkVal === 'SI' || isDarkVal === 'YES'),
+                        textColor: colorTexto || null,
+                        catColor: colorCat || null,
+                        catBg: fondoCat || null,
+                        subColor: colorSub || null
                     });
                 });
 

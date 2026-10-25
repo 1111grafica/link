@@ -138,7 +138,7 @@
             z-index: 2;
         }
 
-        /* SELECTOR IDIOMA */
+        /* BARRA SUPERIOR: SELECTOR IDIOMA & SOUNDTRACK CONTROLLER */
         .lang-nav-bar {
             display: flex;
             align-items: center;
@@ -150,6 +150,14 @@
             padding: 4px 6px;
             margin-bottom: 2px;
             box-shadow: 0 3px 12px rgba(60, 105, 45, 0.08);
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .lang-group-left {
+            display: flex;
+            align-items: center;
+            gap: 4px;
         }
 
         .lang-badge-hint {
@@ -157,7 +165,8 @@
             font-weight: 800;
             color: var(--brand-green-text);
             text-transform: uppercase;
-            padding-left: 10px;
+            padding-left: 8px;
+            padding-right: 4px;
             letter-spacing: 0.04em;
             display: flex;
             align-items: center;
@@ -165,15 +174,15 @@
             user-select: none;
         }
 
-        .lang-switch-pills { display: flex; gap: 4px; }
+        .lang-switch-pills { display: flex; gap: 3px; }
 
         .lang-btn {
             background: transparent;
             border: none;
-            padding: 5px 12px;
+            padding: 5px 10px;
             border-radius: 999px;
             font-family: 'Outfit', sans-serif;
-            font-size: 0.76rem;
+            font-size: 0.75rem;
             font-weight: 800;
             color: var(--text-muted);
             cursor: pointer;
@@ -184,6 +193,77 @@
             background: var(--brand-pink);
             color: #FFFFFF;
             box-shadow: 0 2px 10px var(--brand-pink-glow);
+        }
+
+        /* WIDGET SOUNDTRACK MINIMALISTA */
+        .soundtrack-wrap {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding-right: 4px;
+        }
+
+        .soundtrack-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            font-weight: 800;
+            color: var(--text-muted);
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            user-select: none;
+        }
+
+        .btn-music-toggle {
+            background: rgba(160, 209, 143, 0.16);
+            border: 1.2px solid var(--border-card);
+            border-radius: 999px;
+            padding: 4px 10px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.73rem;
+            font-weight: 800;
+            color: var(--text-muted);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            transition: all 0.22s var(--spring);
+            user-select: none;
+        }
+
+        .btn-music-toggle:hover {
+            border-color: var(--brand-green-deep);
+            color: var(--brand-green-deep);
+        }
+
+        .btn-music-toggle.active {
+            background: var(--brand-green);
+            color: #FFFFFF;
+            border-color: var(--brand-green);
+            box-shadow: 0 2px 10px rgba(160, 209, 143, 0.6);
+        }
+
+        .btn-music-skip {
+            background: rgba(160, 209, 143, 0.16);
+            border: 1.2px solid var(--border-card);
+            border-radius: 999px;
+            padding: 4px 8px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 800;
+            color: var(--text-muted);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s var(--spring);
+        }
+
+        .btn-music-skip:hover {
+            background: var(--brand-pink);
+            color: #FFFFFF;
+            border-color: var(--brand-pink);
+            box-shadow: 0 2px 8px var(--brand-pink-glow);
+            transform: scale(1.05);
         }
 
         /* HEADER */
@@ -340,7 +420,6 @@
             color: var(--brand-pink-deep);
         }
 
-        /* BOTÓN 5: AHORA ENLACE DIRECTO A WEB.HTML */
         .btn-card.card-soft {
             border-left: 5px solid #0284C7;
             background: linear-gradient(135deg, #FFFFFF 0%, #F0F9FF 100%);
@@ -481,20 +560,10 @@
             transition: transform 0.25s var(--spring);
         }
 
-        .modal-box::-webkit-scrollbar {
-            width: 6px;
-        }
-        .modal-box::-webkit-scrollbar-track {
-            background: rgba(0, 0, 0, 0.03);
-            border-radius: 8px;
-        }
-        .modal-box::-webkit-scrollbar-thumb {
-            background: rgba(160, 209, 143, 0.7);
-            border-radius: 8px;
-        }
-        .modal-box::-webkit-scrollbar-thumb:hover {
-            background: var(--brand-pink);
-        }
+        .modal-box::-webkit-scrollbar { width: 6px; }
+        .modal-box::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.03); border-radius: 8px; }
+        .modal-box::-webkit-scrollbar-thumb { background: rgba(160, 209, 143, 0.7); border-radius: 8px; }
+        .modal-box::-webkit-scrollbar-thumb:hover { background: var(--brand-pink); }
 
         .modal-backdrop.active .modal-box { transform: scale(1); }
 
@@ -639,11 +708,8 @@
             transition: transform 0.2s;
         }
 
-        .digital-link-cta:hover {
-            transform: translateX(2px);
-        }
+        .digital-link-cta:hover { transform: translateX(2px); }
 
-        /* BOTÓN DESPLEGABLE ELEGANTE */
         .btn-toggle-examples {
             background: #F2F8EF;
             border: 1.5px solid var(--border-card);
@@ -679,11 +745,8 @@
             transition: transform 0.25s var(--spring);
         }
 
-        .btn-toggle-examples.active svg.chevron-icon {
-            transform: rotate(180deg);
-        }
+        .btn-toggle-examples.active svg.chevron-icon { transform: rotate(180deg); }
 
-        /* CONTENEDOR DESPLEGABLE HACIA ABAJO (FLEX-WRAP LADO A LADO) */
         .examples-expandable-drawer {
             display: none;
             width: 100%;
@@ -695,16 +758,13 @@
             animation: drawerFadeDown 0.24s var(--spring);
         }
 
-        .examples-expandable-drawer.open {
-            display: flex;
-        }
+        .examples-expandable-drawer.open { display: flex; }
 
         @keyframes drawerFadeDown {
             from { opacity: 0; transform: translateY(-6px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* RECUADROS DE EJEMPLOS UNO AL LADO DEL OTRO */
         .example-badge-chip {
             display: inline-flex;
             align-items: center;
@@ -738,9 +798,7 @@
             transition: transform 0.2s;
         }
 
-        .example-badge-chip:hover svg {
-            transform: translate(1px, -1px);
-        }
+        .example-badge-chip:hover svg { transform: translate(1px, -1px); }
 
         /* GRILLA GALERÍA */
         .gallery-grid-dynamic {
@@ -876,6 +934,10 @@
             font-weight: 600;
         }
 
+        @media (max-width: 440px) {
+            .lang-badge-hint { display: none; }
+        }
+
         @media (max-width: 480px) {
             body { padding: 14px 12px 28px; }
             .logo-wrapper { width: 95px; height: 95px; }
@@ -893,13 +955,26 @@
 
     <main class="hub-container">
 
-        <!-- IDIOMA -->
-        <nav class="lang-nav-bar" aria-label="Language selector">
-            <span class="lang-badge-hint" id="uiLangHint">🌐 Idioma</span>
-            <div class="lang-switch-pills">
-                <button type="button" class="lang-btn active" onclick="setLanguage('es')" id="btnLangEs">ES</button>
-                <button type="button" class="lang-btn" onclick="setLanguage('pt')" id="btnLangPt">PT</button>
-                <button type="button" class="lang-btn" onclick="setLanguage('en')" id="btnLangEn">EN</button>
+        <!-- BARRA SUPERIOR: IDIOMA & SOUNDTRACK -->
+        <nav class="lang-nav-bar" aria-label="Language & Music Controls">
+            <div class="lang-group-left">
+                <span class="lang-badge-hint" id="uiLangHint">🌐 Idioma</span>
+                <div class="lang-switch-pills">
+                    <button type="button" class="lang-btn active" onclick="setLanguage('es')" id="btnLangEs">ES</button>
+                    <button type="button" class="lang-btn" onclick="setLanguage('pt')" id="btnLangPt">PT</button>
+                    <button type="button" class="lang-btn" onclick="setLanguage('en')" id="btnLangEn">EN</button>
+                </div>
+            </div>
+
+            <!-- SOUNDTRACK CONTROLLER -->
+            <div class="soundtrack-wrap">
+                <span class="soundtrack-label">SOUNDTRACK</span>
+                <button type="button" class="btn-music-toggle" id="btnMusicToggle" onclick="toggleMusic()" title="Encender / Apagar música">
+                    <span id="musicStatusIcon">🔈</span> <span id="musicStatusText">OFF</span>
+                </button>
+                <button type="button" class="btn-music-skip" id="btnMusicSkip" onclick="skipMusic()" title="Siguiente canción aleatoria">
+                    ⏭
+                </button>
             </div>
         </nav>
 
@@ -1238,7 +1313,7 @@
 
     <!-- SCRIPTS -->
     <script>
-        /* 1. AUDIO */
+        /* 1. AUDIO DE BOTONES (CLICK EFECTO) */
         let audioCtx = null;
         let soundBuffer = null;
         const fallbackAudio = new Audio("./mine_gran_turismo_4_menu.mp3");
@@ -1283,6 +1358,166 @@
             if (!audioCtx) initAudioEngine();
             else if (audioCtx.state === 'suspended') audioCtx.resume();
         }, { once: true });
+
+        /* 1.B MOTOR DE MÚSICA DE FONDO (SOUNDTRACK ALEATORIO + FADE IN / FADE OUT + CONTINUIDAD) */
+        const bgAudioPlayer = new Audio();
+        bgAudioPlayer.preload = "auto";
+        const MUSIC_TARGET_VOL = 0.25;
+        let isMusicActive = false;
+        let musicFadeTimer = null;
+        let currentTrackIndex = -1;
+
+        // Lista de canciones base (se actualiza automáticamente desde Google Sheets pestaña "Música")
+        let playlist = [
+            "./mine_gran_turismo_4_menu.mp3"
+        ];
+
+        function updateMusicUI(active) {
+            const btnToggle = document.getElementById('btnMusicToggle');
+            const icon = document.getElementById('musicStatusIcon');
+            const txt = document.getElementById('musicStatusText');
+            if (!btnToggle || !icon || !txt) return;
+
+            if (active) {
+                btnToggle.classList.add('active');
+                icon.innerText = "🔊";
+                txt.innerText = "ON";
+            } else {
+                btnToggle.classList.remove('active');
+                icon.innerText = "🔈";
+                txt.innerText = "OFF";
+            }
+        }
+
+        function pickRandomTrackIndex() {
+            if (playlist.length <= 1) return 0;
+            let nextIndex;
+            do {
+                nextIndex = Math.floor(Math.random() * playlist.length);
+            } while (nextIndex === currentTrackIndex);
+            return nextIndex;
+        }
+
+        function playTrackWithFadeIn(trackUrl, startSecond = 0) {
+            if (musicFadeTimer) clearInterval(musicFadeTimer);
+            bgAudioPlayer.src = trackUrl;
+            bgAudioPlayer.currentTime = startSecond;
+            bgAudioPlayer.volume = 0;
+
+            const playPromise = bgAudioPlayer.play();
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    isMusicActive = true;
+                    updateMusicUI(true);
+                    sessionStorage.setItem('1111_music_on', 'true');
+                    sessionStorage.setItem('1111_music_src', trackUrl);
+
+                    const steps = 20;
+                    const stepTime = 1000 / steps;
+                    const volStep = MUSIC_TARGET_VOL / steps;
+
+                    musicFadeTimer = setInterval(() => {
+                        if (bgAudioPlayer.volume + volStep < MUSIC_TARGET_VOL) {
+                            bgAudioPlayer.volume += volStep;
+                        } else {
+                            bgAudioPlayer.volume = MUSIC_TARGET_VOL;
+                            clearInterval(musicFadeTimer);
+                            musicFadeTimer = null;
+                        }
+                    }, stepTime);
+                }).catch(() => {});
+            }
+        }
+
+        function fadeOutMusic(duration = 700, onDone) {
+            if (musicFadeTimer) clearInterval(musicFadeTimer);
+            if (!isMusicActive || bgAudioPlayer.paused) {
+                if (onDone) onDone();
+                return;
+            }
+
+            const steps = 15;
+            const stepTime = duration / steps;
+            const startVol = bgAudioPlayer.volume;
+            const volStep = startVol / steps;
+
+            musicFadeTimer = setInterval(() => {
+                if (bgAudioPlayer.volume - volStep > 0) {
+                    bgAudioPlayer.volume -= volStep;
+                } else {
+                    bgAudioPlayer.volume = 0;
+                    bgAudioPlayer.pause();
+                    clearInterval(musicFadeTimer);
+                    musicFadeTimer = null;
+                    isMusicActive = false;
+                    sessionStorage.setItem('1111_music_on', 'false');
+                    updateMusicUI(false);
+                    if (onDone) onDone();
+                }
+            }, stepTime);
+        }
+
+        function toggleMusic() {
+            playClickSound();
+            if (!isMusicActive) {
+                currentTrackIndex = pickRandomTrackIndex();
+                playTrackWithFadeIn(playlist[currentTrackIndex], 0);
+            } else {
+                fadeOutMusic(500);
+            }
+        }
+
+        function skipMusic() {
+            playClickSound();
+            if (!isMusicActive) {
+                currentTrackIndex = pickRandomTrackIndex();
+                playTrackWithFadeIn(playlist[currentTrackIndex], 0);
+                return;
+            }
+            fadeOutMusic(300, () => {
+                currentTrackIndex = pickRandomTrackIndex();
+                playTrackWithFadeIn(playlist[currentTrackIndex], 0);
+            });
+        }
+
+        // Salto automático cuando termina la canción
+        bgAudioPlayer.addEventListener('ended', () => {
+            currentTrackIndex = pickRandomTrackIndex();
+            playTrackWithFadeIn(playlist[currentTrackIndex], 0);
+        });
+
+        // Guardado de segundo exacto periódicamente y antes de navegar internamente
+        setInterval(() => {
+            if (isMusicActive && !bgAudioPlayer.paused) {
+                sessionStorage.setItem('1111_music_src', bgAudioPlayer.src);
+                sessionStorage.setItem('1111_music_time', String(bgAudioPlayer.currentTime));
+            }
+        }, 1000);
+
+        window.addEventListener('pagehide', () => {
+            if (isMusicActive && !bgAudioPlayer.paused) {
+                sessionStorage.setItem('1111_music_on', 'true');
+                sessionStorage.setItem('1111_music_src', bgAudioPlayer.src);
+                sessionStorage.setItem('1111_music_time', String(bgAudioPlayer.currentTime));
+            }
+        });
+
+        // Detector de salida: si se toca un link EXTERNO (WhatsApp, Correo, PDF, Instagram, etc.), hace fade-out suave
+        document.addEventListener('click', (e) => {
+            const link = e.target.closest('a');
+            if (!link) return;
+            const href = (link.getAttribute('href') || '').toLowerCase();
+            
+            const isExternal = href.includes('wa.me') || 
+                               href.includes('mailto:') || 
+                               href.includes('instagram.com') || 
+                               href.includes('.pdf') ||
+                               (link.target === '_blank' && !href.includes('1111grafica.github.io'));
+
+            if (isExternal && isMusicActive) {
+                fadeOutMusic(650);
+            }
+        });
 
         /* 2. GALERÍA */
         const TOTAL_PHOTOS = 50;
@@ -1539,10 +1774,11 @@
             if (lang === 'en') document.getElementById('btnLangEn').classList.add('active');
         }
 
-        /* 4. GOOGLE SHEETS SYNC (Pestaña "Link" y Pestaña "Web") */
+        /* 4. GOOGLE SHEETS SYNC (Pestañas "Link", "Web" y "Música") */
         const SHEET_ID = '12WChaJERJOmnyB6K3IMgpB6lYxDrYBvWR9OToha6do4';
         const GID_LINK = '972224574';
         const GID_WEB = '70835229';
+        const GID_MUSIC = '149458792'; // Pestaña Música de tu captura
 
         function updateExamplesFromRawString(drawerId, rawStr) {
             if (!rawStr) return;
@@ -1659,6 +1895,40 @@
                     }
                 }
             } catch (err) {}
+
+            // Sincronizar Pestaña "Música" (gid 149458792)
+            try {
+                const endpointMusic = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&gid=${GID_MUSIC}&headers=1&t=${Date.now()}`;
+                const resMusic = await fetch(endpointMusic, { cache: 'no-store' });
+                if (resMusic.ok) {
+                    const rawTextM = await resMusic.text();
+                    const s = rawTextM.indexOf('{');
+                    const e = rawTextM.lastIndexOf('}');
+                    if (s !== -1 && e !== -1) {
+                        const payloadM = JSON.parse(rawTextM.substring(s, e + 1));
+                        if (payloadM.table && payloadM.table.rows && payloadM.table.rows.length > 0) {
+                            const getValM = (row, col) => {
+                                const cell = row.c[col];
+                                return (cell && cell.v !== null && cell.v !== undefined) ? String(cell.v).trim() : '';
+                            };
+
+                            const fetchedUrls = [];
+                            payloadM.table.rows.forEach(row => {
+                                if (!row || !row.c) return;
+                                const url = getValM(row, 3);      // Columna D: URL
+                                const status = getValM(row, 4).toUpperCase(); // Columna E: Estado
+                                if (url && (status === '' || status === 'ACTIVO' || status === 'SI')) {
+                                    fetchedUrls.push(url);
+                                }
+                            });
+
+                            if (fetchedUrls.length > 0) {
+                                playlist = fetchedUrls;
+                            }
+                        }
+                    }
+                }
+            } catch (err) {}
         }
 
         /* INICIALIZACIÓN */
@@ -1666,6 +1936,17 @@
             requestAnimationFrame(() => document.body.classList.remove('preload'));
             setLanguage('es');
             initHubSheetsConnection();
+
+            // Reanudación suave de la música si el usuario venía navegando internamente
+            try {
+                const wasMusicOn = sessionStorage.getItem('1111_music_on');
+                const lastSrc = sessionStorage.getItem('1111_music_src');
+                const lastTime = parseFloat(sessionStorage.getItem('1111_music_time') || '0');
+
+                if (wasMusicOn === 'true' && lastSrc) {
+                    playTrackWithFadeIn(lastSrc, isNaN(lastTime) ? 0 : lastTime);
+                }
+            } catch(e) {}
 
             if (window.location.hash === '#digital' || window.location.search.includes('digital')) {
                 setTimeout(() => openDigitalModal(), 350);

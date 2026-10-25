@@ -19,7 +19,6 @@
 
     <style>
         :root {
-            /* Identidad de Marca */
             --brand-green: #A0D18F;
             --brand-green-deep: #417B2E;
             --brand-green-text: #193D0F;
@@ -28,7 +27,6 @@
             --brand-pink-deep: #A92667;
             --brand-white: #FFFFFF;
 
-            /* Atmósfera Pastel Veraniega / Primaveral */
             --bg-base: #F4F8F1;
             --bg-card: #FFFFFF;
             --border-card: rgba(140, 195, 120, 0.65);
@@ -55,7 +53,6 @@
 
         body {
             font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-            font-feature-settings: "cv02", "cv03", "cv04", "cv11";
             background: transparent;
             color: var(--text-main);
             min-height: 100vh;
@@ -76,7 +73,7 @@
             animation: none !important;
         }
 
-        /* FONDO LUMINOSO & DERIVA DIAGONAL */
+        /* FONDOS AMBIENTALES */
         .ambient-canvas {
             position: fixed;
             top: 0;
@@ -100,7 +97,6 @@
             background: radial-gradient(ellipse at 50% 30%, rgba(233, 137, 183, 0.28) 0%, rgba(160, 209, 143, 0.22) 45%, transparent 75%);
             filter: blur(80px);
             z-index: 1;
-            will-change: transform;
         }
 
         .summer-sun-glow {
@@ -112,7 +108,6 @@
             background: radial-gradient(circle, rgba(255, 237, 160, 0.32) 0%, rgba(160, 209, 143, 0.15) 50%, transparent 80%);
             filter: blur(85px);
             z-index: 1;
-            will-change: transform;
         }
 
         .stencil-1111-pattern {
@@ -127,7 +122,6 @@
             background-size: 190px auto;
             transform: rotate(-14deg);
             animation: patternDrift 45s infinite linear;
-            will-change: background-position;
         }
 
         @keyframes patternDrift {
@@ -135,7 +129,6 @@
             100% { background-position: 600px 600px; }
         }
 
-        /* CONTENEDOR PRINCIPAL */
         .hub-container {
             width: 100%;
             max-width: 480px;
@@ -145,19 +138,18 @@
             z-index: 2;
         }
 
-        /* SELECTOR DE IDIOMA */
+        /* SELECTOR IDIOMA */
         .lang-nav-bar {
             display: flex;
             align-items: center;
             justify-content: space-between;
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
             border: 1.5px solid var(--border-card);
             border-radius: 999px;
             padding: 4px 6px;
             margin-bottom: 2px;
-            box-shadow: 0 3px 12px rgba(60, 105, 45, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+            box-shadow: 0 3px 12px rgba(60, 105, 45, 0.08);
         }
 
         .lang-badge-hint {
@@ -173,10 +165,7 @@
             user-select: none;
         }
 
-        .lang-switch-pills {
-            display: flex;
-            gap: 4px;
-        }
+        .lang-switch-pills { display: flex; gap: 4px; }
 
         .lang-btn {
             background: transparent;
@@ -197,7 +186,7 @@
             box-shadow: 0 2px 10px var(--brand-pink-glow);
         }
 
-        /* CABECERA Y LOGO 3D */
+        /* HEADER */
         .brand-header {
             text-align: center;
             display: flex;
@@ -238,7 +227,6 @@
             width: 100%;
             height: 100%;
             border-radius: 50%;
-            backface-visibility: hidden;
             display: block;
         }
 
@@ -250,9 +238,7 @@
             letter-spacing: -0.02em;
             line-height: 1.1;
         }
-        .brand-title span {
-            color: var(--brand-pink-deep);
-        }
+        .brand-title span { color: var(--brand-pink-deep); }
 
         .brand-subtitle {
             font-size: 0.83rem;
@@ -262,7 +248,6 @@
             max-width: 92%;
         }
 
-        /* BARRA REDES SOCIALES */
         .social-bar {
             display: flex;
             align-items: center;
@@ -282,10 +267,8 @@
             border: 1.5px solid var(--border-card);
             color: var(--brand-green-deep);
             text-decoration: none;
-            box-shadow: 0 4px 12px rgba(60, 105, 45, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+            box-shadow: 0 4px 12px rgba(60, 105, 45, 0.08);
             transition: all 0.22s var(--spring);
-            flex-shrink: 0;
-            transform: translateZ(0);
         }
 
         .social-btn:hover {
@@ -295,14 +278,9 @@
             box-shadow: 0 6px 16px var(--brand-pink-glow);
         }
 
-        .social-btn svg {
-            width: 21px;
-            height: 21px;
-            display: block;
-            flex-shrink: 0;
-        }
+        .social-btn svg { width: 21px; height: 21px; display: block; }
 
-        /* TARJETAS / BOTONES INTERACTIVOS */
+        /* TARJETAS BOTONES HUB */
         .btn-card {
             display: flex;
             align-items: center;
@@ -314,132 +292,72 @@
             border-radius: 18px;
             text-decoration: none;
             color: var(--text-main);
-            box-shadow: var(--shadow-card), inset 0 1px 0 rgba(255, 255, 255, 0.85);
+            box-shadow: var(--shadow-card);
             transition: transform 0.22s var(--spring), box-shadow 0.22s ease;
-            position: relative;
-            user-select: none;
             cursor: pointer;
-            transform: translateZ(0);
         }
 
-        .btn-card:hover {
-            transform: translateY(-2px);
-        }
+        .btn-card:hover { transform: translateY(-2px); }
 
-        /* 1. WHATSAPP HERO */
         .btn-card.hero-featured {
             background: linear-gradient(135deg, #FFFFFF 0%, #F2F9EE 100%);
             border: 1.8px solid var(--brand-green-deep);
             border-left: 6px solid var(--brand-green-deep);
-            box-shadow: 0 10px 26px -2px rgba(65, 123, 46, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.9);
-        }
-        .btn-card.hero-featured:hover {
-            border-color: var(--brand-green-deep);
-            box-shadow: 0 14px 32px rgba(65, 123, 46, 0.32);
         }
         .btn-card.hero-featured .icon-box {
             background: rgba(65, 123, 46, 0.16);
             border-color: rgba(65, 123, 46, 0.45);
             color: var(--brand-green-deep);
         }
-        .btn-card.hero-featured:hover .icon-box {
-            background: var(--brand-green-deep);
-            color: #FFFFFF;
-        }
 
-        /* 2. INSTAGRAM */
         .btn-card.card-insta {
             border-left: 5px solid #E1306C;
             background: linear-gradient(135deg, #FFFFFF 0%, #FDF4F7 100%);
-        }
-        .btn-card.card-insta:hover {
-            border-color: #E1306C;
-            box-shadow: 0 12px 30px rgba(225, 48, 108, 0.2);
         }
         .btn-card.card-insta .icon-box {
             background: #FCE7F3;
             border-color: #F472B6;
             color: #BE185D;
         }
-        .btn-card.card-insta:hover .icon-box {
-            background: #E1306C;
-            color: #FFFFFF;
-        }
 
-        /* 3. TRABAJOS DE GRÁFICA */
         .btn-card.card-print {
             border-left: 5px solid #387D25;
             background: linear-gradient(135deg, #FFFFFF 0%, #F4F9F2 100%);
-        }
-        .btn-card.card-print:hover {
-            border-color: #387D25;
-            box-shadow: 0 12px 30px rgba(56, 125, 37, 0.2);
         }
         .btn-card.card-print .icon-box {
             background: rgba(160, 209, 143, 0.25);
             border-color: rgba(160, 209, 143, 0.6);
             color: #2A561B;
         }
-        .btn-card.card-print:hover .icon-box {
-            background: #387D25;
-            color: #FFFFFF;
-        }
 
-        /* 4. DISEÑO GRÁFICO PDF */
         .btn-card.card-pdf {
             border-left: 5px solid var(--brand-pink-deep);
             background: linear-gradient(135deg, #FFFFFF 0%, #FDF2F8 100%);
-        }
-        .btn-card.card-pdf:hover {
-            border-color: var(--brand-pink-deep);
-            box-shadow: 0 12px 30px rgba(169, 38, 103, 0.24);
         }
         .btn-card.card-pdf .icon-box {
             background: #FCE7F3;
             border-color: #FDA4AF;
             color: var(--brand-pink-deep);
         }
-        .btn-card.card-pdf:hover .icon-box {
-            background: var(--brand-pink-deep);
-            color: #FFFFFF;
-        }
 
-        /* 5. SOLUCIONES DIGITALES & SOFTWARE */
         .btn-card.card-soft {
             border-left: 5px solid #0284C7;
             background: linear-gradient(135deg, #FFFFFF 0%, #F0F9FF 100%);
-        }
-        .btn-card.card-soft:hover {
-            border-color: #0284C7;
-            box-shadow: 0 12px 30px rgba(2, 132, 199, 0.22);
         }
         .btn-card.card-soft .icon-box {
             background: #E0F2FE;
             border-color: #BAE6FD;
             color: #0369A1;
         }
-        .btn-card.card-soft:hover .icon-box {
-            background: #0284C7;
-            color: #FFFFFF;
-        }
 
-        /* 6. CORREO ELECTRÓNICO */
         .btn-card.card-mail {
             border-left: 5px solid #475569;
             background: linear-gradient(135deg, #FFFFFF 0%, #F8FAFC 100%);
-        }
-        .btn-card.card-mail:hover {
-            border-color: #475569;
-            box-shadow: 0 12px 30px rgba(71, 85, 105, 0.2);
         }
         .btn-card.card-mail .icon-box {
             background: #F1F5F9;
             border-color: #CBD5E1;
             color: #334155;
-        }
-        .btn-card.card-mail:hover .icon-box {
-            background: #475569;
-            color: #FFFFFF;
         }
 
         .icon-box {
@@ -527,7 +445,7 @@
         .modal-backdrop {
             position: fixed;
             inset: 0;
-            background: rgba(20, 32, 18, 0.70);
+            background: rgba(20, 32, 18, 0.75);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             z-index: 2000;
@@ -550,21 +468,34 @@
             border-radius: 24px;
             max-width: 500px;
             width: 100%;
-            max-height: 86vh;
+            max-height: 88vh;
             overflow-y: auto;
-            padding: 20px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.24), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+            overflow-x: hidden;
+            padding: 20px 18px 24px 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.24);
             display: flex;
             flex-direction: column;
             gap: 12px;
-            position: relative;
             transform: scale(0.95);
             transition: transform 0.25s var(--spring);
         }
 
-        .modal-backdrop.active .modal-box {
-            transform: scale(1);
+        .modal-box::-webkit-scrollbar {
+            width: 6px;
         }
+        .modal-box::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.03);
+            border-radius: 8px;
+        }
+        .modal-box::-webkit-scrollbar-thumb {
+            background: rgba(160, 209, 143, 0.7);
+            border-radius: 8px;
+        }
+        .modal-box::-webkit-scrollbar-thumb:hover {
+            background: var(--brand-pink);
+        }
+
+        .modal-backdrop.active .modal-box { transform: scale(1); }
 
         .modal-header {
             display: flex;
@@ -593,12 +524,221 @@
             align-items: center;
             justify-content: center;
             transition: all 0.2s;
+            flex-shrink: 0;
         }
 
         .btn-close-modal:hover {
             background: var(--brand-pink);
             color: #FFFFFF;
             transform: rotate(90deg);
+        }
+
+        /* TARJETAS DENTRO DEL MODAL DIGITAL */
+        .digital-options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 4px;
+        }
+
+        .digital-item-card {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            padding: 14px 16px;
+            border-radius: 18px;
+            border: 1.5px solid var(--border-card);
+            text-decoration: none;
+            background: #FBFDFB;
+            transition: all 0.22s ease;
+        }
+
+        .digital-item-card:hover {
+            background: #FFFFFF;
+            border-color: var(--brand-pink);
+            box-shadow: 0 6px 16px rgba(60, 105, 45, 0.08);
+        }
+
+        .digital-item-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+        }
+
+        .digital-title-wrap {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+        }
+
+        .digital-icon-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            border-radius: 9px;
+            background: rgba(160, 209, 143, 0.22);
+            color: var(--brand-green-deep);
+            flex-shrink: 0;
+        }
+
+        .digital-icon-badge svg {
+            width: 15px;
+            height: 15px;
+            stroke-width: 2.2;
+        }
+
+        .digital-item-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.98rem;
+            font-weight: 800;
+            color: var(--text-main);
+        }
+
+        .digital-price-pill {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.74rem;
+            font-weight: 800;
+            padding: 3px 9px;
+            border-radius: 999px;
+            background: #E8F5E5;
+            color: var(--brand-green-deep);
+            border: 1px solid var(--brand-green);
+            white-space: nowrap;
+        }
+
+        .digital-item-desc {
+            font-size: 0.77rem;
+            color: var(--text-muted);
+            line-height: 1.35;
+            font-weight: 600;
+        }
+
+        .digital-actions-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            margin-top: 4px;
+            padding-top: 6px;
+            border-top: 1px dashed rgba(160, 209, 143, 0.45);
+            flex-wrap: wrap;
+        }
+
+        .digital-link-cta {
+            font-size: 0.78rem;
+            font-weight: 800;
+            color: var(--brand-pink-deep);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: transform 0.2s;
+        }
+
+        .digital-link-cta:hover {
+            transform: translateX(2px);
+        }
+
+        /* BOTÓN DESPLEGABLE ELEGANTE */
+        .btn-toggle-examples {
+            background: #F2F8EF;
+            border: 1.5px solid var(--border-card);
+            border-radius: 999px;
+            padding: 5px 12px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 800;
+            color: var(--brand-green-deep);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s var(--spring);
+        }
+
+        .btn-toggle-examples:hover {
+            background: #FFFFFF;
+            border-color: var(--brand-green-deep);
+            color: var(--brand-green-deep);
+        }
+
+        .btn-toggle-examples.active {
+            background: var(--brand-green-deep);
+            color: #FFFFFF;
+            border-color: var(--brand-green-deep);
+        }
+
+        .btn-toggle-examples svg.chevron-icon {
+            width: 12px;
+            height: 12px;
+            stroke-width: 2.5;
+            transition: transform 0.25s var(--spring);
+        }
+
+        .btn-toggle-examples.active svg.chevron-icon {
+            transform: rotate(180deg);
+        }
+
+        /* CONTENEDOR DESPLEGABLE HACIA ABAJO (FLEX-WRAP LADO A LADO) */
+        .examples-expandable-drawer {
+            display: none;
+            width: 100%;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid rgba(160, 209, 143, 0.35);
+            flex-wrap: wrap;
+            gap: 8px;
+            animation: drawerFadeDown 0.24s var(--spring);
+        }
+
+        .examples-expandable-drawer.open {
+            display: flex;
+        }
+
+        @keyframes drawerFadeDown {
+            from { opacity: 0; transform: translateY(-6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* RECUADROS DE EJEMPLOS UNO AL LADO DEL OTRO */
+        .example-badge-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 7px 12px;
+            background: #FFFFFF;
+            border: 1.5px solid var(--border-card);
+            border-radius: 11px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--text-main);
+            text-decoration: none;
+            box-shadow: 0 2px 6px rgba(60, 105, 45, 0.05);
+            transition: all 0.2s var(--spring);
+            flex: 0 1 auto;
+        }
+
+        .example-badge-chip:hover {
+            border-color: var(--brand-pink);
+            color: var(--brand-pink-deep);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px var(--brand-pink-glow);
+        }
+
+        .example-badge-chip svg {
+            width: 12px;
+            height: 12px;
+            stroke: currentColor;
+            stroke-width: 2.2;
+            transition: transform 0.2s;
+        }
+
+        .example-badge-chip:hover svg {
+            transform: translate(1px, -1px);
         }
 
         /* GRILLA GALERÍA */
@@ -608,7 +748,6 @@
             gap: 8px;
             max-height: 52vh;
             overflow-y: auto;
-            padding-right: 2px;
             contain: content;
         }
 
@@ -619,27 +758,7 @@
             border: 1.5px solid var(--border-card);
             cursor: zoom-in;
             position: relative;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            transition: transform 0.2s var(--spring);
-            background: linear-gradient(90deg, #F0F6EE 25%, #E6F0E3 50%, #F0F6EE 75%);
-            background-size: 200% 100%;
-            animation: skeletonGlow 1.4s infinite ease-in-out;
-            transform: translateZ(0);
-        }
-
-        @keyframes skeletonGlow {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
-        }
-
-        .gallery-item-wrap.loaded {
-            animation: none;
             background: #F0F6EE;
-        }
-
-        .gallery-item-wrap:hover {
-            transform: scale(1.03);
-            border-color: var(--brand-pink);
         }
 
         .gallery-item-wrap img {
@@ -651,24 +770,19 @@
             transition: opacity 0.28s ease;
         }
 
-        .gallery-item-wrap.loaded img {
-            opacity: 1;
-        }
+        .gallery-item-wrap.loaded img { opacity: 1; }
 
-        /* LIGHTBOX PRO */
+        /* LIGHTBOX */
         .lightbox-overlay {
             position: fixed;
             inset: 0;
             background: rgba(12, 18, 11, 0.94);
             backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
             z-index: 5000;
             display: none;
             align-items: center;
             justify-content: center;
             padding: 14px;
-            cursor: pointer;
-            user-select: none;
         }
 
         .lightbox-overlay.active { display: flex; }
@@ -681,7 +795,6 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            cursor: default;
         }
 
         .lightbox-img-full {
@@ -689,14 +802,7 @@
             max-height: 80vh;
             border-radius: 16px;
             border: 2px solid #FFFFFF;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.6);
             object-fit: contain;
-            animation: zoomIn 0.25s var(--spring);
-        }
-
-        @keyframes zoomIn {
-            from { transform: scale(0.92); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
         }
 
         .lb-nav-btn {
@@ -707,23 +813,11 @@
             height: 44px;
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(8px);
             border: 1.5px solid rgba(255, 255, 255, 0.5);
             color: #FFFFFF;
             font-size: 24px;
-            font-weight: 900;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             cursor: pointer;
-            transition: all 0.2s ease;
             z-index: 5010;
-        }
-
-        .lb-nav-btn:hover {
-            background: var(--brand-pink);
-            border-color: var(--brand-pink);
-            transform: translateY(-50%) scale(1.1);
         }
 
         .lb-prev { left: 14px; }
@@ -740,28 +834,18 @@
             border: 1.5px solid #FFFFFF;
             color: #FFFFFF;
             font-size: 18px;
-            font-weight: 900;
             cursor: pointer;
-            transition: all 0.2s ease;
             z-index: 5020;
-        }
-
-        .lb-close-btn:hover {
-            background: #EF4444;
-            border-color: #EF4444;
-            transform: scale(1.1);
         }
 
         .lb-counter {
             margin-top: 10px;
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.82rem;
-            font-weight: 800;
             color: #FFFFFF;
             background: rgba(0, 0, 0, 0.5);
             padding: 4px 14px;
             border-radius: 999px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         /* FOOTER */
@@ -783,7 +867,6 @@
             border: 1.5px solid var(--border-card);
             padding: 5px 14px;
             border-radius: 999px;
-            box-shadow: 0 2px 6px rgba(60, 105, 45, 0.06);
         }
 
         .footer-legal {
@@ -795,30 +878,21 @@
         @media (max-width: 480px) {
             body { padding: 14px 12px 28px; }
             .logo-wrapper { width: 95px; height: 95px; }
-            .btn-card { padding: 13px 15px; }
-            .btn-title { font-size: 0.98rem; }
-            .btn-desc { font-size: 0.76rem; }
             .gallery-grid-dynamic { grid-template-columns: repeat(2, 1fr); }
-            .lb-nav-btn { width: 40px; height: 40px; font-size: 22px; }
-            .lb-prev { left: 8px; }
-            .lb-next { right: 8px; }
-            .lb-close-btn { top: 12px; right: 12px; width: 38px; height: 38px; }
         }
     </style>
 </head>
 <body class="preload">
 
-    <!-- FONDOS AMBIENTALES DINÁMICOS -->
     <div class="ambient-canvas">
         <div class="spring-spotlight"></div>
         <div class="summer-sun-glow"></div>
         <div class="stencil-1111-pattern"></div>
     </div>
 
-    <!-- CONTENEDOR PRINCIPAL -->
     <main class="hub-container">
 
-        <!-- SELECTOR DE IDIOMAS TRILINGÜE (ES / PT / EN) -->
+        <!-- IDIOMA -->
         <nav class="lang-nav-bar" aria-label="Language selector">
             <span class="lang-badge-hint" id="uiLangHint">🌐 Idioma</span>
             <div class="lang-switch-pills">
@@ -828,7 +902,7 @@
             </div>
         </nav>
 
-        <!-- HEADER CON LOGO OFICIAL 1111 EN 3D FLOTANTE -->
+        <!-- CABECERA -->
         <header class="brand-header">
             <div class="logo-stage">
                 <div class="logo-wrapper">
@@ -850,30 +924,20 @@
                 Servicios de Gráfica, Imprenta y Cartelería, Diseño Gráfico y Herramientas digitales para potenciar tu negocio.
             </p>
 
-            <!-- BARRA DE REDES SOCIALES -->
             <div class="social-bar">
                 <a href="https://wa.me/5491131933611" target="_blank" rel="noopener noreferrer" class="social-btn" id="socialWspTop" aria-label="WhatsApp" onclick="playClickSound()">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.41a8.17 8.17 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.44 0-2.85-.38-4.09-1.1l-.29-.17-3.05.8 1.05-2.97-.19-.31a8.163 8.163 0 0 1-1.25-4.49c0-4.54 3.7-8.24 8.24-8.24m4.53 11.37c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.25-.75-.67-1.26-1.5-1.4-1.76-.15-.25-.02-.39.11-.51.11-.11.25-.29.37-.43.13-.14.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.34-.76-1.84-.2-.49-.4-.42-.56-.43h-.47c-.17 0-.44.06-.67.31-.23.25-.87.85-.87 2.08 0 1.22.89 2.41 1.02 2.58.13.17 1.76 2.68 4.26 3.76.6.26 1.06.41 1.42.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.07-.1-.23-.17-.48-.29"/>
-                    </svg>
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.41a8.17 8.17 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.44 0-2.85-.38-4.09-1.1l-.29-.17-3.05.8 1.05-2.97-.19-.31a8.163 8.163 0 0 1-1.25-4.49c0-4.54 3.7-8.24 8.24-8.24m4.53 11.37c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.25-.75-.67-1.26-1.5-1.4-1.76-.15-.25-.02-.39.11-.51.11-.11.25-.29.37-.43.13-.14.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.34-.76-1.84-.2-.49-.4-.42-.56-.43h-.47c-.17 0-.44.06-.67.31-.23.25-.87.85-.87 2.08 0 1.22.89 2.41 1.02 2.58.13.17 1.76 2.68 4.26 3.76.6.26 1.06.41 1.42.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.07-.1-.23-.17-.48-.29"/></svg>
                 </a>
                 <a href="https://www.instagram.com/1111.grafica" target="_blank" rel="noopener noreferrer" class="social-btn" id="socialInstaTop" aria-label="Instagram" onclick="playClickSound()">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
-                    </svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
                 </a>
                 <a href="mailto:onceonce.grafica@gmail.com" class="social-btn" id="socialMailTop" aria-label="Email" onclick="playClickSound()">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                        <polyline points="22,6 12,13 2,6"/>
-                    </svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
                 </a>
             </div>
         </header>
 
-        <!-- BOTÓN 1: WHATSAPP DIRECTO -->
+        <!-- BOTÓN 1: WHATSAPP -->
         <a href="https://wa.me/5491131933611" target="_blank" rel="noopener noreferrer" class="btn-card hero-featured" id="btnWspMain" onclick="playClickSound()">
             <div class="icon-box" id="iconBoxBtn1">
                 <svg viewBox="0 0 24 24" fill="currentColor" style="width: 32px; height: 32px;"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.099.824z"/></svg>
@@ -888,25 +952,24 @@
             <div class="arrow-box"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></div>
         </a>
 
-        <!-- BOTÓN 2: INSTAGRAM OFICIAL -->
+        <!-- BOTÓN 2: INSTAGRAM -->
         <a href="https://www.instagram.com/1111.grafica" target="_blank" rel="noopener noreferrer" class="btn-card card-insta" id="btnCard2" onclick="playClickSound()">
             <div class="icon-box" id="iconBoxBtn2">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
             </div>
             <div class="btn-info">
                 <div class="btn-title-row">
                     <span class="btn-title" id="t_btn2_title">Instagram Oficial</span>
-                    <span class="badge-pill" id="t_btn2_badge" style="display:none;"></span>
                 </div>
                 <span class="btn-desc" id="t_btn2_desc">¡Seguinos y mirá nuestros trabajos!</span>
             </div>
             <div class="arrow-box"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></div>
         </a>
 
-        <!-- BOTÓN 3: TRABAJOS DE GRÁFICA (GALERÍA 50 FOTOS) -->
+        <!-- BOTÓN 3: TRABAJOS DE GRÁFICA -->
         <div class="btn-card card-print" id="btnCard3" onclick="openGalleryModal(); playClickSound();">
             <div class="icon-box" id="iconBoxBtn3">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
             </div>
             <div class="btn-info">
                 <div class="btn-title-row">
@@ -918,10 +981,10 @@
             <div class="arrow-box"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></div>
         </div>
 
-        <!-- BOTÓN 4: PORTFOLIO DE DISEÑO GRÁFICO EN PDF -->
+        <!-- BOTÓN 4: PORTFOLIO DISEÑO PDF -->
         <a href="https://onceoncegrafica-1111.github.io/1111grafica/Portfolio%20DGI%202026.pdf" target="_blank" rel="noopener noreferrer" class="btn-card card-pdf" id="btnPortfolioPdf" onclick="playClickSound()">
             <div class="icon-box" id="iconBoxBtn4">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
             </div>
             <div class="btn-info">
                 <div class="btn-title-row">
@@ -933,37 +996,36 @@
             <div class="arrow-box"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></div>
         </a>
 
-        <!-- BOTÓN 5: SOLUCIONES DIGITALES -->
-        <a href="clientes.html" class="btn-card card-soft" id="btnCard5" onclick="playClickSound()">
+        <!-- BOTÓN 5: SOLUCIONES DIGITALES & WEB -->
+        <div class="btn-card card-soft" id="btnCard5" onclick="openDigitalModal(); playClickSound();">
             <div class="icon-box" id="iconBoxBtn5">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
             </div>
             <div class="btn-info">
                 <div class="btn-title-row">
-                    <span class="btn-title" id="t_btn5_title">Soluciones Digitales & Software</span>
-                    <span class="badge-pill" id="t_btn5_badge">Para Pymes</span>
+                    <span class="btn-title" id="t_btn5_title">Diseño Web & Soluciones Digitales</span>
+                    <span class="badge-pill" id="t_btn5_badge">Servicios</span>
                 </div>
-                <span class="btn-desc" id="t_btn5_desc">Páginas web, catálogos online y herramientas para ahorrar horas de trabajo</span>
+                <span class="btn-desc" id="t_btn5_desc">Páginas web completas, sitios estilo Linktree y software para PyMEs</span>
             </div>
             <div class="arrow-box"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></div>
-        </a>
+        </div>
 
-        <!-- BOTÓN 6: CORREO ELECTRÓNICO -->
+        <!-- BOTÓN 6: EMAIL -->
         <a href="mailto:onceonce.grafica@gmail.com" class="btn-card card-mail" id="btnCard6" onclick="playClickSound()">
             <div class="icon-box" id="iconBoxBtn6">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
             </div>
             <div class="btn-info">
                 <div class="btn-title-row">
                     <span class="btn-title" id="t_btn6_title">Correo Electrónico</span>
-                    <span class="badge-pill" id="t_btn6_badge" style="display:none;"></span>
                 </div>
                 <span class="btn-desc" id="t_btn6_desc">onceonce.grafica@gmail.com</span>
             </div>
             <div class="arrow-box"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></div>
         </a>
 
-        <!-- PIE DE PÁGINA -->
+        <!-- FOOTER -->
         <footer class="hub-footer">
             <div class="footer-badge">
                 <span>1111 GRÁFICA</span>
@@ -975,7 +1037,152 @@
 
     </main>
 
-    <!-- MODAL: GALERÍA DE TRABAJOS (OPTIMIZADA) -->
+    <!-- MODAL INTEGRADO: DESARROLLO WEB & SOLUCIONES DIGITALES -->
+    <div class="modal-backdrop" id="digitalModal" onclick="closeOnBackdrop(event, 'digitalModal')">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3 class="modal-title" id="t_modal_web_title">Web & Soluciones Digitales</h3>
+                <button type="button" class="btn-close-modal" onclick="closeModal('digitalModal'); playClickSound();">✕</button>
+            </div>
+            <p style="font-size:0.82rem; color:var(--text-muted);" id="t_modal_web_desc">
+                Elegí el servicio que necesitás para ver ejemplos reales o cotizar al instante por WhatsApp:
+            </p>
+
+            <div class="digital-options-list">
+                
+                <!-- 1. LANDING ESTILO LINKTREE -->
+                <div class="digital-item-card">
+                    <div class="digital-item-header">
+                        <div class="digital-title-wrap">
+                            <span class="digital-icon-badge">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="5" y="2" width="14" height="20" rx="3" ry="3"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                            </span>
+                            <span class="digital-item-title" id="t_opt1_title">Landing Page (Estilo Linktree)</span>
+                        </div>
+                        <span class="digital-price-pill" id="t_opt1_price">$30.000</span>
+                    </div>
+                    <p class="digital-item-desc" id="t_opt1_desc">
+                        Reemplazá Linktree por un Hub interactivo propio, sin mensualidades, con tu dominio y diseño 100% a medida.
+                    </p>
+                    <div class="digital-actions-row" style="justify-content: flex-end;">
+                        <a href="https://1111grafica.github.io/link/clientes.html" class="digital-link-cta" id="t_opt1_btn" onclick="playClickSound()">
+                            <span>Ver ejemplos de clientes reales</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:13px; height:13px;"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 2. PÁGINA WEB COMPLETA -->
+                <div class="digital-item-card">
+                    <div class="digital-item-header">
+                        <div class="digital-title-wrap">
+                            <span class="digital-icon-badge">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                            </span>
+                            <span class="digital-item-title" id="t_opt2_title">Página Web Completa (Institucional)</span>
+                        </div>
+                        <span class="digital-price-pill" id="t_opt2_price">$70.000</span>
+                    </div>
+                    <p class="digital-item-desc" id="t_opt2_desc">
+                        Sitio web profesional responsivo, catálogo de servicios, galería interactiva y contacto directo optimizado para Google.
+                    </p>
+                    
+                    <div class="digital-actions-row">
+                        <button type="button" class="btn-toggle-examples" id="btnToggleWeb" onclick="toggleExampleDrawer('drawerWebExamples', 'btnToggleWeb'); playClickSound();">
+                            <span>Ver ejemplos</span>
+                            <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="6 9 12 15 18 9"/></svg>
+                        </button>
+
+                        <a href="https://wa.me/5491131933611?text=%C2%A1Hola!%20Me%20contacto%20desde%201111%20Gr%C3%A1fica%20y%20me%20interesa%20la%20P%C3%A1gina%20Web%20Completa%20($70.000)." target="_blank" rel="noopener noreferrer" class="digital-link-cta" id="t_opt2_btn" onclick="playClickSound()">
+                            <span>Pedir por WhatsApp</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:13px; height:13px;"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </a>
+                    </div>
+
+                    <!-- DESPLEGABLE HACIA ABAJO: RECUADROS LADO A LADO -->
+                    <div class="examples-expandable-drawer" id="drawerWebExamples">
+                        <a href="https://onceoncegrafica-1111.github.io/baldoriamadrid/" target="_blank" rel="noopener noreferrer" class="example-badge-chip" onclick="playClickSound()">
+                            <span>Baldoria Madrid</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                        </a>
+                        <a href="https://onceoncegrafica-1111.github.io/peluqueriaalvear/" target="_blank" rel="noopener noreferrer" class="example-badge-chip" onclick="playClickSound()">
+                            <span>Peluquería Alvear</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                        </a>
+                        <a href="https://onceoncegrafica-1111.github.io/frimaq/" target="_blank" rel="noopener noreferrer" class="example-badge-chip" onclick="playClickSound()">
+                            <span>Frimaq Maquinarias</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 3. WEB E-COMMERCE CON CARRITO -->
+                <div class="digital-item-card">
+                    <div class="digital-item-header">
+                        <div class="digital-title-wrap">
+                            <span class="digital-icon-badge">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                            </span>
+                            <span class="digital-item-title" id="t_opt3_title">Web E-Commerce con Carrito</span>
+                        </div>
+                        <span class="digital-price-pill" id="t_opt3_price">$200.000</span>
+                    </div>
+                    <p class="digital-item-desc" id="t_opt3_desc">
+                        Tienda online completa con catálogo administrable de productos y pedidos directos a WhatsApp o pasarela de pago.
+                    </p>
+                    
+                    <div class="digital-actions-row">
+                        <button type="button" class="btn-toggle-examples" id="btnToggleCart" onclick="toggleExampleDrawer('drawerCartExamples', 'btnToggleCart'); playClickSound();">
+                            <span>Ver ejemplos</span>
+                            <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="6 9 12 15 18 9"/></svg>
+                        </button>
+
+                        <a href="https://wa.me/5491131933611?text=%C2%A1Hola!%20Me%20contacto%20desde%201111%20Gr%C3%A1fica%20y%20me%20interesa%20la%20Web%20con%20Carrito%20de%20Compras%20($200.000)." target="_blank" rel="noopener noreferrer" class="digital-link-cta" id="t_opt3_btn" onclick="playClickSound()">
+                            <span>Pedir por WhatsApp</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:13px; height:13px;"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </a>
+                    </div>
+
+                    <!-- DESPLEGABLE HACIA ABAJO: RECUADROS LADO A LADO -->
+                    <div class="examples-expandable-drawer" id="drawerCartExamples">
+                        <a href="https://onceoncegrafica-1111.github.io/orense/" target="_blank" rel="noopener noreferrer" class="example-badge-chip" onclick="playClickSound()">
+                            <span>Alfajores Orense</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                        </a>
+                        <a href="https://cristelextensions.github.io/link/" target="_blank" rel="noopener noreferrer" class="example-badge-chip" onclick="playClickSound()">
+                            <span>Cristel Extensions</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 4. SOFTWARE A MEDIDA & AUTOMATIZACIONES -->
+                <div class="digital-item-card">
+                    <div class="digital-item-header">
+                        <div class="digital-title-wrap">
+                            <span class="digital-icon-badge">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                            </span>
+                            <span class="digital-item-title" id="t_opt4_title">Software Ligero & Automatizaciones</span>
+                        </div>
+                        <span class="digital-price-pill" id="t_opt4_price">A Medida</span>
+                    </div>
+                    <p class="digital-item-desc" id="t_opt4_desc">
+                        Conversión masiva de archivos pesados, orden y limpieza de bases de datos completas, y herramientas para ahorrar horas de trabajo.
+                    </p>
+                    <div class="digital-actions-row" style="justify-content: flex-end;">
+                        <a href="https://wa.me/5491131933611?text=%C2%A1Hola!%20Me%20contacto%20desde%201111%20Gr%C3%A1fica%20y%20quisiera%20consultar%20por%20Software%20Ligero%20o%20Automatizaciones%20de%20tareas." target="_blank" rel="noopener noreferrer" class="digital-link-cta" id="t_opt4_btn" onclick="playClickSound()">
+                            <span>Cotizar solución por WhatsApp</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:13px; height:13px;"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL GALERÍA -->
     <div class="modal-backdrop" id="galleryModal" onclick="closeOnBackdrop(event, 'galleryModal')">
         <div class="modal-box">
             <div class="modal-header">
@@ -994,7 +1201,7 @@
         </div>
     </div>
 
-    <!-- LIGHTBOX PRO INTERACTIVO -->
+    <!-- LIGHTBOX -->
     <div class="lightbox-overlay" id="lightboxView" onclick="closeLightboxOnBg(event)">
         <button type="button" class="lb-close-btn" onclick="closeLightbox(); playClickSound();" title="Cerrar (Esc)">✕</button>
         <button type="button" class="lb-nav-btn lb-prev" onclick="navLightbox(-1, event); playClickSound();" title="Anterior">‹</button>
@@ -1009,9 +1216,7 @@
 
     <!-- SCRIPTS -->
     <script>
-        /* =========================================================
-           1. MOTOR WEB AUDIO API (Baja latencia tipo GT4)
-           ========================================================= */
+        /* 1. AUDIO */
         let audioCtx = null;
         let soundBuffer = null;
         const fallbackAudio = new Audio("./mine_gran_turismo_4_menu.mp3");
@@ -1057,10 +1262,7 @@
             else if (audioCtx.state === 'suspended') audioCtx.resume();
         }, { once: true });
 
-
-        /* =========================================================
-           2. GESTIÓN MULTIHILO DE LA GALERÍA (Web Worker Inline)
-           ========================================================= */
+        /* 2. GALERÍA */
         const TOTAL_PHOTOS = 50;
         const GITHUB_PHOTOS = Array.from({ length: TOTAL_PHOTOS }, (_, i) => ({
             id: i + 1,
@@ -1072,36 +1274,6 @@
 
         let activeShuffledPhotos = [...GITHUB_PHOTOS];
         let currentPhotoIndex = 0;
-        let galleryWorker = null;
-
-        function initGalleryWorker() {
-            const workerScript = `
-                self.onmessage = function(e) {
-                    if (e.data.action === 'shuffle') {
-                        const copy = [...e.data.photos];
-                        for (let i = copy.length - 1; i > 0; i--) {
-                            const j = Math.floor(Math.random() * (i + 1));
-                            const temp = copy[i];
-                            copy[i] = copy[j];
-                            copy[j] = temp;
-                        }
-                        self.postMessage({ action: 'shuffled', result: copy });
-                    }
-                };
-            `;
-            try {
-                const blob = new Blob([workerScript], { type: 'application/javascript' });
-                galleryWorker = new Worker(URL.createObjectURL(blob));
-                galleryWorker.onmessage = function(e) {
-                    if (e.data.action === 'shuffled') {
-                        activeShuffledPhotos = e.data.result;
-                        populateGalleryGrid(activeShuffledPhotos);
-                    }
-                };
-            } catch(e) {
-                galleryWorker = null;
-            }
-        }
 
         function populateGalleryGrid(photos) {
             const container = document.getElementById('dynamicGalleryGrid');
@@ -1119,9 +1291,7 @@
                 img.alt = `Trabajo 1111 Gráfica #${item.id}`;
                 img.loading = 'lazy';
                 img.decoding = 'async';
-
                 img.onload = () => wrap.classList.add('loaded');
-
                 img.onerror = function() {
                     if (!this.dataset.triedOriginal) {
                         this.dataset.triedOriginal = "true";
@@ -1133,7 +1303,6 @@
                         wrap.style.display = 'none';
                     }
                 };
-
                 img.src = item.thumb;
                 wrap.appendChild(img);
                 container.appendChild(wrap);
@@ -1141,38 +1310,27 @@
         }
 
         function requestShuffledGallery() {
-            if (galleryWorker) {
-                galleryWorker.postMessage({ action: 'shuffle', photos: GITHUB_PHOTOS });
-            } else {
-                const copy = [...GITHUB_PHOTOS];
-                for (let i = copy.length - 1; i > 0; i--) {
-                    const j = Math.floor(Math.random() * (i + 1));
-                    [copy[i], copy[j]] = [copy[j], copy[i]];
-                }
-                activeShuffledPhotos = copy;
-                populateGalleryGrid(activeShuffledPhotos);
+            const copy = [...GITHUB_PHOTOS];
+            for (let i = copy.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [copy[i], copy[j]] = [copy[j], copy[i]];
             }
+            activeShuffledPhotos = copy;
+            populateGalleryGrid(activeShuffledPhotos);
         }
 
-        /* LIGHTBOX PRO */
         function openLightbox(index) {
             currentPhotoIndex = index;
             updateLightboxContent();
             document.getElementById('lightboxView').classList.add('active');
-            try { history.pushState({ lbOpen: true }, ''); } catch(e) {}
         }
 
         function updateLightboxContent() {
             const item = activeShuffledPhotos[currentPhotoIndex];
             const img = document.getElementById('lightboxImg');
             const counter = document.getElementById('lightboxCounter');
-
             img.src = item.full;
             counter.innerText = `${currentPhotoIndex + 1} / ${activeShuffledPhotos.length}`;
-
-            const nextIdx = (currentPhotoIndex + 1) % activeShuffledPhotos.length;
-            const nextCache = new Image();
-            nextCache.src = activeShuffledPhotos[nextIdx].full;
         }
 
         function navLightbox(direction, event) {
@@ -1200,40 +1358,43 @@
             }
         });
 
-        window.addEventListener('popstate', () => closeLightbox());
-
-        // GESTOS TÁCTILES SWIPE
-        let touchStartX = 0;
-        let touchEndX = 0;
-        const lbView = document.getElementById('lightboxView');
-
-        lbView.addEventListener('touchstart', (e) => {
-            touchStartX = e.changedTouches[0].screenX;
-        }, { passive: true });
-
-        lbView.addEventListener('touchend', (e) => {
-            touchEndX = e.changedTouches[0].screenX;
-            if (touchEndX < touchStartX - 45) { navLightbox(1); playClickSound(); }
-            if (touchEndX > touchStartX + 45) { navLightbox(-1); playClickSound(); }
-        }, { passive: true });
-
-        // MODALES
+        /* MODALES */
         function openGalleryModal() {
             requestShuffledGallery();
             document.getElementById('galleryModal').classList.add('active');
         }
 
+        function openDigitalModal() {
+            document.getElementById('digitalModal').classList.add('active');
+        }
+
         function closeModal(id) {
             document.getElementById(id).classList.remove('active');
+            if (window.location.hash === '#digital') {
+                history.replaceState(null, null, ' ');
+            }
         }
 
         function closeOnBackdrop(e, id) {
             if (e.target.id === id) closeModal(id);
         }
 
-        /* =========================================================
-           3. DICCIONARIO TRILINGÜE (TRADUCCIÓN EXACTA Y FIEL)
-           ========================================================= */
+        /* TOGGLE DEL DESPLEGABLE DE EJEMPLOS HACIA ABAJO */
+        function toggleExampleDrawer(drawerId, btnId) {
+            const drawer = document.getElementById(drawerId);
+            const btn = document.getElementById(btnId);
+            if (!drawer || !btn) return;
+            const isOpen = drawer.classList.contains('open');
+            if (isOpen) {
+                drawer.classList.remove('open');
+                btn.classList.remove('active');
+            } else {
+                drawer.classList.add('open');
+                btn.classList.add('active');
+            }
+        }
+
+        /* 3. TRADUCCIONES */
         const TRANSLATIONS = {
             es: {
                 langHint: "🌐 Idioma",
@@ -1249,9 +1410,9 @@
                 btn4_title: "Diseño Gráfico",
                 btn4_badge: "PDF 2026",
                 btn4_desc: "Diseños generales, branding y packaging (en PDF)",
-                btn5_title: "Soluciones Digitales & Software",
-                btn5_badge: "Para Pymes",
-                btn5_desc: "Páginas web, catálogos online y herramientas para ahorrar horas de trabajo",
+                btn5_title: "Diseño Web & Soluciones Digitales",
+                btn5_badge: "Servicios",
+                btn5_desc: "Páginas web completas, sitios estilo Linktree y software para PyMEs",
                 btn6_title: "Correo Electrónico",
                 footer_badge: "CREATIVIDAD & TECNOLOGÍA",
                 modal_title: "Galería de Trabajos",
@@ -1273,13 +1434,13 @@
                 btn4_title: "Design Gráfico",
                 btn4_badge: "PDF 2026",
                 btn4_desc: "Design geral, branding e embalagens (em PDF)",
-                btn5_title: "Soluções Digitais & Software",
-                btn5_badge: "Para PMEs",
-                btn5_desc: "Páginas web, catálogos online e ferramentas para economizar horas de trabalho",
+                btn5_title: "Design Web & Soluções Digitais",
+                btn5_badge: "Serviços",
+                btn5_desc: "Páginas web completas, estilo Linktree e software para PMEs",
                 btn6_title: "E-mail",
                 footer_badge: "CRIATIVIDADE & TECNOLOGIA",
                 modal_title: "Galeria de Trabalhos",
-                modal_desc: "Conheça nossos projetos reais de fachadas, impressões e adesivação. Toque em qualquer foto para ampliar.",
+                modal_desc: "Conheça nossos projetos reais de fachadas, impressões e adesivação.",
                 modal_btn: "Ver mais no Instagram ↗",
                 wsp_main_msg: "Olá! Entro em contato pelo site da 1111 Gráfica e gostaria de fazer uma consulta."
             },
@@ -1297,46 +1458,26 @@
                 btn4_title: "Graphic Design",
                 btn4_badge: "PDF 2026",
                 btn4_desc: "General design, branding, and packaging (PDF)",
-                btn5_title: "Digital Solutions & Software",
-                btn5_badge: "For SMBs",
-                btn5_desc: "Websites, online catalogs, and tools to save hours of work",
+                btn5_title: "Web Design & Digital Solutions",
+                btn5_badge: "Services",
+                btn5_desc: "Complete websites, Linktree-style sites, and custom software for SMBs",
                 btn6_title: "Email",
                 footer_badge: "CREATIVITY & TECHNOLOGY",
                 modal_title: "Work Gallery",
-                modal_desc: "Explore our real signage, printing, and lettering projects. Tap any photo to enlarge.",
+                modal_desc: "Explore our real signage, printing, and lettering projects.",
                 modal_btn: "See more on Instagram ↗",
                 wsp_main_msg: "Hello! I am reaching out from the 1111 Gráfica website and would like to ask a question."
             }
         };
 
         let activeLang = 'es';
-        let hubCustomData = {}; // Guarda datos sincronizados desde Google Sheets
-
-        function applyDynamicColors(cardEl, iconBoxEl, colors) {
-            if (!cardEl) return;
-            if (colors.borde) {
-                cardEl.style.borderColor = colors.borde;
-                cardEl.style.borderLeftColor = colors.borde;
-            }
-            if (colors.fondo) cardEl.style.background = colors.fondo;
-            if (colors.texto) {
-                const title = cardEl.querySelector('.btn-title');
-                const desc = cardEl.querySelector('.btn-desc');
-                if (title) title.style.color = colors.texto;
-                if (desc) desc.style.color = colors.texto;
-            }
-            if (iconBoxEl && colors.icono) {
-                iconBoxEl.style.color = colors.icono;
-                iconBoxEl.style.borderColor = colors.icono;
-            }
-        }
+        let hubCustomData = {};
 
         function setLanguage(lang) {
             playClickSound();
             activeLang = lang;
             const data = TRANSLATIONS[lang] || TRANSLATIONS.es;
 
-            // Textos base del idioma
             document.getElementById('uiLangHint').innerText = data.langHint;
             document.getElementById('uiBio').innerText = data.bio;
 
@@ -1370,141 +1511,143 @@
             document.getElementById('btnWspMain').href = wspBase + encodeURIComponent(data.wsp_main_msg);
             document.getElementById('socialWspTop').href = wspBase + encodeURIComponent(data.wsp_main_msg);
 
-            // SOBREESCRIBIR CON DATOS DE GOOGLE SHEETS SI EXISTEN
-            if (hubCustomData.BIO) {
-                const bioCustom = hubCustomData.BIO[`sub_${lang}`] || hubCustomData.BIO.sub_es;
-                if (bioCustom) document.getElementById('uiBio').innerText = bioCustom;
-            }
-
-            for (let i = 1; i <= 6; i++) {
-                const item = hubCustomData[`BTN${i}`];
-                if (!item) continue;
-
-                const tElem = document.getElementById(`t_btn${i}_title`);
-                const bElem = document.getElementById(`t_btn${i}_badge`);
-                const dElem = document.getElementById(`t_btn${i}_desc`);
-                const btnEl = document.getElementById(i === 1 ? 'btnWspMain' : (i === 4 ? 'btnPortfolioPdf' : `btnCard${i}`));
-                const iconBox = document.getElementById(`iconBoxBtn${i}`);
-
-                const titleVal = item[`title_${lang}`] || item.title_es;
-                const descVal = item[`sub_${lang}`] || item.sub_es;
-                const badgeVal = item[`badge_${lang}`] || item.badge_es;
-
-                if (tElem && titleVal) tElem.innerText = titleVal;
-                if (dElem && descVal) dElem.innerText = descVal;
-                if (bElem) {
-                    if (badgeVal) {
-                        bElem.innerText = badgeVal;
-                        bElem.style.display = 'inline-block';
-                    } else if (i === 2 || i === 6) {
-                        bElem.style.display = 'none';
-                    }
-                }
-
-                if (btnEl && item.url && i !== 3) {
-                    btnEl.href = item.url;
-                }
-
-                // Aplicar personalización de colores desde Sheets
-                applyDynamicColors(btnEl, iconBox, {
-                    borde: item.colorBorde,
-                    fondo: item.colorFondo,
-                    icono: item.colorIcono,
-                    texto: item.colorTexto
-                });
-            }
-
             document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
             if (lang === 'es') document.getElementById('btnLangEs').classList.add('active');
             if (lang === 'pt') document.getElementById('btnLangPt').classList.add('active');
             if (lang === 'en') document.getElementById('btnLangEn').classList.add('active');
-
-            try {
-                localStorage.setItem('1111_preferred_lang', lang);
-            } catch(e) {}
         }
 
-        /* =========================================================
-           4. SINCRONIZACIÓN EN VIVO CON GOOGLE SHEETS
-           ========================================================= */
+        /* 4. GOOGLE SHEETS SYNC (Pestaña "Link" y Pestaña "Web") */
         const SHEET_ID = '12WChaJERJOmnyB6K3IMgpB6lYxDrYBvWR9OToha6do4';
+        const GID_LINK = '972224574';
+        const GID_WEB = '70835229';
+
+        function updateExamplesFromRawString(drawerId, rawStr) {
+            if (!rawStr) return;
+            const drawer = document.getElementById(drawerId);
+            if (!drawer) return;
+            const items = rawStr.split(',').map(s => s.trim()).filter(Boolean);
+            if (items.length === 0) return;
+            drawer.innerHTML = '';
+            items.forEach(item => {
+                const parts = item.split('|').map(p => p.trim());
+                const title = parts[0];
+                const url = parts[1] || '#';
+                const a = document.createElement('a');
+                a.href = url;
+                a.target = '_blank';
+                a.rel = 'noopener noreferrer';
+                a.className = 'example-badge-chip';
+                a.onclick = () => playClickSound();
+                a.innerHTML = `<span>${title}</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>`;
+                drawer.appendChild(a);
+            });
+        }
 
         async function initHubSheetsConnection() {
+            // Sincronizar Pestaña Link
             try {
-                // Anulación de caché automática para que actualice en tiempo real al segundo
-                const endpoint = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&gid=972224574&headers=1&t=${Date.now()}`;
-                const res = await fetch(endpoint, { cache: 'no-store' });
-                if (!res.ok) return;
+                const endpointLink = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&gid=${GID_LINK}&headers=1&t=${Date.now()}`;
+                const res = await fetch(endpointLink, { cache: 'no-store' });
+                if (res.ok) {
+                    const rawText = await res.text();
+                    const jsonStart = rawText.indexOf('{');
+                    const jsonEnd = rawText.lastIndexOf('}');
+                    if (jsonStart !== -1 && jsonEnd !== -1) {
+                        const payload = JSON.parse(rawText.substring(jsonStart, jsonEnd + 1));
+                        if (payload.table && payload.table.rows) {
+                            const getVal = (row, col) => {
+                                const cell = row.c[col];
+                                return (cell && cell.v !== null && cell.v !== undefined) ? String(cell.v).trim() : '';
+                            };
 
-                const rawText = await res.text();
-                const jsonStart = rawText.indexOf('{');
-                const jsonEnd = rawText.lastIndexOf('}');
-                if (jsonStart === -1 || jsonEnd === -1) return;
+                            payload.table.rows.forEach((row) => {
+                                if (!row || !row.c) return;
+                                const id = getVal(row, 0).toUpperCase();
+                                if (id.startsWith('BTN') || id === 'BIO') {
+                                    hubCustomData[id] = {
+                                        title_es: getVal(row, 1),
+                                        title_pt: getVal(row, 2),
+                                        title_en: getVal(row, 3),
+                                        sub_es: getVal(row, 4),
+                                        sub_pt: getVal(row, 5),
+                                        sub_en: getVal(row, 6),
+                                        url: getVal(row, 7)
+                                    };
+                                }
+                            });
 
-                const payload = JSON.parse(rawText.substring(jsonStart, jsonEnd + 1));
-                if (!payload.table || !payload.table.rows) return;
-
-                const getVal = (row, col) => {
-                    const cell = row.c[col];
-                    return (cell && cell.v !== null && cell.v !== undefined) ? String(cell.v).trim() : '';
-                };
-
-                payload.table.rows.forEach((row) => {
-                    if (!row || !row.c) return;
-                    const id = getVal(row, 0).toUpperCase();
-
-                    // Detecta filas de configuración (BIO, BTN1, BTN2, BTN3, BTN4, BTN5, BTN6)
-                    if (id.startsWith('BTN') || id === 'BIO') {
-                        hubCustomData[id] = {
-                            title_es: getVal(row, 1),
-                            title_pt: getVal(row, 2),
-                            title_en: getVal(row, 3),
-                            sub_es: getVal(row, 4),
-                            sub_pt: getVal(row, 5),
-                            sub_en: getVal(row, 6),
-                            url: getVal(row, 7),
-                            badge_es: getVal(row, 8),
-                            badge_pt: getVal(row, 9),
-                            badge_en: getVal(row, 10),
-                            colorBorde: getVal(row, 11),
-                            colorFondo: getVal(row, 12),
-                            colorIcono: getVal(row, 13),
-                            colorTexto: getVal(row, 14)
-                        };
+                            if (hubCustomData.BIO) {
+                                const bioCustom = hubCustomData.BIO[`sub_${activeLang}`] || hubCustomData.BIO.sub_es;
+                                if (bioCustom) document.getElementById('uiBio').innerText = bioCustom;
+                            }
+                        }
                     }
-                });
+                }
+            } catch (err) {}
 
-                // Refresca la interfaz con los datos actualizados de Google Sheets
-                setLanguage(activeLang);
+            // Sincronizar Pestaña "Web" (gid 70835229)
+            try {
+                const endpointWeb = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&gid=${GID_WEB}&headers=1&t=${Date.now()}`;
+                const resWeb = await fetch(endpointWeb, { cache: 'no-store' });
+                if (resWeb.ok) {
+                    const rawTextWeb = await resWeb.text();
+                    const s = rawTextWeb.indexOf('{');
+                    const e = rawTextWeb.lastIndexOf('}');
+                    if (s !== -1 && e !== -1) {
+                        const payloadWeb = JSON.parse(rawTextWeb.substring(s, e + 1));
+                        if (payloadWeb.table && payloadWeb.table.rows && payloadWeb.table.rows.length > 0) {
+                            const getValW = (row, col) => {
+                                const cell = row.c[col];
+                                return (cell && cell.v !== null && cell.v !== undefined) ? String(cell.v).trim() : '';
+                            };
+                            
+                            payloadWeb.table.rows.forEach(row => {
+                                if (!row || !row.c) return;
+                                const id = getValW(row, 0).toUpperCase();
+                                const title = getValW(row, 1);
+                                const sub = getValW(row, 4);
+                                const price = getValW(row, 8);
+                                const examples = getValW(row, 11);
 
-            } catch (err) {
-                console.warn('Sincronización Hub Sheets aviso:', err);
-            }
+                                if (id === 'OPT1' || id === 'LINKTREE') {
+                                    if (title) document.getElementById('t_opt1_title').innerText = title;
+                                    if (sub) document.getElementById('t_opt1_desc').innerText = sub;
+                                    if (price) document.getElementById('t_opt1_price').innerText = price;
+                                }
+                                if (id === 'OPT2' || id === 'WEB') {
+                                    if (title) document.getElementById('t_opt2_title').innerText = title;
+                                    if (sub) document.getElementById('t_opt2_desc').innerText = sub;
+                                    if (price) document.getElementById('t_opt2_price').innerText = price;
+                                    if (examples) updateExamplesFromRawString('drawerWebExamples', examples);
+                                }
+                                if (id === 'OPT3' || id === 'ECOMMERCE') {
+                                    if (title) document.getElementById('t_opt3_title').innerText = title;
+                                    if (sub) document.getElementById('t_opt3_desc').innerText = sub;
+                                    if (price) document.getElementById('t_opt3_price').innerText = price;
+                                    if (examples) updateExamplesFromRawString('drawerCartExamples', examples);
+                                }
+                                if (id === 'OPT4' || id === 'SOFTWARE') {
+                                    if (title) document.getElementById('t_opt4_title').innerText = title;
+                                    if (sub) document.getElementById('t_opt4_desc').innerText = sub;
+                                    if (price) document.getElementById('t_opt4_price').innerText = price;
+                                }
+                            });
+                        }
+                    }
+                }
+            } catch (err) {}
         }
 
         /* INICIALIZACIÓN */
         window.addEventListener('DOMContentLoaded', () => {
-            if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
             requestAnimationFrame(() => document.body.classList.remove('preload'));
-
-            let savedLang = 'es';
-            try {
-                savedLang = localStorage.getItem('1111_preferred_lang') || 'es';
-            } catch(e) {}
-
-            activeLang = savedLang;
-            setLanguage(savedLang);
-            initGalleryWorker();
-
-            // Carga de datos remotos de Google Sheets en segundo plano
+            setLanguage('es');
             initHubSheetsConnection();
 
-            setTimeout(() => {
-                GITHUB_PHOTOS.slice(0, 15).forEach(item => {
-                    const img = new Image();
-                    img.src = item.thumb;
-                });
-            }, 1200);
+            if (window.location.hash === '#digital' || window.location.search.includes('digital')) {
+                setTimeout(() => openDigitalModal(), 350);
+            }
         });
     </script>
 </body>

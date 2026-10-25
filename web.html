@@ -522,7 +522,7 @@
                 </div>
             </div>
 
-            <h1 class="brand-title">Diseño Web <span>& Software</span></h1>
+            <h1 class="brand-title" id="t_main_title">Diseño Web <span>& Software</span></h1>
             <p class="brand-subtitle" id="uiPageSub">
                 Sitios web profesionales, e-commerce interactivo y software para potenciar tu presencia online.
             </p>
@@ -538,12 +538,12 @@
                         <span class="digital-icon-badge">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="5" y="2" width="14" height="20" rx="3" ry="3"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
                         </span>
-                        <h2 class="digital-item-title" id="t_opt1_title">Landing Page (Estilo Linktree)</h2>
+                        <h2 class="digital-item-title" id="t_opt1_title">Landing Page (mejoramos a Linktree)</h2>
                     </div>
                     <span class="digital-price-pill" id="t_opt1_price">$30.000</span>
                 </div>
                 <p class="digital-item-desc" id="t_opt1_desc">
-                    Reemplazá Linktree por un Hub interactivo propio, sin mensualidades, con tu dominio y diseño 100% a medida.
+                    Reemplazá Linktree por una LandingPage interactiva propia, sin mensualidades, con tu dominio y diseño 100% a medida.
                 </p>
                 <div class="digital-actions-row" style="justify-content: flex-end;">
                     <a href="https://1111grafica.github.io/link/clientes.html" class="digital-link-cta" id="t_opt1_btn" onclick="playClickSound()">
@@ -565,7 +565,7 @@
                     <span class="digital-price-pill" id="t_opt2_price">$70.000</span>
                 </div>
                 <p class="digital-item-desc" id="t_opt2_desc">
-                    Sitio web profesional responsivo, catálogo de servicios, galería interactiva y contacto directo optimizado para Google.
+                    Sitio web completo 100% responsivo (información, fotos, catálogo de servicios, galería interactiva y contactos directos); optimizado para Google.
                 </p>
                 
                 <div class="digital-actions-row">
@@ -604,12 +604,12 @@
                         <span class="digital-icon-badge">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
                         </span>
-                        <h2 class="digital-item-title" id="t_opt3_title">Web E-Commerce con Carrito</h2>
+                        <h2 class="digital-item-title" id="t_opt3_title">Web E-Commerce (con compras o reservas)</h2>
                     </div>
                     <span class="digital-price-pill" id="t_opt3_price">$200.000</span>
                 </div>
                 <p class="digital-item-desc" id="t_opt3_desc">
-                    Tienda online completa con catálogo administrable de productos y pedidos directos a WhatsApp o pasarela de pago.
+                    Tienda online completa, con catálogo administrable de productos y/o reservas, y pedidos directos a WhatsApp o pasarela de pago.
                 </p>
                 
                 <div class="digital-actions-row">
@@ -649,7 +649,7 @@
                     <span class="digital-price-pill" id="t_opt4_price">A Medida</span>
                 </div>
                 <p class="digital-item-desc" id="t_opt4_desc">
-                    Conversión masiva de archivos pesados, orden y limpieza de bases de datos completas, y herramientas para ahorrar horas de trabajo.
+                    Conversión masiva de archivos pesados, orden y limpieza de bases de datos completas, herramientas para ahorrar horas de trabajo, ¡y mucho más!...
                 </p>
                 <div class="digital-actions-row" style="justify-content: flex-end;">
                     <a href="https://wa.me/5491131933611?text=%C2%A1Hola!%20Me%20contacto%20desde%201111%20Gr%C3%A1fica%20y%20quisiera%20consultar%20por%20Software%20Ligero%20o%20Automatizaciones%20de%20tareas." target="_blank" rel="noopener noreferrer" class="digital-link-cta" id="t_opt4_btn" onclick="playClickSound()">
@@ -739,45 +739,60 @@
         /* 2. DICCIONARIO TRILINGÜE */
         const TRANSLATIONS = {
             es: {
+                main_title: "Diseño Web <span>& Software</span>",
                 back_hub: "Hub Principal",
                 sub: "Sitios web profesionales, e-commerce interactivo y software para potenciar tu presencia online.",
-                opt1_title: "Landing Page (Estilo Linktree)",
-                opt1_desc: "Reemplazá Linktree por un Hub interactivo propio, sin mensualidades, con tu dominio y diseño 100% a medida.",
+                opt1_title: "Landing Page (mejoramos a Linktree)",
+                opt1_desc: "Reemplazá Linktree por una LandingPage interactiva propia, sin mensualidades, con tu dominio y diseño 100% a medida.",
                 opt1_btn: "Ver ejemplos de empresas variadas",
                 opt2_title: "Página Web Completa (Institucional)",
-                opt2_desc: "Sitio web profesional responsivo, catálogo de servicios, galería interactiva y contacto directo optimizado para Google.",
-                opt3_title: "Web E-Commerce con Carrito",
-                opt3_desc: "Tienda online completa con catálogo administrable de productos y pedidos directos a WhatsApp o pasarela de pago.",
+                opt2_desc: "Sitio web completo 100% responsivo (información, fotos, catálogo de servicios, galería interactiva y contactos directos); optimizado para Google.",
+                opt2_btn: "Pedir por WhatsApp",
+                opt3_title: "Web E-Commerce (con compras o reservas)",
+                opt3_desc: "Tienda online completa, con catálogo administrable de productos y/o reservas, y pedidos directos a WhatsApp o pasarela de pago.",
+                opt3_btn: "Pedir por WhatsApp",
                 opt4_title: "Software Ligero & Automatizaciones",
-                opt4_desc: "Conversión masiva de archivos pesados, orden y limpieza de bases de datos completas, y herramientas para ahorrar horas de trabajo.",
+                opt4_desc: "Conversión masiva de archivos pesados, orden y limpieza de bases de datos completas, herramientas para ahorrar horas de trabajo, ¡y mucho más!...",
+                opt4_price: "A Medida",
+                opt4_btn: "Cotizar a medida por WhatsApp",
                 btn_ex: "Ver ejemplos"
             },
             pt: {
+                main_title: "Web Design <span>& Software</span>",
                 back_hub: "Hub Principal",
                 sub: "Sites profissionais, e-commerce interativo e software para potencializar sua presença online.",
-                opt1_title: "Landing Page (Estilo Linktree)",
-                opt1_desc: "Substitua o Linktree por um Hub interativo próprio, sem mensalidades e sob medida.",
+                opt1_title: "Página inicial (aprimoramos o Linktree)",
+                opt1_desc: "Substitua o Linktree pela sua própria Landing Page interativa, sem mensalidades, com o seu domínio e design 100% personalizado.",
                 opt1_btn: "Ver exemplos reais de clientes",
                 opt2_title: "Página Web Completa",
-                opt2_desc: "Site profissional responsivo, catálogo de serviços e contato direto otimizado para o Google.",
-                opt3_title: "Web E-Commerce com Carrinho",
-                opt3_desc: "Loja virtual completa com catálogo administrável de produtos e pedidos via WhatsApp.",
+                opt2_desc: "Site completo, 100% responsivo (informações, fotos, catálogo de serviços, galeria interativa e contatos diretos); otimizado para o Google.",
+                opt2_btn: "Pedir pelo WhatsApp",
+                opt3_title: "Site de comércio eletrónico (com compras ou reservas)",
+                opt3_desc: "Loja online completa, com catálogo de produtos gerenciável e/ou reservas, e pedidos diretos via WhatsApp ou sistema de pagamento online.",
+                opt3_btn: "Pedir pelo WhatsApp",
                 opt4_title: "Software Leve e Automações",
-                opt4_desc: "Conversão em massa de arquivos pesados, limpeza de banco de dados e ferramentas de produtividade.",
+                opt4_desc: "Conversão em massa de arquivos pesados, limpeza de banco de dados, ferramentas de produtividade, e muito mais!...",
+                opt4_price: "Sob Medida",
+                opt4_btn: "Solicitar orçamento sob medida pelo WhatsApp",
                 btn_ex: "Ver exemplos"
             },
             en: {
+                main_title: "Web Design <span>& Software</span>",
                 back_hub: "Main Hub",
                 sub: "Professional websites, interactive e-commerce, and software to elevate your online presence.",
-                opt1_title: "Landing Page (Linktree style)",
-                opt1_desc: "Replace Linktree with your own custom interactive Hub, no monthly fees.",
+                opt1_title: "Homepage (we've improved Linktree)",
+                opt1_desc: "Replace Linktree with your own interactive Landing Page, without monthly fees, with your domain and 100% custom design.",
                 opt1_btn: "View real client examples",
                 opt2_title: "Full Website",
-                opt2_desc: "Professional responsive website, service catalog, interactive gallery, and direct contact.",
-                opt3_title: "E-Commerce with Cart",
-                opt3_desc: "Full online store with manageable product catalog and direct orders via WhatsApp.",
+                opt2_desc: "Complete website, 100% responsive (information, photos, service catalog, interactive gallery and direct contacts); optimized for Google.",
+                opt2_btn: "Order via WhatsApp",
+                opt3_title: "Web E-Commerce (with purchases or reservations)",
+                opt3_desc: "Complete online store, with manageable product catalog and/or reservations, and direct orders via WhatsApp or payment gateway.",
+                opt3_btn: "Order via WhatsApp",
                 opt4_title: "Lightweight Software",
-                opt4_desc: "Bulk heavy file conversion, database cleaning and formatting, and custom productivity tools.",
+                opt4_desc: "Bulk heavy file conversion, database cleaning and formatting, custom productivity tools, and much more!...",
+                opt4_price: "Custom",
+                opt4_btn: "Request custom quote via WhatsApp",
                 btn_ex: "See examples"
             }
         };
@@ -785,9 +800,12 @@
         let activeLang = 'es';
 
         function setLanguage(lang) {
-            playClickSound();
+            if (activeLang !== lang) playClickSound();
             activeLang = lang;
             const data = TRANSLATIONS[lang] || TRANSLATIONS.es;
+
+            const mainTitle = document.getElementById('t_main_title');
+            if (mainTitle && data.main_title) mainTitle.innerHTML = data.main_title;
 
             document.getElementById('t_back_hub').innerText = data.back_hub;
             document.getElementById('uiPageSub').innerText = data.sub;
@@ -798,12 +816,20 @@
 
             document.getElementById('t_opt2_title').innerText = data.opt2_title;
             document.getElementById('t_opt2_desc').innerText = data.opt2_desc;
+            const opt2Btn = document.getElementById('t_opt2_btn');
+            if (opt2Btn && data.opt2_btn) opt2Btn.firstElementChild.innerText = data.opt2_btn;
 
             document.getElementById('t_opt3_title').innerText = data.opt3_title;
             document.getElementById('t_opt3_desc').innerText = data.opt3_desc;
+            const opt3Btn = document.getElementById('t_opt3_btn');
+            if (opt3Btn && data.opt3_btn) opt3Btn.firstElementChild.innerText = data.opt3_btn;
 
             document.getElementById('t_opt4_title').innerText = data.opt4_title;
             document.getElementById('t_opt4_desc').innerText = data.opt4_desc;
+            const opt4Price = document.getElementById('t_opt4_price');
+            if (opt4Price && data.opt4_price) opt4Price.innerText = data.opt4_price;
+            const opt4Btn = document.getElementById('t_opt4_btn');
+            if (opt4Btn && data.opt4_btn) opt4Btn.firstElementChild.innerText = data.opt4_btn;
 
             document.getElementById('t_btn_ex_1').innerText = data.btn_ex;
             document.getElementById('t_btn_ex_2').innerText = data.btn_ex;
@@ -862,34 +888,50 @@
                 payloadWeb.table.rows.forEach(row => {
                     if (!row || !row.c) return;
                     const id = getValW(row, 0).toUpperCase();
-                    const title = getValW(row, 1);
-                    const sub = getValW(row, 4);
-                    const price = getValW(row, 8);
+
+                    const title_es = getValW(row, 1);
+                    const title_pt = getValW(row, 2);
+                    const title_en = getValW(row, 3);
+
+                    const sub_es = getValW(row, 4);
+                    const sub_pt = getValW(row, 5);
+                    const sub_en = getValW(row, 6);
+
+                    const price_es = getValW(row, 8);
+                    const price_pt = getValW(row, 9);
+                    const price_en = getValW(row, 10);
+
                     const examples = getValW(row, 11);
 
-                    if (id === 'OPT1' || id === 'LINKTREE') {
-                        if (title) document.getElementById('t_opt1_title').innerText = title;
-                        if (sub) document.getElementById('t_opt1_desc').innerText = sub;
-                        if (price) document.getElementById('t_opt1_price').innerText = price;
-                    }
-                    if (id === 'OPT2' || id === 'WEB') {
-                        if (title) document.getElementById('t_opt2_title').innerText = title;
-                        if (sub) document.getElementById('t_opt2_desc').innerText = sub;
-                        if (price) document.getElementById('t_opt2_price').innerText = price;
-                        if (examples) updateExamplesFromRawString('drawerWebExamples', examples);
-                    }
-                    if (id === 'OPT3' || id === 'ECOMMERCE') {
-                        if (title) document.getElementById('t_opt3_title').innerText = title;
-                        if (sub) document.getElementById('t_opt3_desc').innerText = sub;
-                        if (price) document.getElementById('t_opt3_price').innerText = price;
-                        if (examples) updateExamplesFromRawString('drawerCartExamples', examples);
-                    }
-                    if (id === 'OPT4' || id === 'SOFTWARE') {
-                        if (title) document.getElementById('t_opt4_title').innerText = title;
-                        if (sub) document.getElementById('t_opt4_desc').innerText = sub;
-                        if (price) document.getElementById('t_opt4_price').innerText = price;
+                    const mapKey = (id === 'OPT1' || id === 'LINKTREE') ? 'opt1' :
+                                   (id === 'OPT2' || id === 'WEB') ? 'opt2' :
+                                   (id === 'OPT3' || id === 'ECOMMERCE') ? 'opt3' :
+                                   (id === 'OPT4' || id === 'SOFTWARE') ? 'opt4' : null;
+
+                    if (mapKey) {
+                        if (title_es) TRANSLATIONS.es[mapKey + '_title'] = title_es;
+                        if (title_pt) TRANSLATIONS.pt[mapKey + '_title'] = title_pt;
+                        if (title_en) TRANSLATIONS.en[mapKey + '_title'] = title_en;
+
+                        if (sub_es) TRANSLATIONS.es[mapKey + '_desc'] = sub_es;
+                        if (sub_pt) TRANSLATIONS.pt[mapKey + '_desc'] = sub_pt;
+                        if (sub_en) TRANSLATIONS.en[mapKey + '_desc'] = sub_en;
+
+                        if (mapKey === 'opt4') {
+                            if (price_es) TRANSLATIONS.es.opt4_price = price_es;
+                            if (price_pt) TRANSLATIONS.pt.opt4_price = price_pt;
+                            if (price_en) TRANSLATIONS.en.opt4_price = price_en;
+                        } else {
+                            const pElem = document.getElementById(`t_${mapKey}_price`);
+                            if (pElem && price_es) pElem.innerText = price_es;
+                        }
+
+                        if (mapKey === 'opt2' && examples) updateExamplesFromRawString('drawerWebExamples', examples);
+                        if (mapKey === 'opt3' && examples) updateExamplesFromRawString('drawerCartExamples', examples);
                     }
                 });
+
+                setLanguage(activeLang);
             } catch (err) {}
         }
 

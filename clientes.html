@@ -882,8 +882,21 @@
                     if (!title) return; // Omite filas vacías
 
                     let urlVal = getVal(6);
-                    if (urlVal && !urlVal.startsWith('http://') && !urlVal.startsWith('https://') && !urlVal.startsWith('#')) {
-                        urlVal = 'https://' + urlVal;
+                    
+                    // Verificación de enlace válido: si contiene espacios (ej. "Baldoria Madrid") o no posee estructura web, no es una URL
+                    const isRealUrl = urlVal && !urlVal.includes(' ') && (urlVal.startsWith('http://') || urlVal.startsWith('https://') || urlVal.includes('.'));
+
+                    if (isRealUrl) {
+                        if (!urlVal.startsWith('http://') && !urlVal.startsWith('https://') && !urlVal.startsWith('#')) {
+                            urlVal = 'https://' + urlVal;
+                        }
+                    } else {
+                        // Respaldo de seguridad: si en Sheet se puso texto en vez del link, rescata la URL real para que nunca falle
+                        const fallbackItem = currentProjects.find(p => 
+                            p.title.toLowerCase().trim() === title.toLowerCase().trim() ||
+                            p.num === (num ? num.padStart(2, '0') : String(index + 1).padStart(2, '0'))
+                        );
+                        urlVal = fallbackItem ? fallbackItem.url : (urlVal && urlVal.startsWith('#') ? urlVal : '#');
                     }
 
                     const isDarkVal = getVal(8).toUpperCase();

@@ -1432,8 +1432,8 @@
         async function initHubSheetsConnection() {
             try {
                 // Anulación de caché automática para que actualice en tiempo real al segundo
-                const endpoint = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&gid=0&headers=1&t=${Date.now()}`;
-                const res = await fetch(endpoint);
+                const endpoint = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&gid=972224574&headers=1&t=${Date.now()}`;
+                const res = await fetch(endpoint, { cache: 'no-store' });
                 if (!res.ok) return;
 
                 const rawText = await res.text();

@@ -138,7 +138,7 @@
             z-index: 2;
         }
 
-        /* NAVEGACIÓN SUPERIOR CON BOTÓN VOLVER */
+        /* NAVEGACIÓN SUPERIOR CON BOTÓN VOLVER & SOUNDTRACK */
         .top-nav-bar {
             display: flex;
             align-items: center;
@@ -149,6 +149,8 @@
             border-radius: 999px;
             padding: 4px 6px;
             box-shadow: 0 3px 12px rgba(60, 105, 45, 0.08);
+            flex-wrap: wrap;
+            gap: 6px;
         }
 
         .btn-back-hub {
@@ -174,15 +176,21 @@
             transform: translateX(-2px);
         }
 
-        .lang-switch-pills { display: flex; gap: 4px; }
+        .top-nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .lang-switch-pills { display: flex; gap: 3px; }
 
         .lang-btn {
             background: transparent;
             border: none;
-            padding: 5px 12px;
+            padding: 5px 10px;
             border-radius: 999px;
             font-family: 'Outfit', sans-serif;
-            font-size: 0.76rem;
+            font-size: 0.75rem;
             font-weight: 800;
             color: var(--text-muted);
             cursor: pointer;
@@ -193,6 +201,77 @@
             background: var(--brand-pink);
             color: #FFFFFF;
             box-shadow: 0 2px 10px var(--brand-pink-glow);
+        }
+
+        /* WIDGET SOUNDTRACK MINIMALISTA */
+        .soundtrack-wrap {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding-right: 4px;
+        }
+
+        .soundtrack-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            font-weight: 800;
+            color: var(--text-muted);
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            user-select: none;
+        }
+
+        .btn-music-toggle {
+            background: rgba(160, 209, 143, 0.16);
+            border: 1.2px solid var(--border-card);
+            border-radius: 999px;
+            padding: 4px 10px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.73rem;
+            font-weight: 800;
+            color: var(--text-muted);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            transition: all 0.22s var(--spring);
+            user-select: none;
+        }
+
+        .btn-music-toggle:hover {
+            border-color: var(--brand-green-deep);
+            color: var(--brand-green-deep);
+        }
+
+        .btn-music-toggle.active {
+            background: var(--brand-green);
+            color: #FFFFFF;
+            border-color: var(--brand-green);
+            box-shadow: 0 2px 10px rgba(160, 209, 143, 0.6);
+        }
+
+        .btn-music-skip {
+            background: rgba(160, 209, 143, 0.16);
+            border: 1.2px solid var(--border-card);
+            border-radius: 999px;
+            padding: 4px 8px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 800;
+            color: var(--text-muted);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s var(--spring);
+        }
+
+        .btn-music-skip:hover {
+            background: var(--brand-pink);
+            color: #FFFFFF;
+            border-color: var(--brand-pink);
+            box-shadow: 0 2px 8px var(--brand-pink-glow);
+            transform: scale(1.05);
         }
 
         /* CABECERA */
@@ -481,6 +560,10 @@
             color: var(--text-light);
             font-weight: 600;
         }
+
+        @media (max-width: 440px) {
+            .soundtrack-label { display: none; }
+        }
     </style>
 </head>
 <body class="preload">
@@ -493,15 +576,29 @@
 
     <main class="hub-container">
 
-        <!-- NAVEGACIÓN SUPERIOR -->
+        <!-- NAVEGACIÓN SUPERIOR CON BOTÓN VOLVER & SOUNDTRACK -->
         <nav class="top-nav-bar" aria-label="Navegación">
             <a href="https://1111grafica.github.io/link" class="btn-back-hub" id="btnBackHub" onclick="playClickSound()">
                 ← <span id="t_back_hub">Sobre Nosotros</span>
             </a>
-            <div class="lang-switch-pills">
-                <button type="button" class="lang-btn active" onclick="setLanguage('es')" id="btnLangEs">ES</button>
-                <button type="button" class="lang-btn" onclick="setLanguage('pt')" id="btnLangPt">PT</button>
-                <button type="button" class="lang-btn" onclick="setLanguage('en')" id="btnLangEn">EN</button>
+            
+            <div class="top-nav-controls">
+                <div class="lang-switch-pills">
+                    <button type="button" class="lang-btn active" onclick="setLanguage('es')" id="btnLangEs">ES</button>
+                    <button type="button" class="lang-btn" onclick="setLanguage('pt')" id="btnLangPt">PT</button>
+                    <button type="button" class="lang-btn" onclick="setLanguage('en')" id="btnLangEn">EN</button>
+                </div>
+
+                <!-- SOUNDTRACK CONTROLLER -->
+                <div class="soundtrack-wrap">
+                    <span class="soundtrack-label">SOUNDTRACK</span>
+                    <button type="button" class="btn-music-toggle" id="btnMusicToggle" onclick="toggleMusic()" title="Encender / Apagar música">
+                        <span id="musicStatusIcon">🔈</span> <span id="musicStatusText">OFF</span>
+                    </button>
+                    <button type="button" class="btn-music-skip" id="btnMusicSkip" onclick="skipMusic()" title="Siguiente canción aleatoria">
+                        ⏭
+                    </button>
+                </div>
             </div>
         </nav>
 
@@ -675,7 +772,7 @@
 
     <!-- SCRIPTS -->
     <script>
-        /* 1. AUDIO */
+        /* 1. AUDIO DE BOTONES (CLICK EFECTO) */
         let audioCtx = null;
         let soundBuffer = null;
         const fallbackAudio = new Audio("./mine_gran_turismo_4_menu.mp3");
@@ -720,6 +817,173 @@
             if (!audioCtx) initAudioEngine();
             else if (audioCtx.state === 'suspended') audioCtx.resume();
         }, { once: true });
+
+        /* 1.B MOTOR DE MÚSICA DE FONDO (SOUNDTRACK ALEATORIO + FADE IN / FADE OUT) */
+        const bgAudioPlayer = new Audio();
+        bgAudioPlayer.preload = "auto";
+        const MUSIC_TARGET_VOL = 0.25;
+        let isMusicActive = false;
+        let musicFadeTimer = null;
+        let currentTrackIndex = -1;
+
+        // Lista de canciones base (se actualiza desde Google Sheets pestaña "Música")
+        let playlist = [
+            "./mine_gran_turismo_4_menu.mp3"
+        ];
+
+        function updateMusicUI(active) {
+            const btnToggle = document.getElementById('btnMusicToggle');
+            const icon = document.getElementById('musicStatusIcon');
+            const txt = document.getElementById('musicStatusText');
+            if (!btnToggle || !icon || !txt) return;
+
+            if (active) {
+                btnToggle.classList.add('active');
+                icon.innerText = "🔊";
+                txt.innerText = "ON";
+            } else {
+                btnToggle.classList.remove('active');
+                icon.innerText = "🔈";
+                txt.innerText = "OFF";
+            }
+        }
+
+        function pickRandomTrackIndex() {
+            if (playlist.length <= 1) return 0;
+            let nextIndex;
+            do {
+                nextIndex = Math.floor(Math.random() * playlist.length);
+            } while (nextIndex === currentTrackIndex);
+            return nextIndex;
+        }
+
+        function playTrackWithFadeIn(trackUrl, startSecond = 0) {
+            if (musicFadeTimer) clearInterval(musicFadeTimer);
+            bgAudioPlayer.src = trackUrl;
+            bgAudioPlayer.currentTime = startSecond;
+            bgAudioPlayer.volume = 0;
+
+            const playPromise = bgAudioPlayer.play();
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    isMusicActive = true;
+                    updateMusicUI(true);
+                    sessionStorage.setItem('1111_music_on', 'true');
+                    sessionStorage.setItem('1111_music_src', trackUrl);
+
+                    const steps = 20;
+                    const stepTime = 1000 / steps;
+                    const volStep = MUSIC_TARGET_VOL / steps;
+
+                    musicFadeTimer = setInterval(() => {
+                        if (bgAudioPlayer.volume + volStep < MUSIC_TARGET_VOL) {
+                            bgAudioPlayer.volume += volStep;
+                        } else {
+                            bgAudioPlayer.volume = MUSIC_TARGET_VOL;
+                            clearInterval(musicFadeTimer);
+                            musicFadeTimer = null;
+                        }
+                    }, stepTime);
+                }).catch(() => {});
+            }
+        }
+
+        function fadeOutMusic(duration = 700, onDone) {
+            if (musicFadeTimer) clearInterval(musicFadeTimer);
+            if (!isMusicActive || bgAudioPlayer.paused) {
+                if (onDone) onDone();
+                return;
+            }
+
+            const steps = 15;
+            const stepTime = duration / steps;
+            const startVol = bgAudioPlayer.volume;
+            const volStep = startVol / steps;
+
+            musicFadeTimer = setInterval(() => {
+                if (bgAudioPlayer.volume - volStep > 0) {
+                    bgAudioPlayer.volume -= volStep;
+                } else {
+                    bgAudioPlayer.volume = 0;
+                    bgAudioPlayer.pause();
+                    clearInterval(musicFadeTimer);
+                    musicFadeTimer = null;
+                    isMusicActive = false;
+                    sessionStorage.setItem('1111_music_on', 'false');
+                    updateMusicUI(false);
+                    if (onDone) onDone();
+                }
+            }, stepTime);
+        }
+
+        function toggleMusic() {
+            playClickSound();
+            if (!isMusicActive) {
+                currentTrackIndex = pickRandomTrackIndex();
+                playTrackWithFadeIn(playlist[currentTrackIndex], 0);
+            } else {
+                fadeOutMusic(500);
+            }
+        }
+
+        function skipMusic() {
+            playClickSound();
+            if (!isMusicActive) {
+                currentTrackIndex = pickRandomTrackIndex();
+                playTrackWithFadeIn(playlist[currentTrackIndex], 0);
+                return;
+            }
+            fadeOutMusic(300, () => {
+                currentTrackIndex = pickRandomTrackIndex();
+                playTrackWithFadeIn(playlist[currentTrackIndex], 0);
+            });
+        }
+
+        // Salto automático cuando termina la canción
+        bgAudioPlayer.addEventListener('ended', () => {
+            currentTrackIndex = pickRandomTrackIndex();
+            playTrackWithFadeIn(playlist[currentTrackIndex], 0);
+        });
+
+        // Guardado periódico y antes de navegar
+        setInterval(() => {
+            if (isMusicActive && !bgAudioPlayer.paused) {
+                sessionStorage.setItem('1111_music_src', bgAudioPlayer.src);
+                sessionStorage.setItem('1111_music_time', String(bgAudioPlayer.currentTime));
+            }
+        }, 1000);
+
+        window.addEventListener('pagehide', () => {
+            if (isMusicActive && !bgAudioPlayer.paused) {
+                sessionStorage.setItem('1111_music_on', 'true');
+                sessionStorage.setItem('1111_music_src', bgAudioPlayer.src);
+                sessionStorage.setItem('1111_music_time', String(bgAudioPlayer.currentTime));
+            }
+        });
+
+        // Detector de salida: si se toca un link EXTERNO (WhatsApp, ejemplos externos, etc.), hace fade-out suave
+        document.addEventListener('click', (e) => {
+            const link = e.target.closest('a');
+            if (!link) return;
+            const href = (link.getAttribute('href') || '').toLowerCase();
+
+            // Enlaces internos de nuestro ecosistema (NO se apagan)
+            const isInternal = href === './' || 
+                               href === '../' || 
+                               href === 'index.html' || 
+                               href.includes('1111grafica.github.io/link') ||
+                               href.endsWith('/link/') ||
+                               href.endsWith('/link') ||
+                               href.includes('clientes.html') ||
+                               href.includes('web.html');
+
+            if (isInternal) return;
+
+            // Cualquier enlace externo (WhatsApp, ejemplos externos, etc.) apaga con fade-out
+            if (isMusicActive) {
+                fadeOutMusic(650);
+            }
+        });
 
         /* TOGGLE DEL DESPLEGABLE DE EJEMPLOS HACIA ABAJO */
         function toggleDrawer(drawerId, btnId) {
@@ -774,7 +1038,7 @@
                 opt4_desc: "Conversão em massa de arquivos pesados, limpeza de banco de dados, ferramentas de produtividade, e muito mais!...",
                 opt4_price: "Sob Medida",
                 opt4_btn: "Solicitar orçamento sob medida pelo WhatsApp",
-                btn_ex: "Ver exemplos"
+                btn_ex: "Ver ejemplos"
             },
             en: {
                 main_title: "Web Design <span>& Software</span>",
@@ -840,9 +1104,10 @@
             if (lang === 'en') document.getElementById('btnLangEn').classList.add('active');
         }
 
-        /* 3. SINCRONIZACIÓN CON GOOGLE SHEETS (Pestaña "Web" gid 70835229) */
+        /* 3. SINCRONIZACIÓN CON GOOGLE SHEETS (Pestaña "Web" gid 70835229 y "Música" gid 149458792) */
         const SHEET_ID = '12WChaJERJOmnyB6K3IMgpB6lYxDrYBvWR9OToha6do4';
         const GID_WEB = '70835229';
+        const GID_MUSIC = '149458792';
 
         function updateExamplesFromRawString(drawerId, rawStr) {
             if (!rawStr) return;
@@ -867,71 +1132,106 @@
         }
 
         async function initWebSheetsConnection() {
+            // Sincronizar servicios web (gid=70835229)
             try {
                 const endpointWeb = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&gid=${GID_WEB}&headers=1&t=${Date.now()}`;
                 const resWeb = await fetch(endpointWeb, { cache: 'no-store' });
-                if (!resWeb.ok) return;
+                if (resWeb.ok) {
+                    const rawTextWeb = await resWeb.text();
+                    const s = rawTextWeb.indexOf('{');
+                    const e = rawTextWeb.lastIndexOf('}');
+                    if (s !== -1 && e !== -1) {
+                        const payloadWeb = JSON.parse(rawTextWeb.substring(s, e + 1));
+                        if (payloadWeb.table && payloadWeb.table.rows && payloadWeb.table.rows.length > 0) {
+                            const getValW = (row, col) => {
+                                const cell = row.c[col];
+                                return (cell && cell.v !== null && cell.v !== undefined) ? String(cell.v).trim() : '';
+                            };
+                            
+                            payloadWeb.table.rows.forEach(row => {
+                                if (!row || !row.c) return;
+                                const id = getValW(row, 0).toUpperCase();
 
-                const rawTextWeb = await resWeb.text();
-                const s = rawTextWeb.indexOf('{');
-                const e = rawTextWeb.lastIndexOf('}');
-                if (s === -1 || e === -1) return;
+                                const title_es = getValW(row, 1);
+                                const title_pt = getValW(row, 2);
+                                const title_en = getValW(row, 3);
 
-                const payloadWeb = JSON.parse(rawTextWeb.substring(s, e + 1));
-                if (!payloadWeb.table || !payloadWeb.table.rows || payloadWeb.table.rows.length === 0) return;
+                                const sub_es = getValW(row, 4);
+                                const sub_pt = getValW(row, 5);
+                                const sub_en = getValW(row, 6);
 
-                const getValW = (row, col) => {
-                    const cell = row.c[col];
-                    return (cell && cell.v !== null && cell.v !== undefined) ? String(cell.v).trim() : '';
-                };
-                
-                payloadWeb.table.rows.forEach(row => {
-                    if (!row || !row.c) return;
-                    const id = getValW(row, 0).toUpperCase();
+                                const price_es = getValW(row, 8);
+                                const price_pt = getValW(row, 9);
+                                const price_en = getValW(row, 10);
 
-                    const title_es = getValW(row, 1);
-                    const title_pt = getValW(row, 2);
-                    const title_en = getValW(row, 3);
+                                const examples = getValW(row, 11);
 
-                    const sub_es = getValW(row, 4);
-                    const sub_pt = getValW(row, 5);
-                    const sub_en = getValW(row, 6);
+                                const mapKey = (id === 'OPT1' || id === 'LINKTREE') ? 'opt1' :
+                                               (id === 'OPT2' || id === 'WEB') ? 'opt2' :
+                                               (id === 'OPT3' || id === 'ECOMMERCE') ? 'opt3' :
+                                               (id === 'OPT4' || id === 'SOFTWARE') ? 'opt4' : null;
 
-                    const price_es = getValW(row, 8);
-                    const price_pt = getValW(row, 9);
-                    const price_en = getValW(row, 10);
+                                if (mapKey) {
+                                    if (title_es) TRANSLATIONS.es[mapKey + '_title'] = title_es;
+                                    if (title_pt) TRANSLATIONS.pt[mapKey + '_title'] = title_pt;
+                                    if (title_en) TRANSLATIONS.en[mapKey + '_title'] = title_en;
 
-                    const examples = getValW(row, 11);
+                                    if (sub_es) TRANSLATIONS.es[mapKey + '_desc'] = sub_es;
+                                    if (sub_pt) TRANSLATIONS.pt[mapKey + '_desc'] = sub_pt;
+                                    if (sub_en) TRANSLATIONS.en[mapKey + '_desc'] = sub_en;
 
-                    const mapKey = (id === 'OPT1' || id === 'LINKTREE') ? 'opt1' :
-                                   (id === 'OPT2' || id === 'WEB') ? 'opt2' :
-                                   (id === 'OPT3' || id === 'ECOMMERCE') ? 'opt3' :
-                                   (id === 'OPT4' || id === 'SOFTWARE') ? 'opt4' : null;
+                                    if (mapKey === 'opt4') {
+                                        if (price_es) TRANSLATIONS.es.opt4_price = price_es;
+                                        if (price_pt) TRANSLATIONS.pt.opt4_price = price_pt;
+                                        if (price_en) TRANSLATIONS.en.opt4_price = price_en;
+                                    } else {
+                                        const pElem = document.getElementById(`t_${mapKey}_price`);
+                                        if (pElem && price_es) pElem.innerText = price_es;
+                                    }
 
-                    if (mapKey) {
-                        if (title_es) TRANSLATIONS.es[mapKey + '_title'] = title_es;
-                        if (title_pt) TRANSLATIONS.pt[mapKey + '_title'] = title_pt;
-                        if (title_en) TRANSLATIONS.en[mapKey + '_title'] = title_en;
+                                    if (mapKey === 'opt2' && examples) updateExamplesFromRawString('drawerWebExamples', examples);
+                                    if (mapKey === 'opt3' && examples) updateExamplesFromRawString('drawerCartExamples', examples);
+                                }
+                            });
 
-                        if (sub_es) TRANSLATIONS.es[mapKey + '_desc'] = sub_es;
-                        if (sub_pt) TRANSLATIONS.pt[mapKey + '_desc'] = sub_pt;
-                        if (sub_en) TRANSLATIONS.en[mapKey + '_desc'] = sub_en;
-
-                        if (mapKey === 'opt4') {
-                            if (price_es) TRANSLATIONS.es.opt4_price = price_es;
-                            if (price_pt) TRANSLATIONS.pt.opt4_price = price_pt;
-                            if (price_en) TRANSLATIONS.en.opt4_price = price_en;
-                        } else {
-                            const pElem = document.getElementById(`t_${mapKey}_price`);
-                            if (pElem && price_es) pElem.innerText = price_es;
+                            setLanguage(activeLang);
                         }
-
-                        if (mapKey === 'opt2' && examples) updateExamplesFromRawString('drawerWebExamples', examples);
-                        if (mapKey === 'opt3' && examples) updateExamplesFromRawString('drawerCartExamples', examples);
                     }
-                });
+                }
+            } catch (err) {}
 
-                setLanguage(activeLang);
+            // Sincronizar canciones pestaña "Música" (gid=149458792)
+            try {
+                const endpointMusic = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&gid=${GID_MUSIC}&headers=1&t=${Date.now()}`;
+                const resMusic = await fetch(endpointMusic, { cache: 'no-store' });
+                if (resMusic.ok) {
+                    const rawTextM = await resMusic.text();
+                    const s = rawTextM.indexOf('{');
+                    const e = rawTextM.lastIndexOf('}');
+                    if (s !== -1 && e !== -1) {
+                        const payloadM = JSON.parse(rawTextM.substring(s, e + 1));
+                        if (payloadM.table && payloadM.table.rows && payloadM.table.rows.length > 0) {
+                            const getValM = (row, col) => {
+                                const cell = row.c[col];
+                                return (cell && cell.v !== null && cell.v !== undefined) ? String(cell.v).trim() : '';
+                            };
+
+                            const fetchedUrls = [];
+                            payloadM.table.rows.forEach(row => {
+                                if (!row || !row.c) return;
+                                const url = getValM(row, 3);
+                                const status = getValM(row, 4).toUpperCase();
+                                if (url && (status === '' || status === 'ACTIVO' || status === 'SI')) {
+                                    fetchedUrls.push(url);
+                                }
+                            });
+
+                            if (fetchedUrls.length > 0) {
+                                playlist = fetchedUrls;
+                            }
+                        }
+                    }
+                }
             } catch (err) {}
         }
 
@@ -939,6 +1239,17 @@
             requestAnimationFrame(() => document.body.classList.remove('preload'));
             setLanguage('es');
             initWebSheetsConnection();
+
+            // Reanudación suave de la música si venía encendida desde otra sección interna
+            try {
+                const wasMusicOn = sessionStorage.getItem('1111_music_on');
+                const lastSrc = sessionStorage.getItem('1111_music_src');
+                const lastTime = parseFloat(sessionStorage.getItem('1111_music_time') || '0');
+
+                if (wasMusicOn === 'true' && lastSrc) {
+                    playTrackWithFadeIn(lastSrc, isNaN(lastTime) ? 0 : lastTime);
+                }
+            } catch(e) {}
         });
     </script>
 </body>

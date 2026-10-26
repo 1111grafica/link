@@ -190,67 +190,97 @@
             box-shadow: 0 2px 10px var(--brand-pink-glow);
         }
 
-        /* WIDGET SOUNDTRACK MINIMALISTA */
+        /* WIDGET SOUNDTRACK EN ISLA ROSA ARMÓNICA */
         .soundtrack-wrap {
             display: flex;
             align-items: center;
-            gap: 5px;
-            padding-right: 4px;
+            gap: 7px;
+            padding: 3px 5px 3px 9px;
+            background: linear-gradient(135deg, rgba(255, 245, 250, 0.95) 0%, rgba(252, 231, 243, 0.85) 100%);
+            border: 1.2px solid rgba(233, 137, 183, 0.5);
+            border-radius: 999px;
+            box-shadow: 0 2px 8px rgba(233, 137, 183, 0.12);
         }
 
         .soundtrack-label {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.65rem;
+            font-size: 0.62rem;
             font-weight: 800;
-            color: var(--text-muted);
+            color: var(--brand-pink-deep);
             letter-spacing: 0.06em;
             text-transform: uppercase;
             user-select: none;
         }
 
+        /* PASTILLA PROFESIONAL SLIDER SWITCH (DESLIZANTE IZQ <-> DER) */
         .btn-music-toggle {
-            background: rgba(160, 209, 143, 0.16);
-            border: 1.2px solid var(--border-card);
+            width: 36px;
+            height: 21px;
+            min-width: 36px;
+            background: rgba(180, 195, 175, 0.35);
+            border: 1.2px solid rgba(160, 209, 143, 0.6);
             border-radius: 999px;
-            padding: 4px 10px;
-            font-family: 'Outfit', sans-serif;
-            font-size: 0.73rem;
-            font-weight: 800;
-            color: var(--text-muted);
+            position: relative;
             cursor: pointer;
+            padding: 0;
+            outline: none;
+            transition: background 0.26s var(--spring), border-color 0.26s var(--spring), box-shadow 0.26s var(--spring);
+            user-select: none;
             display: inline-flex;
             align-items: center;
-            gap: 4px;
-            transition: all 0.22s var(--spring);
-            user-select: none;
+        }
+
+        .btn-music-toggle .switch-knob {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: #FFFFFF;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+            transition: transform 0.28s var(--spring);
+            pointer-events: none;
         }
 
         .btn-music-toggle:hover {
-            border-color: var(--brand-green-deep);
-            color: var(--brand-green-deep);
+            border-color: var(--brand-pink);
         }
 
         .btn-music-toggle.active {
-            background: var(--brand-green);
-            color: #FFFFFF;
-            border-color: var(--brand-green);
-            box-shadow: 0 2px 10px rgba(160, 209, 143, 0.6);
+            background: var(--brand-pink);
+            border-color: var(--brand-pink);
+            box-shadow: 0 2px 9px var(--brand-pink-glow);
         }
 
+        .btn-music-toggle.active .switch-knob {
+            transform: translateX(15px);
+            box-shadow: 0 2px 6px rgba(169, 38, 103, 0.3);
+        }
+
+        /* BOTÓN SALTEAR CON ICONOGRAFÍA UNIVERSAL DE PISTA (SVG) */
         .btn-music-skip {
-            background: rgba(160, 209, 143, 0.16);
-            border: 1.2px solid var(--border-card);
-            border-radius: 999px;
-            padding: 4px 8px;
-            font-family: 'Outfit', sans-serif;
-            font-size: 0.72rem;
-            font-weight: 800;
-            color: var(--text-muted);
+            background: #FFFFFF;
+            border: 1.2px solid rgba(233, 137, 183, 0.5);
+            border-radius: 50%;
+            width: 23px;
+            height: 23px;
+            min-width: 23px;
             cursor: pointer;
             display: inline-flex;
             align-items: center;
             justify-content: center;
+            color: var(--brand-pink-deep);
             transition: all 0.2s var(--spring);
+            padding: 0;
+            outline: none;
+        }
+
+        .btn-music-skip svg {
+            width: 11px;
+            height: 11px;
+            display: block;
+            transition: transform 0.2s var(--spring);
         }
 
         .btn-music-skip:hover {
@@ -258,7 +288,15 @@
             color: #FFFFFF;
             border-color: var(--brand-pink);
             box-shadow: 0 2px 8px var(--brand-pink-glow);
-            transform: scale(1.05);
+            transform: scale(1.08);
+        }
+
+        .btn-music-skip:hover svg {
+            transform: translateX(1px);
+        }
+
+        .btn-music-skip:active {
+            transform: scale(0.92);
         }
 
         /* CABECERA */
@@ -604,14 +642,20 @@
                 </div>
             </div>
 
-            <!-- SOUNDTRACK CONTROLLER -->
+            <!-- SOUNDTRACK CONTROLLER EN ISLA ROSA -->
             <div class="soundtrack-wrap">
                 <span class="soundtrack-label">SOUNDTRACK</span>
-                <button type="button" class="btn-music-toggle" id="btnMusicToggle" onclick="toggleMusic()" title="Encender / Apagar música">
-                    <span id="musicStatusIcon">🔈</span> <span id="musicStatusText">OFF</span>
+
+                <!-- SWITCH DESLIZANTE PROFESIONAL (DER <-> IZQ) -->
+                <button type="button" class="btn-music-toggle" id="btnMusicToggle" onclick="toggleMusic()" title="Encender / Apagar música" aria-label="Interruptor de música">
+                    <span class="switch-knob"></span>
                 </button>
-                <button type="button" class="btn-music-skip" id="btnMusicSkip" onclick="skipMusic()" title="Siguiente canción aleatoria">
-                    ⏭
+
+                <!-- BOTÓN SALTEAR CON ICONO UNIVERSAL DE PISTA -->
+                <button type="button" class="btn-music-skip" id="btnMusicSkip" onclick="skipMusic()" title="Siguiente pista" aria-label="Siguiente pista">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M5.5 18V6l8.5 6-8.5 6zM16 6h2v12h-2z"/>
+                    </svg>
                 </button>
             </div>
         </nav>
@@ -739,18 +783,12 @@
 
         function updateMusicUI(active) {
             const btnToggle = document.getElementById('btnMusicToggle');
-            const icon = document.getElementById('musicStatusIcon');
-            const txt = document.getElementById('musicStatusText');
-            if (!btnToggle || !icon || !txt) return;
-
-            if (active) {
-                btnToggle.classList.add('active');
-                icon.innerText = "🔊";
-                txt.innerText = "ON";
-            } else {
-                btnToggle.classList.remove('active');
-                icon.innerText = "🔈";
-                txt.innerText = "OFF";
+            if (btnToggle) {
+                if (active) {
+                    btnToggle.classList.add('active');
+                } else {
+                    btnToggle.classList.remove('active');
+                }
             }
         }
 

@@ -164,6 +164,11 @@
             padding-left: 8px;
             padding-right: 4px;
             letter-spacing: 0.04em;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            user-select: none;
+            white-space: nowrap;
         }
 
         .lang-switch-pills {
@@ -190,26 +195,24 @@
             box-shadow: 0 2px 10px var(--brand-pink-glow);
         }
 
-        /* WIDGET SOUNDTRACK EN ISLA ROSA ARMÓNICA */
+        /* WIDGET SOUNDTRACK EN ISLA ROSA ARMÓNICA CON ÍCONO */
         .soundtrack-wrap {
             display: flex;
             align-items: center;
             gap: 7px;
-            padding: 3px 5px 3px 9px;
+            padding: 3px 6px 3px 9px;
             background: linear-gradient(135deg, rgba(255, 245, 250, 0.95) 0%, rgba(252, 231, 243, 0.85) 100%);
             border: 1.2px solid rgba(233, 137, 183, 0.5);
             border-radius: 999px;
             box-shadow: 0 2px 8px rgba(233, 137, 183, 0.12);
         }
 
-        .soundtrack-label {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.62rem;
-            font-weight: 800;
+        .soundtrack-icon {
+            width: 14px;
+            height: 14px;
             color: var(--brand-pink-deep);
-            letter-spacing: 0.06em;
-            text-transform: uppercase;
-            user-select: none;
+            display: block;
+            flex-shrink: 0;
         }
 
         /* PASTILLA PROFESIONAL SLIDER SWITCH (DESLIZANTE IZQ <-> DER) */
@@ -606,8 +609,11 @@
             font-weight: 600;
         }
 
-        @media (max-width: 440px) {
-            .lang-badge-hint { display: none; }
+        @media (max-width: 400px) {
+            .lang-nav-bar { padding: 3px 5px; gap: 4px; }
+            .lang-badge-hint { padding-left: 4px; padding-right: 2px; font-size: 0.69rem; }
+            .lang-btn { padding: 4px 7px; font-size: 0.72rem; }
+            .soundtrack-wrap { gap: 5px; padding: 3px 5px 3px 7px; }
         }
 
         @media (max-width: 480px) {
@@ -642,9 +648,11 @@
                 </div>
             </div>
 
-            <!-- SOUNDTRACK CONTROLLER EN ISLA ROSA -->
+            <!-- SOUNDTRACK CONTROLLER EN ISLA ROSA CON ÍCONO MUSICAL -->
             <div class="soundtrack-wrap">
-                <span class="soundtrack-label">SOUNDTRACK</span>
+                <svg class="soundtrack-icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M9 18V5l12-2v13M9 18a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm12-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                </svg>
 
                 <!-- SWITCH DESLIZANTE PROFESIONAL (DER <-> IZQ) -->
                 <button type="button" class="btn-music-toggle" id="btnMusicToggle" onclick="toggleMusic()" title="Encender / Apagar música" aria-label="Interruptor de música">
@@ -767,7 +775,7 @@
         }, { once: true });
 
         /* =========================================================
-           1.B MOTOR DE MÚSICA DE FONDO (SOUNDTRACK ALEATORIO + FADE IN / FADE OUT)
+           1.B MOTOR DE MÚSICA DE FONDO (CON RESPUESTA INMEDIATA DE SWITCH)
            ========================================================= */
         const bgAudioPlayer = new Audio();
         bgAudioPlayer.preload = "auto";
@@ -803,38 +811,42 @@
 
         function playTrackWithFadeIn(trackUrl, startSecond = 0) {
             if (musicFadeTimer) clearInterval(musicFadeTimer);
-            bgAudioPlayer.src = trackUrl;
-            bgAudioPlayer.currentTime = startSecond;
-            bgAudioPlayer.volume = 0;
+            if (!trackUrl) return;
 
-            const playPromise = bgAudioPlayer.play();
-            if (playPromise !== undefined) {
-                playPromise.then(() => {
-                    isMusicActive = true;
-                    updateMusicUI(true);
-                    sessionStorage.setItem('1111_music_on', 'true');
-                    sessionStorage.setItem('1111_music_src', trackUrl);
+            try {
+                bgAudioPlayer.src = trackUrl;
+                bgAudioPlayer.currentTime = startSecond;
+                bgAudioPlayer.volume = 0;
+                sessionStorage.setItem('1111_music_src', trackUrl);
 
-                    const steps = 20;
-                    const stepTime = 1000 / steps;
-                    const volStep = MUSIC_TARGET_VOL / steps;
+                const playPromise = bgAudioPlayer.play();
+                if (playPromise !== undefined) {
+                    playPromise.then(() => {
+                        const steps = 20;
+                        const stepTime = 1000 / steps;
+                        const volStep = MUSIC_TARGET_VOL / steps;
 
-                    musicFadeTimer = setInterval(() => {
-                        if (bgAudioPlayer.volume + volStep < MUSIC_TARGET_VOL) {
-                            bgAudioPlayer.volume += volStep;
-                        } else {
-                            bgAudioPlayer.volume = MUSIC_TARGET_VOL;
-                            clearInterval(musicFadeTimer);
-                            musicFadeTimer = null;
-                        }
-                    }, stepTime);
-                }).catch(() => {});
-            }
+                        musicFadeTimer = setInterval(() => {
+                            if (bgAudioPlayer.volume + volStep < MUSIC_TARGET_VOL) {
+                                bgAudioPlayer.volume += volStep;
+                            } else {
+                                bgAudioPlayer.volume = MUSIC_TARGET_VOL;
+                                clearInterval(musicFadeTimer);
+                                musicFadeTimer = null;
+                            }
+                        }, stepTime);
+                    }).catch(() => {});
+                }
+            } catch(e) {}
         }
 
-        function fadeOutMusic(duration = 700, onDone) {
+        function fadeOutMusic(duration = 400, onDone) {
             if (musicFadeTimer) clearInterval(musicFadeTimer);
-            if (!isMusicActive || bgAudioPlayer.paused) {
+            isMusicActive = false;
+            sessionStorage.setItem('1111_music_on', 'false');
+            updateMusicUI(false);
+
+            if (bgAudioPlayer.paused) {
                 if (onDone) onDone();
                 return;
             }
@@ -849,12 +861,9 @@
                     bgAudioPlayer.volume -= volStep;
                 } else {
                     bgAudioPlayer.volume = 0;
-                    bgAudioPlayer.pause();
+                    try { bgAudioPlayer.pause(); } catch(e) {}
                     clearInterval(musicFadeTimer);
                     musicFadeTimer = null;
-                    isMusicActive = false;
-                    sessionStorage.setItem('1111_music_on', 'false');
-                    updateMusicUI(false);
                     if (onDone) onDone();
                 }
             }, stepTime);
@@ -863,23 +872,38 @@
         function toggleMusic() {
             playClickSound();
             if (!isMusicActive) {
+                isMusicActive = true;
+                updateMusicUI(true);
+                sessionStorage.setItem('1111_music_on', 'true');
                 currentTrackIndex = pickRandomTrackIndex();
-                playTrackWithFadeIn(playlist[currentTrackIndex], 0);
+                if (playlist && playlist.length > 0 && playlist[currentTrackIndex]) {
+                    playTrackWithFadeIn(playlist[currentTrackIndex], 0);
+                }
             } else {
-                fadeOutMusic(500);
+                fadeOutMusic(400);
             }
         }
 
         function skipMusic() {
             playClickSound();
             if (!isMusicActive) {
+                isMusicActive = true;
+                updateMusicUI(true);
+                sessionStorage.setItem('1111_music_on', 'true');
                 currentTrackIndex = pickRandomTrackIndex();
-                playTrackWithFadeIn(playlist[currentTrackIndex], 0);
+                if (playlist && playlist.length > 0 && playlist[currentTrackIndex]) {
+                    playTrackWithFadeIn(playlist[currentTrackIndex], 0);
+                }
                 return;
             }
-            fadeOutMusic(300, () => {
+            fadeOutMusic(250, () => {
+                isMusicActive = true;
+                updateMusicUI(true);
+                sessionStorage.setItem('1111_music_on', 'true');
                 currentTrackIndex = pickRandomTrackIndex();
-                playTrackWithFadeIn(playlist[currentTrackIndex], 0);
+                if (playlist && playlist.length > 0 && playlist[currentTrackIndex]) {
+                    playTrackWithFadeIn(playlist[currentTrackIndex], 0);
+                }
             });
         }
 

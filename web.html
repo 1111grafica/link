@@ -463,6 +463,14 @@
             color: var(--text-main);
         }
 
+        /* CONTENEDOR DE PRECIO + ICONITO DE CAMBIO PESOS / EUROS */
+        .price-container {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            flex-shrink: 0;
+        }
+
         .digital-price-pill {
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.74rem;
@@ -473,6 +481,38 @@
             color: var(--brand-green-deep);
             border: 1px solid var(--brand-green);
             white-space: nowrap;
+        }
+
+        /* BOTONCITO/ICONO INTERACTIVO DE PESOS / EUROS */
+        .btn-cur-swap {
+            background: #FFFFFF;
+            border: 1.2px solid var(--border-card);
+            border-radius: 999px;
+            padding: 2px 7px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.70rem;
+            font-weight: 800;
+            color: var(--brand-pink-deep);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 3px;
+            transition: all 0.2s var(--spring);
+            box-shadow: 0 1px 4px rgba(60, 105, 45, 0.08);
+            outline: none;
+            user-select: none;
+        }
+
+        .btn-cur-swap:hover {
+            background: var(--brand-pink);
+            color: #FFFFFF;
+            border-color: var(--brand-pink);
+            transform: scale(1.06);
+            box-shadow: 0 2px 8px var(--brand-pink-glow);
+        }
+
+        .btn-cur-swap:active {
+            transform: scale(0.94);
         }
 
         .digital-item-desc {
@@ -543,7 +583,7 @@
 
         .btn-toggle-examples.active svg.chevron-icon { transform: rotate(180deg); }
 
-        /* CONTENEDOR DESPLEGABLE HACIA ABAJO (FLEX-WRAP RECUADROS LADO A LADO) */
+        /* CONTENEDOR DESPLEGABLE HACIA ABAJO */
         .examples-expandable-drawer {
             display: none;
             width: 100%;
@@ -562,7 +602,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* RECUADROS DE EJEMPLOS UNO AL LADO DEL OTRO */
         .example-badge-chip {
             display: inline-flex;
             align-items: center;
@@ -647,7 +686,7 @@
 
         <!-- NAVEGACIÓN SUPERIOR CON BOTÓN VOLVER & SOUNDTRACK -->
         <nav class="top-nav-bar" aria-label="Navegación">
-            <!-- GRUPO IZQUIERDA: FLECHA VOLVER + IDIOMA -->
+            <!-- GRUPO IZQUIERDA: FLECHA VOLVER + IDIOMA EXACTO -->
             <div class="top-nav-left">
                 <a href="https://1111grafica.github.io/link" class="btn-back-hub" id="btnBackHub" onclick="playClickSound()" title="Sobre Nosotros" aria-label="Volver">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
@@ -665,18 +704,16 @@
                 </div>
             </div>
             
-            <!-- GRUPO DERECHA: SOUNDTRACK CONTROLLER EN ISLA ROSA CON ÍCONO MUSICAL -->
+            <!-- GRUPO DERECHA: SOUNDTRACK -->
             <div class="soundtrack-wrap">
                 <svg class="soundtrack-icon" viewBox="0 0 24 24" aria-hidden="true">
                     <path d="M9 18V5l12-2v13M9 18a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm12-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
                 </svg>
 
-                <!-- SWITCH DESLIZANTE PROFESIONAL (DER <-> IZQ) -->
                 <button type="button" class="btn-music-toggle" id="btnMusicToggle" onclick="toggleMusic()" title="Encender / Apagar música" aria-label="Interruptor de música">
                     <span class="switch-knob"></span>
                 </button>
 
-                <!-- BOTÓN SALTEAR CON ICONO UNIVERSAL DE PISTA -->
                 <button type="button" class="btn-music-skip" id="btnMusicSkip" onclick="skipMusic()" title="Siguiente pista" aria-label="Siguiente pista">
                     <svg viewBox="0 0 24 24" fill="currentColor">
                         <path d="M5.5 18V6l8.5 6-8.5 6zM16 6h2v12h-2z"/>
@@ -720,7 +757,12 @@
                         </span>
                         <h2 class="digital-item-title" id="t_opt1_title">Landing Page (mejoramos a Linktree)</h2>
                     </div>
-                    <span class="digital-price-pill" id="t_opt1_price">$30.000</span>
+                    <div class="price-container">
+                        <span class="digital-price-pill" id="t_opt1_price">$30.000</span>
+                        <button type="button" class="btn-cur-swap" onclick="toggleEsCurrency()" title="Ver en Euros / Pesos">
+                            <span>⇄ €</span>
+                        </button>
+                    </div>
                 </div>
                 <p class="digital-item-desc" id="t_opt1_desc">
                     Reemplazá Linktree por una LandingPage interactiva propia, sin mensualidades, con tu dominio y diseño 100% a medida.
@@ -742,7 +784,12 @@
                         </span>
                         <h2 class="digital-item-title" id="t_opt2_title">Página Web Completa (Institucional)</h2>
                     </div>
-                    <span class="digital-price-pill" id="t_opt2_price">$70.000</span>
+                    <div class="price-container">
+                        <span class="digital-price-pill" id="t_opt2_price">$70.000</span>
+                        <button type="button" class="btn-cur-swap" onclick="toggleEsCurrency()" title="Ver en Euros / Pesos">
+                            <span>⇄ €</span>
+                        </button>
+                    </div>
                 </div>
                 <p class="digital-item-desc" id="t_opt2_desc">
                     Sitio web completo 100% responsivo (información, fotos, catálogo de servicios, galería interactiva y contactos directos); optimizado para Google.
@@ -760,7 +807,6 @@
                     </a>
                 </div>
 
-                <!-- DESPLEGABLE HACIA ABAJO: RECUADROS LADO A LADO -->
                 <div class="examples-expandable-drawer" id="drawerWebExamples">
                     <a href="https://onceoncegrafica-1111.github.io/baldoriamadrid/" target="_blank" rel="noopener noreferrer" class="example-badge-chip" onclick="playClickSound()">
                         <span>Baldoria Madrid</span>
@@ -786,7 +832,12 @@
                         </span>
                         <h2 class="digital-item-title" id="t_opt3_title">Web E-Commerce (con compras o reservas)</h2>
                     </div>
-                    <span class="digital-price-pill" id="t_opt3_price">$200.000</span>
+                    <div class="price-container">
+                        <span class="digital-price-pill" id="t_opt3_price">$200.000</span>
+                        <button type="button" class="btn-cur-swap" onclick="toggleEsCurrency()" title="Ver en Euros / Pesos">
+                            <span>⇄ €</span>
+                        </button>
+                    </div>
                 </div>
                 <p class="digital-item-desc" id="t_opt3_desc">
                     Tienda online completa, con catálogo administrable de productos y/o reservas, y pedidos directos a WhatsApp o pasarela de pago.
@@ -804,7 +855,6 @@
                     </a>
                 </div>
 
-                <!-- DESPLEGABLE HACIA ABAJO: RECUADROS LADO A LADO -->
                 <div class="examples-expandable-drawer" id="drawerCartExamples">
                     <a href="https://onceoncegrafica-1111.github.io/orense/" target="_blank" rel="noopener noreferrer" class="example-badge-chip" onclick="playClickSound()">
                         <span>Alfajores Orense</span>
@@ -901,7 +951,7 @@
             else if (audioCtx.state === 'suspended') audioCtx.resume();
         }, { once: true });
 
-        /* 1.B MOTOR DE MÚSICA DE FONDO (CON RESPUESTA INMEDIATA DE SWITCH) */
+        /* 1.B MOTOR DE MÚSICA DE FONDO */
         const bgAudioPlayer = new Audio();
         bgAudioPlayer.preload = "auto";
         const MUSIC_TARGET_VOL = 0.25;
@@ -909,7 +959,6 @@
         let musicFadeTimer = null;
         let currentTrackIndex = -1;
 
-        // Lista de canciones base (se actualiza desde Google Sheets pestaña "Música")
         let playlist = [
             "./mine_gran_turismo_4_menu.mp3"
         ];
@@ -917,11 +966,8 @@
         function updateMusicUI(active) {
             const btnToggle = document.getElementById('btnMusicToggle');
             if (btnToggle) {
-                if (active) {
-                    btnToggle.classList.add('active');
-                } else {
-                    btnToggle.classList.remove('active');
-                }
+                if (active) btnToggle.classList.add('active');
+                else btnToggle.classList.remove('active');
             }
         }
 
@@ -1032,13 +1078,11 @@
             });
         }
 
-        // Salto automático cuando termina la canción
         bgAudioPlayer.addEventListener('ended', () => {
             currentTrackIndex = pickRandomTrackIndex();
             playTrackWithFadeIn(playlist[currentTrackIndex], 0);
         });
 
-        // Guardado periódico y antes de navegar
         setInterval(() => {
             if (isMusicActive && !bgAudioPlayer.paused) {
                 sessionStorage.setItem('1111_music_src', bgAudioPlayer.src);
@@ -1054,31 +1098,18 @@
             }
         });
 
-        // Detector de salida: si se toca un link EXTERNO (WhatsApp, ejemplos externos, etc.), hace fade-out suave
         document.addEventListener('click', (e) => {
             const link = e.target.closest('a');
             if (!link) return;
             const href = (link.getAttribute('href') || '').toLowerCase();
-
-            // Enlaces internos de nuestro ecosistema (NO se apagan)
-            const isInternal = href === './' || 
-                               href === '../' || 
-                               href === 'index.html' || 
+            const isInternal = href === './' || href === '../' || href === 'index.html' || 
                                href.includes('1111grafica.github.io/link') ||
-                               href.endsWith('/link/') ||
-                               href.endsWith('/link') ||
-                               href.includes('clientes.html') ||
-                               href.includes('web.html');
-
+                               href.endsWith('/link/') || href.endsWith('/link') ||
+                               href.includes('clientes.html') || href.includes('web.html');
             if (isInternal) return;
-
-            // Cualquier enlace externo (WhatsApp, ejemplos externos, etc.) apaga con fade-out
-            if (isMusicActive) {
-                fadeOutMusic(650);
-            }
+            if (isMusicActive) fadeOutMusic(650);
         });
 
-        /* TOGGLE DEL DESPLEGABLE DE EJEMPLOS HACIA ABAJO */
         function toggleDrawer(drawerId, btnId) {
             const drawer = document.getElementById(drawerId);
             const btn = document.getElementById(btnId);
@@ -1157,7 +1188,80 @@
             }
         };
 
+        /* BASE DE PRECIOS POR IDIOMA Y MONEDA */
+        const PRICES = {
+            opt1: { es: "$30.000", eu: "30 €", pt: "R$ 150", en: "$30" },
+            opt2: { es: "$70.000", eu: "70 €", pt: "R$ 350", en: "$70" },
+            opt3: { es: "$200.000", eu: "200 €", pt: "R$ 990", en: "$200" },
+            opt4: { es: "A Medida", eu: "A Medida", pt: "Sob Medida", en: "Custom" }
+        };
+
         let activeLang = 'es';
+        let esCurrency = 'ars'; // 'ars' (Pesos) o 'eur' (Euros)
+
+        // Alternar entre Pesos y Euros al hacer clic en el botoncito en ES
+        function toggleEsCurrency() {
+            playClickSound();
+            esCurrency = (esCurrency === 'ars') ? 'eur' : 'ars';
+            updatePricesDisplay();
+        }
+
+        function updatePricesDisplay() {
+            const isEs = (activeLang === 'es');
+
+            // Mostrar/Ocultar el botoncito: SOLO visible cuando estamos en Español
+            document.querySelectorAll('.btn-cur-swap').forEach(btn => {
+                btn.style.display = isEs ? 'inline-flex' : 'none';
+                const label = btn.querySelector('span');
+                if (label) label.innerText = (esCurrency === 'ars') ? '⇄ €' : '⇄ $';
+                btn.title = (esCurrency === 'ars') ? 'Ver precio en Euros (€)' : 'Ver precio en Pesos ($)';
+            });
+
+            // Seleccionar los precios según idioma y moneda activa
+            let p1, p2, p3, p4;
+            if (isEs) {
+                p1 = (esCurrency === 'ars') ? PRICES.opt1.es : PRICES.opt1.eu;
+                p2 = (esCurrency === 'ars') ? PRICES.opt2.es : PRICES.opt2.eu;
+                p3 = (esCurrency === 'ars') ? PRICES.opt3.es : PRICES.opt3.eu;
+                p4 = (esCurrency === 'ars') ? PRICES.opt4.es : PRICES.opt4.eu;
+            } else if (activeLang === 'pt') {
+                p1 = PRICES.opt1.pt;
+                p2 = PRICES.opt2.pt;
+                p3 = PRICES.opt3.pt;
+                p4 = PRICES.opt4.pt;
+            } else if (activeLang === 'en') {
+                p1 = PRICES.opt1.en;
+                p2 = PRICES.opt2.en;
+                p3 = PRICES.opt3.en;
+                p4 = PRICES.opt4.en;
+            }
+
+            const el1 = document.getElementById('t_opt1_price');
+            if (el1 && p1) el1.innerText = p1;
+            const el2 = document.getElementById('t_opt2_price');
+            if (el2 && p2) el2.innerText = p2;
+            const el3 = document.getElementById('t_opt3_price');
+            if (el3 && p3) el3.innerText = p3;
+            const el4 = document.getElementById('t_opt4_price');
+            if (el4 && p4) el4.innerText = p4;
+
+            // Actualizar WhatsApp links con la moneda exacta elegida
+            const opt2Btn = document.getElementById('t_opt2_btn');
+            if (opt2Btn) {
+                let msg = `¡Hola! Me contacto desde 1111 Gráfica y me interesa la Página Web Completa (${p2}).`;
+                if (activeLang === 'pt') msg = `Olá! Entro em contato pela 1111 Gráfica e tenho interesse na Página Web Completa (${p2}).`;
+                else if (activeLang === 'en') msg = `Hello! I'm contacting you from 1111 Gráfica and I'm interested in the Full Website (${p2}).`;
+                opt2Btn.href = `https://wa.me/5491131933611?text=${encodeURIComponent(msg)}`;
+            }
+
+            const opt3Btn = document.getElementById('t_opt3_btn');
+            if (opt3Btn) {
+                let msg = `¡Hola! Me contacto desde 1111 Gráfica y me interesa la Web con Carrito de Compras (${p3}).`;
+                if (activeLang === 'pt') msg = `Olá! Entro em contato pela 1111 Gráfica e tenho interesse no Site E-Commerce (${p3}).`;
+                else if (activeLang === 'en') msg = `Hello! I'm contacting you from 1111 Gráfica and I'm interested in the Web E-Commerce (${p3}).`;
+                opt3Btn.href = `https://wa.me/5491131933611?text=${encodeURIComponent(msg)}`;
+            }
+        }
 
         function setLanguage(lang) {
             if (activeLang !== lang) playClickSound();
@@ -1193,8 +1297,6 @@
 
             document.getElementById('t_opt4_title').innerText = data.opt4_title;
             document.getElementById('t_opt4_desc').innerText = data.opt4_desc;
-            const opt4Price = document.getElementById('t_opt4_price');
-            if (opt4Price && data.opt4_price) opt4Price.innerText = data.opt4_price;
             const opt4Btn = document.getElementById('t_opt4_btn');
             if (opt4Btn && data.opt4_btn) opt4Btn.firstElementChild.innerText = data.opt4_btn;
 
@@ -1205,9 +1307,12 @@
             if (lang === 'es') document.getElementById('btnLangEs').classList.add('active');
             if (lang === 'pt') document.getElementById('btnLangPt').classList.add('active');
             if (lang === 'en') document.getElementById('btnLangEn').classList.add('active');
+
+            // Actualizar precios y visibilidad del switch
+            updatePricesDisplay();
         }
 
-        /* 3. SINCRONIZACIÓN CON GOOGLE SHEETS (Pestaña "Web" gid 70835229 y "Música" gid 149458792) */
+        /* 3. SINCRONIZACIÓN CON GOOGLE SHEETS */
         const SHEET_ID = '12WChaJERJOmnyB6K3IMgpB6lYxDrYBvWR9OToha6do4';
         const GID_WEB = '70835229';
         const GID_MUSIC = '149458792';
@@ -1235,7 +1340,6 @@
         }
 
         async function initWebSheetsConnection() {
-            // Sincronizar servicios web (gid=70835229)
             try {
                 const endpointWeb = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&gid=${GID_WEB}&headers=1&t=${Date.now()}`;
                 const resWeb = await fetch(endpointWeb, { cache: 'no-store' });
@@ -1246,28 +1350,57 @@
                     if (s !== -1 && e !== -1) {
                         const payloadWeb = JSON.parse(rawTextWeb.substring(s, e + 1));
                         if (payloadWeb.table && payloadWeb.table.rows && payloadWeb.table.rows.length > 0) {
+                            
+                            // Detectar columnas de forma inteligente por su nombre
+                            const colMap = {};
+                            if (payloadWeb.table.cols) {
+                                payloadWeb.table.cols.forEach((col, idx) => {
+                                    if (col && col.label) colMap[col.label.trim().toLowerCase()] = idx;
+                                });
+                            }
+                            const getCol = (name, fallback) => (colMap[name.toLowerCase()] !== undefined ? colMap[name.toLowerCase()] : fallback);
+
+                            const colId = getCol('id', getCol('l', 0));
+                            const colTitEs = getCol('titulo_es', 1);
+                            const colTitPt = getCol('titulo_pt', 2);
+                            const colTitEn = getCol('titulo_en', 3);
+                            const colSubEs = getCol('subtitulo_es', 4);
+                            const colSubPt = getCol('subtitulo_pt', 5);
+                            const colSubEn = getCol('subtitulo_en', 6);
+                            
+                            const colBadgeEs = getCol('badge_es', 8);
+                            let colBadgeEu = getCol('badge_eu', -1);
+                            if (colBadgeEu === -1) colBadgeEu = getCol('badge_eur', -1);
+                            if (colBadgeEu === -1) colBadgeEu = 9; // Posición de Badge_EU en la nueva tabla
+
+                            const colBadgePt = getCol('badge_pt', 10);
+                            const colBadgeEn = getCol('badge_en', 11);
+                            const colEjemplos = getCol('ejemplos', 12);
+
                             const getValW = (row, col) => {
+                                if (col === -1) return '';
                                 const cell = row.c[col];
                                 return (cell && cell.v !== null && cell.v !== undefined) ? String(cell.v).trim() : '';
                             };
                             
                             payloadWeb.table.rows.forEach(row => {
                                 if (!row || !row.c) return;
-                                const id = getValW(row, 0).toUpperCase();
+                                const id = getValW(row, colId).toUpperCase();
 
-                                const title_es = getValW(row, 1);
-                                const title_pt = getValW(row, 2);
-                                const title_en = getValW(row, 3);
+                                const title_es = getValW(row, colTitEs);
+                                const title_pt = getValW(row, colTitPt);
+                                const title_en = getValW(row, colTitEn);
 
-                                const sub_es = getValW(row, 4);
-                                const sub_pt = getValW(row, 5);
-                                const sub_en = getValW(row, 6);
+                                const sub_es = getValW(row, colSubEs);
+                                const sub_pt = getValW(row, colSubPt);
+                                const sub_en = getValW(row, colSubEn);
 
-                                const price_es = getValW(row, 8);
-                                const price_pt = getValW(row, 9);
-                                const price_en = getValW(row, 10);
+                                const price_es = getValW(row, colBadgeEs);
+                                const price_eu = getValW(row, colBadgeEu);
+                                const price_pt = getValW(row, colBadgePt);
+                                const price_en = getValW(row, colBadgeEn);
 
-                                const examples = getValW(row, 11);
+                                const examples = getValW(row, colEjemplos);
 
                                 const mapKey = (id === 'OPT1' || id === 'LINKTREE') ? 'opt1' :
                                                (id === 'OPT2' || id === 'WEB') ? 'opt2' :
@@ -1283,27 +1416,24 @@
                                     if (sub_pt) TRANSLATIONS.pt[mapKey + '_desc'] = sub_pt;
                                     if (sub_en) TRANSLATIONS.en[mapKey + '_desc'] = sub_en;
 
-                                    if (mapKey === 'opt4') {
-                                        if (price_es) TRANSLATIONS.es.opt4_price = price_es;
-                                        if (price_pt) TRANSLATIONS.pt.opt4_price = price_pt;
-                                        if (price_en) TRANSLATIONS.en.opt4_price = price_en;
-                                    } else {
-                                        const pElem = document.getElementById(`t_${mapKey}_price`);
-                                        if (pElem && price_es) pElem.innerText = price_es;
-                                    }
+                                    // Guardar los 4 precios
+                                    if (price_es) PRICES[mapKey].es = price_es;
+                                    if (price_eu) PRICES[mapKey].eu = price_eu;
+                                    if (price_pt) PRICES[mapKey].pt = price_pt;
+                                    if (price_en) PRICES[mapKey].en = price_en;
 
                                     if (mapKey === 'opt2' && examples) updateExamplesFromRawString('drawerWebExamples', examples);
                                     if (mapKey === 'opt3' && examples) updateExamplesFromRawString('drawerCartExamples', examples);
                                 }
                             });
 
-                            setLanguage(activeLang);
+                            updatePricesDisplay();
                         }
                     }
                 }
             } catch (err) {}
 
-            // Sincronizar canciones pestaña "Música" (gid=149458792)
+            // Sincronizar canciones
             try {
                 const endpointMusic = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&gid=${GID_MUSIC}&headers=1&t=${Date.now()}`;
                 const resMusic = await fetch(endpointMusic, { cache: 'no-store' });
@@ -1343,7 +1473,6 @@
             setLanguage('es');
             initWebSheetsConnection();
 
-            // Reanudación suave de la música si venía encendida desde otra sección interna
             try {
                 const wasMusicOn = sessionStorage.getItem('1111_music_on');
                 const lastSrc = sessionStorage.getItem('1111_music_src');

@@ -195,7 +195,7 @@
             box-shadow: 0 2px 10px var(--brand-pink-glow);
         }
 
-        /* WIDGET SOUNDTRACK EN ISLA ROSA ARMÓNICA CON ÍCONO */
+        /* WIDGET SOUNDTRACK */
         .soundtrack-wrap {
             display: flex;
             align-items: center;
@@ -215,7 +215,6 @@
             flex-shrink: 0;
         }
 
-        /* PASTILLA PROFESIONAL SLIDER SWITCH (DESLIZANTE IZQ <-> DER) */
         .btn-music-toggle {
             width: 36px;
             height: 21px;
@@ -261,7 +260,6 @@
             box-shadow: 0 2px 6px rgba(169, 38, 103, 0.3);
         }
 
-        /* BOTÓN SALTEAR CON ICONOGRAFÍA UNIVERSAL DE PISTA (SVG) */
         .btn-music-skip {
             background: #FFFFFF;
             border: 1.2px solid rgba(233, 137, 183, 0.5);
@@ -648,18 +646,16 @@
                 </div>
             </div>
 
-            <!-- SOUNDTRACK CONTROLLER EN ISLA ROSA CON ÍCONO MUSICAL -->
+            <!-- SOUNDTRACK CONTROLLER -->
             <div class="soundtrack-wrap">
                 <svg class="soundtrack-icon" viewBox="0 0 24 24" aria-hidden="true">
                     <path d="M9 18V5l12-2v13M9 18a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm12-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
                 </svg>
 
-                <!-- SWITCH DESLIZANTE PROFESIONAL (DER <-> IZQ) -->
                 <button type="button" class="btn-music-toggle" id="btnMusicToggle" onclick="toggleMusic()" title="Encender / Apagar música" aria-label="Interruptor de música">
                     <span class="switch-knob"></span>
                 </button>
 
-                <!-- BOTÓN SALTEAR CON ICONO UNIVERSAL DE PISTA -->
                 <button type="button" class="btn-music-skip" id="btnMusicSkip" onclick="skipMusic()" title="Siguiente pista" aria-label="Siguiente pista">
                     <svg viewBox="0 0 24 24" fill="currentColor">
                         <path d="M5.5 18V6l8.5 6-8.5 6zM16 6h2v12h-2z"/>
@@ -775,7 +771,7 @@
         }, { once: true });
 
         /* =========================================================
-           1.B MOTOR DE MÚSICA DE FONDO (CON RESPUESTA INMEDIATA DE SWITCH)
+           1.B MOTOR DE MÚSICA DE FONDO
            ========================================================= */
         const bgAudioPlayer = new Audio();
         bgAudioPlayer.preload = "auto";
@@ -784,7 +780,6 @@
         let musicFadeTimer = null;
         let currentTrackIndex = -1;
 
-        // Lista de canciones base (se actualiza desde Google Sheets pestaña "Música")
         let playlist = [
             "./mine_gran_turismo_4_menu.mp3"
         ];
@@ -907,13 +902,11 @@
             });
         }
 
-        // Salto automático de canción
         bgAudioPlayer.addEventListener('ended', () => {
             currentTrackIndex = pickRandomTrackIndex();
             playTrackWithFadeIn(playlist[currentTrackIndex], 0);
         });
 
-        // Guardado periódico y antes de navegar
         setInterval(() => {
             if (isMusicActive && !bgAudioPlayer.paused) {
                 sessionStorage.setItem('1111_music_src', bgAudioPlayer.src);
@@ -929,13 +922,11 @@
             }
         });
 
-        // Detector de enlaces: se apaga suave si tocan un ejemplo de cliente o WhatsApp, pero NO si tocan el botón de volver al Hub
         document.addEventListener('click', (e) => {
             const link = e.target.closest('a');
             if (!link) return;
             const href = (link.getAttribute('href') || '').toLowerCase();
 
-            // Enlaces internos de nuestro ecosistema (NO se apagan)
             const isInternal = href === './' || 
                                href === '../' || 
                                href === 'index.html' || 
@@ -945,14 +936,13 @@
 
             if (isInternal) return;
 
-            // Cualquier enlace externo (ejemplos de clientes, WhatsApp, mail) apaga con fade-out
             if (isMusicActive) {
                 fadeOutMusic(650);
             }
         });
 
         /* =========================================================
-           2. DICCIONARIO TRILINGÜE
+           2. DICCIONARIOS DE IDIOMA Y CATEGORÍAS
            ========================================================= */
         const TRANSLATIONS = {
             es: {
@@ -993,7 +983,47 @@
             }
         };
 
-        /* CLIENTES BASE REALES (FALLBACK INMEDIATO) */
+        const CATEGORY_TRANSLATIONS = {
+            pt: {
+                "Gastronomía · Carta": "Gastronomia · Cardápio",
+                "Detailing · Vehículos": "Detailing · Veículos",
+                "Turismo": "Turismo",
+                "Letras Corpóreas": "Comunicação Visual · 3D",
+                "Peluquería · Turnos": "Salão · Agendamentos",
+                "Alfajores argentinos": "Alfajores Argentinos",
+                "Industria · Refrigeración": "Indústria · Refrigeração",
+                "Industria · Regrigeración": "Indústria · Refrigeração",
+                "Hotelería": "Hotelaria",
+                "Hair Studio · Extensiones": "Hair Studio · Mega Hair"
+            },
+            en: {
+                "Gastronomía · Carta": "Gastronomy · Menu",
+                "Detailing · Vehículos": "Detailing · Vehicles",
+                "Turismo": "Tourism",
+                "Letras Corpóreas": "Dimensional Signs · 3D",
+                "Peluquería · Turnos": "Hair Salon · Bookings",
+                "Alfajores argentinos": "Argentine Alfajores",
+                "Industria · Refrigeración": "Industry · Refrigeration",
+                "Industria · Regrigeración": "Industry · Refrigeration",
+                "Hotelería": "Hotels & Hospitality",
+                "Hair Studio · Extensiones": "Hair Studio · Extensions"
+            }
+        };
+
+        function getLocalizedCategory(originalCat, lang) {
+            if (!originalCat) return '';
+            if (lang === 'es') return originalCat;
+            const dict = CATEGORY_TRANSLATIONS[lang];
+            if (!dict) return originalCat;
+
+            const clean = originalCat.trim();
+            if (dict[clean]) return dict[clean];
+
+            const key = Object.keys(dict).find(k => k.toLowerCase() === clean.toLowerCase());
+            return key ? dict[key] : originalCat;
+        }
+
+        /* CLIENTES BASE REALES (FALLBACK) */
         let currentProjects = [
             {
                 num: "01",
@@ -1013,7 +1043,7 @@
                 sub_es: "Mantenimiento estético vehícular, (música y contactos directos)",
                 sub_pt: "Manutenção estética do veículo (música e contatos diretos)",
                 sub_en: "Vehicle aesthetic maintenance (music and direct contacts)",
-                url: "https://onceoncegrafica-1111.github.io/blackcenter/",
+                url: "http://www.blackcenter.com.ar/",
                 color: "#FFC700",
                 isDark: true
             },
@@ -1030,6 +1060,17 @@
             },
             {
                 num: "04",
+                title: "Keiwa Corpóreos",
+                cat: "Letras Corpóreas",
+                sub_es: "Comunicación Gráfica y Corpórea para emprendimientos, empresas, eventos, ¡y más!",
+                sub_pt: "Comunicação gráfica e 3D para startups, empresas, eventos e muito mais!",
+                sub_en: "Graphic and 3D communication for startups, companies, events, and more!",
+                url: "https://agustinmartinez-dgi.github.io/keiwacorporeos/",
+                color: "#0169C4",
+                isDark: false
+            },
+            {
+                num: "05",
                 title: "Peluquería Alvear",
                 cat: "Peluquería · Turnos",
                 sub_es: "Catálogo tradicional de servicios, galería interactiva y reservas.",
@@ -1040,22 +1081,22 @@
                 isDark: false
             },
             {
-                num: "05",
+                num: "06",
                 title: "Alfajores Orense",
                 cat: "Alfajores argentinos",
                 sub_es: "Enlaces directos, historia de la empresa y sabores emblemáticos",
                 sub_pt: "Links diretos, história da empresa e sabores icônicos",
                 sub_en: "Direct links, company history and iconic flavors",
                 url: "https://onceoncegrafica-1111.github.io/orense/",
-                color: "#3C2B20",
+                color: "#E8C18C",
                 isDark: true,
                 numColor: "#E8C18C",
                 btnColor: "#E8C18C"
             },
             {
-                num: "06",
+                num: "07",
                 title: "Frimaq Maquinarias",
-                cat: "Industria · Regrigeración",
+                cat: "Industria · Refrigeración",
                 sub_es: "Catálogo industrial de maquinaria y canal de presupuestos.",
                 sub_pt: "Catálogo de máquinas industriais e canal de cotação.",
                 sub_en: "Industrial machinery catalog and quotation channel.",
@@ -1064,7 +1105,7 @@
                 isDark: false
             },
             {
-                num: "07",
+                num: "08",
                 title: "Four Seasons MX",
                 cat: "Hotelería",
                 sub_es: "Experiencia inmersiva para turismo premium y hotelería.",
@@ -1075,7 +1116,7 @@
                 isDark: false
             },
             {
-                num: "08",
+                num: "09",
                 title: "Cristel Extensions",
                 cat: "Hair Studio · Extensiones",
                 sub_es: "Técnica rusa de nanocápsulas invisibles y cabello 100% virgen de origen eslavo.",
@@ -1116,7 +1157,8 @@
                 if (lang === 'pt') subText = item.sub_pt || item.sub_es;
                 if (lang === 'en') subText = item.sub_en || item.sub_es;
 
-                // Definición de colores con prioridad a los ingresados en Google Sheets
+                const categoryText = getLocalizedCategory(item.cat, lang);
+
                 const nameColor = item.textColor || (item.isDark ? '#FFFFFF' : 'var(--text-main)');
                 const tagColor = item.subColor || (item.textColor ? item.textColor : (item.isDark ? '#CBD5E1' : 'var(--text-muted)'));
                 
@@ -1124,29 +1166,50 @@
                 const catBorderColor = item.catColor || (item.isDark ? hex : `rgba(${r}, ${g}, ${b}, 0.50)`);
                 const catBgColor = item.catBg || (item.isDark ? `rgba(${r}, ${g}, ${b}, 0.20)` : `rgba(${r}, ${g}, ${b}, 0.16)`);
 
-                // Configuración dinámica del Número
                 const numColor = item.numColor || hex;
                 const numRgb = item.numColor ? hexToRgb(item.numColor) : { r, g, b };
                 const numBorderColor = item.numColor || (item.isDark ? hex : `rgba(${r}, ${g}, ${b}, 0.50)`);
                 const numBgColor = `rgba(${numRgb.r}, ${numRgb.g}, ${numRgb.b}, ${item.isDark ? 0.22 : 0.18})`;
 
-                // Configuración dinámica del Botón Ver Link
                 const btnColor = item.btnColor || hex;
                 const btnRgb = item.btnColor ? hexToRgb(item.btnColor) : { r, g, b };
                 const btnBorderColor = item.btnColor || (item.isDark ? hex : `rgba(${r}, ${g}, ${b}, 0.50)`);
                 const btnBgColor = item.isDark ? `rgba(${btnRgb.r}, ${btnRgb.g}, ${btnRgb.b}, 0.18)` : '#FFFFFF';
 
+                // CONTROL REGULABLE DE TRANSPARENCIA DESDE GOOGLE SHEETS
+                let userOpacity = null;
+                if (item.bgOpacity !== null && item.bgOpacity !== undefined && item.bgOpacity !== '') {
+                    let cleanOp = String(item.bgOpacity).replace('%', '').trim().replace(',', '.');
+                    let parsedOp = parseFloat(cleanOp);
+                    if (!isNaN(parsedOp)) {
+                        if (parsedOp > 1) parsedOp = parsedOp / 100;
+                        userOpacity = Math.min(Math.max(parsedOp, 0), 1);
+                    }
+                }
+
                 let cardStyle, numStyle, catStyle, tagStyle, nameStyle, linkStyle;
 
                 if (item.isDark) {
-                    cardStyle = `background: linear-gradient(135deg, #0B0B0E 0%, #15161C 100%); border: 2px solid ${hex}; border-left: 7px solid ${hex}; color: #FFFFFF; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45), 0 0 16px rgba(${r}, ${g}, ${b}, 0.22);`;
+                    let darkBg = `linear-gradient(135deg, #0B0B0E 0%, #15161C 100%)`;
+                    let blurCss = ``;
+                    if (userOpacity !== null) {
+                        darkBg = `linear-gradient(135deg, rgba(11, 11, 14, ${userOpacity}) 0%, rgba(21, 22, 28, ${userOpacity}) 100%)`;
+                        blurCss = `backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);`;
+                    }
+                    cardStyle = `background: ${darkBg}; ${blurCss} border: 2px solid ${hex}; border-left: 7px solid ${hex}; color: #FFFFFF; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45), 0 0 16px rgba(${r}, ${g}, ${b}, 0.22);`;
                     numStyle = `background: ${numBgColor}; border-color: ${numBorderColor}; color: ${numColor};`;
                     catStyle = `background: ${catBgColor}; color: ${catTextColor}; border-color: ${catBorderColor};`;
                     tagStyle = `color: ${tagColor};`;
                     nameStyle = `color: ${nameColor};`;
                     linkStyle = `color: ${btnColor}; background: ${btnBgColor}; border-color: ${btnBorderColor};`;
                 } else {
-                    cardStyle = `background: linear-gradient(135deg, rgba(${r}, ${g}, ${b}, 0.08) 0%, rgba(${r}, ${g}, ${b}, 0.18) 100%); border: 2px solid rgba(${r}, ${g}, ${b}, 0.50); border-left: 7px solid ${hex};`;
+                    let lightBg = `linear-gradient(135deg, rgba(${r}, ${g}, ${b}, 0.08) 0%, rgba(${r}, ${g}, ${b}, 0.18) 100%)`;
+                    let blurCss = ``;
+                    if (userOpacity !== null) {
+                        lightBg = `linear-gradient(135deg, rgba(${r}, ${g}, ${b}, ${(userOpacity * 0.45).toFixed(3)}) 0%, rgba(${r}, ${g}, ${b}, ${userOpacity.toFixed(3)}) 100%)`;
+                        blurCss = `backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);`;
+                    }
+                    cardStyle = `background: ${lightBg}; ${blurCss} border: 2px solid rgba(${r}, ${g}, ${b}, 0.50); border-left: 7px solid ${hex};`;
                     numStyle = `background: ${numBgColor}; border-color: ${numBorderColor}; color: ${numColor};`;
                     catStyle = `background: ${catBgColor}; color: ${catTextColor}; border-color: ${catBorderColor};`;
                     tagStyle = `color: ${tagColor};`;
@@ -1161,7 +1224,7 @@
                         <div class="soft-meta">
                             <div class="soft-head-row">
                                 <span class="soft-name" style="${nameStyle}">${item.title}</span>
-                                <span class="soft-cat-badge" style="${catStyle}">${item.cat}</span>
+                                <span class="soft-cat-badge" style="${catStyle}">${categoryText}</span>
                             </div>
                             <span class="soft-tag" style="${tagStyle}">${subText}</span>
                         </div>
@@ -1175,13 +1238,12 @@
         }
 
         /* =========================================================
-           3. CONEXIÓN DIRECTA Y SIN CACHÉ CON GOOGLE SHEETS
+           3. CONEXIÓN CON GOOGLE SHEETS
            ========================================================= */
         const SHEET_ID = '12WChaJERJOmnyB6K3IMgpB6lYxDrYBvWR9OToha6do4';
-        const GID_MUSIC = '149458792'; // Pestaña Música
+        const GID_MUSIC = '149458792';
 
         async function initGoogleSheetsConnection() {
-            // Sincronizar clientes (gid=0)
             try {
                 const endpoint = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&gid=0&headers=1&t=${Date.now()}`;
                 const response = await fetch(endpoint);
@@ -1227,6 +1289,7 @@
                                 const colorSub = getVal(12);
                                 const colorNum = getVal(13);
                                 const colorBoton = getVal(14);
+                                const transpFondo = getVal(15); // NUEVA COLUMNA 15: Transparencia / Opacidad
 
                                 loaded.push({
                                     num: num ? num.padStart(2, '0') : String(index + 1).padStart(2, '0'),
@@ -1243,7 +1306,8 @@
                                     catBg: fondoCat || null,
                                     subColor: colorSub || null,
                                     numColor: colorNum || null,
-                                    btnColor: colorBoton || null
+                                    btnColor: colorBoton || null,
+                                    bgOpacity: transpFondo || null
                                 });
                             });
 
@@ -1256,7 +1320,6 @@
                 }
             } catch (err) {}
 
-            // Sincronizar canciones pestaña "Música" (gid=149458792)
             try {
                 const endpointMusic = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&gid=${GID_MUSIC}&headers=1&t=${Date.now()}`;
                 const resMusic = await fetch(endpointMusic, { cache: 'no-store' });
@@ -1331,10 +1394,8 @@
             activeLang = savedLang;
             setLanguage(savedLang);
 
-            // Sincronización en tiempo real con Google Sheets
             initGoogleSheetsConnection();
 
-            // Reanudación suave de la música si venía encendida desde otra sección interna
             try {
                 const wasMusicOn = sessionStorage.getItem('1111_music_on');
                 const lastSrc = sessionStorage.getItem('1111_music_src');

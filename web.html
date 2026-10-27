@@ -1199,7 +1199,6 @@
         let activeLang = 'es';
         let esCurrency = 'ars'; // 'ars' (Pesos) o 'eur' (Euros)
 
-        // Alternar entre Pesos y Euros al hacer clic en el botoncito en ES
         function toggleEsCurrency() {
             playClickSound();
             esCurrency = (esCurrency === 'ars') ? 'eur' : 'ars';
@@ -1245,13 +1244,16 @@
             const el4 = document.getElementById('t_opt4_price');
             if (el4 && p4) el4.innerText = p4;
 
-            // Actualizar WhatsApp links con la moneda exacta elegida
+            // NÚMERO EXCLUSIVO SEGÚN EL IDIOMA (BRASIL EN 'PT', ARGENTINA EN 'ES' Y 'EN')
+            const telDestino = (activeLang === 'pt') ? '554588076078' : '5491131933611';
+
+            // Actualizar WhatsApp links con la moneda exacta y el teléfono correspondiente
             const opt2Btn = document.getElementById('t_opt2_btn');
             if (opt2Btn) {
                 let msg = `¡Hola! Me contacto desde 1111 Gráfica y me interesa la Página Web Completa (${p2}).`;
                 if (activeLang === 'pt') msg = `Olá! Entro em contato pela 1111 Gráfica e tenho interesse na Página Web Completa (${p2}).`;
                 else if (activeLang === 'en') msg = `Hello! I'm contacting you from 1111 Gráfica and I'm interested in the Full Website (${p2}).`;
-                opt2Btn.href = `https://wa.me/5491131933611?text=${encodeURIComponent(msg)}`;
+                opt2Btn.href = `https://wa.me/${telDestino}?text=${encodeURIComponent(msg)}`;
             }
 
             const opt3Btn = document.getElementById('t_opt3_btn');
@@ -1259,7 +1261,15 @@
                 let msg = `¡Hola! Me contacto desde 1111 Gráfica y me interesa la Web con Carrito de Compras (${p3}).`;
                 if (activeLang === 'pt') msg = `Olá! Entro em contato pela 1111 Gráfica e tenho interesse no Site E-Commerce (${p3}).`;
                 else if (activeLang === 'en') msg = `Hello! I'm contacting you from 1111 Gráfica and I'm interested in the Web E-Commerce (${p3}).`;
-                opt3Btn.href = `https://wa.me/5491131933611?text=${encodeURIComponent(msg)}`;
+                opt3Btn.href = `https://wa.me/${telDestino}?text=${encodeURIComponent(msg)}`;
+            }
+
+            const opt4Btn = document.getElementById('t_opt4_btn');
+            if (opt4Btn) {
+                let msg = `¡Hola! Me contacto desde 1111 Gráfica y quisiera consultar por Software Ligero o Automatizaciones de tareas.`;
+                if (activeLang === 'pt') msg = `Olá! Entro em contato pela 1111 Gráfica e gostaria de solicitar um orçamento para Software Leve ou Automações.`;
+                else if (activeLang === 'en') msg = `Hello! I'm contacting you from 1111 Gráfica and I'd like to ask about Lightweight Software or Automations.`;
+                opt4Btn.href = `https://wa.me/${telDestino}?text=${encodeURIComponent(msg)}`;
             }
         }
 
@@ -1308,7 +1318,6 @@
             if (lang === 'pt') document.getElementById('btnLangPt').classList.add('active');
             if (lang === 'en') document.getElementById('btnLangEn').classList.add('active');
 
-            // Actualizar precios y visibilidad del switch
             updatePricesDisplay();
         }
 
@@ -1351,7 +1360,6 @@
                         const payloadWeb = JSON.parse(rawTextWeb.substring(s, e + 1));
                         if (payloadWeb.table && payloadWeb.table.rows && payloadWeb.table.rows.length > 0) {
                             
-                            // Detectar columnas de forma inteligente por su nombre
                             const colMap = {};
                             if (payloadWeb.table.cols) {
                                 payloadWeb.table.cols.forEach((col, idx) => {
@@ -1371,7 +1379,7 @@
                             const colBadgeEs = getCol('badge_es', 8);
                             let colBadgeEu = getCol('badge_eu', -1);
                             if (colBadgeEu === -1) colBadgeEu = getCol('badge_eur', -1);
-                            if (colBadgeEu === -1) colBadgeEu = 9; // Posición de Badge_EU en la nueva tabla
+                            if (colBadgeEu === -1) colBadgeEu = 9;
 
                             const colBadgePt = getCol('badge_pt', 10);
                             const colBadgeEn = getCol('badge_en', 11);
@@ -1416,7 +1424,6 @@
                                     if (sub_pt) TRANSLATIONS.pt[mapKey + '_desc'] = sub_pt;
                                     if (sub_en) TRANSLATIONS.en[mapKey + '_desc'] = sub_en;
 
-                                    // Guardar los 4 precios
                                     if (price_es) PRICES[mapKey].es = price_es;
                                     if (price_eu) PRICES[mapKey].eu = price_eu;
                                     if (price_pt) PRICES[mapKey].pt = price_pt;
@@ -1433,7 +1440,6 @@
                 }
             } catch (err) {}
 
-            // Sincronizar canciones
             try {
                 const endpointMusic = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&gid=${GID_MUSIC}&headers=1&t=${Date.now()}`;
                 const resMusic = await fetch(endpointMusic, { cache: 'no-store' });

@@ -1428,7 +1428,7 @@
             else if (audioCtx.state === 'suspended') audioCtx.resume();
         }, { once: true });
 
-        /* 1.B MOTOR DE MÚSICA DE FONDO (CON RESPUESTA INMEDIATA DE SWITCH) */
+        /* 1.B MOTOR DE MÚSICA DE FONDO (CARPETA MUSIC GITHUB + GOOGLE SHEETS) */
         const bgAudioPlayer = new Audio();
         bgAudioPlayer.preload = "auto";
         const MUSIC_TARGET_VOL = 0.25;
@@ -1436,10 +1436,24 @@
         let musicFadeTimer = null;
         let currentTrackIndex = -1;
 
-        // Lista de canciones base (se actualiza automáticamente desde Google Sheets pestaña "Música")
-        let playlist = [
-            "./mine_gran_turismo_4_menu.mp3"
-        ];
+        // Lista de canciones activa (cargada dinámicamente desde la carpeta /music/ y enlazada al Sheets)
+        let playlist = [];
+
+        // LECTURA DINÁMICA DE LA CARPETA /music/ EN GITHUB
+        async function loadMusicFromFolder() {
+            try {
+                const res = await fetch('https://api.github.com/repos/1111grafica/link/contents/music');
+                if (res.ok) {
+                    const files = await res.json();
+                    const tracks = files
+                        .filter(f => f.type === 'file' && f.name.toLowerCase().endsWith('.mp3'))
+                        .map(f => `./music/${encodeURIComponent(f.name)}`);
+                    if (tracks.length > 0) {
+                        playlist = [...new Set([...playlist, ...tracks])];
+                    }
+                }
+            } catch(e) {}
+        }
 
         function updateMusicUI(active) {
             const btnToggle = document.getElementById('btnMusicToggle');
@@ -1524,6 +1538,7 @@
         function toggleMusic() {
             playClickSound();
             if (!isMusicActive) {
+                if (playlist.length === 0) return;
                 isMusicActive = true;
                 updateMusicUI(true);
                 sessionStorage.setItem('1111_music_on', 'true');
@@ -1538,6 +1553,7 @@
 
         function skipMusic() {
             playClickSound();
+            if (playlist.length === 0) return;
             if (!isMusicActive) {
                 isMusicActive = true;
                 updateMusicUI(true);
@@ -1562,7 +1578,9 @@
         // Salto automático cuando termina la canción
         bgAudioPlayer.addEventListener('ended', () => {
             currentTrackIndex = pickRandomTrackIndex();
-            playTrackWithFadeIn(playlist[currentTrackIndex], 0);
+            if (playlist[currentTrackIndex]) {
+                playTrackWithFadeIn(playlist[currentTrackIndex], 0);
+            }
         });
 
         // Guardado de segundo exacto periódicamente y antes de navegar internamente
@@ -2002,7 +2020,7 @@
                             });
 
                             if (fetchedUrls.length > 0) {
-                                playlist = fetchedUrls;
+                                playlist = [...new Set([...playlist, ...fetchedUrls])].filter(u => !u.includes('mine_gran_turismo_4_menu.mp3'));
                             }
                         }
                     }
@@ -2014,6 +2032,7 @@
         window.addEventListener('DOMContentLoaded', () => {
             requestAnimationFrame(() => document.body.classList.remove('preload'));
             setLanguage('es');
+            loadMusicFromFolder();
             initHubSheetsConnection();
 
             // Reanudación suave de la música si el usuario venía navegando internamente

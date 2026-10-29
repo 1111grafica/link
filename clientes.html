@@ -771,7 +771,7 @@
         }, { once: true });
 
         /* =========================================================
-           1.B MOTOR DE MÚSICA DE FONDO
+           1.B MOTOR DE MÚSICA DE FONDO (CARPETA MUSIC GITHUB + GOOGLE SHEETS)
            ========================================================= */
         const bgAudioPlayer = new Audio();
         bgAudioPlayer.preload = "auto";
@@ -780,9 +780,24 @@
         let musicFadeTimer = null;
         let currentTrackIndex = -1;
 
-        let playlist = [
-            "./mine_gran_turismo_4_menu.mp3"
-        ];
+        // Lista de canciones activa (cargada dinámicamente desde /music/ y enlazada al Sheets)
+        let playlist = [];
+
+        // LECTURA DINÁMICA DE LA CARPETA /music/ EN GITHUB
+        async function loadMusicFromFolder() {
+            try {
+                const res = await fetch('https://api.github.com/repos/1111grafica/link/contents/music');
+                if (res.ok) {
+                    const files = await res.json();
+                    const tracks = files
+                        .filter(f => f.type === 'file' && f.name.toLowerCase().endsWith('.mp3'))
+                        .map(f => `./music/${encodeURIComponent(f.name)}`);
+                    if (tracks.length > 0) {
+                        playlist = [...new Set([...playlist, ...tracks])];
+                    }
+                }
+            } catch(e) {}
+        }
 
         function updateMusicUI(active) {
             const btnToggle = document.getElementById('btnMusicToggle');
@@ -813,10 +828,14 @@
                 bgAudioPlayer.currentTime = startSecond;
                 bgAudioPlayer.volume = 0;
                 sessionStorage.setItem('1111_music_src', trackUrl);
+                sessionStorage.setItem('1111_music_on', 'true');
 
                 const playPromise = bgAudioPlayer.play();
                 if (playPromise !== undefined) {
                     playPromise.then(() => {
+                        isMusicActive = true;
+                        updateMusicUI(true);
+
                         const steps = 20;
                         const stepTime = 1000 / steps;
                         const volStep = MUSIC_TARGET_VOL / steps;
@@ -867,6 +886,7 @@
         function toggleMusic() {
             playClickSound();
             if (!isMusicActive) {
+                if (playlist.length === 0) return;
                 isMusicActive = true;
                 updateMusicUI(true);
                 sessionStorage.setItem('1111_music_on', 'true');
@@ -881,6 +901,7 @@
 
         function skipMusic() {
             playClickSound();
+            if (playlist.length === 0) return;
             if (!isMusicActive) {
                 isMusicActive = true;
                 updateMusicUI(true);
@@ -904,7 +925,9 @@
 
         bgAudioPlayer.addEventListener('ended', () => {
             currentTrackIndex = pickRandomTrackIndex();
-            playTrackWithFadeIn(playlist[currentTrackIndex], 0);
+            if (playlist[currentTrackIndex]) {
+                playTrackWithFadeIn(playlist[currentTrackIndex], 0);
+            }
         });
 
         setInterval(() => {
@@ -922,6 +945,7 @@
             }
         });
 
+        // Detector de enlaces internos vs externos
         document.addEventListener('click', (e) => {
             const link = e.target.closest('a');
             if (!link) return;
@@ -930,11 +954,14 @@
             const isInternal = href === './' || 
                                href === '../' || 
                                href === 'index.html' || 
+                               href === 'web.html' ||
+                               href.includes('web.html') ||
+                               href.includes('clientes.html') ||
                                href.includes('1111grafica.github.io/link/') ||
                                href.endsWith('/link/') ||
                                href.endsWith('/link');
 
-            if (isInternal) return;
+            if (isInternal) return; // Si navega dentro de la misma web, la música no se corta
 
             if (isMusicActive) {
                 fadeOutMusic(650);
@@ -1289,7 +1316,7 @@
                                 const colorSub = getVal(12);
                                 const colorNum = getVal(13);
                                 const colorBoton = getVal(14);
-                                const transpFondo = getVal(15); // NUEVA COLUMNA 15: Transparencia / Opacidad
+                                const transpFondo = getVal(15);
 
                                 loaded.push({
                                     num: num ? num.padStart(2, '0') : String(index + 1).padStart(2, '0'),
@@ -1346,7 +1373,7 @@
                             });
 
                             if (fetchedUrls.length > 0) {
-                                playlist = fetchedUrls;
+                                playlist = [...new Set([...playlist, ...fetchedUrls])].filter(u => !u.includes('mine_gran_turismo_4_menu.mp3'));
                             }
                         }
                     }
@@ -1394,8 +1421,10 @@
             activeLang = savedLang;
             setLanguage(savedLang);
 
+            loadMusicFromFolder();
             initGoogleSheetsConnection();
 
+            // Reanudación suave de la música si venía sonando desde index.html
             try {
                 const wasMusicOn = sessionStorage.getItem('1111_music_on');
                 const lastSrc = sessionStorage.getItem('1111_music_src');

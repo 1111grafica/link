@@ -951,7 +951,7 @@
             else if (audioCtx.state === 'suspended') audioCtx.resume();
         }, { once: true });
 
-        /* 1.B MOTOR DE MÚSICA DE FONDO */
+        /* 1.B MOTOR DE MÚSICA DE FONDO (CARPETA MUSIC GITHUB + GOOGLE SHEETS) */
         const bgAudioPlayer = new Audio();
         bgAudioPlayer.preload = "auto";
         const MUSIC_TARGET_VOL = 0.25;
@@ -959,9 +959,24 @@
         let musicFadeTimer = null;
         let currentTrackIndex = -1;
 
-        let playlist = [
-            "./mine_gran_turismo_4_menu.mp3"
-        ];
+        // Lista de canciones activa (cargada dinámicamente desde /music/ y enlazada al Sheets)
+        let playlist = [];
+
+        // LECTURA DINÁMICA DE LA CARPETA /music/ EN GITHUB
+        async function loadMusicFromFolder() {
+            try {
+                const res = await fetch('https://api.github.com/repos/1111grafica/link/contents/music');
+                if (res.ok) {
+                    const files = await res.json();
+                    const tracks = files
+                        .filter(f => f.type === 'file' && f.name.toLowerCase().endsWith('.mp3'))
+                        .map(f => `./music/${encodeURIComponent(f.name)}`);
+                    if (tracks.length > 0) {
+                        playlist = [...new Set([...playlist, ...tracks])];
+                    }
+                }
+            } catch(e) {}
+        }
 
         function updateMusicUI(active) {
             const btnToggle = document.getElementById('btnMusicToggle');
@@ -989,10 +1004,14 @@
                 bgAudioPlayer.currentTime = startSecond;
                 bgAudioPlayer.volume = 0;
                 sessionStorage.setItem('1111_music_src', trackUrl);
+                sessionStorage.setItem('1111_music_on', 'true');
 
                 const playPromise = bgAudioPlayer.play();
                 if (playPromise !== undefined) {
                     playPromise.then(() => {
+                        isMusicActive = true;
+                        updateMusicUI(true);
+
                         const steps = 20;
                         const stepTime = 1000 / steps;
                         const volStep = MUSIC_TARGET_VOL / steps;
@@ -1043,6 +1062,7 @@
         function toggleMusic() {
             playClickSound();
             if (!isMusicActive) {
+                if (playlist.length === 0) return;
                 isMusicActive = true;
                 updateMusicUI(true);
                 sessionStorage.setItem('1111_music_on', 'true');
@@ -1057,6 +1077,7 @@
 
         function skipMusic() {
             playClickSound();
+            if (playlist.length === 0) return;
             if (!isMusicActive) {
                 isMusicActive = true;
                 updateMusicUI(true);
@@ -1080,7 +1101,9 @@
 
         bgAudioPlayer.addEventListener('ended', () => {
             currentTrackIndex = pickRandomTrackIndex();
-            playTrackWithFadeIn(playlist[currentTrackIndex], 0);
+            if (playlist[currentTrackIndex]) {
+                playTrackWithFadeIn(playlist[currentTrackIndex], 0);
+            }
         });
 
         setInterval(() => {
@@ -1106,7 +1129,7 @@
                                href.includes('1111grafica.github.io/link') ||
                                href.endsWith('/link/') || href.endsWith('/link') ||
                                href.includes('clientes.html') || href.includes('web.html');
-            if (isInternal) return;
+            if (isInternal) return; // Si navega internamente entre páginas no se interrumpe
             if (isMusicActive) fadeOutMusic(650);
         });
 
@@ -1197,7 +1220,7 @@
         };
 
         let activeLang = 'es';
-        let esCurrency = 'ars'; // 'ars' (Pesos) o 'eur' (Euros)
+        let esCurrency = 'ars';
 
         function toggleEsCurrency() {
             playClickSound();
@@ -1208,7 +1231,6 @@
         function updatePricesDisplay() {
             const isEs = (activeLang === 'es');
 
-            // Mostrar/Ocultar el botoncito: SOLO visible cuando estamos en Español
             document.querySelectorAll('.btn-cur-swap').forEach(btn => {
                 btn.style.display = isEs ? 'inline-flex' : 'none';
                 const label = btn.querySelector('span');
@@ -1216,7 +1238,6 @@
                 btn.title = (esCurrency === 'ars') ? 'Ver precio en Euros (€)' : 'Ver precio en Pesos ($)';
             });
 
-            // Seleccionar los precios según idioma y moneda activa
             let p1, p2, p3, p4;
             if (isEs) {
                 p1 = (esCurrency === 'ars') ? PRICES.opt1.es : PRICES.opt1.eu;
@@ -1244,10 +1265,8 @@
             const el4 = document.getElementById('t_opt4_price');
             if (el4 && p4) el4.innerText = p4;
 
-            // NÚMERO EXCLUSIVO SEGÚN EL IDIOMA (BRASIL EN 'PT', ARGENTINA EN 'ES' Y 'EN')
             const telDestino = (activeLang === 'pt') ? '554588076078' : '5491131933611';
 
-            // Actualizar WhatsApp links con la moneda exacta y el teléfono correspondiente
             const opt2Btn = document.getElementById('t_opt2_btn');
             if (opt2Btn) {
                 let msg = `¡Hola! Me contacto desde 1111 Gráfica y me interesa la Página Web Completa (${p2}).`;
@@ -1466,7 +1485,7 @@
                             });
 
                             if (fetchedUrls.length > 0) {
-                                playlist = fetchedUrls;
+                                playlist = [...new Set([...playlist, ...fetchedUrls])].filter(u => !u.includes('mine_gran_turismo_4_menu.mp3'));
                             }
                         }
                     }
@@ -1477,6 +1496,7 @@
         window.addEventListener('DOMContentLoaded', () => {
             requestAnimationFrame(() => document.body.classList.remove('preload'));
             setLanguage('es');
+            loadMusicFromFolder();
             initWebSheetsConnection();
 
             try {

@@ -216,19 +216,23 @@
             flex-shrink: 0;
         }
 
-        /* PASTILLA PROFESIONAL SLIDER SWITCH (DESLIZANTE IZQ <-> DER) */
+        /* PASTILLA PROFESIONAL SLIDER SWITCH (FÍSICA MECÁNICA REAL Y PESO TÁCTIL) */
         .btn-music-toggle {
-            width: 36px;
-            height: 21px;
-            min-width: 36px;
-            background: rgba(180, 195, 175, 0.35);
-            border: 1.2px solid rgba(160, 209, 143, 0.6);
+            width: 38px;
+            height: 22px;
+            min-width: 38px;
+            background: linear-gradient(180deg, rgba(165, 185, 160, 0.42) 0%, rgba(195, 210, 190, 0.22) 100%);
+            border: 1.2px solid rgba(145, 195, 130, 0.7);
             border-radius: 999px;
             position: relative;
             cursor: pointer;
             padding: 0;
             outline: none;
-            transition: background 0.26s var(--spring), border-color 0.26s var(--spring), box-shadow 0.26s var(--spring);
+            box-shadow: inset 0 1.5px 3px rgba(0, 0, 0, 0.14), 0 1px 2px rgba(255, 255, 255, 0.85);
+            transition: background 0.24s cubic-bezier(0.2, 0.8, 0.25, 1), 
+                        border-color 0.24s cubic-bezier(0.2, 0.8, 0.25, 1), 
+                        box-shadow 0.24s cubic-bezier(0.2, 0.8, 0.25, 1),
+                        transform 0.12s ease-out;
             user-select: none;
             display: inline-flex;
             align-items: center;
@@ -238,12 +242,17 @@
             position: absolute;
             top: 2px;
             left: 2px;
-            width: 15px;
-            height: 15px;
+            width: 16px;
+            height: 16px;
             border-radius: 50%;
-            background: #FFFFFF;
-            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
-            transition: transform 0.28s var(--spring);
+            background: radial-gradient(circle at 35% 30%, #FFFFFF 0%, #F5F7F3 80%, #DFE5DC 100%);
+            box-shadow: 0 2px 5px rgba(20, 35, 15, 0.25), 
+                        0 1px 1px rgba(0, 0, 0, 0.12), 
+                        inset 0 1px 1px #FFFFFF, 
+                        inset 0 -1px 1px rgba(0, 0, 0, 0.08);
+            transition: transform 0.26s cubic-bezier(0.34, 1.4, 0.64, 1), 
+                        width 0.16s ease,
+                        box-shadow 0.26s cubic-bezier(0.34, 1.4, 0.64, 1);
             pointer-events: none;
         }
 
@@ -251,21 +260,37 @@
             border-color: var(--brand-pink);
         }
 
+        .btn-music-toggle:active {
+            transform: scale(0.95);
+        }
+
+        .btn-music-toggle:active .switch-knob {
+            width: 18px;
+        }
+
         .btn-music-toggle.active {
-            background: var(--brand-pink);
+            background: linear-gradient(135deg, #F090BF 0%, #D86F9F 100%);
             border-color: var(--brand-pink);
-            box-shadow: 0 2px 9px var(--brand-pink-glow);
+            box-shadow: inset 0 1.5px 3px rgba(120, 20, 70, 0.22), 0 2px 9px var(--brand-pink-glow);
         }
 
         .btn-music-toggle.active .switch-knob {
-            transform: translateX(15px);
-            box-shadow: 0 2px 6px rgba(169, 38, 103, 0.3);
+            transform: translateX(16px);
+            box-shadow: 0 2px 6px rgba(140, 25, 75, 0.35), 
+                        0 1px 2px rgba(0, 0, 0, 0.15), 
+                        inset 0 1px 1px #FFFFFF, 
+                        inset 0 -1px 1px rgba(180, 50, 110, 0.2);
         }
 
-        /* BOTÓN SALTEAR CON ICONOGRAFÍA UNIVERSAL DE PISTA (SVG) */
+        .btn-music-toggle.active:active .switch-knob {
+            transform: translateX(14px);
+            width: 18px;
+        }
+
+        /* BOTÓN SALTEAR CON ICONOGRAFÍA UNIVERSAL DE PISTA (SVG) Y TACTO MECÁNICO */
         .btn-music-skip {
-            background: #FFFFFF;
-            border: 1.2px solid rgba(233, 137, 183, 0.5);
+            background: linear-gradient(180deg, #FFFFFF 0%, #F8F9F7 100%);
+            border: 1.2px solid rgba(233, 137, 183, 0.55);
             border-radius: 50%;
             width: 23px;
             height: 23px;
@@ -275,7 +300,8 @@
             align-items: center;
             justify-content: center;
             color: var(--brand-pink-deep);
-            transition: all 0.2s var(--spring);
+            box-shadow: 0 1.5px 4px rgba(60, 105, 45, 0.08), inset 0 1px 0 #FFFFFF;
+            transition: all 0.2s cubic-bezier(0.34, 1.4, 0.64, 1);
             padding: 0;
             outline: none;
         }
@@ -284,14 +310,14 @@
             width: 11px;
             height: 11px;
             display: block;
-            transition: transform 0.2s var(--spring);
+            transition: transform 0.2s cubic-bezier(0.34, 1.4, 0.64, 1);
         }
 
         .btn-music-skip:hover {
             background: var(--brand-pink);
             color: #FFFFFF;
             border-color: var(--brand-pink);
-            box-shadow: 0 2px 8px var(--brand-pink-glow);
+            box-shadow: 0 3px 8px var(--brand-pink-glow);
             transform: scale(1.08);
         }
 
@@ -300,7 +326,8 @@
         }
 
         .btn-music-skip:active {
-            transform: scale(0.92);
+            transform: scale(0.88);
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
         }
 
         /* HEADER */
@@ -1428,31 +1455,26 @@
             else if (audioCtx.state === 'suspended') audioCtx.resume();
         }, { once: true });
 
-        /* 1.B MOTOR DE MÚSICA DE FONDO (CARPETA MUSIC GITHUB + GOOGLE SHEETS) */
+        /* 1.B MOTOR DE MÚSICA DE FONDO (CON FÍSICA MECÁNICA, CERO PARPADEO Y FADES PERFECCIONADOS) */
         const bgAudioPlayer = new Audio();
         bgAudioPlayer.preload = "auto";
         const MUSIC_TARGET_VOL = 0.25;
         let isMusicActive = false;
+        let isTrackTransitioning = false;
+        let autoFadeOutTriggered = false;
         let musicFadeTimer = null;
         let currentTrackIndex = -1;
 
-        // Lista de canciones activa (cargada dinámicamente desde la carpeta /music/ y enlazada al Sheets)
-        let playlist = [];
+        // Lista de canciones base (se actualiza automáticamente desde Google Sheets pestaña "Música")
+        let playlist = [
+            "./mine_gran_turismo_4_menu.mp3"
+        ];
 
-        // LECTURA DINÁMICA DE LA CARPETA /music/ EN GITHUB
-        async function loadMusicFromFolder() {
-            try {
-                const res = await fetch('https://api.github.com/repos/1111grafica/link/contents/music');
-                if (res.ok) {
-                    const files = await res.json();
-                    const tracks = files
-                        .filter(f => f.type === 'file' && f.name.toLowerCase().endsWith('.mp3'))
-                        .map(f => `./music/${encodeURIComponent(f.name)}`);
-                    if (tracks.length > 0) {
-                        playlist = [...new Set([...playlist, ...tracks])];
-                    }
-                }
-            } catch(e) {}
+        // Micro-vibración háptica mecánica al tacto en dispositivos compatibles
+        function triggerHapticFeedback() {
+            if (typeof navigator !== 'undefined' && navigator.vibrate) {
+                try { navigator.vibrate(10); } catch(e) {}
+            }
         }
 
         function updateMusicUI(active) {
@@ -1475,9 +1497,17 @@
             return nextIndex;
         }
 
-        function playTrackWithFadeIn(trackUrl, startSecond = 0) {
-            if (musicFadeTimer) clearInterval(musicFadeTimer);
-            if (!trackUrl) return;
+        function playTrackWithFadeIn(trackUrl, startSecond = 0, duration = 1000) {
+            if (musicFadeTimer) {
+                clearInterval(musicFadeTimer);
+                musicFadeTimer = null;
+            }
+            if (!trackUrl) {
+                isTrackTransitioning = false;
+                return;
+            }
+
+            autoFadeOutTriggered = false;
 
             try {
                 bgAudioPlayer.src = trackUrl;
@@ -1488,8 +1518,8 @@
                 const playPromise = bgAudioPlayer.play();
                 if (playPromise !== undefined) {
                     playPromise.then(() => {
-                        const steps = 20;
-                        const stepTime = 1000 / steps;
+                        const steps = 25;
+                        const stepTime = duration / steps;
                         const volStep = MUSIC_TARGET_VOL / steps;
 
                         musicFadeTimer = setInterval(() => {
@@ -1499,25 +1529,37 @@
                                 bgAudioPlayer.volume = MUSIC_TARGET_VOL;
                                 clearInterval(musicFadeTimer);
                                 musicFadeTimer = null;
+                                isTrackTransitioning = false;
                             }
                         }, stepTime);
-                    }).catch(() => {});
+                    }).catch(() => {
+                        isTrackTransitioning = false;
+                    });
                 }
-            } catch(e) {}
+            } catch(e) {
+                isTrackTransitioning = false;
+            }
         }
 
-        function fadeOutMusic(duration = 400, onDone) {
-            if (musicFadeTimer) clearInterval(musicFadeTimer);
-            isMusicActive = false;
-            sessionStorage.setItem('1111_music_on', 'false');
-            updateMusicUI(false);
+        function fadeOutMusic(duration = 400, onDone, isSwitchingTrack = false) {
+            if (musicFadeTimer) {
+                clearInterval(musicFadeTimer);
+                musicFadeTimer = null;
+            }
+
+            // Si es un cambio de pista, mantenemos el switch visual activado (cero parpadeo)
+            if (!isSwitchingTrack) {
+                isMusicActive = false;
+                sessionStorage.setItem('1111_music_on', 'false');
+                updateMusicUI(false);
+            }
 
             if (bgAudioPlayer.paused) {
                 if (onDone) onDone();
                 return;
             }
 
-            const steps = 15;
+            const steps = 20;
             const stepTime = duration / steps;
             const startVol = bgAudioPlayer.volume;
             const volStep = startVol / steps;
@@ -1536,15 +1578,15 @@
         }
 
         function toggleMusic() {
+            triggerHapticFeedback();
             playClickSound();
             if (!isMusicActive) {
-                if (playlist.length === 0) return;
                 isMusicActive = true;
                 updateMusicUI(true);
                 sessionStorage.setItem('1111_music_on', 'true');
                 currentTrackIndex = pickRandomTrackIndex();
                 if (playlist && playlist.length > 0 && playlist[currentTrackIndex]) {
-                    playTrackWithFadeIn(playlist[currentTrackIndex], 0);
+                    playTrackWithFadeIn(playlist[currentTrackIndex], 0, 1000);
                 }
             } else {
                 fadeOutMusic(400);
@@ -1552,34 +1594,68 @@
         }
 
         function skipMusic() {
+            triggerHapticFeedback();
             playClickSound();
-            if (playlist.length === 0) return;
             if (!isMusicActive) {
                 isMusicActive = true;
                 updateMusicUI(true);
                 sessionStorage.setItem('1111_music_on', 'true');
                 currentTrackIndex = pickRandomTrackIndex();
                 if (playlist && playlist.length > 0 && playlist[currentTrackIndex]) {
-                    playTrackWithFadeIn(playlist[currentTrackIndex], 0);
+                    playTrackWithFadeIn(playlist[currentTrackIndex], 0, 900);
                 }
                 return;
             }
-            fadeOutMusic(250, () => {
-                isMusicActive = true;
-                updateMusicUI(true);
-                sessionStorage.setItem('1111_music_on', 'true');
+
+            if (isTrackTransitioning) return;
+            isTrackTransitioning = true;
+
+            // Fade out con UI trabada en ON (elimina cualquier parpadeo de la perilla)
+            fadeOutMusic(300, () => {
                 currentTrackIndex = pickRandomTrackIndex();
                 if (playlist && playlist.length > 0 && playlist[currentTrackIndex]) {
-                    playTrackWithFadeIn(playlist[currentTrackIndex], 0);
+                    playTrackWithFadeIn(playlist[currentTrackIndex], 0, 900);
+                } else {
+                    isTrackTransitioning = false;
                 }
-            });
+            }, true);
         }
 
-        // Salto automático cuando termina la canción
+        // FADE OUT SUAVE AL FINAL DE CADA CANCIÓN Y CONEXIÓN FLUIDA CON LA SIGUIENTE
+        bgAudioPlayer.addEventListener('timeupdate', () => {
+            if (isMusicActive && !bgAudioPlayer.paused && bgAudioPlayer.duration) {
+                const timeLeft = bgAudioPlayer.duration - bgAudioPlayer.currentTime;
+                if (timeLeft <= 2.8 && !autoFadeOutTriggered && !isTrackTransitioning) {
+                    autoFadeOutTriggered = true;
+                    isTrackTransitioning = true;
+                    fadeOutMusic(2600, () => {
+                        currentTrackIndex = pickRandomTrackIndex();
+                        if (playlist && playlist.length > 0 && playlist[currentTrackIndex]) {
+                            playTrackWithFadeIn(playlist[currentTrackIndex], 0, 1200);
+                        } else {
+                            isTrackTransitioning = false;
+                        }
+                    }, true);
+                }
+            }
+        });
+
+        // Salto automático de respaldo si el archivo termina
         bgAudioPlayer.addEventListener('ended', () => {
-            currentTrackIndex = pickRandomTrackIndex();
-            if (playlist[currentTrackIndex]) {
-                playTrackWithFadeIn(playlist[currentTrackIndex], 0);
+            if (isMusicActive && !isTrackTransitioning) {
+                isTrackTransitioning = true;
+                currentTrackIndex = pickRandomTrackIndex();
+                playTrackWithFadeIn(playlist[currentTrackIndex], 0, 1000);
+            }
+        });
+
+        // Tolerancia a fallos: Si una URL de Sheets no carga o falla, salta limpiamente al siguiente tema
+        bgAudioPlayer.addEventListener('error', () => {
+            if (isMusicActive) {
+                currentTrackIndex = pickRandomTrackIndex();
+                if (playlist && playlist.length > 1 && playlist[currentTrackIndex]) {
+                    playTrackWithFadeIn(playlist[currentTrackIndex], 0, 800);
+                }
             }
         });
 
@@ -1599,7 +1675,7 @@
             }
         });
 
-        // Detector de salida: si se toca un link EXTERNO (WhatsApp, Correo, PDF, Instagram, etc.), hace fade-out suave
+        // Detector de salida: si se toca un link EXTERNO (WhatsApp, Correo, PDF, Instagram, etc.), hace fade-out semi-lento
         document.addEventListener('click', (e) => {
             const link = e.target.closest('a');
             if (!link) return;
@@ -1612,7 +1688,7 @@
                                (link.target === '_blank' && !href.includes('1111grafica.github.io'));
 
             if (isExternal && isMusicActive) {
-                fadeOutMusic(650);
+                fadeOutMusic(1000); // Fade out semi-lento suave y cinematográfico
             }
         });
 
@@ -2020,7 +2096,7 @@
                             });
 
                             if (fetchedUrls.length > 0) {
-                                playlist = [...new Set([...playlist, ...fetchedUrls])].filter(u => !u.includes('mine_gran_turismo_4_menu.mp3'));
+                                playlist = fetchedUrls;
                             }
                         }
                     }
@@ -2032,7 +2108,6 @@
         window.addEventListener('DOMContentLoaded', () => {
             requestAnimationFrame(() => document.body.classList.remove('preload'));
             setLanguage('es');
-            loadMusicFromFolder();
             initHubSheetsConnection();
 
             // Reanudación suave de la música si el usuario venía navegando internamente
@@ -2042,7 +2117,9 @@
                 const lastTime = parseFloat(sessionStorage.getItem('1111_music_time') || '0');
 
                 if (wasMusicOn === 'true' && lastSrc) {
-                    playTrackWithFadeIn(lastSrc, isNaN(lastTime) ? 0 : lastTime);
+                    isMusicActive = true;
+                    updateMusicUI(true);
+                    playTrackWithFadeIn(lastSrc, isNaN(lastTime) ? 0 : lastTime, 1000);
                 }
             } catch(e) {}
 

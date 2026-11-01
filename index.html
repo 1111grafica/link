@@ -216,23 +216,19 @@
             flex-shrink: 0;
         }
 
-        /* PASTILLA PROFESIONAL SLIDER SWITCH (FÍSICA MECÁNICA REAL Y PESO TÁCTIL) */
+        /* PASTILLA PROFESIONAL SLIDER SWITCH (DESLIZANTE IZQ <-> DER) */
         .btn-music-toggle {
-            width: 38px;
-            height: 22px;
-            min-width: 38px;
-            background: linear-gradient(180deg, rgba(165, 185, 160, 0.42) 0%, rgba(195, 210, 190, 0.22) 100%);
-            border: 1.2px solid rgba(145, 195, 130, 0.7);
+            width: 36px;
+            height: 21px;
+            min-width: 36px;
+            background: rgba(180, 195, 175, 0.35);
+            border: 1.2px solid rgba(160, 209, 143, 0.6);
             border-radius: 999px;
             position: relative;
             cursor: pointer;
             padding: 0;
             outline: none;
-            box-shadow: inset 0 1.5px 3px rgba(0, 0, 0, 0.14), 0 1px 2px rgba(255, 255, 255, 0.85);
-            transition: background 0.24s cubic-bezier(0.2, 0.8, 0.25, 1), 
-                        border-color 0.24s cubic-bezier(0.2, 0.8, 0.25, 1), 
-                        box-shadow 0.24s cubic-bezier(0.2, 0.8, 0.25, 1),
-                        transform 0.12s ease-out;
+            transition: background 0.26s var(--spring), border-color 0.26s var(--spring), box-shadow 0.26s var(--spring);
             user-select: none;
             display: inline-flex;
             align-items: center;
@@ -242,17 +238,12 @@
             position: absolute;
             top: 2px;
             left: 2px;
-            width: 16px;
-            height: 16px;
+            width: 15px;
+            height: 15px;
             border-radius: 50%;
-            background: radial-gradient(circle at 35% 30%, #FFFFFF 0%, #F5F7F3 80%, #DFE5DC 100%);
-            box-shadow: 0 2px 5px rgba(20, 35, 15, 0.25), 
-                        0 1px 1px rgba(0, 0, 0, 0.12), 
-                        inset 0 1px 1px #FFFFFF, 
-                        inset 0 -1px 1px rgba(0, 0, 0, 0.08);
-            transition: transform 0.26s cubic-bezier(0.34, 1.4, 0.64, 1), 
-                        width 0.16s ease,
-                        box-shadow 0.26s cubic-bezier(0.34, 1.4, 0.64, 1);
+            background: #FFFFFF;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+            transition: transform 0.28s var(--spring);
             pointer-events: none;
         }
 
@@ -260,37 +251,21 @@
             border-color: var(--brand-pink);
         }
 
-        .btn-music-toggle:active {
-            transform: scale(0.95);
-        }
-
-        .btn-music-toggle:active .switch-knob {
-            width: 18px;
-        }
-
         .btn-music-toggle.active {
-            background: linear-gradient(135deg, #F090BF 0%, #D86F9F 100%);
+            background: var(--brand-pink);
             border-color: var(--brand-pink);
-            box-shadow: inset 0 1.5px 3px rgba(120, 20, 70, 0.22), 0 2px 9px var(--brand-pink-glow);
+            box-shadow: 0 2px 9px var(--brand-pink-glow);
         }
 
         .btn-music-toggle.active .switch-knob {
-            transform: translateX(16px);
-            box-shadow: 0 2px 6px rgba(140, 25, 75, 0.35), 
-                        0 1px 2px rgba(0, 0, 0, 0.15), 
-                        inset 0 1px 1px #FFFFFF, 
-                        inset 0 -1px 1px rgba(180, 50, 110, 0.2);
+            transform: translateX(15px);
+            box-shadow: 0 2px 6px rgba(169, 38, 103, 0.3);
         }
 
-        .btn-music-toggle.active:active .switch-knob {
-            transform: translateX(14px);
-            width: 18px;
-        }
-
-        /* BOTÓN SALTEAR CON ICONOGRAFÍA UNIVERSAL DE PISTA (SVG) Y TACTO MECÁNICO */
+        /* BOTÓN SALTEAR CON ICONOGRAFÍA UNIVERSAL DE PISTA (SVG) */
         .btn-music-skip {
-            background: linear-gradient(180deg, #FFFFFF 0%, #F8F9F7 100%);
-            border: 1.2px solid rgba(233, 137, 183, 0.55);
+            background: #FFFFFF;
+            border: 1.2px solid rgba(233, 137, 183, 0.5);
             border-radius: 50%;
             width: 23px;
             height: 23px;
@@ -300,8 +275,7 @@
             align-items: center;
             justify-content: center;
             color: var(--brand-pink-deep);
-            box-shadow: 0 1.5px 4px rgba(60, 105, 45, 0.08), inset 0 1px 0 #FFFFFF;
-            transition: all 0.2s cubic-bezier(0.34, 1.4, 0.64, 1);
+            transition: all 0.2s var(--spring);
             padding: 0;
             outline: none;
         }
@@ -310,14 +284,14 @@
             width: 11px;
             height: 11px;
             display: block;
-            transition: transform 0.2s cubic-bezier(0.34, 1.4, 0.64, 1);
+            transition: transform 0.2s var(--spring);
         }
 
         .btn-music-skip:hover {
             background: var(--brand-pink);
             color: #FFFFFF;
             border-color: var(--brand-pink);
-            box-shadow: 0 3px 8px var(--brand-pink-glow);
+            box-shadow: 0 2px 8px var(--brand-pink-glow);
             transform: scale(1.08);
         }
 
@@ -326,8 +300,7 @@
         }
 
         .btn-music-skip:active {
-            transform: scale(0.88);
-            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
+            transform: scale(0.92);
         }
 
         /* HEADER */
@@ -1077,8 +1050,11 @@
 
             <div class="social-bar">
                 <a href="https://wa.me/5491131933611" target="_blank" rel="noopener noreferrer" class="social-btn" id="socialWspTop" aria-label="WhatsApp" onclick="playClickSound()">
-                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.41a8.17 8.17 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.44 0-2.85-.38-4.09-1.1l-.29-.17-3.05.8 1.05-2.97-.19-.31a8.163 8.163 0 0 1-1.25-4.49c0-4.54 3.7-8.24 8.24-8.24m4.53 11.37c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.25-.75-.67-1.26-1.5-1.4-1.76-.15-.25-.02-.39.11-.51.11-.11.25-.29.37-.43.13-.14.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.34-.76-1.84-.2-.49-.4-.42-.56-.43h-.47c-.17 0-.44.06-.67.31-.23.25-.87.85-.87 2.08 0 1.22.89 2.41 1.02 2.58.13.17 1.76 2.68 4.26 3.76.6.26 1.06.41 1.42.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.07-.1-.23-.17-.48-.29"/></svg>
-                </a>
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2z"/>
+                    <path fill="#FFFFFF" d="M17.472 14.382c-.301-.15-1.78-.878-2.056-.979-.276-.1-.477-.15-.678.15-.201.301-.778.979-.954 1.18-.176.2-.351.226-.653.075-.301-.15-1.272-.469-2.423-1.496-.895-.798-1.5-1.784-1.675-2.085-.176-.301-.019-.464.132-.614.136-.135.301-.351.452-.527.151-.176.201-.301.301-.502.101-.201.05-.377-.025-.527-.075-.15-.678-1.633-.929-2.235-.244-.587-.493-.507-.678-.517-.176-.01-.377-.012-.577-.012-.201 0-.527.075-.803.376-.276.301-1.054 1.029-1.054 2.509 0 1.48 1.079 2.911 1.23 3.112.151.201 2.124 3.243 5.145 4.549.719.311 1.28.497 1.718.636.722.23 1.379.197 1.898.12.578-.086 1.78-.728 2.031-1.431.251-.703.251-1.305.176-1.431-.075-.126-.276-.201-.577-.351z"/>
+                </svg>
+            </div>
+            <div class="social-bar">
                 <a href="https://www.instagram.com/1111.grafica" target="_blank" rel="noopener noreferrer" class="social-btn" id="socialInstaTop" aria-label="Instagram" onclick="playClickSound()">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
                 </a>
@@ -1455,27 +1431,56 @@
             else if (audioCtx.state === 'suspended') audioCtx.resume();
         }, { once: true });
 
-        /* 1.B MOTOR DE MÚSICA DE FONDO (CON FÍSICA MECÁNICA, CERO PARPADEO Y FADES PERFECCIONADOS) */
+        /* 1.B MOTOR DE MÚSICA DE FONDO (CON RESPUESTA INMEDIATA DE SWITCH) */
         const bgAudioPlayer = new Audio();
         bgAudioPlayer.preload = "auto";
         const MUSIC_TARGET_VOL = 0.25;
         let isMusicActive = false;
-        let isTrackTransitioning = false;
-        let autoFadeOutTriggered = false;
         let musicFadeTimer = null;
         let currentTrackIndex = -1;
 
-        // Lista de canciones base (se actualiza automáticamente desde Google Sheets pestaña "Música")
-        let playlist = [
-            "./mine_gran_turismo_4_menu.mp3"
+        // ==============================================================
+        // 🎵 LISTA DE CANCIONES BASE (DESDE TU CARPETA DE GITHUB "music/")
+        // ¡Podés agregar tus temas acá abajo con solo poner el nombre del archivo!
+        // ==============================================================
+        const DEFAULT_PLAYLIST = [
+            "A Fistful Of Dollars - 01 - Titoli (Ennio Morricone).mp3",
+            "A Fistful Of Dollars - 07 - Doppi Giochi (1).mp3",
+            "A Fistful Of Dollars - 10 - Cavalcata (Ennio Morricone).mp3",
+            "A Fistful Of Dollars - 17 - Per Un Pugno Di Dollari (1).mp3"
         ];
 
-        // Micro-vibración háptica mecánica al tacto en dispositivos compatibles
-        function triggerHapticFeedback() {
-            if (typeof navigator !== 'undefined' && navigator.vibrate) {
-                try { navigator.vibrate(10); } catch(e) {}
+        // Función que limpia la URL (si ponés solo el nombre, le agrega ./music/ y codifica los espacios automáticamente)
+        function formatMusicUrl(url) {
+            if (!url) return '';
+            let cleaned = String(url).trim();
+            if (!cleaned.startsWith('http://') && !cleaned.startsWith('https://') && !cleaned.startsWith('./') && !cleaned.startsWith('/')) {
+                cleaned = './music/' + cleaned;
             }
+            return encodeURI(cleaned);
         }
+
+        // Carga inicial ultra rápida: usa la memoria guardada o arranca directo con GitHub sin esperar a Sheets
+        let playlist = (() => {
+            try {
+                const cached = localStorage.getItem('1111_cached_playlist');
+                if (cached) {
+                    const parsed = JSON.parse(cached);
+                    if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+                }
+            } catch(e) {}
+            return DEFAULT_PLAYLIST.map(formatMusicUrl);
+        })();
+
+        // Si una pista da error o no existe, salta suavemente a la siguiente canción sin quedarse en silencio
+        bgAudioPlayer.addEventListener('error', () => {
+            if (isMusicActive && playlist.length > 1) {
+                setTimeout(() => {
+                    currentTrackIndex = pickRandomTrackIndex();
+                    playTrackWithFadeIn(playlist[currentTrackIndex], 0);
+                }, 250);
+            }
+        });
 
         function updateMusicUI(active) {
             const btnToggle = document.getElementById('btnMusicToggle');
@@ -1497,29 +1502,21 @@
             return nextIndex;
         }
 
-        function playTrackWithFadeIn(trackUrl, startSecond = 0, duration = 1000) {
-            if (musicFadeTimer) {
-                clearInterval(musicFadeTimer);
-                musicFadeTimer = null;
-            }
-            if (!trackUrl) {
-                isTrackTransitioning = false;
-                return;
-            }
-
-            autoFadeOutTriggered = false;
+        function playTrackWithFadeIn(trackUrl, startSecond = 0) {
+            if (musicFadeTimer) clearInterval(musicFadeTimer);
+            if (!trackUrl) return;
 
             try {
-                bgAudioPlayer.src = trackUrl;
+                bgAudioPlayer.src = formatMusicUrl(trackUrl);
                 bgAudioPlayer.currentTime = startSecond;
                 bgAudioPlayer.volume = 0;
-                sessionStorage.setItem('1111_music_src', trackUrl);
+                sessionStorage.setItem('1111_music_src', bgAudioPlayer.src);
 
                 const playPromise = bgAudioPlayer.play();
                 if (playPromise !== undefined) {
                     playPromise.then(() => {
-                        const steps = 25;
-                        const stepTime = duration / steps;
+                        const steps = 20;
+                        const stepTime = 1000 / steps;
                         const volStep = MUSIC_TARGET_VOL / steps;
 
                         musicFadeTimer = setInterval(() => {
@@ -1529,37 +1526,25 @@
                                 bgAudioPlayer.volume = MUSIC_TARGET_VOL;
                                 clearInterval(musicFadeTimer);
                                 musicFadeTimer = null;
-                                isTrackTransitioning = false;
                             }
                         }, stepTime);
-                    }).catch(() => {
-                        isTrackTransitioning = false;
-                    });
+                    }).catch(() => {});
                 }
-            } catch(e) {
-                isTrackTransitioning = false;
-            }
+            } catch(e) {}
         }
 
-        function fadeOutMusic(duration = 400, onDone, isSwitchingTrack = false) {
-            if (musicFadeTimer) {
-                clearInterval(musicFadeTimer);
-                musicFadeTimer = null;
-            }
-
-            // Si es un cambio de pista, mantenemos el switch visual activado (cero parpadeo)
-            if (!isSwitchingTrack) {
-                isMusicActive = false;
-                sessionStorage.setItem('1111_music_on', 'false');
-                updateMusicUI(false);
-            }
+        function fadeOutMusic(duration = 400, onDone) {
+            if (musicFadeTimer) clearInterval(musicFadeTimer);
+            isMusicActive = false;
+            sessionStorage.setItem('1111_music_on', 'false');
+            updateMusicUI(false);
 
             if (bgAudioPlayer.paused) {
                 if (onDone) onDone();
                 return;
             }
 
-            const steps = 20;
+            const steps = 15;
             const stepTime = duration / steps;
             const startVol = bgAudioPlayer.volume;
             const volStep = startVol / steps;
@@ -1578,7 +1563,6 @@
         }
 
         function toggleMusic() {
-            triggerHapticFeedback();
             playClickSound();
             if (!isMusicActive) {
                 isMusicActive = true;
@@ -1586,7 +1570,7 @@
                 sessionStorage.setItem('1111_music_on', 'true');
                 currentTrackIndex = pickRandomTrackIndex();
                 if (playlist && playlist.length > 0 && playlist[currentTrackIndex]) {
-                    playTrackWithFadeIn(playlist[currentTrackIndex], 0, 1000);
+                    playTrackWithFadeIn(playlist[currentTrackIndex], 0);
                 }
             } else {
                 fadeOutMusic(400);
@@ -1594,7 +1578,6 @@
         }
 
         function skipMusic() {
-            triggerHapticFeedback();
             playClickSound();
             if (!isMusicActive) {
                 isMusicActive = true;
@@ -1602,61 +1585,25 @@
                 sessionStorage.setItem('1111_music_on', 'true');
                 currentTrackIndex = pickRandomTrackIndex();
                 if (playlist && playlist.length > 0 && playlist[currentTrackIndex]) {
-                    playTrackWithFadeIn(playlist[currentTrackIndex], 0, 900);
+                    playTrackWithFadeIn(playlist[currentTrackIndex], 0);
                 }
                 return;
             }
-
-            if (isTrackTransitioning) return;
-            isTrackTransitioning = true;
-
-            // Fade out con UI trabada en ON (elimina cualquier parpadeo de la perilla)
-            fadeOutMusic(300, () => {
+            fadeOutMusic(250, () => {
+                isMusicActive = true;
+                updateMusicUI(true);
+                sessionStorage.setItem('1111_music_on', 'true');
                 currentTrackIndex = pickRandomTrackIndex();
                 if (playlist && playlist.length > 0 && playlist[currentTrackIndex]) {
-                    playTrackWithFadeIn(playlist[currentTrackIndex], 0, 900);
-                } else {
-                    isTrackTransitioning = false;
+                    playTrackWithFadeIn(playlist[currentTrackIndex], 0);
                 }
-            }, true);
+            });
         }
 
-        // FADE OUT SUAVE AL FINAL DE CADA CANCIÓN Y CONEXIÓN FLUIDA CON LA SIGUIENTE
-        bgAudioPlayer.addEventListener('timeupdate', () => {
-            if (isMusicActive && !bgAudioPlayer.paused && bgAudioPlayer.duration) {
-                const timeLeft = bgAudioPlayer.duration - bgAudioPlayer.currentTime;
-                if (timeLeft <= 2.8 && !autoFadeOutTriggered && !isTrackTransitioning) {
-                    autoFadeOutTriggered = true;
-                    isTrackTransitioning = true;
-                    fadeOutMusic(2600, () => {
-                        currentTrackIndex = pickRandomTrackIndex();
-                        if (playlist && playlist.length > 0 && playlist[currentTrackIndex]) {
-                            playTrackWithFadeIn(playlist[currentTrackIndex], 0, 1200);
-                        } else {
-                            isTrackTransitioning = false;
-                        }
-                    }, true);
-                }
-            }
-        });
-
-        // Salto automático de respaldo si el archivo termina
+        // Salto automático cuando termina la canción
         bgAudioPlayer.addEventListener('ended', () => {
-            if (isMusicActive && !isTrackTransitioning) {
-                isTrackTransitioning = true;
-                currentTrackIndex = pickRandomTrackIndex();
-                playTrackWithFadeIn(playlist[currentTrackIndex], 0, 1000);
-            }
-        });
-
-        // Tolerancia a fallos: Si una URL de Sheets no carga o falla, salta limpiamente al siguiente tema
-        bgAudioPlayer.addEventListener('error', () => {
-            if (isMusicActive) {
-                currentTrackIndex = pickRandomTrackIndex();
-                if (playlist && playlist.length > 1 && playlist[currentTrackIndex]) {
-                    playTrackWithFadeIn(playlist[currentTrackIndex], 0, 800);
-                }
-            }
+            currentTrackIndex = pickRandomTrackIndex();
+            playTrackWithFadeIn(playlist[currentTrackIndex], 0);
         });
 
         // Guardado de segundo exacto periódicamente y antes de navegar internamente
@@ -1675,7 +1622,7 @@
             }
         });
 
-        // Detector de salida: si se toca un link EXTERNO (WhatsApp, Correo, PDF, Instagram, etc.), hace fade-out semi-lento
+        // Detector de salida: si se toca un link EXTERNO (WhatsApp, Correo, PDF, Instagram, etc.), hace fade-out suave
         document.addEventListener('click', (e) => {
             const link = e.target.closest('a');
             if (!link) return;
@@ -1688,7 +1635,7 @@
                                (link.target === '_blank' && !href.includes('1111grafica.github.io'));
 
             if (isExternal && isMusicActive) {
-                fadeOutMusic(1000); // Fade out semi-lento suave y cinematográfico
+                fadeOutMusic(650);
             }
         });
 
@@ -2091,12 +2038,15 @@
                                 const url = getValM(row, 3);
                                 const status = getValM(row, 4).toUpperCase();
                                 if (url && (status === '' || status === 'ACTIVO' || status === 'SI')) {
-                                    fetchedUrls.push(url);
+                                    fetchedUrls.push(formatMusicUrl(url));
                                 }
                             });
 
                             if (fetchedUrls.length > 0) {
                                 playlist = fetchedUrls;
+                                try {
+                                    localStorage.setItem('1111_cached_playlist', JSON.stringify(fetchedUrls));
+                                } catch(e) {}
                             }
                         }
                     }
@@ -2119,7 +2069,7 @@
                 if (wasMusicOn === 'true' && lastSrc) {
                     isMusicActive = true;
                     updateMusicUI(true);
-                    playTrackWithFadeIn(lastSrc, isNaN(lastTime) ? 0 : lastTime, 1000);
+                    playTrackWithFadeIn(lastSrc, isNaN(lastTime) ? 0 : lastTime);
                 }
             } catch(e) {}
 

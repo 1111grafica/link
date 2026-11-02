@@ -1466,6 +1466,25 @@
             return DEFAULT_PLAYLIST.map(formatMusicUrl);
         })();
 
+        // LECTURA DINÁMICA DE LA CARPETA /music/ EN GITHUB
+        async function loadMusicFromFolder() {
+            try {
+                const res = await fetch('https://api.github.com/repos/1111grafica/link/contents/music');
+                if (res.ok) {
+                    const files = await res.json();
+                    const tracks = files
+                        .filter(f => f.type === 'file' && f.name.toLowerCase().endsWith('.mp3'))
+                        .map(f => formatMusicUrl(f.name));
+                    if (tracks.length > 0) {
+                        playlist = [...new Set([...playlist, ...tracks])];
+                        try {
+                            localStorage.setItem('1111_cached_playlist', JSON.stringify(playlist));
+                        } catch(e) {}
+                    }
+                }
+            } catch(e) {}
+        }
+
         // Si una canción no se encuentra o da 404, salta automáticamente a la siguiente sin trabarse
         bgAudioPlayer.addEventListener('error', () => {
             if (isMusicActive && playlist.length > 1) {
@@ -2052,6 +2071,7 @@
         window.addEventListener('DOMContentLoaded', () => {
             requestAnimationFrame(() => document.body.classList.remove('preload'));
             setLanguage('es');
+            loadMusicFromFolder();
             initHubSheetsConnection();
 
             // Reanudación suave de la música si el usuario venía navegando internamente

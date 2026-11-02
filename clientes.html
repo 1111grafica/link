@@ -811,8 +811,35 @@
         let musicFadeTimer = null;
         let currentTrackIndex = -1;
 
-        // Lista de canciones activa (cargada dinámicamente desde /music/ y enlazada al Sheets)
-        let playlist = [];
+        // Lista de canciones base directa desde la carpeta "music/"
+        const DEFAULT_PLAYLIST = [
+            "./music/A Fistful Of Dollars - 01 - Titoli (Ennio Morricone).mp3",
+            "./music/A Fistful Of Dollars - 07 - Doppi Giochi (1).mp3",
+            "./music/A Fistful Of Dollars - 10 - Cavalcata (Ennio Morricone).mp3",
+            "./music/A Fistful Of Dollars - 17 - Per Un Pugno Di Dollari (1).mp3"
+        ];
+
+        // Función que normaliza la URL (si se escribe solo el nombre, le añade ./music/ y codifica espacios)
+        function formatMusicUrl(url) {
+            if (!url) return '';
+            let cleaned = String(url).trim();
+            if (!cleaned.startsWith('http://') && !cleaned.startsWith('https://') && !cleaned.startsWith('./') && !cleaned.startsWith('/')) {
+                cleaned = './music/' + cleaned;
+            }
+            return encodeURI(cleaned);
+        }
+
+        // Carga inmediata de la lista: arranca con memoria guardada o directo con las 4 canciones de GitHub
+        let playlist = (() => {
+            try {
+                const cached = localStorage.getItem('1111_cached_playlist');
+                if (cached) {
+                    const parsed = JSON.parse(cached);
+                    if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+                }
+            } catch(e) {}
+            return DEFAULT_PLAYLIST.map(formatMusicUrl);
+        })();
 
         // Micro-vibración háptica mecánica al tacto en dispositivos compatibles
         function triggerHapticFeedback() {
@@ -829,9 +856,12 @@
                     const files = await res.json();
                     const tracks = files
                         .filter(f => f.type === 'file' && f.name.toLowerCase().endsWith('.mp3'))
-                        .map(f => `./music/${encodeURIComponent(f.name)}`);
+                        .map(f => formatMusicUrl(f.name));
                     if (tracks.length > 0) {
                         playlist = [...new Set([...playlist, ...tracks])];
+                        try {
+                            localStorage.setItem('1111_cached_playlist', JSON.stringify(playlist));
+                        } catch(e) {}
                     }
                 }
             } catch(e) {}
@@ -870,10 +900,10 @@
             autoFadeOutTriggered = false;
 
             try {
-                bgAudioPlayer.src = trackUrl;
+                bgAudioPlayer.src = formatMusicUrl(trackUrl);
                 bgAudioPlayer.currentTime = startSecond;
                 bgAudioPlayer.volume = 0;
-                sessionStorage.setItem('1111_music_src', trackUrl);
+                sessionStorage.setItem('1111_music_src', bgAudioPlayer.src);
                 sessionStorage.setItem('1111_music_on', 'true');
 
                 const playPromise = bgAudioPlayer.play();
@@ -1466,12 +1496,15 @@
                                 const url = getValM(row, 3);
                                 const status = getValM(row, 4).toUpperCase();
                                 if (url && (status === '' || status === 'ACTIVO' || status === 'SI')) {
-                                    fetchedUrls.push(url);
+                                    fetchedUrls.push(formatMusicUrl(url));
                                 }
                             });
 
                             if (fetchedUrls.length > 0) {
                                 playlist = [...new Set([...playlist, ...fetchedUrls])].filter(u => !u.includes('mine_gran_turismo_4_menu.mp3'));
+                                try {
+                                    localStorage.setItem('1111_cached_playlist', JSON.stringify(playlist));
+                                } catch(e) {}
                             }
                         }
                     }

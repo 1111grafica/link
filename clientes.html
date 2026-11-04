@@ -28,13 +28,13 @@
 
             --bg-base: #F4F8F1;
             --bg-card: #FFFFFF;
-            --border-card: rgba(140, 195, 120, 0.65);
+            --border-card: rgba(140, 195, 120, 0.55);
 
             --text-main: #132010;
             --text-muted: #495C44;
             --text-light: #6A7E65;
 
-            --shadow-card: 0 4px 16px -2px rgba(60, 105, 45, 0.10), 0 2px 6px rgba(0, 0, 0, 0.04);
+            --shadow-card: 0 3px 14px -2px rgba(60, 105, 45, 0.06), 0 1px 3px rgba(0, 0, 0, 0.02);
             --spring: cubic-bezier(0.16, 1, 0.3, 1);
         }
 
@@ -59,7 +59,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 16px 14px 40px;
+            padding: 14px 12px 36px;
             overflow-x: hidden;
             position: relative;
             letter-spacing: -0.015em;
@@ -110,7 +110,7 @@
             left: -20%;
             width: 140%;
             height: 140%;
-            opacity: 0.13;
+            opacity: 0.12;
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='120' viewBox='0 0 220 120'%3E%3Cg fill='%23E989B7'%3E%3Cpath d='M25,60v-10c9-.1,12-2,14-7h13v40h-16v-23h-11Z'/%3E%3Cpath d='M60,60v-10c9-.1,12-2,14-7h13v40h-16v-23h-11Z'/%3E%3Cpath d='M95,60v-10c9-.1,12-2,14-7h13v40h-16v-23h-11Z'/%3E%3Cpath d='M130,60v-10c9-.1,12-2,14-7h13v40h-16v-23h-11Z'/%3E%3C/g%3E%3C/svg%3E");
             background-repeat: repeat;
             background-size: 190px auto;
@@ -124,14 +124,15 @@
             100% { background-position: 600px 600px; }
         }
 
-        /* CONTENEDOR PRINCIPAL */
+        /* CONTENEDOR PRINCIPAL CALIBRADO CON BLINDAJE ULTRA-RESPONSIVE */
         .hub-container {
             width: 100%;
-            max-width: 480px;
+            max-width: 460px;
             display: flex;
             flex-direction: column;
-            gap: 22px;
+            gap: 15px;
             z-index: 2;
+            min-width: 0;
         }
 
         /* BARRA DE IDIOMA & SOUNDTRACK */
@@ -142,27 +143,29 @@
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(14px);
             -webkit-backdrop-filter: blur(14px);
-            border: 1.5px solid var(--border-card);
+            border: 1.2px solid var(--border-card);
             border-radius: 999px;
-            padding: 4px 6px;
-            box-shadow: 0 3px 12px rgba(60, 105, 45, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+            padding: 3.5px 6px;
+            box-shadow: 0 2px 10px rgba(60, 105, 45, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.9);
             flex-wrap: wrap;
-            gap: 6px;
+            gap: 5px;
+            width: 100%;
         }
 
         .lang-group-left {
             display: flex;
             align-items: center;
             gap: 4px;
+            flex-wrap: wrap;
         }
 
         .lang-badge-hint {
-            font-size: 0.72rem;
+            font-size: 0.70rem;
             font-weight: 800;
             color: var(--brand-green-text);
             text-transform: uppercase;
-            padding-left: 8px;
-            padding-right: 4px;
+            padding-left: 6px;
+            padding-right: 3px;
             letter-spacing: 0.04em;
             display: flex;
             align-items: center;
@@ -173,16 +176,16 @@
 
         .lang-switch-pills {
             display: flex;
-            gap: 3px;
+            gap: 2.5px;
         }
 
         .lang-btn {
             background: transparent;
             border: none;
-            padding: 5px 10px;
+            padding: 4px 8.5px;
             border-radius: 999px;
             font-family: 'Outfit', sans-serif;
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             font-weight: 800;
             color: var(--text-muted);
             cursor: pointer;
@@ -192,34 +195,34 @@
         .lang-btn.active {
             background: var(--brand-pink);
             color: #FFFFFF;
-            box-shadow: 0 2px 10px var(--brand-pink-glow);
+            box-shadow: 0 2px 8px var(--brand-pink-glow);
         }
 
         /* WIDGET SOUNDTRACK */
         .soundtrack-wrap {
             display: flex;
             align-items: center;
-            gap: 7px;
-            padding: 3px 6px 3px 9px;
+            gap: 6px;
+            padding: 2.5px 5px 2.5px 8px;
             background: linear-gradient(135deg, rgba(255, 245, 250, 0.95) 0%, rgba(252, 231, 243, 0.85) 100%);
-            border: 1.2px solid rgba(233, 137, 183, 0.5);
+            border: 1.2px solid rgba(233, 137, 183, 0.45);
             border-radius: 999px;
-            box-shadow: 0 2px 8px rgba(233, 137, 183, 0.12);
+            box-shadow: 0 2px 6px rgba(233, 137, 183, 0.10);
+            flex-shrink: 0;
         }
 
         .soundtrack-icon {
-            width: 14px;
-            height: 14px;
+            width: 13px;
+            height: 13px;
             color: var(--brand-pink-deep);
             display: block;
             flex-shrink: 0;
         }
 
-        /* PASTILLA PROFESIONAL SLIDER SWITCH (FÍSICA MECÁNICA REAL Y PESO TÁCTIL) */
         .btn-music-toggle {
-            width: 38px;
-            height: 22px;
-            min-width: 38px;
+            width: 36px;
+            height: 20px;
+            min-width: 36px;
             background: linear-gradient(180deg, rgba(165, 185, 160, 0.42) 0%, rgba(195, 210, 190, 0.22) 100%);
             border: 1.2px solid rgba(145, 195, 130, 0.7);
             border-radius: 999px;
@@ -239,61 +242,41 @@
 
         .btn-music-toggle .switch-knob {
             position: absolute;
-            top: 2px;
+            top: 1.5px;
             left: 2px;
-            width: 16px;
-            height: 16px;
+            width: 14.5px;
+            height: 14.5px;
             border-radius: 50%;
             background: radial-gradient(circle at 35% 30%, #FFFFFF 0%, #F5F7F3 80%, #DFE5DC 100%);
-            box-shadow: 0 2px 5px rgba(20, 35, 15, 0.25), 
+            box-shadow: 0 2px 4px rgba(20, 35, 15, 0.25), 
                         0 1px 1px rgba(0, 0, 0, 0.12), 
-                        inset 0 1px 1px #FFFFFF, 
-                        inset 0 -1px 1px rgba(0, 0, 0, 0.08);
+                        inset 0 1px 1px #FFFFFF;
             transition: transform 0.26s cubic-bezier(0.34, 1.4, 0.64, 1), 
-                        width 0.16s ease,
-                        box-shadow 0.26s cubic-bezier(0.34, 1.4, 0.64, 1);
+                        width 0.16s ease;
             pointer-events: none;
         }
 
-        .btn-music-toggle:hover {
-            border-color: var(--brand-pink);
-        }
-
-        .btn-music-toggle:active {
-            transform: scale(0.95);
-        }
-
-        .btn-music-toggle:active .switch-knob {
-            width: 18px;
-        }
+        .btn-music-toggle:hover { border-color: var(--brand-pink); }
+        .btn-music-toggle:active { transform: scale(0.95); }
 
         .btn-music-toggle.active {
             background: linear-gradient(135deg, #F090BF 0%, #D86F9F 100%);
             border-color: var(--brand-pink);
-            box-shadow: inset 0 1.5px 3px rgba(120, 20, 70, 0.22), 0 2px 9px var(--brand-pink-glow);
+            box-shadow: inset 0 1.5px 3px rgba(120, 20, 70, 0.22), 0 2px 8px var(--brand-pink-glow);
         }
 
         .btn-music-toggle.active .switch-knob {
-            transform: translateX(16px);
-            box-shadow: 0 2px 6px rgba(140, 25, 75, 0.35), 
-                        0 1px 2px rgba(0, 0, 0, 0.15), 
-                        inset 0 1px 1px #FFFFFF, 
-                        inset 0 -1px 1px rgba(180, 50, 110, 0.2);
+            transform: translateX(15.5px);
+            box-shadow: 0 2px 5px rgba(140, 25, 75, 0.35), 0 1px 2px rgba(0, 0, 0, 0.15), inset 0 1px 1px #FFFFFF;
         }
 
-        .btn-music-toggle.active:active .switch-knob {
-            transform: translateX(14px);
-            width: 18px;
-        }
-
-        /* BOTÓN SALTEAR CON ICONOGRAFÍA UNIVERSAL DE PISTA (SVG) Y TACTO MECÁNICO */
         .btn-music-skip {
             background: linear-gradient(180deg, #FFFFFF 0%, #F8F9F7 100%);
             border: 1.2px solid rgba(233, 137, 183, 0.55);
             border-radius: 50%;
-            width: 23px;
-            height: 23px;
-            min-width: 23px;
+            width: 21px;
+            height: 21px;
+            min-width: 21px;
             cursor: pointer;
             display: inline-flex;
             align-items: center;
@@ -305,49 +288,34 @@
             outline: none;
         }
 
-        .btn-music-skip svg {
-            width: 11px;
-            height: 11px;
-            display: block;
-            transition: transform 0.2s cubic-bezier(0.34, 1.4, 0.64, 1);
-        }
-
+        .btn-music-skip svg { width: 10px; height: 10px; display: block; }
         .btn-music-skip:hover {
             background: var(--brand-pink);
             color: #FFFFFF;
             border-color: var(--brand-pink);
-            box-shadow: 0 3px 8px var(--brand-pink-glow);
             transform: scale(1.08);
         }
 
-        .btn-music-skip:hover svg {
-            transform: translateX(1px);
-        }
-
-        .btn-music-skip:active {
-            transform: scale(0.88);
-            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
-        }
-
-        /* CABECERA */
+        /* CABECERA PROPORCIONADA */
         .brand-header {
             text-align: center;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 8px;
-            padding: 4px 0 2px;
+            gap: 6px;
+            padding: 2px 0;
+            width: 100%;
         }
 
         .logo-wrapper {
-            width: 92px;
-            height: 92px;
+            width: 80px;
+            height: 80px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            filter: drop-shadow(0 10px 20px rgba(78, 138, 58, 0.25));
-            border: 3.5px solid #FFFFFF;
+            filter: drop-shadow(0 8px 16px rgba(78, 138, 58, 0.20));
+            border: 3px solid #FFFFFF;
             animation: softCoinFlip 7s infinite ease-in-out;
             transform-style: preserve-3d;
         }
@@ -360,227 +328,329 @@
 
         .brand-title {
             font-family: 'Outfit', sans-serif;
-            font-size: 1.75rem;
+            font-size: clamp(1.3rem, 6vw, 1.55rem);
             font-weight: 900;
             line-height: 1.1;
             color: var(--text-main);
+            letter-spacing: -0.02em;
         }
 
-        .brand-title span {
-            color: var(--brand-pink-deep);
-        }
+        .brand-title span { color: var(--brand-pink-deep); }
 
         .brand-subtitle {
-            font-size: 0.86rem;
-            line-height: 1.5;
+            font-size: clamp(0.74rem, 3.2vw, 0.80rem);
+            line-height: 1.42;
             color: var(--text-muted);
             font-weight: 500;
-            max-width: 96%;
+            max-width: 420px;
+            word-break: break-word;
         }
 
-        .brand-subtitle strong {
-            color: var(--text-main);
-            font-weight: 800;
-        }
+        .brand-subtitle strong { color: var(--text-main); font-weight: 800; }
+        .brand-subtitle .subtitle-dark { color: var(--text-main); font-weight: 700; }
+        .brand-subtitle em { font-style: italic; }
 
-        .brand-subtitle .subtitle-dark {
-            color: var(--text-main);
-            font-weight: 700;
-        }
-
-        .brand-subtitle em {
-            font-style: italic;
-        }
-
-        /* BANNER DE SECCIÓN */
+        /* BANNER DE SECCIÓN: CON ÍCONO DE TILDE DE ALIENTO */
         .section-header-banner {
             display: flex;
             align-items: center;
-            gap: 9px;
-            padding: 7px 12px;
+            gap: 8px;
+            padding: 6px 11px;
             background: linear-gradient(135deg, #FFFFFF 0%, #EFF7EC 100%);
-            border: 1.5px solid var(--border-card);
-            border-radius: 14px;
-            box-shadow: 0 3px 10px rgba(60, 105, 45, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.9);
-            margin-bottom: 2px;
+            border: 1.2px solid var(--border-card);
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(60, 105, 45, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+            width: 100%;
         }
 
-        .section-num-pill {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.70rem;
-            font-weight: 900;
+        .section-check-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 22px;
+            height: 22px;
+            min-width: 22px;
             background: linear-gradient(135deg, var(--brand-pink-deep) 0%, var(--brand-pink) 100%);
             color: #FFFFFF;
-            padding: 3px 8px;
             border-radius: 7px;
-            box-shadow: 0 2px 6px var(--brand-pink-glow);
-            letter-spacing: 0.02em;
+            box-shadow: 0 2px 5px var(--brand-pink-glow);
+            flex-shrink: 0;
+        }
+
+        .section-check-badge svg {
+            width: 13px;
+            height: 13px;
+            stroke-width: 3;
+            stroke: currentColor;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
         }
 
         .section-title {
             font-family: 'Outfit', sans-serif;
-            font-size: 0.94rem;
-            font-weight: 900;
+            font-size: clamp(0.78rem, 3.5vw, 0.88rem);
+            font-weight: 800;
             color: var(--brand-green-text);
             text-transform: uppercase;
             letter-spacing: 0.04em;
             flex: 1;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
-        /* LISTADO DE TARJETAS */
+        /* ==========================================================================
+           TARJETAS DE ÉLITE: PROPORCIONES PRECISAS Y RESPONSIVE ANTI-ROTURA
+           ========================================================================== */
         .software-cards-list {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 9px;
+            width: 100%;
         }
 
         .software-card-item {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 12px;
-            padding: 14px 17px;
-            border-radius: 18px;
+            gap: 10px;
+            padding: 10px 12px 10px 11px;
+            border-radius: 16px;
             text-decoration: none;
             color: var(--text-main);
-            box-shadow: var(--shadow-card), inset 0 1px 0 rgba(255, 255, 255, 0.65);
-            transition: transform 0.22s var(--spring), box-shadow 0.22s ease;
+            box-shadow: var(--shadow-card), inset 0 1px 0 rgba(255, 255, 255, 0.7);
+            transition: transform 0.20s var(--spring), box-shadow 0.20s ease, border-color 0.18s ease;
             position: relative;
             overflow: hidden;
             cursor: pointer;
             transform: translateZ(0);
+            min-height: 64px;
+            width: 100%;
         }
 
         .software-card-item:hover {
-            transform: translateY(-2.5px);
-            box-shadow: 0 12px 26px -2px rgba(60, 105, 45, 0.18);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 22px -2px rgba(60, 105, 45, 0.15);
         }
 
-        /* COMPONENTES INTERNOS */
+        /* FICHA CATEGORÍA ANCLADA AL BORDE SUPERIOR DERECHO */
+        .soft-cat-badge-corner {
+            position: absolute;
+            top: 0;
+            right: 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.54rem;
+            font-weight: 800;
+            padding: 2.5px 8.5px 3px 8px;
+            border-bottom-left-radius: 8px;
+            border-top-right-radius: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border-left: 1px solid;
+            border-bottom: 1px solid;
+            line-height: 1.15;
+            z-index: 3;
+            max-width: 58%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            box-shadow: -1px 1px 4px rgba(0, 0, 0, 0.04);
+        }
+
         .soft-left {
             display: flex;
             align-items: center;
-            gap: 13px;
+            gap: 10px;
             min-width: 0;
             flex: 1;
         }
 
-        .project-num {
+        /* RECUADRO SEPARADO DE LOGO */
+        .project-logo-box {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 44px;
-            height: 44px;
-            min-width: 44px;
-            border-radius: 13px;
-            border: 1.8px solid;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.95rem;
-            font-weight: 900;
-            transition: transform 0.22s ease;
+            width: 38px;
+            height: 38px;
+            min-width: 38px;
+            border-radius: 10px;
+            border: 1.3px solid;
+            transition: transform 0.20s ease;
+            overflow: hidden;
+            padding: 6px;
+            position: relative;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+            flex-shrink: 0;
         }
 
-        .software-card-item:hover .project-num {
-            transform: scale(1.05) rotate(-3deg);
+        .software-card-item:hover .project-logo-box {
+            transform: scale(1.06) rotate(-2deg);
+        }
+
+        .project-logo-box svg {
+            width: 100%;
+            height: 100%;
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            display: block;
+            margin: auto;
+        }
+
+        .project-logo-box img {
+            width: 100%;
+            height: 100%;
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            display: block;
+            margin: auto;
+        }
+
+        .project-monogram {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            font-weight: 900;
+            line-height: 1;
         }
 
         .soft-meta {
             display: flex;
             flex-direction: column;
-            gap: 3px;
+            gap: 1.5px;
             min-width: 0;
-        }
-
-        .soft-head-row {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            flex-wrap: wrap;
+            flex: 1;
+            padding-right: 30px;
         }
 
         .soft-name {
             font-family: 'Outfit', sans-serif;
-            font-size: 1.05rem;
+            font-size: 0.94rem;
             font-weight: 800;
-            line-height: 1.2;
+            line-height: 1.15;
             color: var(--text-main);
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-        }
-
-        .soft-cat-badge {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.60rem;
-            font-weight: 800;
-            padding: 2px 7px;
-            border-radius: 5px;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            border: 1px solid;
+            letter-spacing: -0.01em;
+            margin-top: 1px;
         }
 
         .soft-tag {
-            font-size: 0.77rem;
+            font-size: 0.71rem;
             color: var(--text-muted);
             font-weight: 600;
-            line-height: 1.35;
+            line-height: 1.28;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
 
-        .soft-badge-link {
-            font-family: 'Outfit', sans-serif;
-            font-size: 0.78rem;
-            font-weight: 800;
-            padding: 6px 14px;
-            border-radius: 999px;
-            border: 1.5px solid;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            white-space: nowrap;
-            transition: all 0.22s ease;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
-        }
-
-        .software-card-item:hover .soft-badge-link {
-            background: var(--brand-pink);
-            color: #FFFFFF;
-            border-color: var(--brand-pink);
-            transform: translateX(2px);
-        }
-
-        /* BOTÓN DESTACADO WHATSAPP */
-        .cta-box-wsp {
-            margin-top: 4px;
+        /* BOTÓN SUGESTIVO TÁCTIL EN BORDE INFERIOR DERECHO */
+        .suggestive-touch-btn {
+            position: absolute;
+            bottom: 7px;
+            right: 9px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
-            padding: 16px 20px;
-            border-radius: 20px;
+            width: 25px;
+            height: 25px;
+            min-width: 25px;
+            border-radius: 50%;
+            border: 1.2px solid;
+            box-shadow: 0 1.5px 5px rgba(0, 0, 0, 0.05);
+            transition: all 0.22s var(--spring);
+            z-index: 2;
+        }
+
+        .suggestive-touch-btn svg {
+            width: 12px;
+            height: 12px;
+            display: block;
+            transition: transform 0.22s var(--spring);
+        }
+
+        .software-card-item:hover .suggestive-touch-btn {
+            transform: scale(1.14);
+        }
+
+        .software-card-item:hover .suggestive-touch-btn svg {
+            transform: translate(1px, -1px);
+        }
+
+        /* ==========================================================================
+           BOTÓN DESTACADO WHATSAPP CON DESTELLO LUMÍNICO EN DIAGONAL
+           ========================================================================== */
+        .cta-box-wsp {
+            margin-top: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 13px;
+            padding: 14px 18px;
+            border-radius: 18px;
             background: linear-gradient(135deg, var(--brand-pink) 0%, var(--brand-pink-deep) 100%);
             color: #FFFFFF;
             font-family: 'Outfit', sans-serif;
-            font-size: 1.02rem;
+            font-size: 0.95rem;
             font-weight: 800;
             text-decoration: none;
-            box-shadow: 0 10px 24px var(--brand-pink-glow), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+            box-shadow: 0 8px 22px var(--brand-pink-glow), inset 0 1px 0 rgba(255, 255, 255, 0.4);
             transition: transform 0.22s var(--spring), box-shadow 0.22s ease;
             transform: translateZ(0);
+            width: 100%;
+            position: relative;
+            overflow: hidden;
         }
 
         .cta-box-wsp:hover {
             transform: translateY(-2px);
-            box-shadow: 0 14px 30px rgba(169, 38, 103, 0.45);
+            box-shadow: 0 12px 28px rgba(169, 38, 103, 0.45);
         }
 
+        /* HAZ DE LUZ EN DIAGONAL A INTERVALOS SIMÉTRICOS */
+        .cta-box-wsp::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -80%;
+            width: 45%;
+            height: 200%;
+            background: linear-gradient(
+                90deg, 
+                rgba(255, 255, 255, 0) 0%, 
+                rgba(255, 255, 255, 0.38) 50%, 
+                rgba(255, 255, 255, 0) 100%
+            );
+            transform: rotate(26deg);
+            pointer-events: none;
+            animation: shimmerGlow 3.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
+
+        @keyframes shimmerGlow {
+            0%   { left: -80%; opacity: 0; }
+            10%  { opacity: 1; }
+            35%  { left: 160%; opacity: 0; }
+            100% { left: 160%; opacity: 0; }
+        }
+
+        /* SVG OFICIAL WHATSAPP CALIBRADO */
         .cta-box-wsp svg {
             width: 32px;
             height: 32px;
             min-width: 32px;
             flex-shrink: 0;
-            fill: currentColor;
             display: block;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-box-wsp span {
+            position: relative;
+            z-index: 1;
         }
 
         /* BOTÓN VOLVER */
@@ -588,18 +658,20 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            padding: 12px 18px;
-            border-radius: 16px;
+            gap: 7px;
+            padding: 9.5px 15px;
+            border-radius: 14px;
             background: rgba(255, 255, 255, 0.95);
-            border: 1.5px solid var(--border-card);
+            border: 1.2px solid var(--border-card);
             color: var(--brand-green-text);
             font-family: 'Outfit', sans-serif;
-            font-size: 0.86rem;
+            font-size: 0.82rem;
             font-weight: 800;
             text-decoration: none;
-            box-shadow: 0 2px 8px rgba(60, 105, 45, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.9);
-            transition: all 0.22s var(--spring);
+            box-shadow: 0 2px 6px rgba(60, 105, 45, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+            transition: all 0.20s var(--spring);
+            width: 100%;
+            text-align: center;
         }
 
         .btn-back-hub:hover {
@@ -610,45 +682,47 @@
 
         /* FOOTER */
         .hub-footer {
-            margin-top: 6px;
+            margin-top: 4px;
             text-align: center;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 5px;
+            gap: 4px;
+            width: 100%;
         }
 
         .footer-badge {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.68rem;
+            font-size: 0.65rem;
             font-weight: 800;
             color: var(--brand-green-text);
             background: rgba(255, 255, 255, 0.92);
-            border: 1.5px solid var(--border-card);
-            padding: 5px 14px;
+            border: 1.2px solid var(--border-card);
+            padding: 4px 12px;
             border-radius: 999px;
-            box-shadow: 0 2px 6px rgba(60, 105, 45, 0.06);
+            box-shadow: 0 2px 5px rgba(60, 105, 45, 0.05);
         }
 
         .footer-legal {
-            font-size: 0.68rem;
+            font-size: 0.66rem;
             color: var(--text-light);
             font-weight: 600;
         }
 
-        @media (max-width: 400px) {
-            .lang-nav-bar { padding: 3px 5px; gap: 4px; }
-            .lang-badge-hint { padding-left: 4px; padding-right: 2px; font-size: 0.69rem; }
-            .lang-btn { padding: 4px 7px; font-size: 0.72rem; }
-            .soundtrack-wrap { gap: 5px; padding: 3px 5px 3px 7px; }
-        }
-
-        @media (max-width: 480px) {
-            .software-card-item { padding: 13px 14px; }
-            .soft-left { gap: 10px; }
-            .project-num { width: 38px; height: 38px; min-width: 38px; font-size: 0.88rem; }
-            .soft-name { font-size: 0.98rem; }
-            .soft-badge-link { padding: 5px 11px; font-size: 0.74rem; }
+        /* REGLAS PARA PANTALLAS ULTRA-ANGOSTAS (DOWN TO 200px) */
+        @media (max-width: 350px) {
+            .lang-nav-bar { justify-content: center; gap: 4px; border-radius: 18px; }
+            .lang-group-left { justify-content: center; width: 100%; }
+            .soundtrack-wrap { margin-top: 2px; }
+            .software-card-item { padding: 8px 8px; }
+            .project-logo-box { width: 32px; height: 32px; min-width: 32px; padding: 4px; border-radius: 8px; }
+            .soft-meta { padding-right: 22px; }
+            .soft-name { font-size: 0.85rem; }
+            .soft-tag { font-size: 0.66rem; -webkit-line-clamp: 1; }
+            .soft-cat-badge-corner { font-size: 0.48rem; padding: 2px 6px; max-width: 50%; }
+            .suggestive-touch-btn { width: 22px; height: 22px; min-width: 22px; bottom: 5px; right: 6px; }
+            .cta-box-wsp { padding: 11px 12px; font-size: 0.80rem; gap: 8px; }
+            .cta-box-wsp svg { width: 26px; height: 26px; min-width: 26px; }
         }
     </style>
 </head>
@@ -714,10 +788,12 @@
             </p>
         </header>
 
-        <!-- SECCIÓN DE ENLACES -->
-        <section style="display:flex; flex-direction:column; gap:11px;">
+        <!-- SECCIÓN DE ENLACES: CON ÍCONO DE TILDE POSITIVO -->
+        <section style="display:flex; flex-direction:column; gap:8.5px; width: 100%;">
             <div class="section-header-banner">
-                <span class="section-num-pill">[01]</span>
+                <span class="section-check-badge" title="Solución Recomendada">
+                    <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                </span>
                 <span class="section-title" id="t_sec_title">Reemplazamos tu Linktree</span>
             </div>
 
@@ -725,9 +801,15 @@
             <div class="software-cards-list" id="cardsListContainer"></div>
         </section>
 
-        <!-- BOTÓN PRINCIPAL: COTIZAR POR WHATSAPP -->
+        <!-- BOTÓN PRINCIPAL: COTIZAR POR WHATSAPP CON LOGO PROTAGONISTA & DESTELLO LUMÍNICO -->
         <a href="https://wa.me/5491131933611?text=%C2%A1Hola!%20Quiero%20reemplazar%20mi%20Linktree%20y%20crear%20mi%20link%20100%25%20personalizado." target="_blank" rel="noopener noreferrer" class="cta-box-wsp" id="btnWspCta" onclick="playClickSound()">
-            <svg viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.099.824z"/></svg>
+            <!-- SVG Oficial de WhatsApp con viewBox 125.49 126.53 y fill blanco -->
+            <svg viewBox="0 0 125.49 126.53" xmlns="http://www.w3.org/2000/svg">
+                <g fill="#FFFFFF">
+                    <path d="M0,126.53c.49-1.47.96-2.86,1.42-4.24,1.85-5.5,3.7-11,5.54-16.5,1.32-3.92,2.64-7.84,3.93-11.77.09-.26,0-.65-.13-.9-2.26-3.87-4.11-7.93-5.51-12.19-1.28-3.9-2.11-7.9-2.63-11.97-.47-3.64-.56-7.3-.33-10.95.39-6.21,1.65-12.26,3.87-18.1,3.77-9.89,9.68-18.26,17.71-25.16,5.32-4.57,11.27-8.1,17.81-10.63,4.47-1.73,9.07-3,13.84-3.5C58.49.3,61.48.05,64.47,0c3.59-.05,7.16.4,10.7,1.05,5.44,1,10.63,2.73,15.61,5.14,6.82,3.31,12.82,7.74,18.01,13.25,5.14,5.47,9.15,11.68,12.03,18.62,1.71,4.1,2.98,8.33,3.72,12.7.45,2.65.69,5.34.85,8.02.14,2.27.13,4.56-.01,6.83-.26,4.07-.88,8.08-1.95,12.03-1.95,7.23-5.09,13.88-9.45,19.97-4.23,5.91-9.34,10.91-15.33,15.01-6.77,4.63-14.18,7.79-22.22,9.47-3.39.71-6.83,1.05-10.29,1.21-4.4.21-8.76-.12-13.08-.87-4.21-.73-8.34-1.85-12.27-3.55-2.11-.91-4.16-1.96-6.25-2.9-.34-.15-.82-.2-1.16-.09-3.93,1.24-7.84,2.52-11.76,3.78-7.03,2.25-14.05,4.49-21.08,6.74-.14.04-.28.07-.53.12ZM15.71,111.01c.38-.07.63-.1.87-.17,1.57-.5,3.13-1,4.69-1.51,4.54-1.46,9.09-2.91,13.63-4.38.46-.15.81-.1,1.23.15,1.19.74,2.4,1.45,3.64,2.11,6.84,3.7,14.18,5.61,21.92,5.99,3.09.15,6.16-.05,9.23-.46,5.53-.73,10.78-2.36,15.75-4.83,7.65-3.81,14.01-9.19,19.01-16.14,4.49-6.25,7.47-13.14,8.85-20.73.86-4.75,1.1-9.51.62-14.31-.47-4.67-1.49-9.19-3.21-13.56-3.77-9.63-9.86-17.46-18.26-23.48-8.1-5.8-17.17-8.9-27.09-9.51-5.08-.31-10.11.19-15.05,1.43-9.61,2.42-17.88,7.19-24.76,14.32-5.45,5.65-9.43,12.22-11.88,19.7-1.63,4.97-2.49,10.05-2.57,15.28-.07,4.52.44,8.96,1.55,13.33,1.55,6.14,4.14,11.81,7.81,16.97.33.46.4.85.21,1.38-.44,1.19-.82,2.4-1.23,3.61-1.56,4.6-3.11,9.21-4.66,13.81-.09.28-.17.57-.29.98Z"/>
+                    <path d="M80.61,92.56c-2.42-.1-4.44-.61-6.38-1.37-3.85-1.52-7.71-3.03-11.46-4.75-3.75-1.72-7.01-4.22-10.09-6.95-5.47-4.86-9.89-10.58-13.79-16.74-2.29-3.62-4.33-7.32-5.26-11.53-1.59-7.27.38-13.41,5.98-18.35,1.48-1.3,3.26-1.35,5.09-1.19.63.06,1.27.13,1.9.11,1.19-.03,2.05.47,2.51,1.55.59,1.39,1.12,2.8,1.65,4.22,1.16,3.05,2.3,6.1,3.45,9.16.32.87.25,1.69-.18,2.53-1.02,2.02-2.62,3.55-4.16,5.14-1.26,1.29-1.4,1.99-.54,3.56,4.85,8.91,11.84,15.5,21.2,19.53,1.27.55,2.16.39,3.06-.64,1.8-2.04,3.58-4.09,5.33-6.16.69-.81,1.54-.97,2.43-.64,1.25.47,2.46,1.03,3.64,1.65,3.07,1.6,6.08,3.31,9.17,4.87,1.38.7,1.91,1.69,1.63,3.12-.31,1.61-.67,3.21-1.1,4.79-.33,1.23-1.07,2.25-2.01,3.11-2.38,2.19-5.11,3.78-8.3,4.43-1.35.28-2.72.4-3.78.55Z"/>
+                </g>
+            </svg>
             <span id="uiBtnCta">Crear mi Link Personalizado en WhatsApp ↗</span>
         </a>
 
@@ -773,9 +855,7 @@
         function playClickSound() {
             try {
                 if (audioCtx && soundBuffer) {
-                    if (audioCtx.state === 'suspended') {
-                        audioCtx.resume();
-                    }
+                    if (audioCtx.state === 'suspended') audioCtx.resume();
                     const source = audioCtx.createBufferSource();
                     const gainNode = audioCtx.createGain();
                     gainNode.gain.value = 0.5;
@@ -800,7 +880,7 @@
         }, { once: true });
 
         /* =========================================================
-           1.B MOTOR DE MÚSICA DE FONDO (CON FÍSICA MECÁNICA, CERO PARPADEO Y FADES PERFECCIONADOS)
+           1.B MOTOR DE MÚSICA DE FONDO (TOTALMENTE INTACTO)
            ========================================================= */
         const bgAudioPlayer = new Audio();
         bgAudioPlayer.preload = "auto";
@@ -811,7 +891,6 @@
         let musicFadeTimer = null;
         let currentTrackIndex = -1;
 
-        // Lista de canciones base directa desde la carpeta "music/"
         const DEFAULT_PLAYLIST = [
             "./music/A Fistful Of Dollars - 01 - Titoli (Ennio Morricone).mp3",
             "./music/A Fistful Of Dollars - 07 - Doppi Giochi (1).mp3",
@@ -819,7 +898,6 @@
             "./music/A Fistful Of Dollars - 17 - Per Un Pugno Di Dollari (1).mp3"
         ];
 
-        // Función que normaliza la URL (si se escribe solo el nombre, le añade ./music/ y codifica espacios)
         function formatMusicUrl(url) {
             if (!url) return '';
             let cleaned = String(url).trim();
@@ -829,7 +907,6 @@
             return encodeURI(cleaned);
         }
 
-        // Carga inmediata de la lista: arranca con memoria guardada o directo con las 4 canciones de GitHub
         let playlist = (() => {
             try {
                 const cached = localStorage.getItem('1111_cached_playlist');
@@ -841,14 +918,12 @@
             return DEFAULT_PLAYLIST.map(formatMusicUrl);
         })();
 
-        // Micro-vibración háptica mecánica al tacto en dispositivos compatibles
         function triggerHapticFeedback() {
             if (typeof navigator !== 'undefined' && navigator.vibrate) {
                 try { navigator.vibrate(10); } catch(e) {}
             }
         }
 
-        // LECTURA DINÁMICA DE LA CARPETA /music/ EN GITHUB
         async function loadMusicFromFolder() {
             try {
                 const res = await fetch('https://api.github.com/repos/1111grafica/link/contents/music');
@@ -870,11 +945,8 @@
         function updateMusicUI(active) {
             const btnToggle = document.getElementById('btnMusicToggle');
             if (btnToggle) {
-                if (active) {
-                    btnToggle.classList.add('active');
-                } else {
-                    btnToggle.classList.remove('active');
-                }
+                if (active) btnToggle.classList.add('active');
+                else btnToggle.classList.remove('active');
             }
         }
 
@@ -888,17 +960,10 @@
         }
 
         function playTrackWithFadeIn(trackUrl, startSecond = 0, duration = 1000) {
-            if (musicFadeTimer) {
-                clearInterval(musicFadeTimer);
-                musicFadeTimer = null;
-            }
-            if (!trackUrl) {
-                isTrackTransitioning = false;
-                return;
-            }
+            if (musicFadeTimer) { clearInterval(musicFadeTimer); musicFadeTimer = null; }
+            if (!trackUrl) { isTrackTransitioning = false; return; }
 
             autoFadeOutTriggered = false;
-
             try {
                 bgAudioPlayer.src = formatMusicUrl(trackUrl);
                 bgAudioPlayer.currentTime = startSecond;
@@ -926,32 +991,19 @@
                                 isTrackTransitioning = false;
                             }
                         }, stepTime);
-                    }).catch(() => {
-                        isTrackTransitioning = false;
-                    });
+                    }).catch(() => { isTrackTransitioning = false; });
                 }
-            } catch(e) {
-                isTrackTransitioning = false;
-            }
+            } catch(e) { isTrackTransitioning = false; }
         }
 
         function fadeOutMusic(duration = 400, onDone, isSwitchingTrack = false) {
-            if (musicFadeTimer) {
-                clearInterval(musicFadeTimer);
-                musicFadeTimer = null;
-            }
-
-            // Si es un cambio de pista, mantenemos el switch visual activado (cero parpadeo)
+            if (musicFadeTimer) { clearInterval(musicFadeTimer); musicFadeTimer = null; }
             if (!isSwitchingTrack) {
                 isMusicActive = false;
                 sessionStorage.setItem('1111_music_on', 'false');
                 updateMusicUI(false);
             }
-
-            if (bgAudioPlayer.paused) {
-                if (onDone) onDone();
-                return;
-            }
+            if (bgAudioPlayer.paused) { if (onDone) onDone(); return; }
 
             const steps = 20;
             const stepTime = duration / steps;
@@ -980,7 +1032,7 @@
                 updateMusicUI(true);
                 sessionStorage.setItem('1111_music_on', 'true');
                 currentTrackIndex = pickRandomTrackIndex();
-                if (playlist && playlist.length > 0 && playlist[currentTrackIndex]) {
+                if (playlist && playlist[currentTrackIndex]) {
                     playTrackWithFadeIn(playlist[currentTrackIndex], 0, 1000);
                 }
             } else {
@@ -997,7 +1049,7 @@
                 updateMusicUI(true);
                 sessionStorage.setItem('1111_music_on', 'true');
                 currentTrackIndex = pickRandomTrackIndex();
-                if (playlist && playlist.length > 0 && playlist[currentTrackIndex]) {
+                if (playlist && playlist[currentTrackIndex]) {
                     playTrackWithFadeIn(playlist[currentTrackIndex], 0, 900);
                 }
                 return;
@@ -1006,10 +1058,9 @@
             if (isTrackTransitioning) return;
             isTrackTransitioning = true;
 
-            // Fade out con UI trabada en ON (elimina cualquier parpadeo de la perilla)
             fadeOutMusic(300, () => {
                 currentTrackIndex = pickRandomTrackIndex();
-                if (playlist && playlist.length > 0 && playlist[currentTrackIndex]) {
+                if (playlist && playlist[currentTrackIndex]) {
                     playTrackWithFadeIn(playlist[currentTrackIndex], 0, 900);
                 } else {
                     isTrackTransitioning = false;
@@ -1017,7 +1068,6 @@
             }, true);
         }
 
-        // FADE OUT SUAVE AL FINAL DE CADA CANCIÓN Y CONEXIÓN FLUIDA CON LA SIGUIENTE
         bgAudioPlayer.addEventListener('timeupdate', () => {
             if (isMusicActive && !bgAudioPlayer.paused && bgAudioPlayer.duration) {
                 const timeLeft = bgAudioPlayer.duration - bgAudioPlayer.currentTime;
@@ -1026,7 +1076,7 @@
                     isTrackTransitioning = true;
                     fadeOutMusic(2600, () => {
                         currentTrackIndex = pickRandomTrackIndex();
-                        if (playlist && playlist.length > 0 && playlist[currentTrackIndex]) {
+                        if (playlist && playlist[currentTrackIndex]) {
                             playTrackWithFadeIn(playlist[currentTrackIndex], 0, 1200);
                         } else {
                             isTrackTransitioning = false;
@@ -1036,18 +1086,14 @@
             }
         });
 
-        // Salto automático de respaldo si el archivo termina
         bgAudioPlayer.addEventListener('ended', () => {
             if (isMusicActive && !isTrackTransitioning) {
                 isTrackTransitioning = true;
                 currentTrackIndex = pickRandomTrackIndex();
-                if (playlist[currentTrackIndex]) {
-                    playTrackWithFadeIn(playlist[currentTrackIndex], 0, 1000);
-                }
+                if (playlist[currentTrackIndex]) playTrackWithFadeIn(playlist[currentTrackIndex], 0, 1000);
             }
         });
 
-        // Tolerancia a fallos: Si una URL de audio falla o está caída, salta limpiamente al siguiente tema
         bgAudioPlayer.addEventListener('error', () => {
             if (isMusicActive) {
                 currentTrackIndex = pickRandomTrackIndex();
@@ -1057,7 +1103,6 @@
             }
         });
 
-        // Guardado de segundo exacto periódicamente y antes de navegar internamente
         setInterval(() => {
             if (isMusicActive && !bgAudioPlayer.paused) {
                 sessionStorage.setItem('1111_music_src', bgAudioPlayer.src);
@@ -1073,27 +1118,13 @@
             }
         });
 
-        // Detector de enlaces internos vs externos
         document.addEventListener('click', (e) => {
             const link = e.target.closest('a');
             if (!link) return;
             const href = (link.getAttribute('href') || '').toLowerCase();
-
-            const isInternal = href === './' || 
-                               href === '../' || 
-                               href === 'index.html' || 
-                               href === 'web.html' ||
-                               href.includes('web.html') ||
-                               href.includes('clientes.html') ||
-                               href.includes('1111grafica.github.io/link/') ||
-                               href.endsWith('/link/') ||
-                               href.endsWith('/link');
-
-            if (isInternal) return; // Si navega dentro de la misma web, la música continúa continua
-
-            if (isMusicActive) {
-                fadeOutMusic(1000); // Fade out semi-lento suave y cinematográfico
-            }
+            const isInternal = href === './' || href === '../' || href === 'index.html' || href === 'web.html' || href.includes('clientes.html') || href.includes('1111grafica.github.io/link/') || href.endsWith('/link/') || href.endsWith('/link');
+            if (isInternal) return;
+            if (isMusicActive) fadeOutMusic(1000);
         });
 
         /* =========================================================
@@ -1170,15 +1201,43 @@
             if (lang === 'es') return originalCat;
             const dict = CATEGORY_TRANSLATIONS[lang];
             if (!dict) return originalCat;
-
             const clean = originalCat.trim();
             if (dict[clean]) return dict[clean];
-
             const key = Object.keys(dict).find(k => k.toLowerCase() === clean.toLowerCase());
             return key ? dict[key] : originalCat;
         }
 
-        /* CLIENTES BASE REALES (FALLBACK) */
+        /* =========================================================
+           2.B BANCO VECTORIAL DE LOGOS INCORPORADOS (DEFAULT SVGs)
+           ========================================================= */
+        const DEFAULT_BRAND_LOGOS = {
+            "baldoria madrid": `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3v18"/><path d="M3 12h18"/><circle cx="12" cy="12" r="4"/></svg>`,
+            "black center cars": `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/></svg>`,
+            "flor de buenos aires": `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a5 5 0 0 1 5 5c0 3-5 7-5 7s-5-4-5-7a5 5 0 0 1 5-5z"/><circle cx="12" cy="7" r="1.5"/><path d="M12 14v8"/><path d="M8 18c2-1 4-1 4 0"/><path d="M16 18c-2-1-4-1-4 0"/></svg>`,
+            "keiwa corpóreos": `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>`,
+            "taller de costura mabel": `<svg viewBox="70 160 472 472" xmlns="http://www.w3.org/2000/svg"><defs><style>.tdcm-c1{fill:currentColor;}.tdcm-c2{fill:currentColor;opacity:0.85;}</style></defs><g><path class="tdcm-c1" d="M211.97,450.42v-102.07c14.9.75,29.72,0,43.95,2.54,23.5,4.18,39.19,27.46,37.31,51.94-1.51,19.72-9.74,35.08-28.04,43.91-3.69,1.78-7.86,3.39-11.86,3.52-13.72.43-27.46.17-41.36.17ZM232.4,430.82c14.53,1.36,27.73.04,35.5-14,6.71-12.13,6.17-24.43-1.71-35.83-8.2-11.86-20.54-12.71-33.79-11.43v61.26Z"/><path class="tdcm-c1" d="M374.29,425.82c.84,6.92,1.64,13.5,2.43,20-19.83,8.9-46.87,5.2-61.63-11.95-15.47-17.98-16.85-46.92-3.01-66.98,12.64-18.33,38.26-25.27,62.42-16.56-.75,6.56-1.52,13.27-2.33,20.29-16.79-6.1-32.37-6.44-43.42,10.14-7.34,11.01-6.24,27.36,1.65,37.67,8.99,11.74,21.72,13.96,43.88,7.4Z"/><path class="tdcm-c1" d="M201.33,348.88v19.55h-24.89v82.06h-20.36v-81.7h-25.22v-19.91h70.46Z"/><polyline class="tdcm-c2" points="388.14 450.5 388.14 341.5 434.82 391.96 481.14 341.5 481.14 450.44 461.35 450.44 460.32 394.48 434.79 421.11 408.82 393.81 408.82 450.5"/></g><path class="tdcm-c2" d="M306,172.42c-123.48,0-223.59,100.11-223.59,223.59s100.11,223.58,223.59,223.58,223.58-100.1,223.58-223.58-100.1-223.59-223.58-223.59ZM306,598.48c-111.83,0-202.48-90.65-202.48-202.47s90.65-202.47,202.48-202.47,202.47,90.65,202.47,202.47-90.65,202.47-202.47,202.47Z"/></svg>`,
+            "peluquería alvear": `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg>`,
+            "alfajores orense": `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="12" rx="9" ry="5"/><path d="M3 12c0 2.5 4 4.5 9 4.5s9-2 9-4.5"/><path d="M3 8c0 2.5 4 4.5 9 4.5s9-2 9-4.5"/><line x1="12" y1="3" x2="12" y2="7"/></svg>`,
+            "frimaq maquinarias": `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="12" x2="22" y2="12"/><line x1="12" y1="2" x2="12" y2="22"/><path d="M20 16l-4-4 4-4"/><path d="M4 8l4 4-4 4"/><path d="M16 4l-4 4-4-4"/><path d="M8 20l4-4 4 4"/></svg>`,
+            "four seasons mx": `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-7"/><path d="M12 15a6 6 0 0 1-6-6c0-4 6-7 6-7s6 3 6 7a6 6 0 0 1-6 6z"/><path d="M9 13a3 3 0 0 1 3-3"/></svg>`,
+            "cristel extensions": `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4c4 4 4 12 8 16 4-4 4-12 8-16"/><path d="M12 12c1.5-2 3-3 5-3"/><path d="M12 12c-1.5-2-3-3-5-3"/></svg>`
+        };
+
+        function getBrandLogoHtml(item, hexColor) {
+            if (item.logoUrl) {
+                return `<img src="${item.logoUrl}" alt="${item.title}" class="project-logo-img" />`;
+            }
+            const cleanTitle = (item.title || '').toLowerCase().trim();
+            for (const key in DEFAULT_BRAND_LOGOS) {
+                if (cleanTitle.includes(key)) {
+                    return `<span style="color:${hexColor}; width:100%; height:100%; display:flex; align-items:center; justify-content:center;">${DEFAULT_BRAND_LOGOS[key]}</span>`;
+                }
+            }
+            const initials = cleanTitle.split(' ').map(w => w[0]).join('').substring(0, 2).toUpperCase() || '11';
+            return `<span class="project-monogram" style="color:${hexColor};">${initials}</span>`;
+        }
+
+        /* CLIENTES BASE REALES (FALLBACK INTACTO) */
         let currentProjects = [
             {
                 num: "01",
@@ -1215,14 +1274,19 @@
             },
             {
                 num: "04",
-                title: "Keiwa Corpóreos",
-                cat: "Letras Corpóreas",
-                sub_es: "Comunicación Gráfica y Corpórea para emprendimientos, empresas, eventos, ¡y más!",
-                sub_pt: "Comunicação gráfica e 3D para startups, empresas, eventos e muito mais!",
-                sub_en: "Graphic and 3D communication for startups, companies, events, and more!",
-                url: "https://agustinmartinez-dgi.github.io/keiwacorporeos/",
-                color: "#0169C4",
-                isDark: false
+                title: "Taller de Costura Mabel (TDCM)",
+                cat: "Fábrica de Ropa",
+                sub_es: "Moldería, corte y confección de básicos en calidad premium.",
+                sub_pt: "Confecção de moldes, corte e costura de básicos em alta qualidade.",
+                sub_en: "Pattern making, cutting and sewing in premium quality.",
+                url: "https://onceoncegrafica-1111.github.io/TDCM/",
+                color: "#5A5A8E",
+                isDark: false,
+                borderColor: "#000000",
+                borderOpacity: 1,
+                logoBg: "#FFFFFF",
+                catBg: "#EEEEF8",
+                catColor: "#37375A"
             },
             {
                 num: "05",
@@ -1296,7 +1360,34 @@
             };
         }
 
-        /* RENDERIZADO VISUAL */
+        function formatHexColor(val) {
+            if (!val) return null;
+            let c = String(val).trim();
+            if (!c.startsWith('#') && !c.startsWith('rgb') && !c.startsWith('hsl')) {
+                if (/^[0-9A-Fa-f]{3,8}$/.test(c)) c = '#' + c;
+            }
+            return c;
+        }
+
+        function parseOpacityValue(val, defaultVal = null) {
+            if (val === null || val === undefined || val === '') return defaultVal;
+            let clean = String(val).replace('%', '').trim().replace(',', '.');
+            let parsed = parseFloat(clean);
+            if (isNaN(parsed)) return defaultVal;
+            if (parsed > 1) parsed = parsed / 100;
+            return Math.min(Math.max(parsed, 0), 1);
+        }
+
+        function applyAlphaToHex(hexStr, alpha) {
+            if (!hexStr) return `rgba(0, 0, 0, ${alpha})`;
+            if (hexStr.startsWith('rgba') || hexStr.startsWith('hsla')) return hexStr;
+            const { r, g, b } = hexToRgb(hexStr);
+            return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+        }
+
+        /* ==========================================================================
+           RENDERIZADO VISUAL ELEVADO (PROPORCIONES AWWWARDS + BOTÓN SUGESTIVO TÁCTIL)
+           ========================================================================== */
         function renderCards(lang) {
             const container = document.getElementById('cardsListContainer');
             if (!container) return;
@@ -1305,7 +1396,7 @@
             let html = '';
 
             currentProjects.forEach((item) => {
-                const hex = item.color || '#D4AF37';
+                const hex = formatHexColor(item.color) || '#D4AF37';
                 const { r, g, b } = hexToRgb(hex);
 
                 let subText = item.sub_es;
@@ -1314,77 +1405,100 @@
 
                 const categoryText = getLocalizedCategory(item.cat, lang);
 
-                const nameColor = item.textColor || (item.isDark ? '#FFFFFF' : 'var(--text-main)');
-                const tagColor = item.subColor || (item.textColor ? item.textColor : (item.isDark ? '#CBD5E1' : 'var(--text-muted)'));
+                // TIPOGRAFÍA
+                const nameColor = formatHexColor(item.textColor) || (item.isDark ? '#FFFFFF' : 'var(--text-main)');
+                const tagColor = formatHexColor(item.subColor) || (item.textColor ? formatHexColor(item.textColor) : (item.isDark ? '#CBD5E1' : 'var(--text-muted)'));
+
+                // CATEGORÍA (ESQUINA SUPERIOR DERECHA)
+                const catTextColor = formatHexColor(item.catColor) || hex;
+                const catBgBase = formatHexColor(item.catBg) || hex;
+                const catOpacity = parseOpacityValue(item.catOpacity, item.catBg ? 0.95 : (item.isDark ? 0.22 : 0.14));
+                const catBgFinal = applyAlphaToHex(catBgBase, catOpacity);
+                const catBorderFinal = formatHexColor(item.catColor) ? applyAlphaToHex(formatHexColor(item.catColor), 0.5) : applyAlphaToHex(hex, item.isDark ? 0.45 : 0.35);
+
+                // RECUADRO DE LOGO
+                const logoBoxIconColor = formatHexColor(item.numColor) || hex;
+                const logoBoxBgBase = formatHexColor(item.logoBg) || (item.isDark ? '#14161E' : '#FFFFFF');
+                const logoBoxBorderColor = formatHexColor(item.logoBorder) || applyAlphaToHex(hex, item.isDark ? 0.45 : 0.40);
+                const logoBoxBgFinal = logoBoxBgBase.startsWith('rgb') ? logoBoxBgBase : logoBoxBgBase;
+
+                // BOTÓN SUGESTIVO TÁCTIL (INFERIOR DERECHO)
+                const btnIconColor = formatHexColor(item.btnColor) || hex;
+                const btnBgBase = formatHexColor(item.btnBg) || (item.isDark ? '#1C1F28' : '#FFFFFF');
+                const btnOpacity = parseOpacityValue(item.btnOpacity, item.isDark ? 0.35 : 0.95);
+                const btnBgFinal = applyAlphaToHex(btnBgBase, btnOpacity);
+                const btnBorderFinal = applyAlphaToHex(btnIconColor, 0.45);
+
+                // TRANSPARENCIA DEL FONDO DE LA TARJETA
+                const bgOpacity = parseOpacityValue(item.bgOpacity, null);
+
+                // COLOR & OPACIDAD DEL BORDE (GARANTIZADO 100%)
+                const borderCustom = formatHexColor(item.borderColor);
+                const borderOpacity = parseOpacityValue(item.borderOpacity, 1);
                 
-                const catTextColor = item.catColor || hex;
-                const catBorderColor = item.catColor || (item.isDark ? hex : `rgba(${r}, ${g}, ${b}, 0.50)`);
-                const catBgColor = item.catBg || (item.isDark ? `rgba(${r}, ${g}, ${b}, 0.20)` : `rgba(${r}, ${g}, ${b}, 0.16)`);
-
-                const numColor = item.numColor || hex;
-                const numRgb = item.numColor ? hexToRgb(item.numColor) : { r, g, b };
-                const numBorderColor = item.numColor || (item.isDark ? hex : `rgba(${r}, ${g}, ${b}, 0.50)`);
-                const numBgColor = `rgba(${numRgb.r}, ${numRgb.g}, ${numRgb.b}, ${item.isDark ? 0.22 : 0.18})`;
-
-                const btnColor = item.btnColor || hex;
-                const btnRgb = item.btnColor ? hexToRgb(item.btnColor) : { r, g, b };
-                const btnBorderColor = item.btnColor || (item.isDark ? hex : `rgba(${r}, ${g}, ${b}, 0.50)`);
-                const btnBgColor = item.isDark ? `rgba(${btnRgb.r}, ${btnRgb.g}, ${btnRgb.b}, 0.18)` : '#FFFFFF';
-
-                // CONTROL REGULABLE DE TRANSPARENCIA DESDE GOOGLE SHEETS
-                let userOpacity = null;
-                if (item.bgOpacity !== null && item.bgOpacity !== undefined && item.bgOpacity !== '') {
-                    let cleanOp = String(item.bgOpacity).replace('%', '').trim().replace(',', '.');
-                    let parsedOp = parseFloat(cleanOp);
-                    if (!isNaN(parsedOp)) {
-                        if (parsedOp > 1) parsedOp = parsedOp / 100;
-                        userOpacity = Math.min(Math.max(parsedOp, 0), 1);
-                    }
+                let finalBorder, finalBorderLeft;
+                if (borderCustom) {
+                    finalBorder = borderOpacity < 1 ? applyAlphaToHex(borderCustom, borderOpacity) : borderCustom;
+                    finalBorderLeft = borderCustom;
+                } else {
+                    finalBorder = item.isDark ? applyAlphaToHex(hex, borderOpacity < 1 ? borderOpacity : 0.65) : applyAlphaToHex(hex, borderOpacity < 1 ? borderOpacity : 0.40);
+                    finalBorderLeft = hex;
                 }
 
-                let cardStyle, numStyle, catStyle, tagStyle, nameStyle, linkStyle;
+                let cardStyle, logoBoxStyle, catCornerStyle, tagStyle, nameStyle, touchBtnStyle;
 
                 if (item.isDark) {
-                    let darkBg = `linear-gradient(135deg, #0B0B0E 0%, #15161C 100%)`;
+                    let darkBg = `linear-gradient(135deg, #0C0E12 0%, #171A22 100%)`;
                     let blurCss = ``;
-                    if (userOpacity !== null) {
-                        darkBg = `linear-gradient(135deg, rgba(11, 11, 14, ${userOpacity}) 0%, rgba(21, 22, 28, ${userOpacity}) 100%)`;
+                    if (bgOpacity !== null) {
+                        darkBg = `linear-gradient(135deg, rgba(12, 14, 18, ${bgOpacity}) 0%, rgba(23, 26, 34, ${bgOpacity}) 100%)`;
                         blurCss = `backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);`;
                     }
-                    cardStyle = `background: ${darkBg}; ${blurCss} border: 2px solid ${hex}; border-left: 7px solid ${hex}; color: #FFFFFF; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45), 0 0 16px rgba(${r}, ${g}, ${b}, 0.22);`;
-                    numStyle = `background: ${numBgColor}; border-color: ${numBorderColor}; color: ${numColor};`;
-                    catStyle = `background: ${catBgColor}; color: ${catTextColor}; border-color: ${catBorderColor};`;
+                    cardStyle = `background: ${darkBg}; ${blurCss} border: 1.6px solid ${finalBorder}; border-left: 5px solid ${finalBorderLeft}; color: #FFFFFF; box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4), 0 0 12px rgba(${r}, ${g}, ${b}, 0.16);`;
+                    logoBoxStyle = `background: ${logoBoxBgFinal}; border-color: ${logoBoxBorderColor};`;
+                    catCornerStyle = `background: ${catBgFinal}; color: ${catTextColor}; border-color: ${catBorderFinal};`;
                     tagStyle = `color: ${tagColor};`;
                     nameStyle = `color: ${nameColor};`;
-                    linkStyle = `color: ${btnColor}; background: ${btnBgColor}; border-color: ${btnBorderColor};`;
+                    touchBtnStyle = `color: ${btnIconColor}; background: ${btnBgFinal}; border-color: ${btnBorderFinal};`;
                 } else {
-                    let lightBg = `linear-gradient(135deg, rgba(${r}, ${g}, ${b}, 0.08) 0%, rgba(${r}, ${g}, ${b}, 0.18) 100%)`;
+                    let lightBg = `linear-gradient(135deg, rgba(${r}, ${g}, ${b}, 0.06) 0%, rgba(${r}, ${g}, ${b}, 0.15) 100%)`;
                     let blurCss = ``;
-                    if (userOpacity !== null) {
-                        lightBg = `linear-gradient(135deg, rgba(${r}, ${g}, ${b}, ${(userOpacity * 0.45).toFixed(3)}) 0%, rgba(${r}, ${g}, ${b}, ${userOpacity.toFixed(3)}) 100%)`;
+                    if (bgOpacity !== null) {
+                        lightBg = `linear-gradient(135deg, rgba(${r}, ${g}, ${b}, ${(bgOpacity * 0.4).toFixed(3)}) 0%, rgba(${r}, ${g}, ${b}, ${bgOpacity.toFixed(3)}) 100%)`;
                         blurCss = `backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);`;
                     }
-                    cardStyle = `background: ${lightBg}; ${blurCss} border: 2px solid rgba(${r}, ${g}, ${b}, 0.50); border-left: 7px solid ${hex};`;
-                    numStyle = `background: ${numBgColor}; border-color: ${numBorderColor}; color: ${numColor};`;
-                    catStyle = `background: ${catBgColor}; color: ${catTextColor}; border-color: ${catBorderColor};`;
+                    cardStyle = `background: ${lightBg}; ${blurCss} border: 1.6px solid ${finalBorder}; border-left: 5px solid ${finalBorderLeft};`;
+                    logoBoxStyle = `background: ${logoBoxBgFinal}; border-color: ${logoBoxBorderColor};`;
+                    catCornerStyle = `background: ${catBgFinal}; color: ${catTextColor}; border-color: ${catBorderFinal};`;
                     tagStyle = `color: ${tagColor};`;
                     nameStyle = `color: ${nameColor};`;
-                    linkStyle = `color: ${btnColor}; background: ${btnBgColor}; border-color: ${btnBorderColor};`;
+                    touchBtnStyle = `color: ${btnIconColor}; background: ${btnBgFinal}; border-color: ${btnBorderFinal};`;
                 }
+
+                const brandLogoHtml = getBrandLogoHtml(item, logoBoxIconColor);
 
                 html += `
                 <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="software-card-item" style="${cardStyle}" onclick="playClickSound()">
+                    <!-- Ficha categoría anclada al ángulo superior derecho (sin alterar proporciones) -->
+                    <span class="soft-cat-badge-corner" style="${catCornerStyle}">${categoryText}</span>
+
                     <div class="soft-left">
-                        <div class="project-num" style="${numStyle}">${item.num}</div>
+                        <!-- Recuadro exclusivo para el Logo de Empresa con fondo regulable -->
+                        <div class="project-logo-box" style="${logoBoxStyle}">
+                            ${brandLogoHtml}
+                        </div>
                         <div class="soft-meta">
-                            <div class="soft-head-row">
-                                <span class="soft-name" style="${nameStyle}">${item.title}</span>
-                                <span class="soft-cat-badge" style="${catStyle}">${categoryText}</span>
-                            </div>
+                            <span class="soft-name" style="${nameStyle}">${item.title}</span>
                             <span class="soft-tag" style="${tagStyle}">${subText}</span>
                         </div>
                     </div>
-                    <span class="soft-badge-link" style="${linkStyle}">${t.view_web}</span>
+
+                    <!-- Botón sugestivo táctil en la parte inferior derecha -->
+                    <span class="suggestive-touch-btn" style="${touchBtnStyle}" title="${t.view_web}">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                        </svg>
+                    </span>
                 </a>
                 `;
             });
@@ -1393,7 +1507,7 @@
         }
 
         /* =========================================================
-           3. CONEXIÓN CON GOOGLE SHEETS
+           3. CONEXIÓN INTELIGENTE CON GOOGLE SHEETS (POR NOMBRE DE COLUMNA)
            ========================================================= */
         const SHEET_ID = '12WChaJERJOmnyB6K3IMgpB6lYxDrYBvWR9OToha6do4';
         const GID_MUSIC = '149458792';
@@ -1409,20 +1523,42 @@
                     if (jsonStart !== -1 && jsonEnd !== -1) {
                         const payload = JSON.parse(rawText.substring(jsonStart, jsonEnd + 1));
                         if (payload.table && payload.table.rows && payload.table.rows.length > 0) {
+                            
+                            // Mapeo dinámico por nombres de encabezados de la fila 1
+                            const colMap = {};
+                            if (payload.table.cols) {
+                                payload.table.cols.forEach((colObj, idx) => {
+                                    if (colObj && colObj.label) {
+                                        colMap[colObj.label.toLowerCase().trim()] = idx;
+                                    }
+                                });
+                            }
+
                             const loaded = [];
                             payload.table.rows.forEach((row, index) => {
                                 if (!row || !row.c) return;
 
                                 const getVal = (col) => {
+                                    if (col === undefined || col < 0 || col >= row.c.length) return '';
                                     const cell = row.c[col];
-                                    return (cell && cell.v !== null && cell.v !== undefined) ? String(cell.v).trim() : '';
+                                    if (!cell) return '';
+                                    const val = (cell.v !== null && cell.v !== undefined) ? cell.v : (cell.f || '');
+                                    return String(val).trim();
                                 };
 
-                                const num = getVal(0);
-                                const title = getVal(1);
+                                const getByHeader = (name, fallbackIdx) => {
+                                    const cleanName = name.toLowerCase().trim();
+                                    if (colMap[cleanName] !== undefined) {
+                                        return getVal(colMap[cleanName]);
+                                    }
+                                    return getVal(fallbackIdx);
+                                };
+
+                                const num = getByHeader('numero', 0);
+                                const title = getByHeader('titulo', 1);
                                 if (!title) return;
 
-                                let urlVal = getVal(6);
+                                let urlVal = getByHeader('url', 6);
                                 const isRealUrl = urlVal && !urlVal.includes(' ') && (urlVal.startsWith('http://') || urlVal.startsWith('https://') || urlVal.includes('.'));
 
                                 if (isRealUrl) {
@@ -1437,32 +1573,32 @@
                                     urlVal = fallbackItem ? fallbackItem.url : (urlVal && urlVal.startsWith('#') ? urlVal : '#');
                                 }
 
-                                const isDarkVal = getVal(8).toUpperCase();
-                                const colorTexto = getVal(9);
-                                const colorCat = getVal(10);
-                                const fondoCat = getVal(11);
-                                const colorSub = getVal(12);
-                                const colorNum = getVal(13);
-                                const colorBoton = getVal(14);
-                                const transpFondo = getVal(15);
+                                const isDarkVal = getByHeader('modo_oscuro', 8).toUpperCase();
 
                                 loaded.push({
                                     num: num ? num.padStart(2, '0') : String(index + 1).padStart(2, '0'),
                                     title: title,
-                                    cat: getVal(2),
-                                    sub_es: getVal(3),
-                                    sub_pt: getVal(4) || getVal(3),
-                                    sub_en: getVal(5) || getVal(3),
+                                    cat: getByHeader('categoria', 2),
+                                    sub_es: getByHeader('subtitulo_es', 3),
+                                    sub_pt: getByHeader('subtitulo_pt', 4) || getByHeader('subtitulo_es', 3),
+                                    sub_en: getByHeader('subtitulo_en', 5) || getByHeader('subtitulo_es', 3),
                                     url: urlVal || '#',
-                                    color: getVal(7) || '#417B2E',
+                                    color: getByHeader('color_hex', 7) || '#417B2E',
                                     isDark: (isDarkVal === 'SI' || isDarkVal === 'YES'),
-                                    textColor: colorTexto || null,
-                                    catColor: colorCat || null,
-                                    catBg: fondoCat || null,
-                                    subColor: colorSub || null,
-                                    numColor: colorNum || null,
-                                    btnColor: colorBoton || null,
-                                    bgOpacity: transpFondo || null
+                                    textColor: getByHeader('color_texto', 9) || null,
+                                    catColor: getByHeader('color_categoria', 10) || null,
+                                    catBg: getByHeader('fondo_categoria', 11) || null,
+                                    catOpacity: getByHeader('transparencia_categoria', 12) || null,
+                                    subColor: getByHeader('color_subtitulo', 13) || null,
+                                    numColor: getByHeader('color_logo', 14) || getByHeader('color_numero', 14) || null,
+                                    logoBg: getByHeader('fondo_logo', 15) || null,
+                                    btnColor: getByHeader('color_boton', 16) || null,
+                                    btnBg: getByHeader('fondo_boton', 17) || null,
+                                    btnOpacity: getByHeader('transparencia_boton', 18) || null,
+                                    bgOpacity: getByHeader('transparencia_fondo', 19) || null,
+                                    borderColor: getByHeader('color_borde', 20) || null,
+                                    borderOpacity: getByHeader('transparencia_borde', 21) || null,
+                                    logoUrl: getByHeader('logo_url', 22) || null
                                 });
                             });
 
@@ -1555,7 +1691,6 @@
             loadMusicFromFolder();
             initGoogleSheetsConnection();
 
-            // Reanudación suave de la música si venía sonando desde index.html o 1111.grafica.html
             try {
                 const wasMusicOn = sessionStorage.getItem('1111_music_on');
                 const lastSrc = sessionStorage.getItem('1111_music_src');

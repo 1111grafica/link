@@ -466,7 +466,7 @@
             flex: 1;
         }
 
-        /* RECUADRO SEPARADO DE LOGO */
+        /* RECUADRO NUMÉRICO VUELTA DE TUERCA */
         .project-logo-box {
             display: flex;
             align-items: center;
@@ -478,7 +478,7 @@
             border: 1.3px solid;
             transition: transform 0.20s ease;
             overflow: hidden;
-            padding: 6px;
+            padding: 2px;
             position: relative;
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
             flex-shrink: 0;
@@ -486,16 +486,6 @@
 
         .software-card-item:hover .project-logo-box {
             transform: scale(1.06) rotate(-2deg);
-        }
-
-        .project-logo-box svg {
-            width: 100%;
-            height: 100%;
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-            display: block;
-            margin: auto;
         }
 
         .project-logo-box img {
@@ -508,11 +498,19 @@
             margin: auto;
         }
 
-        .project-monogram {
+        .project-index-num {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.85rem;
-            font-weight: 900;
+            font-size: 0.88rem;
+            font-weight: 800;
+            letter-spacing: -0.035em;
             line-height: 1;
+            user-select: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            width: 100%;
+            height: 100%;
         }
 
         .soft-meta {
@@ -715,7 +713,8 @@
             .lang-group-left { justify-content: center; width: 100%; }
             .soundtrack-wrap { margin-top: 2px; }
             .software-card-item { padding: 8px 8px; }
-            .project-logo-box { width: 32px; height: 32px; min-width: 32px; padding: 4px; border-radius: 8px; }
+            .project-logo-box { width: 32px; height: 32px; min-width: 32px; padding: 2px; border-radius: 8px; }
+            .project-index-num { font-size: 0.78rem; }
             .soft-meta { padding-right: 22px; }
             .soft-name { font-size: 0.85rem; }
             .soft-tag { font-size: 0.66rem; -webkit-line-clamp: 1; }
@@ -803,7 +802,6 @@
 
         <!-- BOTÓN PRINCIPAL: COTIZAR POR WHATSAPP CON LOGO PROTAGONISTA & DESTELLO LUMÍNICO -->
         <a href="https://wa.me/5491131933611?text=%C2%A1Hola!%20Quiero%20reemplazar%20mi%20Linktree%20y%20crear%20mi%20link%20100%25%20personalizado." target="_blank" rel="noopener noreferrer" class="cta-box-wsp" id="btnWspCta" onclick="playClickSound()">
-            <!-- SVG Oficial de WhatsApp con viewBox 125.49 126.53 y fill blanco -->
             <svg viewBox="0 0 125.49 126.53" xmlns="http://www.w3.org/2000/svg">
                 <g fill="#FFFFFF">
                     <path d="M0,126.53c.49-1.47.96-2.86,1.42-4.24,1.85-5.5,3.7-11,5.54-16.5,1.32-3.92,2.64-7.84,3.93-11.77.09-.26,0-.65-.13-.9-2.26-3.87-4.11-7.93-5.51-12.19-1.28-3.9-2.11-7.9-2.63-11.97-.47-3.64-.56-7.3-.33-10.95.39-6.21,1.65-12.26,3.87-18.1,3.77-9.89,9.68-18.26,17.71-25.16,5.32-4.57,11.27-8.1,17.81-10.63,4.47-1.73,9.07-3,13.84-3.5C58.49.3,61.48.05,64.47,0c3.59-.05,7.16.4,10.7,1.05,5.44,1,10.63,2.73,15.61,5.14,6.82,3.31,12.82,7.74,18.01,13.25,5.14,5.47,9.15,11.68,12.03,18.62,1.71,4.1,2.98,8.33,3.72,12.7.45,2.65.69,5.34.85,8.02.14,2.27.13,4.56-.01,6.83-.26,4.07-.88,8.08-1.95,12.03-1.95,7.23-5.09,13.88-9.45,19.97-4.23,5.91-9.34,10.91-15.33,15.01-6.77,4.63-14.18,7.79-22.22,9.47-3.39.71-6.83,1.05-10.29,1.21-4.4.21-8.76-.12-13.08-.87-4.21-.73-8.34-1.85-12.27-3.55-2.11-.91-4.16-1.96-6.25-2.9-.34-.15-.82-.2-1.16-.09-3.93,1.24-7.84,2.52-11.76,3.78-7.03,2.25-14.05,4.49-21.08,6.74-.14.04-.28.07-.53.12ZM15.71,111.01c.38-.07.63-.1.87-.17,1.57-.5,3.13-1,4.69-1.51,4.54-1.46,9.09-2.91,13.63-4.38.46-.15.81-.1,1.23.15,1.19.74,2.4,1.45,3.64,2.11,6.84,3.7,14.18,5.61,21.92,5.99,3.09.15,6.16-.05,9.23-.46,5.53-.73,10.78-2.36,15.75-4.83,7.65-3.81,14.01-9.19,19.01-16.14,4.49-6.25,7.47-13.14,8.85-20.73.86-4.75,1.1-9.51.62-14.31-.47-4.67-1.49-9.19-3.21-13.56-3.77-9.63-9.86-17.46-18.26-23.48-8.1-5.8-17.17-8.9-27.09-9.51-5.08-.31-10.11.19-15.05,1.43-9.61,2.42-17.88,7.19-24.76,14.32-5.45,5.65-9.43,12.22-11.88,19.7-1.63,4.97-2.49,10.05-2.57,15.28-.07,4.52.44,8.96,1.55,13.33,1.55,6.14,4.14,11.81,7.81,16.97.33.46.4.85.21,1.38-.44,1.19-.82,2.4-1.23,3.61-1.56,4.6-3.11,9.21-4.66,13.81-.09.28-.17.57-.29.98Z"/>
@@ -1208,33 +1206,14 @@
         }
 
         /* =========================================================
-           2.B BANCO VECTORIAL DE LOGOS INCORPORADOS (DEFAULT SVGs)
+           2.B RECUADRO CON NUMERACIÓN DE ALTA PRECISIÓN (VUELTA DE TUERCA)
            ========================================================= */
-        const DEFAULT_BRAND_LOGOS = {
-            "baldoria madrid": `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3v18"/><path d="M3 12h18"/><circle cx="12" cy="12" r="4"/></svg>`,
-            "black center cars": `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/></svg>`,
-            "flor de buenos aires": `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a5 5 0 0 1 5 5c0 3-5 7-5 7s-5-4-5-7a5 5 0 0 1 5-5z"/><circle cx="12" cy="7" r="1.5"/><path d="M12 14v8"/><path d="M8 18c2-1 4-1 4 0"/><path d="M16 18c-2-1-4-1-4 0"/></svg>`,
-            "keiwa corpóreos": `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>`,
-            "taller de costura mabel": `<svg viewBox="70 160 472 472" xmlns="http://www.w3.org/2000/svg"><defs><style>.tdcm-c1{fill:currentColor;}.tdcm-c2{fill:currentColor;opacity:0.85;}</style></defs><g><path class="tdcm-c1" d="M211.97,450.42v-102.07c14.9.75,29.72,0,43.95,2.54,23.5,4.18,39.19,27.46,37.31,51.94-1.51,19.72-9.74,35.08-28.04,43.91-3.69,1.78-7.86,3.39-11.86,3.52-13.72.43-27.46.17-41.36.17ZM232.4,430.82c14.53,1.36,27.73.04,35.5-14,6.71-12.13,6.17-24.43-1.71-35.83-8.2-11.86-20.54-12.71-33.79-11.43v61.26Z"/><path class="tdcm-c1" d="M374.29,425.82c.84,6.92,1.64,13.5,2.43,20-19.83,8.9-46.87,5.2-61.63-11.95-15.47-17.98-16.85-46.92-3.01-66.98,12.64-18.33,38.26-25.27,62.42-16.56-.75,6.56-1.52,13.27-2.33,20.29-16.79-6.1-32.37-6.44-43.42,10.14-7.34,11.01-6.24,27.36,1.65,37.67,8.99,11.74,21.72,13.96,43.88,7.4Z"/><path class="tdcm-c1" d="M201.33,348.88v19.55h-24.89v82.06h-20.36v-81.7h-25.22v-19.91h70.46Z"/><polyline class="tdcm-c2" points="388.14 450.5 388.14 341.5 434.82 391.96 481.14 341.5 481.14 450.44 461.35 450.44 460.32 394.48 434.79 421.11 408.82 393.81 408.82 450.5"/></g><path class="tdcm-c2" d="M306,172.42c-123.48,0-223.59,100.11-223.59,223.59s100.11,223.58,223.59,223.58,223.58-100.1,223.58-223.58-100.1-223.59-223.58-223.59ZM306,598.48c-111.83,0-202.48-90.65-202.48-202.47s90.65-202.47,202.48-202.47,202.47,90.65,202.47,202.47-90.65,202.47-202.47,202.47Z"/></svg>`,
-            "peluquería alvear": `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg>`,
-            "alfajores orense": `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="12" rx="9" ry="5"/><path d="M3 12c0 2.5 4 4.5 9 4.5s9-2 9-4.5"/><path d="M3 8c0 2.5 4 4.5 9 4.5s9-2 9-4.5"/><line x1="12" y1="3" x2="12" y2="7"/></svg>`,
-            "frimaq maquinarias": `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="12" x2="22" y2="12"/><line x1="12" y1="2" x2="12" y2="22"/><path d="M20 16l-4-4 4-4"/><path d="M4 8l4 4-4 4"/><path d="M16 4l-4 4-4-4"/><path d="M8 20l4-4 4 4"/></svg>`,
-            "four seasons mx": `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-7"/><path d="M12 15a6 6 0 0 1-6-6c0-4 6-7 6-7s6 3 6 7a6 6 0 0 1-6 6z"/><path d="M9 13a3 3 0 0 1 3-3"/></svg>`,
-            "cristel extensions": `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4c4 4 4 12 8 16 4-4 4-12 8-16"/><path d="M12 12c1.5-2 3-3 5-3"/><path d="M12 12c-1.5-2-3-3-5-3"/></svg>`
-        };
-
-        function getBrandLogoHtml(item, hexColor) {
+        function getBrandLogoHtml(item, hexColor, index) {
             if (item.logoUrl) {
                 return `<img src="${item.logoUrl}" alt="${item.title}" class="project-logo-img" />`;
             }
-            const cleanTitle = (item.title || '').toLowerCase().trim();
-            for (const key in DEFAULT_BRAND_LOGOS) {
-                if (cleanTitle.includes(key)) {
-                    return `<span style="color:${hexColor}; width:100%; height:100%; display:flex; align-items:center; justify-content:center;">${DEFAULT_BRAND_LOGOS[key]}</span>`;
-                }
-            }
-            const initials = cleanTitle.split(' ').map(w => w[0]).join('').substring(0, 2).toUpperCase() || '11';
-            return `<span class="project-monogram" style="color:${hexColor};">${initials}</span>`;
+            const numVal = item.num ? String(item.num).padStart(2, '0') : String((index !== undefined ? index + 1 : 1)).padStart(2, '0');
+            return `<span class="project-index-num" style="color:${hexColor};">${numVal}</span>`;
         }
 
         /* CLIENTES BASE REALES (FALLBACK INTACTO) */
@@ -1395,7 +1374,7 @@
             const t = TRANSLATIONS[lang] || TRANSLATIONS.es;
             let html = '';
 
-            currentProjects.forEach((item) => {
+            currentProjects.forEach((item, index) => {
                 const hex = formatHexColor(item.color) || '#D4AF37';
                 const { r, g, b } = hexToRgb(hex);
 
@@ -1416,7 +1395,7 @@
                 const catBgFinal = applyAlphaToHex(catBgBase, catOpacity);
                 const catBorderFinal = formatHexColor(item.catColor) ? applyAlphaToHex(formatHexColor(item.catColor), 0.5) : applyAlphaToHex(hex, item.isDark ? 0.45 : 0.35);
 
-                // RECUADRO DE LOGO
+                // RECUADRO DE NÚMERO
                 const logoBoxIconColor = formatHexColor(item.numColor) || hex;
                 const logoBoxBgBase = formatHexColor(item.logoBg) || (item.isDark ? '#14161E' : '#FFFFFF');
                 const logoBoxBorderColor = formatHexColor(item.logoBorder) || applyAlphaToHex(hex, item.isDark ? 0.45 : 0.40);
@@ -1475,15 +1454,15 @@
                     touchBtnStyle = `color: ${btnIconColor}; background: ${btnBgFinal}; border-color: ${btnBorderFinal};`;
                 }
 
-                const brandLogoHtml = getBrandLogoHtml(item, logoBoxIconColor);
+                const brandLogoHtml = getBrandLogoHtml(item, logoBoxIconColor, index);
 
                 html += `
                 <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="software-card-item" style="${cardStyle}" onclick="playClickSound()">
-                    <!-- Ficha categoría anclada al ángulo superior derecho (sin alterar proporciones) -->
+                    <!-- Ficha categoría anclada al ángulo superior derecho -->
                     <span class="soft-cat-badge-corner" style="${catCornerStyle}">${categoryText}</span>
 
                     <div class="soft-left">
-                        <!-- Recuadro exclusivo para el Logo de Empresa con fondo regulable -->
+                        <!-- Recuadro Numérico de Precisión -->
                         <div class="project-logo-box" style="${logoBoxStyle}">
                             ${brandLogoHtml}
                         </div>

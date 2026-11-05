@@ -29,13 +29,13 @@
 
             --bg-base: #F4F8F1;
             --bg-card: #FFFFFF;
-            --border-card: rgba(140, 195, 120, 0.65);
+            --border-card: rgba(140, 195, 120, 0.55);
 
-            --text-main: #142211;
-            --text-muted: #4D6048;
-            --text-light: #6F846A;
+            --text-main: #132010;
+            --text-muted: #495C44;
+            --text-light: #6A7E65;
 
-            --shadow-card: 0 4px 16px -2px rgba(60, 105, 45, 0.10), 0 2px 6px rgba(0, 0, 0, 0.04);
+            --shadow-card: 0 3px 14px -2px rgba(60, 105, 45, 0.06), 0 1px 3px rgba(0, 0, 0, 0.02);
             --spring: cubic-bezier(0.16, 1, 0.3, 1);
         }
 
@@ -53,14 +53,14 @@
 
         body {
             font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: transparent;
+            font-feature-settings: "cv02", "cv03", "cv04", "cv11";
             color: var(--text-main);
             min-height: 100vh;
             min-height: 100dvh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 16px 14px 44px;
+            padding: 14px 12px 36px;
             overflow-x: hidden;
             position: relative;
             letter-spacing: -0.015em;
@@ -116,7 +116,7 @@
             left: -20%;
             width: 140%;
             height: 140%;
-            opacity: 0.13;
+            opacity: 0.12;
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='120' viewBox='0 0 220 120'%3E%3Cg fill='%23E989B7'%3E%3Cpath d='M25,60v-10c9-.1,12-2,14-7h13v40h-16v-23h-11Z'/%3E%3Cpath d='M60,60v-10c9-.1,12-2,14-7h13v40h-16v-23h-11Z'/%3E%3Cpath d='M95,60v-10c9-.1,12-2,14-7h13v40h-16v-23h-11Z'/%3E%3Cpath d='M130,60v-10c9-.1,12-2,14-7h13v40h-16v-23h-11Z'/%3E%3C/g%3E%3C/svg%3E");
             background-repeat: repeat;
             background-size: 190px auto;
@@ -131,11 +131,12 @@
 
         .hub-container {
             width: 100%;
-            max-width: 500px;
+            max-width: 460px;
             display: flex;
             flex-direction: column;
-            gap: 13px;
+            gap: 10px;
             z-index: 2;
+            min-width: 0;
         }
 
         /* NAVEGACIÓN SUPERIOR CON BOTÓN VOLVER & SOUNDTRACK */
@@ -145,25 +146,27 @@
             justify-content: space-between;
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(14px);
-            border: 1.5px solid var(--border-card);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1.2px solid var(--border-card);
             border-radius: 999px;
-            padding: 4px 6px;
-            box-shadow: 0 3px 12px rgba(60, 105, 45, 0.08);
-            gap: 6px;
+            padding: 3.5px 6px;
+            box-shadow: 0 2px 10px rgba(60, 105, 45, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+            flex-wrap: wrap;
+            gap: 5px;
+            width: 100%;
         }
 
-        /* GRUPO IZQUIERDA: FLECHA + IDIOMA */
         .top-nav-left {
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 4px;
+            flex-wrap: wrap;
         }
 
-        /* BOTÓN VOLVER CON FLECHA CIRCULAR */
         .btn-back-hub {
-            width: 32px;
-            height: 32px;
-            min-width: 32px;
+            width: 27px;
+            height: 27px;
+            min-width: 27px;
             border-radius: 50%;
             background: rgba(160, 209, 143, 0.22);
             border: 1.2px solid var(--border-card);
@@ -185,8 +188,8 @@
         }
 
         .btn-back-hub svg {
-            width: 15px;
-            height: 15px;
+            width: 13px;
+            height: 13px;
             display: block;
             transition: transform 0.2s var(--spring);
         }
@@ -196,7 +199,7 @@
         }
 
         .lang-badge-hint {
-            font-size: 0.72rem;
+            font-size: 0.70rem;
             font-weight: 800;
             color: var(--brand-green-text);
             text-transform: uppercase;
@@ -210,15 +213,15 @@
             white-space: nowrap;
         }
 
-        .lang-switch-pills { display: flex; gap: 3px; }
+        .lang-switch-pills { display: flex; gap: 2.5px; }
 
         .lang-btn {
             background: transparent;
             border: none;
-            padding: 5px 10px;
+            padding: 4px 8.5px;
             border-radius: 999px;
             font-family: 'Outfit', sans-serif;
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             font-weight: 800;
             color: var(--text-muted);
             cursor: pointer;
@@ -228,34 +231,34 @@
         .lang-btn.active {
             background: var(--brand-pink);
             color: #FFFFFF;
-            box-shadow: 0 2px 10px var(--brand-pink-glow);
+            box-shadow: 0 2px 8px var(--brand-pink-glow);
         }
 
-        /* WIDGET SOUNDTRACK EN ISLA ROSA ARMÓNICA CON ÍCONO */
+        /* WIDGET SOUNDTRACK */
         .soundtrack-wrap {
             display: flex;
             align-items: center;
-            gap: 7px;
-            padding: 3px 6px 3px 9px;
+            gap: 6px;
+            padding: 2.5px 5px 2.5px 8px;
             background: linear-gradient(135deg, rgba(255, 245, 250, 0.95) 0%, rgba(252, 231, 243, 0.85) 100%);
-            border: 1.2px solid rgba(233, 137, 183, 0.5);
+            border: 1.2px solid rgba(233, 137, 183, 0.45);
             border-radius: 999px;
-            box-shadow: 0 2px 8px rgba(233, 137, 183, 0.12);
+            box-shadow: 0 2px 6px rgba(233, 137, 183, 0.10);
+            flex-shrink: 0;
         }
 
         .soundtrack-icon {
-            width: 14px;
-            height: 14px;
+            width: 13px;
+            height: 13px;
             color: var(--brand-pink-deep);
             display: block;
             flex-shrink: 0;
         }
 
-        /* PASTILLA PROFESIONAL SLIDER SWITCH (FÍSICA MECÁNICA REAL Y PESO TÁCTIL) */
         .btn-music-toggle {
-            width: 38px;
-            height: 22px;
-            min-width: 38px;
+            width: 36px;
+            height: 20px;
+            min-width: 36px;
             background: linear-gradient(180deg, rgba(165, 185, 160, 0.42) 0%, rgba(195, 210, 190, 0.22) 100%);
             border: 1.2px solid rgba(145, 195, 130, 0.7);
             border-radius: 999px;
@@ -275,61 +278,41 @@
 
         .btn-music-toggle .switch-knob {
             position: absolute;
-            top: 2px;
+            top: 1.5px;
             left: 2px;
-            width: 16px;
-            height: 16px;
+            width: 14.5px;
+            height: 14.5px;
             border-radius: 50%;
             background: radial-gradient(circle at 35% 30%, #FFFFFF 0%, #F5F7F3 80%, #DFE5DC 100%);
-            box-shadow: 0 2px 5px rgba(20, 35, 15, 0.25), 
+            box-shadow: 0 2px 4px rgba(20, 35, 15, 0.25), 
                         0 1px 1px rgba(0, 0, 0, 0.12), 
-                        inset 0 1px 1px #FFFFFF, 
-                        inset 0 -1px 1px rgba(0, 0, 0, 0.08);
+                        inset 0 1px 1px #FFFFFF;
             transition: transform 0.26s cubic-bezier(0.34, 1.4, 0.64, 1), 
-                        width 0.16s ease,
-                        box-shadow 0.26s cubic-bezier(0.34, 1.4, 0.64, 1);
+                        width 0.16s ease;
             pointer-events: none;
         }
 
-        .btn-music-toggle:hover {
-            border-color: var(--brand-pink);
-        }
-
-        .btn-music-toggle:active {
-            transform: scale(0.95);
-        }
-
-        .btn-music-toggle:active .switch-knob {
-            width: 18px;
-        }
+        .btn-music-toggle:hover { border-color: var(--brand-pink); }
+        .btn-music-toggle:active { transform: scale(0.95); }
 
         .btn-music-toggle.active {
             background: linear-gradient(135deg, #F090BF 0%, #D86F9F 100%);
             border-color: var(--brand-pink);
-            box-shadow: inset 0 1.5px 3px rgba(120, 20, 70, 0.22), 0 2px 9px var(--brand-pink-glow);
+            box-shadow: inset 0 1.5px 3px rgba(120, 20, 70, 0.22), 0 2px 8px var(--brand-pink-glow);
         }
 
         .btn-music-toggle.active .switch-knob {
-            transform: translateX(16px);
-            box-shadow: 0 2px 6px rgba(140, 25, 75, 0.35), 
-                        0 1px 2px rgba(0, 0, 0, 0.15), 
-                        inset 0 1px 1px #FFFFFF, 
-                        inset 0 -1px 1px rgba(180, 50, 110, 0.2);
+            transform: translateX(15.5px);
+            box-shadow: 0 2px 5px rgba(140, 25, 75, 0.35), 0 1px 2px rgba(0, 0, 0, 0.15), inset 0 1px 1px #FFFFFF;
         }
 
-        .btn-music-toggle.active:active .switch-knob {
-            transform: translateX(14px);
-            width: 18px;
-        }
-
-        /* BOTÓN SALTEAR CON ICONOGRAFÍA UNIVERSAL DE PISTA (SVG) Y TACTO MECÁNICO */
         .btn-music-skip {
             background: linear-gradient(180deg, #FFFFFF 0%, #F8F9F7 100%);
             border: 1.2px solid rgba(233, 137, 183, 0.55);
             border-radius: 50%;
-            width: 23px;
-            height: 23px;
-            min-width: 23px;
+            width: 21px;
+            height: 21px;
+            min-width: 21px;
             cursor: pointer;
             display: inline-flex;
             align-items: center;
@@ -341,28 +324,12 @@
             outline: none;
         }
 
-        .btn-music-skip svg {
-            width: 11px;
-            height: 11px;
-            display: block;
-            transition: transform 0.2s cubic-bezier(0.34, 1.4, 0.64, 1);
-        }
-
+        .btn-music-skip svg { width: 10px; height: 10px; display: block; }
         .btn-music-skip:hover {
             background: var(--brand-pink);
             color: #FFFFFF;
             border-color: var(--brand-pink);
-            box-shadow: 0 3px 8px var(--brand-pink-glow);
             transform: scale(1.08);
-        }
-
-        .btn-music-skip:hover svg {
-            transform: translateX(1px);
-        }
-
-        .btn-music-skip:active {
-            transform: scale(0.88);
-            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
         }
 
         /* CABECERA */
@@ -371,8 +338,9 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 8px;
-            padding: 6px 0 4px;
+            gap: 6px;
+            padding: 2px 0;
+            width: 100%;
         }
 
         .logo-stage {
@@ -383,8 +351,8 @@
         }
 
         .logo-wrapper {
-            width: 90px;
-            height: 90px;
+            width: 80px;
+            height: 80px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -392,8 +360,8 @@
             position: relative;
             transform-style: preserve-3d;
             animation: softCoinFlip 7s infinite ease-in-out;
-            filter: drop-shadow(0 10px 20px rgba(78, 138, 58, 0.25));
-            border: 3.5px solid #FFFFFF;
+            filter: drop-shadow(0 8px 16px rgba(78, 138, 58, 0.20));
+            border: 3px solid #FFFFFF;
         }
 
         @keyframes softCoinFlip {
@@ -411,113 +379,224 @@
 
         .brand-title {
             font-family: 'Outfit', sans-serif;
-            font-size: 1.62rem;
+            font-size: clamp(1.3rem, 6vw, 1.55rem);
             font-weight: 900;
+            line-height: 1.1;
             color: var(--text-main);
             letter-spacing: -0.02em;
-            line-height: 1.1;
         }
         .brand-title span { color: var(--brand-pink-deep); }
 
         .brand-subtitle {
-            font-size: 0.83rem;
-            line-height: 1.4;
+            font-size: clamp(0.74rem, 3.2vw, 0.80rem);
+            line-height: 1.42;
             color: var(--text-muted);
-            font-weight: 600;
-            max-width: 92%;
+            font-weight: 500;
+            max-width: 420px;
+            word-break: break-word;
         }
 
-        /* TARJETAS DE SERVICIOS */
+        /* LISTADO DE SERVICIOS */
         .services-list {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 11px;
+            width: 100%;
         }
 
+        /* ==========================================================================
+           TARJETAS DE SERVICIO: DESPEJE SUPERIOR EXACTO (CERO COLISIÓN)
+           ========================================================================== */
         .digital-item-card {
             display: flex;
             flex-direction: column;
-            gap: 8px;
-            padding: 15px 16px;
+            gap: 9px;
+            padding: 24px 14px 13px 14px; /* 24px asegura que la cabecera jamás toque el badge */
             background: #FFFFFF;
             border-radius: 18px;
-            border: 1.5px solid var(--border-card);
-            box-shadow: var(--shadow-card);
-            transition: all 0.22s var(--spring);
+            border: 1.4px solid;
+            box-shadow: var(--shadow-card), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            transition: transform 0.20s var(--spring), box-shadow 0.20s ease, border-color 0.18s ease;
+            position: relative;
+            overflow: hidden;
+            width: 100%;
         }
 
         .digital-item-card:hover {
-            border-color: var(--brand-pink);
             transform: translateY(-2px);
-            box-shadow: 0 10px 24px -2px rgba(65, 123, 46, 0.16);
+            box-shadow: 0 10px 24px -2px rgba(60, 105, 45, 0.14);
         }
 
+        /* 1. LINKTREE */
+        .digital-item-card.card-linktree {
+            border-color: rgba(233, 137, 183, 0.55);
+            border-left: 5px solid var(--brand-pink-deep);
+            background: linear-gradient(135deg, #FFFFFF 0%, #FDF4F8 100%);
+        }
+        .card-linktree .digital-icon-badge {
+            background: rgba(233, 137, 183, 0.20);
+            color: var(--brand-pink-deep);
+            border-color: rgba(233, 137, 183, 0.6);
+        }
+
+        /* 2. WEB INSTITUCIONAL */
+        .digital-item-card.card-institutional {
+            border-color: rgba(2, 132, 199, 0.45);
+            border-left: 5px solid #0284C7;
+            background: linear-gradient(135deg, #FFFFFF 0%, #F0F9FF 100%);
+        }
+        .card-institutional .digital-icon-badge {
+            background: #E0F2FE;
+            color: #0369A1;
+            border-color: #BAE6FD;
+        }
+
+        /* 3. E-COMMERCE */
+        .digital-item-card.card-ecommerce {
+            border-color: rgba(232, 89, 12, 0.45);
+            border-left: 5px solid #E8590C;
+            background: linear-gradient(135deg, #FFFFFF 0%, #FFF8F3 100%);
+        }
+        .card-ecommerce .digital-icon-badge {
+            background: #FFEDD5;
+            color: #C2410C;
+            border-color: #FED7AA;
+        }
+
+        /* 4. SOFTWARE */
+        .digital-item-card.card-software {
+            border-color: rgba(124, 58, 237, 0.45);
+            border-left: 5px solid #7C3AED;
+            background: linear-gradient(135deg, #FFFFFF 0%, #F6F3FE 100%);
+        }
+        .card-software .digital-icon-badge {
+            background: #EDE9FE;
+            color: #6D28D9;
+            border-color: #DDD6FE;
+        }
+
+        /* FICHA DE CATEGORÍA ANCLADA AL BORDE SUPERIOR DERECHO */
+        .service-corner-badge {
+            position: absolute;
+            top: 0;
+            right: 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.52rem;
+            font-weight: 800;
+            padding: 2.5px 8px 3px 8px;
+            border-bottom-left-radius: 8px;
+            border-top-right-radius: 17px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border-left: 1px solid;
+            border-bottom: 1px solid;
+            line-height: 1.15;
+            z-index: 3;
+            box-shadow: -1px 1px 4px rgba(0, 0, 0, 0.04);
+        }
+
+        .badge-linktree {
+            background: rgba(253, 231, 243, 0.95);
+            color: var(--brand-pink-deep);
+            border-color: rgba(233, 137, 183, 0.55);
+        }
+        .badge-institutional {
+            background: rgba(224, 242, 254, 0.95);
+            color: #0369A1;
+            border-color: rgba(186, 230, 253, 0.85);
+        }
+        .badge-ecommerce {
+            background: rgba(255, 237, 213, 0.95);
+            color: #C2410C;
+            border-color: rgba(254, 215, 170, 0.85);
+        }
+        .badge-software {
+            background: rgba(237, 233, 254, 0.95);
+            color: #6D28D9;
+            border-color: rgba(221, 214, 254, 0.85);
+        }
+
+        /* HEADER DE LA TARJETA */
         .digital-item-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 8px;
+            gap: 10px;
+            width: 100%;
         }
 
         .digital-title-wrap {
             display: flex;
             align-items: center;
             gap: 9px;
+            min-width: 0;
+            flex: 1;
         }
 
         .digital-icon-badge {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 28px;
-            height: 28px;
-            border-radius: 9px;
-            background: rgba(160, 209, 143, 0.22);
-            color: var(--brand-green-deep);
+            width: 36px;
+            height: 36px;
+            min-width: 36px;
+            border-radius: 10px;
+            border: 1.3px solid;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
             flex-shrink: 0;
+            transition: transform 0.20s ease;
+        }
+
+        .digital-item-card:hover .digital-icon-badge {
+            transform: scale(1.06) rotate(-2deg);
         }
 
         .digital-icon-badge svg {
-            width: 15px;
-            height: 15px;
-            stroke-width: 2.2;
+            width: 17px;
+            height: 17px;
+            display: block;
         }
 
         .digital-item-title {
             font-family: 'Outfit', sans-serif;
-            font-size: 0.98rem;
+            font-size: 0.94rem;
             font-weight: 800;
             color: var(--text-main);
+            line-height: 1.2;
+            letter-spacing: -0.01em;
+            margin: 0;
         }
 
-        /* CONTENEDOR DE PRECIO + ICONITO DE CAMBIO PESOS / EUROS */
+        /* CÁPSULA FINANCIERA UNIFICADA */
         .price-container {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            gap: 3px;
+            padding: 2px 2px 2px 6px;
+            background: #FFFFFF;
+            border: 1.2px solid var(--border-card);
+            border-radius: 999px;
+            box-shadow: 0 1.5px 5px rgba(60, 105, 45, 0.06);
             flex-shrink: 0;
         }
 
         .digital-price-pill {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.74rem;
+            font-size: 0.75rem;
             font-weight: 800;
-            padding: 3px 9px;
-            border-radius: 999px;
-            background: #E8F5E5;
+            padding: 1.5px 4px;
             color: var(--brand-green-deep);
-            border: 1px solid var(--brand-green);
             white-space: nowrap;
+            letter-spacing: -0.02em;
         }
 
-        /* BOTONCITO INTERACTIVO DE CAMBIO CON AMBOS SÍMBOLOS VISIBLES */
         .btn-cur-swap {
-            background: #FFFFFF;
-            border: 1.2px solid var(--border-card);
+            background: linear-gradient(135deg, rgba(255, 245, 250, 0.95) 0%, rgba(252, 231, 243, 0.9) 100%);
+            border: 1.1px solid rgba(233, 137, 183, 0.65);
             border-radius: 999px;
-            padding: 3px 8px;
+            padding: 2.5px 7px;
             font-family: 'Outfit', sans-serif;
-            font-size: 0.70rem;
+            font-size: 0.66rem;
             font-weight: 800;
             color: var(--brand-pink-deep);
             cursor: pointer;
@@ -525,75 +604,104 @@
             align-items: center;
             gap: 3px;
             transition: all 0.2s var(--spring);
-            box-shadow: 0 1px 4px rgba(60, 105, 45, 0.08);
             outline: none;
             user-select: none;
-            letter-spacing: 0.03em;
         }
 
         .btn-cur-swap:hover {
             background: var(--brand-pink);
             color: #FFFFFF;
             border-color: var(--brand-pink);
-            transform: scale(1.06);
+            transform: scale(1.05);
             box-shadow: 0 2px 8px var(--brand-pink-glow);
         }
 
-        .btn-cur-swap:active {
-            transform: scale(0.94);
-        }
-
         .digital-item-desc {
-            font-size: 0.77rem;
+            font-size: 0.73rem;
             color: var(--text-muted);
-            line-height: 1.35;
+            line-height: 1.34;
             font-weight: 600;
+            margin: 0;
         }
 
+        /* ==========================================================================
+           FILA DE ACCIONES Y BOTONES CON PROPORCIÓN EXACTA
+           ========================================================================== */
         .digital-actions-row {
             display: flex;
             align-items: center;
             justify-content: space-between;
             gap: 8px;
-            margin-top: 4px;
+            margin-top: 2px;
             padding-top: 7px;
-            border-top: 1px dashed rgba(160, 209, 143, 0.45);
+            border-top: 1px dashed rgba(160, 209, 143, 0.5);
             flex-wrap: wrap;
+            width: 100%;
         }
 
+        /* BOTÓN DE ACCIÓN COMPACTO PARA LINKTREE (TARJETA 1) */
         .digital-link-cta {
-            font-size: 0.78rem;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.76rem;
             font-weight: 800;
             color: var(--brand-pink-deep);
+            background: #FFFFFF;
+            border: 1.3px solid rgba(233, 137, 183, 0.65);
+            padding: 6.5px 13px;
+            border-radius: 10px;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
-            gap: 5px;
+            gap: 6px;
+            box-shadow: 0 2px 6px rgba(233, 137, 183, 0.12);
+            transition: all 0.2s var(--spring);
+            margin-left: auto;
+            flex: 0 0 auto;
+        }
+
+        .digital-link-cta:hover {
+            background: var(--brand-pink);
+            color: #FFFFFF !important;
+            border-color: var(--brand-pink);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px var(--brand-pink-glow);
+        }
+
+        .digital-link-cta svg {
+            width: 13px;
+            height: 13px;
+            stroke-width: 2.5;
             transition: transform 0.2s;
         }
 
-        .digital-link-cta:hover { transform: translateX(2px); }
+        .digital-link-cta:hover svg {
+            transform: translateX(2px);
+        }
 
-        /* BOTÓN DESPLEGABLE ELEGANTE */
+        /* BOTÓN OUTLINE: VER EJEMPLOS */
         .btn-toggle-examples {
-            background: #F2F8EF;
-            border: 1.5px solid var(--border-card);
-            border-radius: 999px;
-            padding: 5px 12px;
+            background: #FFFFFF;
+            border: 1.3px solid var(--border-card);
+            border-radius: 10px;
+            padding: 6.5px 12px;
             font-family: 'Outfit', sans-serif;
-            font-size: 0.75rem;
+            font-size: 0.74rem;
             font-weight: 800;
             color: var(--brand-green-deep);
             cursor: pointer;
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            gap: 5px;
+            box-shadow: 0 1.5px 4px rgba(60, 105, 45, 0.05);
             transition: all 0.2s var(--spring);
+            flex: 0 0 auto;
+            white-space: nowrap;
         }
 
         .btn-toggle-examples:hover {
-            background: #FFFFFF;
+            background: #F4F9F1;
             border-color: var(--brand-green-deep);
+            transform: translateY(-1px);
         }
 
         .btn-toggle-examples.active {
@@ -603,47 +711,95 @@
         }
 
         .btn-toggle-examples svg.chevron-icon {
-            width: 12px;
-            height: 12px;
-            stroke-width: 2.5;
-            transition: transform 0.25s var(--spring);
+            width: 11px;
+            height: 11px;
+            stroke-width: 2.6;
+            transition: transform 0.24s var(--spring);
         }
 
         .btn-toggle-examples.active svg.chevron-icon { transform: rotate(180deg); }
 
-        /* CONTENEDOR DESPLEGABLE HACIA ABAJO */
+        /* BOTÓN COMPACTO PEDIR POR WHATSAPP (NO ESTIRADO) */
+        .btn-action-wsp {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 6.5px 13px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #A0D18F 0%, #3B7228 100%);
+            color: #FFFFFF !important;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.74rem;
+            font-weight: 800;
+            text-decoration: none;
+            box-shadow: 0 2px 7px rgba(60, 105, 45, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+            transition: all 0.2s var(--spring);
+            cursor: pointer;
+            flex: 0 0 auto;
+            white-space: nowrap;
+        }
+
+        .btn-action-wsp:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 5px 14px rgba(60, 105, 45, 0.32);
+        }
+
+        .btn-action-wsp svg {
+            width: 12px;
+            height: 12px;
+            stroke-width: 2.8;
+            transition: transform 0.2s;
+        }
+
+        .btn-action-wsp:hover svg {
+            transform: translate(1px, -1px);
+        }
+
+        /* BOTÓN SOFTWARE COMPACTO ALINEADO A LA DERECHA */
+        .btn-software-cta {
+            background: linear-gradient(135deg, #8B5CF6 0%, #6D28D9 100%);
+            box-shadow: 0 2px 7px rgba(109, 40, 217, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+            margin-left: auto;
+        }
+
+        .btn-software-cta:hover {
+            box-shadow: 0 5px 14px rgba(109, 40, 217, 0.38);
+        }
+
+        /* DESPLEGABLE DE EJEMPLOS */
         .examples-expandable-drawer {
             display: none;
             width: 100%;
-            margin-top: 10px;
-            padding-top: 10px;
+            margin-top: 8px;
+            padding-top: 8px;
             border-top: 1px solid rgba(160, 209, 143, 0.35);
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 6px;
             animation: drawerFadeDown 0.24s var(--spring);
         }
 
         .examples-expandable-drawer.open { display: flex; }
 
         @keyframes drawerFadeDown {
-            from { opacity: 0; transform: translateY(-6px); }
+            from { opacity: 0; transform: translateY(-5px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         .example-badge-chip {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            padding: 7px 12px;
+            gap: 5px;
+            padding: 6px 10px;
             background: #FFFFFF;
-            border: 1.5px solid var(--border-card);
-            border-radius: 11px;
+            border: 1.2px solid var(--border-card);
+            border-radius: 9px;
             font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             font-weight: 700;
             color: var(--text-main);
             text-decoration: none;
-            box-shadow: 0 2px 6px rgba(60, 105, 45, 0.05);
+            box-shadow: 0 1.5px 4px rgba(60, 105, 45, 0.05);
             transition: all 0.2s var(--spring);
             flex: 0 1 auto;
         }
@@ -651,13 +807,13 @@
         .example-badge-chip:hover {
             border-color: var(--brand-pink);
             color: var(--brand-pink-deep);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px var(--brand-pink-glow);
+            transform: translateY(-1.5px);
+            box-shadow: 0 3px 8px var(--brand-pink-glow);
         }
 
         .example-badge-chip svg {
-            width: 12px;
-            height: 12px;
+            width: 11px;
+            height: 11px;
             stroke: currentColor;
             stroke-width: 2.2;
             transition: transform 0.2s;
@@ -667,38 +823,44 @@
 
         /* FOOTER */
         .hub-footer {
-            margin-top: 10px;
+            margin-top: 4px;
             text-align: center;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 5px;
+            gap: 4px;
+            width: 100%;
         }
 
         .footer-badge {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.68rem;
+            font-size: 0.65rem;
             font-weight: 800;
             color: var(--brand-green-text);
             background: rgba(255, 255, 255, 0.92);
-            border: 1.5px solid var(--border-card);
-            padding: 5px 14px;
+            border: 1.2px solid var(--border-card);
+            padding: 4px 12px;
             border-radius: 999px;
+            box-shadow: 0 2px 5px rgba(60, 105, 45, 0.05);
         }
 
         .footer-legal {
-            font-size: 0.68rem;
+            font-size: 0.66rem;
             color: var(--text-light);
             font-weight: 600;
         }
 
-        @media (max-width: 420px) {
-            .top-nav-bar { padding: 3px 5px; gap: 4px; }
-            .top-nav-left { gap: 3px; }
-            .btn-back-hub { width: 30px; height: 30px; min-width: 30px; }
-            .lang-badge-hint { padding-left: 2px; padding-right: 2px; font-size: 0.68rem; }
-            .lang-btn { padding: 4px 6px; font-size: 0.70rem; }
-            .soundtrack-wrap { gap: 5px; padding: 3px 5px 3px 7px; }
+        /* REGLAS ULTRA-ANGOSTAS (<350px) */
+        @media (max-width: 350px) {
+            .top-nav-bar { justify-content: center; gap: 4px; border-radius: 18px; }
+            .top-nav-left { justify-content: center; width: 100%; }
+            .soundtrack-wrap { margin-top: 2px; }
+            .digital-item-card { padding: 22px 10px 10px 10px; }
+            .digital-icon-badge { width: 32px; height: 32px; min-width: 32px; }
+            .digital-item-title { font-size: 0.86rem; }
+            .digital-price-pill { font-size: 0.70rem; }
+            .btn-cur-swap { font-size: 0.60rem; padding: 2px 4px; }
+            .btn-action-wsp, .btn-toggle-examples, .digital-link-cta { font-size: 0.69rem; padding: 5.5px 8px; }
         }
     </style>
 </head>
@@ -777,7 +939,9 @@
         <section class="services-list">
             
             <!-- 1. LANDING ESTILO LINKTREE -->
-            <article class="digital-item-card">
+            <article class="digital-item-card card-linktree">
+                <span class="service-corner-badge badge-linktree">✦ REEMPLAZO LINKTREE</span>
+
                 <div class="digital-item-header">
                     <div class="digital-title-wrap">
                         <span class="digital-icon-badge">
@@ -804,7 +968,9 @@
             </article>
 
             <!-- 2. PÁGINA WEB COMPLETA -->
-            <article class="digital-item-card">
+            <article class="digital-item-card card-institutional">
+                <span class="service-corner-badge badge-institutional">★ WEB INSTITUCIONAL</span>
+
                 <div class="digital-item-header">
                     <div class="digital-title-wrap">
                         <span class="digital-icon-badge">
@@ -829,30 +995,29 @@
                         <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="6 9 12 15 18 9"/></svg>
                     </button>
 
-                    <a href="https://wa.me/5491131933611?text=%C2%A1Hola!%20Me%20contacto%20desde%201111%20Gr%C3%A1fica%20y%20me%20interesa%20la%20P%C3%A1gina%20Web%20Completa%20($70.000)." target="_blank" rel="noopener noreferrer" class="digital-link-cta" id="t_opt2_btn" onclick="playClickSound()">
+                    <a href="https://wa.me/5491131933611?text=%C2%A1Hola!%20Me%20contacto%20desde%201111%20Gr%C3%A1fica%20y%20me%20interesa%20la%20P%C3%A1gina%20Web%20Completa%20($70.000)." target="_blank" rel="noopener noreferrer" class="btn-action-wsp" id="t_opt2_btn" onclick="playClickSound()">
                         <span>Pedir por WhatsApp</span>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:13px; height:13px;"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
                     </a>
                 </div>
 
+                <!-- EJEMPLOS WEBS EXACTOS: BALDORIA MADRID & CICALA JOYERÍA -->
                 <div class="examples-expandable-drawer" id="drawerWebExamples">
-                    <a href="https://onceoncegrafica-1111.github.io/baldoriamadrid/" target="_blank" rel="noopener noreferrer" class="example-badge-chip" onclick="playClickSound()">
+                    <a href="https://baldoriamadrid.com/" target="_blank" rel="noopener noreferrer" class="example-badge-chip" onclick="playClickSound()">
                         <span>Baldoria Madrid</span>
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
                     </a>
-                    <a href="https://onceoncegrafica-1111.github.io/peluqueriaalvear/" target="_blank" rel="noopener noreferrer" class="example-badge-chip" onclick="playClickSound()">
-                        <span>Peluquería Alvear</span>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
-                    </a>
-                    <a href="https://onceoncegrafica-1111.github.io/frimaq/" target="_blank" rel="noopener noreferrer" class="example-badge-chip" onclick="playClickSound()">
-                        <span>Frimaq Maquinarias</span>
+                    <a href="https://cicala.it/" target="_blank" rel="noopener noreferrer" class="example-badge-chip" onclick="playClickSound()">
+                        <span>Cicala Joyería</span>
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
                     </a>
                 </div>
             </article>
 
             <!-- 3. WEB E-COMMERCE CON CARRITO -->
-            <article class="digital-item-card">
+            <article class="digital-item-card card-ecommerce">
+                <span class="service-corner-badge badge-ecommerce">🛒 TIENDA & RESERVAS</span>
+
                 <div class="digital-item-header">
                     <div class="digital-title-wrap">
                         <span class="digital-icon-badge">
@@ -877,26 +1042,29 @@
                         <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="6 9 12 15 18 9"/></svg>
                     </button>
 
-                    <a href="https://wa.me/5491131933611?text=%C2%A1Hola!%20Me%20contacto%20desde%201111%20Gr%C3%A1fica%20y%20me%20interesa%20la%20Web%20con%20Carrito%20de%20Compras%20($200.000)." target="_blank" rel="noopener noreferrer" class="digital-link-cta" id="t_opt3_btn" onclick="playClickSound()">
+                    <a href="https://wa.me/5491131933611?text=%C2%A1Hola!%20Me%20contacto%20desde%201111%20Gr%C3%A1fica%20y%20me%20interesa%20la%20Web%20con%20Carrito%20de%20Compras%20($200.000)." target="_blank" rel="noopener noreferrer" class="btn-action-wsp" id="t_opt3_btn" onclick="playClickSound()">
                         <span>Pedir por WhatsApp</span>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:13px; height:13px;"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
                     </a>
                 </div>
 
+                <!-- EJEMPLOS WEBS EXACTOS: EL FARO HOTEL & JOYERÍA JEAN PIERRE -->
                 <div class="examples-expandable-drawer" id="drawerCartExamples">
-                    <a href="https://onceoncegrafica-1111.github.io/orense/" target="_blank" rel="noopener noreferrer" class="example-badge-chip" onclick="playClickSound()">
-                        <span>Alfajores Orense</span>
+                    <a href="https://elfaroboutiquehotel.com.ar/" target="_blank" rel="noopener noreferrer" class="example-badge-chip" onclick="playClickSound()">
+                        <span>El Faro Hotel</span>
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
                     </a>
-                    <a href="https://cristelextensions.github.io/link/" target="_blank" rel="noopener noreferrer" class="example-badge-chip" onclick="playClickSound()">
-                        <span>Cristel Extensions</span>
+                    <a href="https://www.joyeriajeanpierre.com/" target="_blank" rel="noopener noreferrer" class="example-badge-chip" onclick="playClickSound()">
+                        <span>Joyería Jean Pierre</span>
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
                     </a>
                 </div>
             </article>
 
             <!-- 4. SOFTWARE A MEDIDA & AUTOMATIZACIONES -->
-            <article class="digital-item-card">
+            <article class="digital-item-card card-software">
+                <span class="service-corner-badge badge-software">⚡ AUTOMATIZACIÓN</span>
+
                 <div class="digital-item-header">
                     <div class="digital-title-wrap">
                         <span class="digital-icon-badge">
@@ -910,9 +1078,9 @@
                     Conversión masiva de archivos pesados, orden y limpieza de bases de datos completas, herramientas para ahorrar horas de trabajo, ¡y mucho más!...
                 </p>
                 <div class="digital-actions-row" style="justify-content: flex-end;">
-                    <a href="https://wa.me/5491131933611?text=%C2%A1Hola!%20Me%20contacto%20desde%201111%20Gr%C3%A1fica%20y%20quisiera%20consultar%20por%20Software%20Ligero%20o%20Automatizaciones%20de%20tareas." target="_blank" rel="noopener noreferrer" class="digital-link-cta" id="t_opt4_btn" onclick="playClickSound()">
+                    <a href="https://wa.me/5491131933611?text=%C2%A1Hola!%20Me%20contacto%20desde%201111%20Gr%C3%A1fica%20y%20quisiera%20consultar%20por%20Software%20Ligero%20o%20Automatizaciones%20de%20tareas." target="_blank" rel="noopener noreferrer" class="btn-action-wsp btn-software-cta" id="t_opt4_btn" onclick="playClickSound()">
                         <span>Cotizar a medida por WhatsApp</span>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:13px; height:13px;"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
                     </a>
                 </div>
             </article>
@@ -997,7 +1165,6 @@
             "./music/A Fistful Of Dollars - 17 - Per Un Pugno Di Dollari (1).mp3"
         ];
 
-        // Función que normaliza la URL (si se escribe solo el nombre, le añade ./music/ y codifica espacios)
         function formatMusicUrl(url) {
             if (!url) return '';
             let cleaned = String(url).trim();
@@ -1007,7 +1174,6 @@
             return encodeURI(cleaned);
         }
 
-        // Carga inmediata de la lista: arranca con memoria guardada o directo con las 4 canciones de GitHub
         let playlist = (() => {
             try {
                 const cached = localStorage.getItem('1111_cached_playlist');
@@ -1019,14 +1185,12 @@
             return DEFAULT_PLAYLIST.map(formatMusicUrl);
         })();
 
-        // Micro-vibración háptica mecánica al tacto en dispositivos compatibles
         function triggerHapticFeedback() {
             if (typeof navigator !== 'undefined' && navigator.vibrate) {
                 try { navigator.vibrate(10); } catch(e) {}
             }
         }
 
-        // LECTURA DINÁMICA DE LA CARPETA /music/ EN GITHUB
         async function loadMusicFromFolder() {
             try {
                 const res = await fetch('https://api.github.com/repos/1111grafica/link/contents/music');
@@ -1116,7 +1280,6 @@
                 musicFadeTimer = null;
             }
 
-            // Si es un cambio de pista, mantenemos el switch visual activado (cero parpadeo)
             if (!isSwitchingTrack) {
                 isMusicActive = false;
                 sessionStorage.setItem('1111_music_on', 'false');
@@ -1181,7 +1344,6 @@
             if (isTrackTransitioning) return;
             isTrackTransitioning = true;
 
-            // Fade out con UI trabada en ON (elimina cualquier parpadeo de la perilla)
             fadeOutMusic(300, () => {
                 currentTrackIndex = pickRandomTrackIndex();
                 if (playlist && playlist.length > 0 && playlist[currentTrackIndex]) {
@@ -1192,7 +1354,6 @@
             }, true);
         }
 
-        // FADE OUT SUAVE AL FINAL DE CADA CANCIÓN Y CONEXIÓN FLUIDA CON LA SIGUIENTE
         bgAudioPlayer.addEventListener('timeupdate', () => {
             if (isMusicActive && !bgAudioPlayer.paused && bgAudioPlayer.duration) {
                 const timeLeft = bgAudioPlayer.duration - bgAudioPlayer.currentTime;
@@ -1211,7 +1372,6 @@
             }
         });
 
-        // Salto automático de respaldo si el archivo termina
         bgAudioPlayer.addEventListener('ended', () => {
             if (isMusicActive && !isTrackTransitioning) {
                 isTrackTransitioning = true;
@@ -1222,7 +1382,6 @@
             }
         });
 
-        // Tolerancia a fallos: Si una URL de audio falla o está caída, salta limpiamente al siguiente tema
         bgAudioPlayer.addEventListener('error', () => {
             if (isMusicActive) {
                 currentTrackIndex = pickRandomTrackIndex();
@@ -1232,7 +1391,6 @@
             }
         });
 
-        // Guardado de segundo exacto periódicamente y antes de navegar internamente
         setInterval(() => {
             if (isMusicActive && !bgAudioPlayer.paused) {
                 sessionStorage.setItem('1111_music_src', bgAudioPlayer.src);
@@ -1248,7 +1406,6 @@
             }
         });
 
-        // Detector de enlaces internos vs externos con fade-out semi-lento
         document.addEventListener('click', (e) => {
             const link = e.target.closest('a');
             if (!link) return;
@@ -1257,8 +1414,8 @@
                                href.includes('1111grafica.github.io/link') ||
                                href.endsWith('/link/') || href.endsWith('/link') ||
                                href.includes('clientes.html') || href.includes('web.html');
-            if (isInternal) return; // Si navega internamente entre páginas no se interrumpe
-            if (isMusicActive) fadeOutMusic(1000); // Fade out semi-lento suave y cinematográfico
+            if (isInternal) return;
+            if (isMusicActive) fadeOutMusic(1000);
         });
 
         function toggleDrawer(drawerId, btnId) {
@@ -1339,11 +1496,11 @@
             }
         };
 
-        /* BASE DE PRECIOS POR IDIOMA Y MONEDA */
+        /* BASE DE PRECIOS POR IDIOMA Y MONEDA (CALIBRADA SEGÚN TU TABLA) */
         const PRICES = {
-            opt1: { es: "$30.000", eu: "30 €", pt: "R$ 150", en: "$30" },
-            opt2: { es: "$70.000", eu: "70 €", pt: "R$ 350", en: "$70" },
-            opt3: { es: "$200.000", eu: "200 €", pt: "R$ 990", en: "$200" },
+            opt1: { es: "$30.000", eu: "20 €", pt: "R$ 100", en: "$20" },
+            opt2: { es: "$70.000", eu: "40 €", pt: "R$ 250", en: "$40" },
+            opt3: { es: "$200.000", eu: "120 €", pt: "R$ 600", en: "$125" },
             opt4: { es: "A Medida", eu: "A Medida", pt: "Sob Medida", en: "Custom" }
         };
 
@@ -1555,7 +1712,6 @@
                                 const price_pt = getValW(row, colBadgePt);
                                 const price_en = getValW(row, colBadgeEn);
 
-                                // Asegurar que el precio en Euros conserve siempre el símbolo €
                                 if (price_eu && !price_eu.includes('€') && !price_eu.toLowerCase().includes('medida')) {
                                     price_eu = `${price_eu} €`;
                                 }
@@ -1635,7 +1791,6 @@
             loadMusicFromFolder();
             initWebSheetsConnection();
 
-            // Reanudación suave de la música si venía sonando desde otra página interna
             try {
                 const wasMusicOn = sessionStorage.getItem('1111_music_on');
                 const lastSrc = sessionStorage.getItem('1111_music_src');

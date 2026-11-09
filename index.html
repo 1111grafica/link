@@ -129,7 +129,6 @@
             100% { background-position: 600px 600px; }
         }
 
-        /* CONTENEDOR PRINCIPAL CALIBRADO */
         .hub-container {
             width: 100%;
             max-width: 460px;
@@ -396,7 +395,7 @@
         .social-btn svg { width: 18px; height: 18px; display: block; }
 
         /* ==========================================================================
-           TARJETAS BOTONES HUB CON VITALIDAD AWWWARDS & ILUMINACIÓN REACTIVA
+           TARJETAS BOTONES HUB CON ILUMINACIÓN REFINADA (GLOW SUAVIZADO)
            ========================================================================== */
         .btn-card {
             --mouse-x: 50%;
@@ -423,7 +422,7 @@
             will-change: transform, box-shadow;
         }
 
-        /* LUZ AMBIENTAL DE FOCO QUE SIGUE AL CURSOR O CONTACTO TÁCTIL */
+        /* LUZ AMBIENTAL DE FOCO SATINADA (NO FUERTE NI MOLESTA) */
         .btn-card::before {
             content: '';
             position: absolute;
@@ -432,13 +431,13 @@
             right: 0;
             bottom: 0;
             background: radial-gradient(
-                220px circle at var(--mouse-x) var(--mouse-y),
-                rgba(var(--card-accent-rgb), 0.22),
-                transparent 70%
+                210px circle at var(--mouse-x) var(--mouse-y),
+                rgba(var(--card-accent-rgb), 0.09),
+                transparent 72%
             );
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.35s ease;
+            transition: opacity 0.30s ease;
             z-index: 1;
         }
 
@@ -448,7 +447,7 @@
         }
 
         .btn-card:hover {
-            box-shadow: 0 10px 26px -4px rgba(60, 105, 45, 0.16), 0 0 14px rgba(var(--card-accent-rgb), 0.18);
+            box-shadow: 0 8px 20px -3px rgba(60, 105, 45, 0.12), 0 0 10px rgba(var(--card-accent-rgb), 0.06);
         }
 
         .btn-card:active {
@@ -456,7 +455,7 @@
             transition: transform 0.1s ease;
         }
 
-        /* FICHA CATEGORÍA / BADGE ANCLADA EN LA ESQUINA SUPERIOR DERECHA */
+        /* FICHA CATEGORÍA ANCLADA EN LA ESQUINA SUPERIOR DERECHA */
         .hub-cat-badge-corner {
             position: absolute;
             top: 0;
@@ -578,7 +577,6 @@
             color: #334155;
         }
 
-        /* RECUADRO DE ICONO PROPORCIONADO */
         .icon-box {
             display: flex;
             align-items: center;
@@ -597,7 +595,7 @@
 
         .btn-card:hover .icon-box {
             transform: scale(1.08) rotate(-2deg);
-            box-shadow: 0 4px 10px rgba(var(--card-accent-rgb), 0.32);
+            box-shadow: 0 4px 10px rgba(var(--card-accent-rgb), 0.22);
         }
 
         .btn-info {
@@ -644,7 +642,6 @@
             overflow: hidden;
         }
 
-        /* BOTÓN SUGESTIVO TÁCTIL (INFERIOR DERECHO) */
         .arrow-box {
             position: absolute;
             bottom: 7px;
@@ -683,7 +680,7 @@
             transition: transform 0.24s var(--spring);
         }
 
-        /* MODALES FLOTANTES */
+        /* MODALES */
         .modal-backdrop {
             position: fixed;
             inset: 0;
@@ -766,7 +763,7 @@
             transform: rotate(90deg);
         }
 
-        /* TARJETAS DENTRO DEL MODAL DIGITAL */
+        /* DIGITAL MODAL */
         .digital-options-list {
             display: flex;
             flex-direction: column;
@@ -964,7 +961,9 @@
 
         .example-badge-chip:hover svg { transform: translate(1px, -1px); }
 
-        /* GRILLA GALERÍA */
+        /* ==========================================================================
+           GALERÍA DE TRABAJOS: RESISTENTE, RÁPIDA Y A PRUEBA DE FALLOS
+           ========================================================================== */
         .gallery-grid-dynamic {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -972,6 +971,7 @@
             max-height: 52vh;
             overflow-y: auto;
             contain: content;
+            padding-right: 2px;
         }
 
         .gallery-item-wrap {
@@ -981,7 +981,15 @@
             border: 1.3px solid var(--border-card);
             cursor: zoom-in;
             position: relative;
-            background: #F0F6EE;
+            background: #EFF5ED;
+            transition: transform 0.2s var(--spring), box-shadow 0.2s ease;
+        }
+
+        .gallery-item-wrap:hover {
+            transform: scale(1.03);
+            border-color: var(--brand-pink);
+            box-shadow: 0 4px 12px rgba(60, 105, 45, 0.14);
+            z-index: 2;
         }
 
         .gallery-item-wrap img {
@@ -990,22 +998,27 @@
             object-fit: cover;
             display: block;
             opacity: 0;
-            transition: opacity 0.28s ease;
+            transition: opacity 0.25s ease;
         }
 
         .gallery-item-wrap.loaded img { opacity: 1; }
 
-        /* LIGHTBOX */
+        /* ==========================================================================
+           LIGHTBOX ULTRA-RÁPIDO, CON SWIPE TÁCTIL Y TRANSICIÓN SPRING
+           ========================================================================== */
         .lightbox-overlay {
             position: fixed;
             inset: 0;
             background: rgba(12, 18, 11, 0.94);
-            backdrop-filter: blur(12px);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
             z-index: 5000;
             display: none;
             align-items: center;
             justify-content: center;
             padding: 14px;
+            touch-action: pan-y;
+            user-select: none;
         }
 
         .lightbox-overlay.active { display: flex; }
@@ -1018,33 +1031,69 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            overflow: hidden;
         }
 
         .lightbox-img-full {
             max-width: 100%;
-            max-height: 80vh;
+            max-height: 78vh;
             border-radius: 16px;
-            border: 2px solid #FFFFFF;
+            border: 2px solid rgba(255, 255, 255, 0.85);
             object-fit: contain;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55);
+            transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.18s ease;
+            will-change: transform, opacity;
+        }
+
+        /* Micro animación de slide veloz al pasar fotos */
+        .lightbox-img-full.slide-next {
+            animation: slideNextAnim 0.18s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .lightbox-img-full.slide-prev {
+            animation: slidePrevAnim 0.18s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes slideNextAnim {
+            0% { opacity: 0.3; transform: translateX(24px) scale(0.96); }
+            100% { opacity: 1; transform: translateX(0) scale(1); }
+        }
+
+        @keyframes slidePrevAnim {
+            0% { opacity: 0.3; transform: translateX(-24px) scale(0.96); }
+            100% { opacity: 1; transform: translateX(0) scale(1); }
         }
 
         .lb-nav-btn {
             position: fixed;
             top: 50%;
             transform: translateY(-50%);
-            width: 42px;
-            height: 42px;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.2);
-            border: 1.5px solid rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.18);
+            backdrop-filter: blur(8px);
+            border: 1.5px solid rgba(255, 255, 255, 0.6);
             color: #FFFFFF;
             font-size: 22px;
             cursor: pointer;
             z-index: 5010;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s var(--spring);
+            outline: none;
         }
 
-        .lb-prev { left: 14px; }
-        .lb-next { right: 14px; }
+        .lb-nav-btn:hover {
+            background: var(--brand-pink);
+            border-color: var(--brand-pink);
+            transform: translateY(-50%) scale(1.12);
+        }
+
+        .lb-nav-btn:active { transform: translateY(-50%) scale(0.94); }
+
+        .lb-prev { left: 16px; }
+        .lb-next { right: 16px; }
 
         .lb-close-btn {
             position: fixed;
@@ -1053,12 +1102,23 @@
             width: 38px;
             height: 38px;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.22);
+            background: rgba(255, 255, 255, 0.2);
             border: 1.5px solid #FFFFFF;
             color: #FFFFFF;
-            font-size: 17px;
+            font-size: 16px;
             cursor: pointer;
             z-index: 5020;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s var(--spring);
+            outline: none;
+        }
+
+        .lb-close-btn:hover {
+            background: var(--brand-pink);
+            border-color: var(--brand-pink);
+            transform: rotate(90deg) scale(1.08);
         }
 
         .lb-counter {
@@ -1066,9 +1126,11 @@
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.78rem;
             color: #FFFFFF;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.55);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             padding: 4px 14px;
             border-radius: 999px;
+            letter-spacing: 0.05em;
         }
 
         /* FOOTER */
@@ -1100,7 +1162,6 @@
             font-weight: 600;
         }
 
-        /* REGLAS PARA PANTALLAS ULTRA-ANGOSTAS (<350px) */
         @media (max-width: 350px) {
             .lang-nav-bar { justify-content: center; gap: 4px; border-radius: 18px; }
             .lang-group-left { justify-content: center; width: 100%; }
@@ -1112,6 +1173,8 @@
             .hub-cat-badge-corner { font-size: 0.48rem; padding: 2px 6px; max-width: 50%; }
             .arrow-box { width: 22px; height: 22px; min-width: 22px; bottom: 5px; right: 6px; }
             .gallery-grid-dynamic { grid-template-columns: repeat(2, 1fr); }
+            .lb-prev { left: 8px; width: 38px; height: 38px; }
+            .lb-next { right: 8px; width: 38px; height: 38px; }
         }
     </style>
 </head>
@@ -1136,18 +1199,15 @@
                 </div>
             </div>
 
-            <!-- SOUNDTRACK CONTROLLER EN ISLA ROSA CON ÍCONO MUSICAL -->
             <div class="soundtrack-wrap">
                 <svg class="soundtrack-icon" viewBox="0 0 24 24" aria-hidden="true">
                     <path d="M9 18V5l12-2v13M9 18a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm12-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
                 </svg>
 
-                <!-- SWITCH DESLIZANTE PROFESIONAL (DER <-> IZQ) -->
                 <button type="button" class="btn-music-toggle" id="btnMusicToggle" onclick="toggleMusic()" title="Encender / Apagar música" aria-label="Interruptor de música">
                     <span class="switch-knob"></span>
                 </button>
 
-                <!-- BOTÓN SALTEAR CON ICONO UNIVERSAL DE PISTA -->
                 <button type="button" class="btn-music-skip" id="btnMusicSkip" onclick="skipMusic()" title="Siguiente pista" aria-label="Siguiente pista">
                     <svg viewBox="0 0 24 24" fill="currentColor">
                         <path d="M5.5 18V6l8.5 6-8.5 6zM16 6h2v12h-2z"/>
@@ -1193,7 +1253,6 @@
 
         <!-- BOTÓN 1: WHATSAPP -->
         <a href="https://wa.me/5491131933611" target="_blank" rel="noopener noreferrer" class="btn-card hero-featured" id="btnWspMain" onclick="playClickSound()">
-            <!-- Ficha categoría anclada arriba a la derecha -->
             <span class="hub-cat-badge-corner" id="t_btn1_badge">Respuesta Rápida</span>
 
             <div class="icon-box" id="iconBoxBtn1">
@@ -1245,7 +1304,6 @@
 
         <!-- BOTÓN 3: TRABAJOS DE GRÁFICA -->
         <div class="btn-card card-print" id="btnCard3" onclick="openGalleryModal(); playClickSound();">
-            <!-- Ficha categoría anclada arriba a la derecha -->
             <span class="hub-cat-badge-corner" id="t_btn3_badge">Fotos</span>
 
             <div class="icon-box" id="iconBoxBtn3">
@@ -1267,7 +1325,6 @@
 
         <!-- BOTÓN 4: PORTFOLIO DISEÑO PDF -->
         <a href="https://onceoncegrafica-1111.github.io/1111grafica/Portfolio%20DGI%202026.pdf" target="_blank" rel="noopener noreferrer" class="btn-card card-pdf" id="btnPortfolioPdf" onclick="playClickSound()">
-            <!-- Ficha categoría anclada arriba a la derecha -->
             <span class="hub-cat-badge-corner" id="t_btn4_badge">PDF 2026</span>
 
             <div class="icon-box" id="iconBoxBtn4">
@@ -1289,7 +1346,6 @@
 
         <!-- BOTÓN 5: SOLUCIONES DIGITALES & WEB -->
         <a href="web.html" class="btn-card card-soft" id="btnCard5" onclick="playClickSound()">
-            <!-- Ficha categoría anclada arriba a la derecha -->
             <span class="hub-cat-badge-corner" id="t_btn5_badge">Servicios</span>
 
             <div class="icon-box" id="iconBoxBtn5">
@@ -1381,7 +1437,7 @@
                     <div class="digital-item-header">
                         <div class="digital-title-wrap">
                             <span class="digital-icon-badge">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1-4-10z"/></svg>
                             </span>
                             <span class="digital-item-title" id="t_opt2_title">Página Web Completa (Institucional)</span>
                         </div>
@@ -1403,7 +1459,6 @@
                         </a>
                     </div>
 
-                    <!-- DESPLEGABLE HACIA ABAJO: RECUADROS LADO A LADO -->
                     <div class="examples-expandable-drawer" id="drawerWebExamples">
                         <a href="https://onceoncegrafica-1111.github.io/baldoriamadrid/" target="_blank" rel="noopener noreferrer" class="example-badge-chip" onclick="playClickSound()">
                             <span>Baldoria Madrid</span>
@@ -1447,7 +1502,6 @@
                         </a>
                     </div>
 
-                    <!-- DESPLEGABLE HACIA ABAJO: RECUADROS LADO A LADO -->
                     <div class="examples-expandable-drawer" id="drawerCartExamples">
                         <a href="https://onceoncegrafica-1111.github.io/orense/" target="_blank" rel="noopener noreferrer" class="example-badge-chip" onclick="playClickSound()">
                             <span>Alfajores Orense</span>
@@ -1505,17 +1559,17 @@
         </div>
     </div>
 
-    <!-- LIGHTBOX -->
+    <!-- LIGHTBOX VELOZ CON GESTOS Y TECLADO -->
     <div class="lightbox-overlay" id="lightboxView" onclick="closeLightboxOnBg(event)">
         <button type="button" class="lb-close-btn" onclick="closeLightbox(); playClickSound();" title="Cerrar (Esc)">✕</button>
-        <button type="button" class="lb-nav-btn lb-prev" onclick="navLightbox(-1, event); playClickSound();" title="Anterior">‹</button>
+        <button type="button" class="lb-nav-btn lb-prev" onclick="navLightbox(-1, event); playClickSound();" title="Anterior (←)">‹</button>
         
         <div class="lightbox-container" id="lightboxContainer" onclick="event.stopPropagation()">
             <img src="" alt="Trabajo 1111 Gráfica" class="lightbox-img-full" id="lightboxImg">
             <span class="lb-counter" id="lightboxCounter">1 / 50</span>
         </div>
 
-        <button type="button" class="lb-nav-btn lb-next" onclick="navLightbox(1, event); playClickSound();" title="Siguiente">›</button>
+        <button type="button" class="lb-nav-btn lb-next" onclick="navLightbox(1, event); playClickSound();" title="Siguiente (→)">›</button>
     </div>
 
     <!-- SCRIPTS -->
@@ -1832,14 +1886,14 @@
             });
         }
 
-        /* 2. GALERÍA */
+        /* ==========================================================================
+           2. MOTOR DE GALERÍA Y LIGHTBOX DE VELOCIDAD INSTANTÁNEA (0s DE ESPERA)
+           ========================================================================== */
         const TOTAL_PHOTOS = 50;
         const GITHUB_PHOTOS = Array.from({ length: TOTAL_PHOTOS }, (_, i) => ({
             id: i + 1,
-            thumb: `https://cdn.jsdelivr.net/gh/onceoncegrafica-1111/1111grafica@main/miniaturas/foto_${i + 1}.webp`,
-            full: `https://cdn.jsdelivr.net/gh/onceoncegrafica-1111/1111grafica@main/imagenes/foto_${i + 1}.webp`,
-            fallbackThumb: `./miniaturas/foto_${i + 1}.webp`,
-            fallbackFull: `./imagenes/foto_${i + 1}.webp`
+            thumb: `./miniaturas/foto_${i + 1}.webp`,
+            full: `./imagenes/foto_${i + 1}.webp`
         }));
 
         let activeShuffledPhotos = [...GITHUB_PHOTOS];
@@ -1862,18 +1916,8 @@
                 img.loading = 'lazy';
                 img.decoding = 'async';
                 img.onload = () => wrap.classList.add('loaded');
-                img.onerror = function() {
-                    if (!this.dataset.triedOriginal) {
-                        this.dataset.triedOriginal = "true";
-                        this.src = item.full;
-                    } else if (!this.dataset.triedFallback) {
-                        this.dataset.triedFallback = "true";
-                        this.src = item.fallbackFull;
-                    } else {
-                        wrap.style.display = 'none';
-                    }
-                };
                 img.src = item.thumb;
+
                 wrap.appendChild(img);
                 container.appendChild(wrap);
             });
@@ -1889,18 +1933,47 @@
             populateGalleryGrid(activeShuffledPhotos);
         }
 
+        /* LIGHTBOX CON CARGA INSTANTÁNEA (USA MINIATURA INMEDIATA EN 0ms) */
         function openLightbox(index) {
             currentPhotoIndex = index;
             updateLightboxContent();
             document.getElementById('lightboxView').classList.add('active');
         }
 
-        function updateLightboxContent() {
+        function preloadAdjacentPhotos() {
+            const prevIdx = (currentPhotoIndex - 1 + activeShuffledPhotos.length) % activeShuffledPhotos.length;
+            const nextIdx = (currentPhotoIndex + 1) % activeShuffledPhotos.length;
+            [prevIdx, nextIdx].forEach(idx => {
+                const imgPre = new Image();
+                imgPre.src = activeShuffledPhotos[idx].full;
+            });
+        }
+
+        function updateLightboxContent(directionClass = '') {
             const item = activeShuffledPhotos[currentPhotoIndex];
             const img = document.getElementById('lightboxImg');
             const counter = document.getElementById('lightboxCounter');
-            img.src = item.full;
+
+            if (directionClass) {
+                img.classList.remove('slide-next', 'slide-prev');
+                void img.offsetWidth; // Reinicia animación spring
+                img.classList.add(directionClass);
+            }
+
+            // 1. Muestra al instante (0 milisegundos) la miniatura que ya está en memoria caché (CERO PANTALLA NEGRA)
+            img.src = item.thumb;
             counter.innerText = `${currentPhotoIndex + 1} / ${activeShuffledPhotos.length}`;
+
+            // 2. En segundo plano reemplaza por la HD sin parpadeos
+            const hdImg = new Image();
+            hdImg.onload = () => {
+                if (item.full === activeShuffledPhotos[currentPhotoIndex].full) {
+                    img.src = item.full;
+                }
+            };
+            hdImg.src = item.full;
+
+            preloadAdjacentPhotos();
         }
 
         function navLightbox(direction, event) {
@@ -1908,17 +1981,20 @@
             currentPhotoIndex += direction;
             if (currentPhotoIndex < 0) currentPhotoIndex = activeShuffledPhotos.length - 1;
             if (currentPhotoIndex >= activeShuffledPhotos.length) currentPhotoIndex = 0;
-            updateLightboxContent();
+            updateLightboxContent(direction > 0 ? 'slide-next' : 'slide-prev');
         }
 
         function closeLightbox() {
             document.getElementById('lightboxView').classList.remove('active');
+            const img = document.getElementById('lightboxImg');
+            img.classList.remove('slide-next', 'slide-prev');
         }
 
         function closeLightboxOnBg(event) {
             if (event.target.id === 'lightboxView') closeLightbox();
         }
 
+        // CONTROL POR TECLADO
         window.addEventListener('keydown', (e) => {
             const lb = document.getElementById('lightboxView');
             if (lb.classList.contains('active')) {
@@ -1927,6 +2003,34 @@
                 if (e.key === 'ArrowRight') { navLightbox(1); playClickSound(); }
             }
         });
+
+        // SOPORTE TÁCTIL (SWIPE GESTURE EN MÓVIL)
+        let touchStartX = 0;
+        let touchEndX = 0;
+        const lbOverlay = document.getElementById('lightboxView');
+
+        lbOverlay.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        lbOverlay.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleLightboxSwipe();
+        }, { passive: true });
+
+        function handleLightboxSwipe() {
+            const threshold = 40;
+            const diff = touchEndX - touchStartX;
+            if (Math.abs(diff) > threshold) {
+                if (diff < 0) {
+                    navLightbox(1); // Swipe izquierda -> Siguiente
+                    playClickSound();
+                } else {
+                    navLightbox(-1); // Swipe derecha -> Anterior
+                    playClickSound();
+                }
+            }
+        }
 
         /* MODALES */
         function openGalleryModal() {

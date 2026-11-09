@@ -37,6 +37,7 @@
 
             --shadow-card: 0 3px 14px -2px rgba(60, 105, 45, 0.06), 0 1px 3px rgba(0, 0, 0, 0.02);
             --spring: cubic-bezier(0.16, 1, 0.3, 1);
+            --spring-bounce: cubic-bezier(0.34, 1.4, 0.64, 1);
         }
 
         * {
@@ -405,30 +406,61 @@
         }
 
         /* ==========================================================================
-           TARJETAS DE SERVICIO: DESPEJE SUPERIOR EXACTO (CERO COLISIÓN)
+           TARJETAS DE SERVICIO: ILUMINACIÓN PERIMETRAL LÍQUIDA + ELEVACIÓN ELEGANTE
+           (CERO INCLINACIÓN FÍSICA PARA UNA LECTURA Y USO IMPECABLE)
            ========================================================================== */
         .digital-item-card {
+            --card-accent-rgb: 160, 209, 143;
             display: flex;
             flex-direction: column;
             gap: 9px;
-            padding: 24px 14px 13px 14px; /* 24px asegura que la cabecera jamás toque el badge */
+            padding: 24px 14px 13px 14px;
             background: #FFFFFF;
             border-radius: 18px;
             border: 1.4px solid;
-            box-shadow: var(--shadow-card), inset 0 1px 0 rgba(255, 255, 255, 0.8);
-            transition: transform 0.20s var(--spring), box-shadow 0.20s ease, border-color 0.18s ease;
+            box-shadow: var(--shadow-card), inset 0 1px 0 rgba(255, 255, 255, 0.85);
             position: relative;
             overflow: hidden;
             width: 100%;
+            transition: transform 0.24s var(--spring), box-shadow 0.24s ease, border-color 0.22s ease;
+        }
+
+        /* HAZ DE LUZ LÍQUIDA SATINADA (NO MOLESTA, SATINADA Y ELEGANTE) */
+        .digital-item-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: linear-gradient(
+                135deg, 
+                rgba(var(--card-accent-rgb), 0.08) 0%, 
+                rgba(255, 255, 255, 0) 50%, 
+                rgba(var(--card-accent-rgb), 0.06) 100%
+            );
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            z-index: 1;
+        }
+
+        .digital-item-card:hover::before,
+        .digital-item-card.is-touched::before {
+            opacity: 1;
         }
 
         .digital-item-card:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 24px -2px rgba(60, 105, 45, 0.14);
+            box-shadow: 0 10px 26px -3px rgba(60, 105, 45, 0.12), 0 0 10px rgba(var(--card-accent-rgb), 0.06);
+        }
+
+        .digital-item-card:active {
+            transform: scale(0.99) translateY(0);
+            transition: transform 0.1s ease;
         }
 
         /* 1. LINKTREE */
         .digital-item-card.card-linktree {
+            --card-accent-rgb: 233, 137, 183;
             border-color: rgba(233, 137, 183, 0.55);
             border-left: 5px solid var(--brand-pink-deep);
             background: linear-gradient(135deg, #FFFFFF 0%, #FDF4F8 100%);
@@ -441,6 +473,7 @@
 
         /* 2. WEB INSTITUCIONAL */
         .digital-item-card.card-institutional {
+            --card-accent-rgb: 2, 132, 199;
             border-color: rgba(2, 132, 199, 0.45);
             border-left: 5px solid #0284C7;
             background: linear-gradient(135deg, #FFFFFF 0%, #F0F9FF 100%);
@@ -453,6 +486,7 @@
 
         /* 3. E-COMMERCE */
         .digital-item-card.card-ecommerce {
+            --card-accent-rgb: 232, 89, 12;
             border-color: rgba(232, 89, 12, 0.45);
             border-left: 5px solid #E8590C;
             background: linear-gradient(135deg, #FFFFFF 0%, #FFF8F3 100%);
@@ -465,6 +499,7 @@
 
         /* 4. SOFTWARE */
         .digital-item-card.card-software {
+            --card-accent-rgb: 5, 150, 105;
             border-color: rgba(124, 58, 237, 0.45);
             border-left: 5px solid #059669;
             background: linear-gradient(135deg, #FFFFFF 0%, #F6F3FE 100%);
@@ -481,9 +516,9 @@
             top: 0;
             right: 0;
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.52rem;
+            font-size: 0.54rem;
             font-weight: 800;
-            padding: 2.5px 8px 3px 8px;
+            padding: 2.5px 8.5px 3px 8px;
             border-bottom-left-radius: 8px;
             border-top-right-radius: 17px;
             text-transform: uppercase;
@@ -493,6 +528,11 @@
             line-height: 1.15;
             z-index: 3;
             box-shadow: -1px 1px 4px rgba(0, 0, 0, 0.04);
+            transition: transform 0.22s var(--spring);
+        }
+
+        .digital-item-card:hover .service-corner-badge {
+            transform: translateY(-0.5px);
         }
 
         .badge-linktree {
@@ -523,6 +563,7 @@
             justify-content: space-between;
             gap: 10px;
             width: 100%;
+            z-index: 2;
         }
 
         .digital-title-wrap {
@@ -537,23 +578,24 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 36px;
-            height: 36px;
-            min-width: 36px;
+            width: 38px;
+            height: 38px;
+            min-width: 38px;
             border-radius: 10px;
             border: 1.3px solid;
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
             flex-shrink: 0;
-            transition: transform 0.20s ease;
+            transition: transform 0.24s var(--spring-bounce), box-shadow 0.24s ease;
         }
 
         .digital-item-card:hover .digital-icon-badge {
-            transform: scale(1.06) rotate(-2deg);
+            transform: scale(1.08) rotate(-2deg);
+            box-shadow: 0 4px 10px rgba(var(--card-accent-rgb), 0.22);
         }
 
         .digital-icon-badge svg {
-            width: 17px;
-            height: 17px;
+            width: 18px;
+            height: 18px;
             display: block;
         }
 
@@ -565,6 +607,11 @@
             line-height: 1.2;
             letter-spacing: -0.01em;
             margin: 0;
+            transition: transform 0.22s var(--spring);
+        }
+
+        .digital-item-card:hover .digital-item-title {
+            transform: translateX(1.5px);
         }
 
         /* CÁPSULA FINANCIERA UNIFICADA */
@@ -578,6 +625,8 @@
             border-radius: 999px;
             box-shadow: 0 1.5px 5px rgba(60, 105, 45, 0.06);
             flex-shrink: 0;
+            z-index: 2;
+            overflow: hidden;
         }
 
         .digital-price-pill {
@@ -588,6 +637,21 @@
             color: var(--brand-green-deep);
             white-space: nowrap;
             letter-spacing: -0.02em;
+            display: inline-block;
+            transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
+        }
+
+        .digital-price-pill.flip-out {
+            transform: translateY(-8px);
+            opacity: 0;
+        }
+        .digital-price-pill.flip-in {
+            animation: flipInPrice 0.22s var(--spring) forwards;
+        }
+
+        @keyframes flipInPrice {
+            0% { transform: translateY(8px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
         }
 
         .btn-cur-swap {
@@ -603,7 +667,7 @@
             display: inline-flex;
             align-items: center;
             gap: 3px;
-            transition: all 0.2s var(--spring);
+            transition: all 0.22s var(--spring-bounce);
             outline: none;
             user-select: none;
         }
@@ -612,8 +676,12 @@
             background: var(--brand-pink);
             color: #FFFFFF;
             border-color: var(--brand-pink);
-            transform: scale(1.05);
+            transform: scale(1.06) rotate(180deg);
             box-shadow: 0 2px 8px var(--brand-pink-glow);
+        }
+
+        .btn-cur-swap:active {
+            transform: scale(0.92) rotate(180deg);
         }
 
         .digital-item-desc {
@@ -622,11 +690,10 @@
             line-height: 1.34;
             font-weight: 600;
             margin: 0;
+            z-index: 2;
         }
 
-        /* ==========================================================================
-           FILA DE ACCIONES Y BOTONES CON PROPORCIÓN EXACTA
-           ========================================================================== */
+        /* FILA DE ACCIONES */
         .digital-actions-row {
             display: flex;
             align-items: center;
@@ -637,9 +704,9 @@
             border-top: 1px dashed rgba(160, 209, 143, 0.5);
             flex-wrap: wrap;
             width: 100%;
+            z-index: 2;
         }
 
-        /* BOTÓN DE ACCIÓN COMPACTO PARA LINKTREE (TARJETA 1) */
         .digital-link-cta {
             font-family: 'Outfit', sans-serif;
             font-size: 0.76rem;
@@ -678,7 +745,6 @@
             transform: translateX(2px);
         }
 
-        /* BOTÓN OUTLINE: VER EJEMPLOS */
         .btn-toggle-examples {
             background: #FFFFFF;
             border: 1.3px solid var(--border-card);
@@ -714,12 +780,11 @@
             width: 11px;
             height: 11px;
             stroke-width: 2.6;
-            transition: transform 0.24s var(--spring);
+            transition: transform 0.26s var(--spring-bounce);
         }
 
         .btn-toggle-examples.active svg.chevron-icon { transform: rotate(180deg); }
 
-        /* BOTÓN COMPACTO PEDIR POR WHATSAPP (NO ESTIRADO) */
         .btn-action-wsp {
             display: inline-flex;
             align-items: center;
@@ -756,34 +821,45 @@
             transform: translate(1px, -1px);
         }
 
-        /* BOTÓN SOFTWARE COMPACTO ALINEADO A LA DERECHA */
         .btn-software-cta {
-            background: linear-gradient(135deg, #059669 0%, #059669 100%);
-            box-shadow: 0 2px 7px rgba(109, 40, 217, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+            box-shadow: 0 2px 7px rgba(5, 150, 105, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.35);
             margin-left: auto;
         }
 
         .btn-software-cta:hover {
-            box-shadow: 0 5px 14px rgba(109, 40, 217, 0.38);
+            box-shadow: 0 5px 14px rgba(5, 150, 105, 0.38);
         }
 
-        /* DESPLEGABLE DE EJEMPLOS */
-        .examples-expandable-drawer {
-            display: none;
+        /* ==========================================================================
+           DESPLEGABLE DE EJEMPLOS: TRANSICIÓN ELÁSTICA CON ENTRADA ESCALONADA
+           ========================================================================== */
+        .drawer-wrapper-grid {
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows 0.32s cubic-bezier(0.16, 1, 0.3, 1);
             width: 100%;
+        }
+
+        .drawer-wrapper-grid.open {
+            grid-template-rows: 1fr;
+        }
+
+        .examples-expandable-drawer {
+            overflow: hidden;
+            display: flex;
+            width: 100%;
+            flex-wrap: wrap;
+            gap: 6px;
+            padding-top: 0;
+            border-top: 0px solid transparent;
+            transition: padding-top 0.24s ease, border-color 0.24s ease;
+        }
+
+        .drawer-wrapper-grid.open .examples-expandable-drawer {
             margin-top: 8px;
             padding-top: 8px;
             border-top: 1px solid rgba(160, 209, 143, 0.35);
-            flex-wrap: wrap;
-            gap: 6px;
-            animation: drawerFadeDown 0.24s var(--spring);
-        }
-
-        .examples-expandable-drawer.open { display: flex; }
-
-        @keyframes drawerFadeDown {
-            from { opacity: 0; transform: translateY(-5px); }
-            to { opacity: 1; transform: translateY(0); }
         }
 
         .example-badge-chip {
@@ -802,6 +878,20 @@
             box-shadow: 0 1.5px 4px rgba(60, 105, 45, 0.05);
             transition: all 0.2s var(--spring);
             flex: 0 1 auto;
+            opacity: 0;
+            transform: translateY(6px);
+        }
+
+        .drawer-wrapper-grid.open .example-badge-chip {
+            animation: chipFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation-delay: calc(var(--chip-idx, 0) * 0.045s);
+        }
+
+        @keyframes chipFadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .example-badge-chip:hover {
@@ -856,7 +946,7 @@
             .top-nav-left { justify-content: center; width: 100%; }
             .soundtrack-wrap { margin-top: 2px; }
             .digital-item-card { padding: 22px 10px 10px 10px; }
-            .digital-icon-badge { width: 32px; height: 32px; min-width: 32px; }
+            .digital-icon-badge { width: 34px; height: 34px; min-width: 34px; }
             .digital-item-title { font-size: 0.86rem; }
             .digital-price-pill { font-size: 0.70rem; }
             .btn-cur-swap { font-size: 0.60rem; padding: 2px 4px; }
@@ -876,7 +966,6 @@
 
         <!-- NAVEGACIÓN SUPERIOR CON BOTÓN VOLVER & SOUNDTRACK -->
         <nav class="top-nav-bar" aria-label="Navegación">
-            <!-- GRUPO IZQUIERDA: FLECHA VOLVER + IDIOMA EXACTO -->
             <div class="top-nav-left">
                 <a href="https://1111grafica.github.io/link" class="btn-back-hub" id="btnBackHub" onclick="playClickSound()" title="Sobre Nosotros" aria-label="Volver">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
@@ -894,7 +983,6 @@
                 </div>
             </div>
             
-            <!-- GRUPO DERECHA: SOUNDTRACK -->
             <div class="soundtrack-wrap">
                 <svg class="soundtrack-icon" viewBox="0 0 24 24" aria-hidden="true">
                     <path d="M9 18V5l12-2v13M9 18a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm12-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
@@ -990,7 +1078,7 @@
                 </p>
                 
                 <div class="digital-actions-row">
-                    <button type="button" class="btn-toggle-examples" id="btnToggleWeb" onclick="toggleDrawer('drawerWebExamples', 'btnToggleWeb'); playClickSound();">
+                    <button type="button" class="btn-toggle-examples" id="btnToggleWeb" onclick="toggleDrawer('drawerWebWrap', 'btnToggleWeb'); playClickSound();">
                         <span id="t_btn_ex_1">Ver ejemplos</span>
                         <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="6 9 12 15 18 9"/></svg>
                     </button>
@@ -1001,16 +1089,18 @@
                     </a>
                 </div>
 
-                <!-- EJEMPLOS WEBS EXACTOS: BALDORIA MADRID & CICALA JOYERÍA -->
-                <div class="examples-expandable-drawer" id="drawerWebExamples">
-                    <a href="https://baldoriamadrid.com/" target="_blank" rel="noopener noreferrer" class="example-badge-chip" onclick="playClickSound()">
-                        <span>Baldoria Madrid</span>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
-                    </a>
-                    <a href="https://cicala.it/" target="_blank" rel="noopener noreferrer" class="example-badge-chip" onclick="playClickSound()">
-                        <span>Cicala Joyería</span>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
-                    </a>
+                <!-- DESPLEGABLE EN CASCADA ESCALONADA (BALDORIA MADRID & CICALA JOYERÍA) -->
+                <div class="drawer-wrapper-grid" id="drawerWebWrap">
+                    <div class="examples-expandable-drawer" id="drawerWebExamples">
+                        <a href="https://baldoriamadrid.com/" target="_blank" rel="noopener noreferrer" class="example-badge-chip" style="--chip-idx: 0;" onclick="playClickSound()">
+                            <span>Baldoria Madrid</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                        </a>
+                        <a href="https://cicala.it/" target="_blank" rel="noopener noreferrer" class="example-badge-chip" style="--chip-idx: 1;" onclick="playClickSound()">
+                            <span>Cicala Joyería</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                        </a>
+                    </div>
                 </div>
             </article>
 
@@ -1037,7 +1127,7 @@
                 </p>
                 
                 <div class="digital-actions-row">
-                    <button type="button" class="btn-toggle-examples" id="btnToggleCart" onclick="toggleDrawer('drawerCartExamples', 'btnToggleCart'); playClickSound();">
+                    <button type="button" class="btn-toggle-examples" id="btnToggleCart" onclick="toggleDrawer('drawerCartWrap', 'btnToggleCart'); playClickSound();">
                         <span id="t_btn_ex_2">Ver ejemplos</span>
                         <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="6 9 12 15 18 9"/></svg>
                     </button>
@@ -1048,16 +1138,18 @@
                     </a>
                 </div>
 
-                <!-- EJEMPLOS WEBS EXACTOS: EL FARO HOTEL & JOYERÍA JEAN PIERRE -->
-                <div class="examples-expandable-drawer" id="drawerCartExamples">
-                    <a href="https://elfaroboutiquehotel.com.ar/" target="_blank" rel="noopener noreferrer" class="example-badge-chip" onclick="playClickSound()">
-                        <span>El Faro Hotel</span>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
-                    </a>
-                    <a href="https://www.joyeriajeanpierre.com/" target="_blank" rel="noopener noreferrer" class="example-badge-chip" onclick="playClickSound()">
-                        <span>Joyería Jean Pierre</span>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
-                    </a>
+                <!-- DESPLEGABLE EN CASCADA ESCALONADA (EL FARO HOTEL & JOYERÍA JEAN PIERRE) -->
+                <div class="drawer-wrapper-grid" id="drawerCartWrap">
+                    <div class="examples-expandable-drawer" id="drawerCartExamples">
+                        <a href="https://elfaroboutiquehotel.com.ar/" target="_blank" rel="noopener noreferrer" class="example-badge-chip" style="--chip-idx: 0;" onclick="playClickSound()">
+                            <span>El Faro Hotel</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                        </a>
+                        <a href="https://www.joyeriajeanpierre.com/" target="_blank" rel="noopener noreferrer" class="example-badge-chip" style="--chip-idx: 1;" onclick="playClickSound()">
+                            <span>Joyería Jean Pierre</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                        </a>
+                    </div>
                 </div>
             </article>
 
@@ -1147,7 +1239,7 @@
             else if (audioCtx.state === 'suspended') audioCtx.resume();
         }, { once: true });
 
-        /* 1.B MOTOR DE MÚSICA DE FONDO (CON FÍSICA MECÁNICA, CERO PARPADEO Y FADES PERFECCIONADOS) */
+        /* 1.B MOTOR DE MÚSICA DE FONDO */
         const bgAudioPlayer = new Audio();
         bgAudioPlayer.preload = "auto";
         const MUSIC_TARGET_VOL = 0.25;
@@ -1157,7 +1249,6 @@
         let musicFadeTimer = null;
         let currentTrackIndex = -1;
 
-        // Lista de canciones base directa desde la carpeta "music/"
         const DEFAULT_PLAYLIST = [
             "./music/A Fistful Of Dollars - 01 - Titoli (Ennio Morricone).mp3",
             "./music/A Fistful Of Dollars - 07 - Doppi Giochi (1).mp3",
@@ -1418,16 +1509,29 @@
             if (isMusicActive) fadeOutMusic(1000);
         });
 
-        function toggleDrawer(drawerId, btnId) {
-            const drawer = document.getElementById(drawerId);
+        /* ==========================================================================
+           MICRO-INTERACCIÓN TÁCTIL SATINADA (MÓVIL Y ESCRITORIO)
+           ========================================================================== */
+        function bindTouchCards() {
+            const cards = document.querySelectorAll('.digital-item-card');
+            cards.forEach(card => {
+                card.addEventListener('touchstart', () => card.classList.add('is-touched'), { passive: true });
+                card.addEventListener('touchend', () => setTimeout(() => card.classList.remove('is-touched'), 350), { passive: true });
+                card.addEventListener('touchcancel', () => card.classList.remove('is-touched'), { passive: true });
+            });
+        }
+
+        /* TOGGLE FLUIDO DEL DESPLEGABLE EN CASCADA */
+        function toggleDrawer(wrapperId, btnId) {
+            const wrap = document.getElementById(wrapperId);
             const btn = document.getElementById(btnId);
-            if (!drawer || !btn) return;
-            const isOpen = drawer.classList.contains('open');
+            if (!wrap || !btn) return;
+            const isOpen = wrap.classList.contains('open');
             if (isOpen) {
-                drawer.classList.remove('open');
+                wrap.classList.remove('open');
                 btn.classList.remove('active');
             } else {
-                drawer.classList.add('open');
+                wrap.classList.add('open');
                 btn.classList.add('active');
             }
         }
@@ -1496,7 +1600,6 @@
             }
         };
 
-        /* BASE DE PRECIOS POR IDIOMA Y MONEDA (CALIBRADA SEGÚN TU TABLA) */
         const PRICES = {
             opt1: { es: "$30.000", eu: "20 €", pt: "R$ 100", en: "$20" },
             opt2: { es: "$70.000", eu: "40 €", pt: "R$ 250", en: "$40" },
@@ -1508,12 +1611,14 @@
         let esCurrency = 'ars';
 
         function toggleEsCurrency() {
+            triggerHapticFeedback();
             playClickSound();
             esCurrency = (esCurrency === 'ars') ? 'eur' : 'ars';
-            updatePricesDisplay();
+            updatePricesDisplay(true);
         }
 
-        function updatePricesDisplay() {
+        /* ACTUALIZACIÓN CON EFECTO FLIP LÍQUIDO */
+        function updatePricesDisplay(animate = false) {
             const isEs = (activeLang === 'es');
 
             document.querySelectorAll('.btn-cur-swap').forEach(btn => {
@@ -1541,14 +1646,26 @@
                 p4 = PRICES.opt4.en;
             }
 
-            const el1 = document.getElementById('t_opt1_price');
-            if (el1 && p1) el1.innerText = p1;
-            const el2 = document.getElementById('t_opt2_price');
-            if (el2 && p2) el2.innerText = p2;
-            const el3 = document.getElementById('t_opt3_price');
-            if (el3 && p3) el3.innerText = p3;
-            const el4 = document.getElementById('t_opt4_price');
-            if (el4 && p4) el4.innerText = p4;
+            const applyPillText = (id, text) => {
+                const el = document.getElementById(id);
+                if (!el || !text) return;
+                if (!animate) {
+                    el.innerText = text;
+                    return;
+                }
+                el.classList.add('flip-out');
+                setTimeout(() => {
+                    el.innerText = text;
+                    el.classList.remove('flip-out');
+                    el.classList.add('flip-in');
+                    setTimeout(() => el.classList.remove('flip-in'), 220);
+                }, 100);
+            };
+
+            applyPillText('t_opt1_price', p1);
+            applyPillText('t_opt2_price', p2);
+            applyPillText('t_opt3_price', p3);
+            applyPillText('t_opt4_price', p4);
 
             const telDestino = (activeLang === 'pt') ? '554588076078' : '5491131933611';
 
@@ -1622,7 +1739,7 @@
             if (lang === 'pt') document.getElementById('btnLangPt').classList.add('active');
             if (lang === 'en') document.getElementById('btnLangEn').classList.add('active');
 
-            updatePricesDisplay();
+            updatePricesDisplay(false);
         }
 
         /* 3. SINCRONIZACIÓN CON GOOGLE SHEETS */
@@ -1637,7 +1754,7 @@
             const items = rawStr.split(',').map(s => s.trim()).filter(Boolean);
             if (items.length === 0) return;
             drawer.innerHTML = '';
-            items.forEach(item => {
+            items.forEach((item, idx) => {
                 const parts = item.split('|').map(p => p.trim());
                 const title = parts[0];
                 const url = parts[1] || '#';
@@ -1646,6 +1763,7 @@
                 a.target = '_blank';
                 a.rel = 'noopener noreferrer';
                 a.className = 'example-badge-chip';
+                a.style.setProperty('--chip-idx', idx);
                 a.onclick = () => playClickSound();
                 a.innerHTML = `<span>${title}</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>`;
                 drawer.appendChild(a);
@@ -1742,7 +1860,7 @@
                                 }
                             });
 
-                            updatePricesDisplay();
+                            updatePricesDisplay(false);
                         }
                     }
                 }
@@ -1790,6 +1908,7 @@
             setLanguage('es');
             loadMusicFromFolder();
             initWebSheetsConnection();
+            bindTouchCards();
 
             try {
                 const wasMusicOn = sessionStorage.getItem('1111_music_on');

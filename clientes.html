@@ -124,7 +124,6 @@
             100% { background-position: 600px 600px; }
         }
 
-        /* CONTENEDOR PRINCIPAL CALIBRADO CON BLINDAJE ULTRA-RESPONSIVE */
         .hub-container {
             width: 100%;
             max-width: 460px;
@@ -133,6 +132,7 @@
             gap: 15px;
             z-index: 2;
             min-width: 0;
+            perspective: 1000px;
         }
 
         /* BARRA DE IDIOMA & SOUNDTRACK */
@@ -296,7 +296,7 @@
             transform: scale(1.08);
         }
 
-        /* CABECERA PROPORCIONADA */
+        /* CABECERA */
         .brand-header {
             text-align: center;
             display: flex;
@@ -350,7 +350,6 @@
         .brand-subtitle .subtitle-dark { color: var(--text-main); font-weight: 700; }
         .brand-subtitle em { font-style: italic; }
 
-        /* BANNER DE SECCIÓN: CON ÍCONO DE TILDE DE ALIENTO */
         .section-header-banner {
             display: flex;
             align-items: center;
@@ -401,7 +400,7 @@
         }
 
         /* ==========================================================================
-           TARJETAS DE ÉLITE: PROPORCIONES PRECISAS Y RESPONSIVE ANTI-ROTURA
+           TARJETAS DE ÉLITE CON ILUMINACIÓN REACTIVA & VITALIDAD AWWWARDS
            ========================================================================== */
         .software-cards-list {
             display: flex;
@@ -411,6 +410,9 @@
         }
 
         .software-card-item {
+            --mouse-x: 50%;
+            --mouse-y: 50%;
+            --card-accent-rgb: 160, 209, 143;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -420,21 +422,64 @@
             text-decoration: none;
             color: var(--text-main);
             box-shadow: var(--shadow-card), inset 0 1px 0 rgba(255, 255, 255, 0.7);
-            transition: transform 0.20s var(--spring), box-shadow 0.20s ease, border-color 0.18s ease;
             position: relative;
             overflow: hidden;
             cursor: pointer;
-            transform: translateZ(0);
             min-height: 64px;
             width: 100%;
+            transform: perspective(800px) rotateX(0deg) rotateY(0deg) translateZ(0);
+            transition: transform 0.28s var(--spring), box-shadow 0.28s ease, border-color 0.2s ease;
+            will-change: transform, box-shadow;
+            opacity: 0;
+            animation: cardEnter 0.55s var(--spring) forwards;
+            animation-delay: calc(var(--card-index, 0) * 0.045s);
+        }
+
+        @keyframes cardEnter {
+            from {
+                opacity: 0;
+                transform: perspective(800px) translateY(14px) scale(0.98);
+            }
+            to {
+                opacity: 1;
+                transform: perspective(800px) translateY(0) scale(1);
+            }
+        }
+
+        /* FOCO SPOTLIGHT SEGUIDOR */
+        .software-card-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(
+                220px circle at var(--mouse-x) var(--mouse-y),
+                rgba(var(--card-accent-rgb), 0.22),
+                transparent 70%
+            );
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.35s ease;
+            z-index: 1;
+        }
+
+        .software-card-item:hover::before,
+        .software-card-item.is-touched::before {
+            opacity: 1;
         }
 
         .software-card-item:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 22px -2px rgba(60, 105, 45, 0.15);
+            box-shadow: 0 10px 26px -4px rgba(60, 105, 45, 0.16), 0 0 14px rgba(var(--card-accent-rgb), 0.18);
         }
 
-        /* FICHA CATEGORÍA ANCLADA AL BORDE SUPERIOR DERECHO */
+        .software-card-item:active {
+            transform: scale(0.985) translateZ(0) !important;
+            transition: transform 0.1s ease;
+        }
+
+        /* FICHA CATEGORÍA */
         .soft-cat-badge-corner {
             position: absolute;
             top: 0;
@@ -456,6 +501,11 @@
             overflow: hidden;
             text-overflow: ellipsis;
             box-shadow: -1px 1px 4px rgba(0, 0, 0, 0.04);
+            transition: transform 0.22s var(--spring);
+        }
+
+        .software-card-item:hover .soft-cat-badge-corner {
+            transform: translateY(-0.5px);
         }
 
         .soft-left {
@@ -464,9 +514,10 @@
             gap: 10px;
             min-width: 0;
             flex: 1;
+            z-index: 2;
         }
 
-        /* RECUADRO NUMÉRICO VUELTA DE TUERCA */
+        /* RECUADRO NUMÉRICO */
         .project-logo-box {
             display: flex;
             align-items: center;
@@ -476,7 +527,7 @@
             min-width: 38px;
             border-radius: 10px;
             border: 1.3px solid;
-            transition: transform 0.20s ease;
+            transition: transform 0.26s var(--spring), box-shadow 0.26s ease;
             overflow: hidden;
             padding: 2px;
             position: relative;
@@ -485,7 +536,8 @@
         }
 
         .software-card-item:hover .project-logo-box {
-            transform: scale(1.06) rotate(-2deg);
+            transform: scale(1.08) rotate(-2deg);
+            box-shadow: 0 4px 10px rgba(var(--card-accent-rgb), 0.32);
         }
 
         .project-logo-box img {
@@ -511,6 +563,11 @@
             text-align: center;
             width: 100%;
             height: 100%;
+            transition: transform 0.2s ease;
+        }
+
+        .software-card-item:hover .project-index-num {
+            transform: scale(1.04);
         }
 
         .soft-meta {
@@ -520,6 +577,7 @@
             min-width: 0;
             flex: 1;
             padding-right: 30px;
+            z-index: 2;
         }
 
         .soft-name {
@@ -533,6 +591,11 @@
             text-overflow: ellipsis;
             letter-spacing: -0.01em;
             margin-top: 1px;
+            transition: transform 0.22s var(--spring);
+        }
+
+        .software-card-item:hover .soft-name {
+            transform: translateX(1.5px);
         }
 
         .soft-tag {
@@ -546,7 +609,7 @@
             overflow: hidden;
         }
 
-        /* BOTÓN SUGESTIVO TÁCTIL EN BORDE INFERIOR DERECHO */
+        /* BOTÓN SUGESTIVO TÁCTIL */
         .suggestive-touch-btn {
             position: absolute;
             bottom: 7px;
@@ -560,7 +623,7 @@
             border-radius: 50%;
             border: 1.2px solid;
             box-shadow: 0 1.5px 5px rgba(0, 0, 0, 0.05);
-            transition: all 0.22s var(--spring);
+            transition: all 0.24s var(--spring);
             z-index: 2;
         }
 
@@ -568,20 +631,18 @@
             width: 12px;
             height: 12px;
             display: block;
-            transition: transform 0.22s var(--spring);
+            transition: transform 0.24s var(--spring);
         }
 
         .software-card-item:hover .suggestive-touch-btn {
-            transform: scale(1.14);
+            transform: scale(1.15);
         }
 
         .software-card-item:hover .suggestive-touch-btn svg {
             transform: translate(1px, -1px);
         }
 
-        /* ==========================================================================
-           BOTÓN DESTACADO WHATSAPP CON DESTELLO LUMÍNICO EN DIAGONAL
-           ========================================================================== */
+        /* BOTÓN DESTACADO WHATSAPP CON DESTELLO LUMÍNICO */
         .cta-box-wsp {
             margin-top: 2px;
             display: flex;
@@ -609,7 +670,6 @@
             box-shadow: 0 12px 28px rgba(169, 38, 103, 0.45);
         }
 
-        /* HAZ DE LUZ EN DIAGONAL A INTERVALOS SIMÉTRICOS */
         .cta-box-wsp::after {
             content: '';
             position: absolute;
@@ -635,7 +695,6 @@
             100% { left: 160%; opacity: 0; }
         }
 
-        /* SVG OFICIAL WHATSAPP CALIBRADO */
         .cta-box-wsp svg {
             width: 32px;
             height: 32px;
@@ -707,7 +766,6 @@
             font-weight: 600;
         }
 
-        /* REGLAS PARA PANTALLAS ULTRA-ANGOSTAS (DOWN TO 200px) */
         @media (max-width: 350px) {
             .lang-nav-bar { justify-content: center; gap: 4px; border-radius: 18px; }
             .lang-group-left { justify-content: center; width: 100%; }
@@ -787,7 +845,7 @@
             </p>
         </header>
 
-        <!-- SECCIÓN DE ENLACES: CON ÍCONO DE TILDE POSITIVO -->
+        <!-- SECCIÓN DE ENLACES -->
         <section style="display:flex; flex-direction:column; gap:8.5px; width: 100%;">
             <div class="section-header-banner">
                 <span class="section-check-badge" title="Solución Recomendada">
@@ -800,7 +858,7 @@
             <div class="software-cards-list" id="cardsListContainer"></div>
         </section>
 
-        <!-- BOTÓN PRINCIPAL: COTIZAR POR WHATSAPP CON LOGO PROTAGONISTA & DESTELLO LUMÍNICO -->
+        <!-- BOTÓN PRINCIPAL -->
         <a href="https://wa.me/5491131933611?text=%C2%A1Hola!%20Quiero%20reemplazar%20mi%20Linktree%20y%20crear%20mi%20link%20100%25%20personalizado." target="_blank" rel="noopener noreferrer" class="cta-box-wsp" id="btnWspCta" onclick="playClickSound()">
             <svg viewBox="0 0 125.49 126.53" xmlns="http://www.w3.org/2000/svg">
                 <g fill="#FFFFFF">
@@ -830,7 +888,7 @@
 
     <script>
         /* =========================================================
-           1. MOTOR WEB AUDIO API (EFECTO CLIC)
+           1. MOTOR WEB AUDIO API
            ========================================================= */
         let audioCtx = null;
         let soundBuffer = null;
@@ -878,7 +936,7 @@
         }, { once: true });
 
         /* =========================================================
-           1.B MOTOR DE MÚSICA DE FONDO (TOTALMENTE INTACTO)
+           1.B MOTOR DE MÚSICA DE FONDO
            ========================================================= */
         const bgAudioPlayer = new Audio();
         bgAudioPlayer.preload = "auto";
@@ -1172,7 +1230,10 @@
                 "Gastronomía · Carta": "Gastronomia · Cardápio",
                 "Detailing · Vehículos": "Detailing · Veículos",
                 "Turismo": "Turismo",
-                "Letras Corpóreas": "Comunicação Visual · 3D",
+                "Fábrica de Ropa": "Confecção de Roupas",
+                "Fábrica de Ropa - Bebé": "Roupas Infantis · Bebê",
+                "Viandas caseras saludables": "Marmitas Caseiras Saudáveis",
+                "Gimnasio profesional": "Academia Profissional",
                 "Peluquería · Turnos": "Salão · Agendamentos",
                 "Alfajores argentinos": "Alfajores Argentinos",
                 "Industria · Refrigeración": "Indústria · Refrigeração",
@@ -1184,7 +1245,10 @@
                 "Gastronomía · Carta": "Gastronomy · Menu",
                 "Detailing · Vehículos": "Detailing · Vehicles",
                 "Turismo": "Tourism",
-                "Letras Corpóreas": "Dimensional Signs · 3D",
+                "Fábrica de Ropa": "Clothing Factory",
+                "Fábrica de Ropa - Bebé": "Baby Clothing Factory",
+                "Viandas caseras saludables": "Healthy Homemade Meals",
+                "Gimnasio profesional": "Professional Gym",
                 "Peluquería · Turnos": "Hair Salon · Bookings",
                 "Alfajores argentinos": "Argentine Alfajores",
                 "Industria · Refrigeración": "Industry · Refrigeration",
@@ -1205,9 +1269,6 @@
             return key ? dict[key] : originalCat;
         }
 
-        /* =========================================================
-           2.B RECUADRO CON NUMERACIÓN DE ALTA PRECISIÓN (VUELTA DE TUERCA)
-           ========================================================= */
         function getBrandLogoHtml(item, hexColor, index) {
             if (item.logoUrl) {
                 return `<img src="${item.logoUrl}" alt="${item.title}" class="project-logo-img" />`;
@@ -1216,7 +1277,7 @@
             return `<span class="project-index-num" style="color:${hexColor};">${numVal}</span>`;
         }
 
-        /* CLIENTES BASE REALES (FALLBACK INTACTO) */
+        /* LISTA COMPLETA DE PROYECTOS ACTUALIZADA CON ENLACES Y ESTILOS EXACTOS */
         let currentProjects = [
             {
                 num: "01",
@@ -1227,7 +1288,20 @@
                 sub_en: "Digital menu, contact information, and benefits minigame",
                 url: "https://onceoncegrafica-1111.github.io/baldoriamadrid/",
                 color: "#FF4757",
-                isDark: false
+                isDark: false,
+                textColor: "#132010",
+                catColor: "#FFFFFF",
+                catBg: "#FF4757",
+                catOpacity: "35",
+                subColor: "#495C44",
+                numColor: "#FF4757",
+                logoBg: "#FFFFFF",
+                btnColor: "#FF4757",
+                btnBg: "#FFFFFF",
+                btnOpacity: "90",
+                bgOpacity: "15",
+                borderColor: "#FF4757",
+                borderOpacity: "50"
             },
             {
                 num: "02",
@@ -1238,7 +1312,20 @@
                 sub_en: "Vehicle aesthetic maintenance (music and direct contacts)",
                 url: "http://www.blackcenter.com.ar/",
                 color: "#FFC700",
-                isDark: true
+                isDark: true,
+                textColor: "#FFFFFF",
+                catColor: "#FFC700",
+                catBg: "#FFC700",
+                catOpacity: "22",
+                subColor: "#CBD5E1",
+                numColor: "#FFC700",
+                logoBg: "#1A1C23",
+                btnColor: "#FFC700",
+                btnBg: "#232733",
+                btnOpacity: "80",
+                bgOpacity: "100",
+                borderColor: "#FFC700",
+                borderOpacity: "70"
             },
             {
                 num: "03",
@@ -1249,7 +1336,20 @@
                 sub_en: "Getaways and traditional and luxury tourism, with direct contacts.",
                 url: "https://www.flordebuenosaires.com.ar/link",
                 color: "#E2103F",
-                isDark: false
+                isDark: false,
+                textColor: "#132010",
+                catColor: "#FFFFFF",
+                catBg: "#E2103F",
+                catOpacity: "30",
+                subColor: "#495C44",
+                numColor: "#E2103F",
+                logoBg: "#FFFFFF",
+                btnColor: "#E2103F",
+                btnBg: "#FFFFFF",
+                btnOpacity: "90",
+                bgOpacity: "15",
+                borderColor: "#E2103F",
+                borderOpacity: "50"
             },
             {
                 num: "04",
@@ -1258,17 +1358,97 @@
                 sub_es: "Moldería, corte y confección de básicos en calidad premium.",
                 sub_pt: "Confecção de moldes, corte e costura de básicos em alta qualidade.",
                 sub_en: "Pattern making, cutting and sewing in premium quality.",
-                url: "https://onceoncegrafica-1111.github.io/TDCM/",
-                color: "#5A5A8E",
+                url: "https://www.tallerdecosturamabel.com.ar/link",
+                color: "#FFFFFF",
                 isDark: false,
-                borderColor: "#000000",
-                borderOpacity: 1,
-                logoBg: "#FFFFFF",
+                textColor: "#000000",
+                catColor: "#000000",
                 catBg: "#EEEEF8",
-                catColor: "#37375A"
+                catOpacity: "55",
+                subColor: "#2B2B2B",
+                numColor: "#37375A",
+                logoBg: "#FFFFFF",
+                btnColor: "#37375A",
+                btnBg: "#EEEEF8",
+                btnOpacity: "90",
+                bgOpacity: "90",
+                borderColor: "#000000",
+                borderOpacity: "100"
             },
             {
                 num: "05",
+                title: "Lalelí Bebés",
+                cat: "Fábrica de Ropa - Bebé",
+                sub_es: "Fabricamos ropa para bebés de 0 a 24 meses.",
+                sub_pt: "Fabricamos roupas para bebês de 0 a 24 meses.",
+                sub_en: "We manufacture clothing for babies from 0 to 24 months.",
+                url: "https://linkuniversal.github.io/laleli/",
+                color: "#FEF1D7",
+                isDark: false,
+                textColor: "#64676B",
+                catColor: "#FFFFFF",
+                catBg: "#F68634",
+                catOpacity: "",
+                subColor: "",
+                numColor: "#FEF1D7",
+                logoBg: "#F68634",
+                btnColor: "#F68634",
+                btnBg: "#FFFFFF",
+                btnOpacity: "",
+                bgOpacity: "90",
+                borderColor: "#F68634",
+                borderOpacity: ""
+            },
+            {
+                num: "06",
+                title: "Meal Plans",
+                cat: "Viandas caseras saludables",
+                sub_es: "Comida casera, rica y saludable, ¡lista para toda tu semana!",
+                sub_pt: "Comida caseira, deliciosa e saudável, pronta para a semana toda!",
+                sub_en: "Homemade, delicious and healthy food, ready for your whole week!",
+                url: "https://linkuniversal.github.io/mealplans/",
+                color: "#79A13C",
+                isDark: false,
+                textColor: "#FFFFFF",
+                catColor: "#79A13C",
+                catBg: "#FFFFFF",
+                catOpacity: "80",
+                subColor: "",
+                numColor: "",
+                logoBg: "",
+                btnColor: "#79A13C",
+                btnBg: "#FFFFFF",
+                btnOpacity: "",
+                bgOpacity: "100",
+                borderColor: "",
+                borderOpacity: ""
+            },
+            {
+                num: "07",
+                title: "Dinamyc Gym 2",
+                cat: "Gimnasio profesional",
+                sub_es: "Fuerza, rendimiento y discilpina, los pilares del coaching de Marisol Novi",
+                sub_pt: "Força, desempenho e disciplina: os pilares do método de treino de Marisol Novi.",
+                sub_en: "Strength, performance and discipline, the pillars of Marisol Novi's coaching",
+                url: "https://linkuniversal.github.io/dynamicgym2/",
+                color: "#FF4600",
+                isDark: false,
+                textColor: "#000000",
+                catColor: "#FFFFFF",
+                catBg: "#FF4600",
+                catOpacity: "",
+                subColor: "",
+                numColor: "",
+                logoBg: "",
+                btnColor: "",
+                btnBg: "",
+                btnOpacity: "",
+                bgOpacity: "",
+                borderColor: "",
+                borderOpacity: ""
+            },
+            {
+                num: "08",
                 title: "Peluquería Alvear",
                 cat: "Peluquería · Turnos",
                 sub_es: "Catálogo tradicional de servicios, galería interactiva y reservas.",
@@ -1276,10 +1456,23 @@
                 sub_en: "Traditional service catalog, interactive gallery and reservations.",
                 url: "https://onceoncegrafica-1111.github.io/peluqueriaalvear/",
                 color: "#8E6847",
-                isDark: false
+                isDark: false,
+                textColor: "#132010",
+                catColor: "#8E6847",
+                catBg: "#8E6847",
+                catOpacity: "16",
+                subColor: "#495C44",
+                numColor: "#8E6847",
+                logoBg: "#FFFFFF",
+                btnColor: "#8E6847",
+                btnBg: "#FFFFFF",
+                btnOpacity: "90",
+                bgOpacity: "15",
+                borderColor: "#8E6847",
+                borderOpacity: "50"
             },
             {
-                num: "06",
+                num: "09",
                 title: "Alfajores Orense",
                 cat: "Alfajores argentinos",
                 sub_es: "Enlaces directos, historia de la empresa y sabores emblemáticos",
@@ -1288,11 +1481,22 @@
                 url: "https://onceoncegrafica-1111.github.io/orense/",
                 color: "#E8C18C",
                 isDark: true,
+                textColor: "#FFFFFF",
+                catColor: "#E8C18C",
+                catBg: "#E8C18C",
+                catOpacity: "22",
+                subColor: "#CBD5E1",
                 numColor: "#E8C18C",
-                btnColor: "#E8C18C"
+                logoBg: "#1E1C1A",
+                btnColor: "#E8C18C",
+                btnBg: "#2A2622",
+                btnOpacity: "80",
+                bgOpacity: "100",
+                borderColor: "#E8C18C",
+                borderOpacity: "70"
             },
             {
-                num: "07",
+                num: "10",
                 title: "Frimaq Maquinarias",
                 cat: "Industria · Refrigeración",
                 sub_es: "Catálogo industrial de maquinaria y canal de presupuestos.",
@@ -1300,10 +1504,23 @@
                 sub_en: "Industrial machinery catalog and quotation channel.",
                 url: "https://onceoncegrafica-1111.github.io/frimaq/",
                 color: "#0284C7",
-                isDark: false
+                isDark: false,
+                textColor: "#132010",
+                catColor: "#0284C7",
+                catBg: "#0284C7",
+                catOpacity: "16",
+                subColor: "#495C44",
+                numColor: "#0284C7",
+                logoBg: "#FFFFFF",
+                btnColor: "#0284C7",
+                btnBg: "#FFFFFF",
+                btnOpacity: "90",
+                bgOpacity: "15",
+                borderColor: "#0284C7",
+                borderOpacity: "50"
             },
             {
-                num: "08",
+                num: "11",
                 title: "Four Seasons MX",
                 cat: "Hotelería",
                 sub_es: "Experiencia inmersiva para turismo premium y hotelería.",
@@ -1311,10 +1528,23 @@
                 sub_en: "Immersive experience for premium tourism and hospitality.",
                 url: "https://onceoncegrafica-1111.github.io/fourseasonsmx/",
                 color: "#244122",
-                isDark: false
+                isDark: false,
+                textColor: "#132010",
+                catColor: "#244122",
+                catBg: "#244122",
+                catOpacity: "16",
+                subColor: "#495C44",
+                numColor: "#244122",
+                logoBg: "#FFFFFF",
+                btnColor: "#244122",
+                btnBg: "#FFFFFF",
+                btnOpacity: "90",
+                bgOpacity: "15",
+                borderColor: "#244122",
+                borderOpacity: "50"
             },
             {
-                num: "09",
+                num: "12",
                 title: "Cristel Extensions",
                 cat: "Hair Studio · Extensiones",
                 sub_es: "Técnica rusa de nanocápsulas invisibles y cabello 100% virgen de origen eslavo.",
@@ -1322,7 +1552,20 @@
                 sub_en: "Russian technique of invisible nanocapsules and 100% virgin hair of Slavic origin.",
                 url: "https://cristelextensions.github.io/link/",
                 color: "#D4AF37",
-                isDark: true
+                isDark: true,
+                textColor: "#FFFFFF",
+                catColor: "#D4AF37",
+                catBg: "#D4AF37",
+                catOpacity: "22",
+                subColor: "#CBD5E1",
+                numColor: "#D4AF37",
+                logoBg: "#1F1D15",
+                btnColor: "#D4AF37",
+                btnBg: "#2A271C",
+                btnOpacity: "80",
+                bgOpacity: "100",
+                borderColor: "#D4AF37",
+                borderOpacity: "70"
             }
         ];
 
@@ -1365,8 +1608,58 @@
         }
 
         /* ==========================================================================
-           RENDERIZADO VISUAL ELEVADO (PROPORCIONES AWWWARDS + BOTÓN SUGESTIVO TÁCTIL)
-           ========================================================================== */
+           MOTOR DE ILUMINACIÓN Y TILT INTERACTIVO AWWWARDS (DESK & MOBILE)
+           ========================================================= */
+        function bindInteractiveVitality() {
+            const cards = document.querySelectorAll('.software-card-item');
+            const isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+
+            cards.forEach(card => {
+                if (!isTouch) {
+                    card.addEventListener('mousemove', (e) => {
+                        const rect = card.getBoundingClientRect();
+                        const x = e.clientX - rect.left;
+                        const y = e.clientY - rect.top;
+
+                        const centerX = rect.width / 2;
+                        const centerY = rect.height / 2;
+                        const rotateX = ((y - centerY) / centerY) * -3.2;
+                        const rotateY = ((x - centerX) / centerX) * 3.2;
+
+                        card.style.setProperty('--mouse-x', `${x}px`);
+                        card.style.setProperty('--mouse-y', `${y}px`);
+                        card.style.transform = `perspective(800px) translateY(-2.5px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateZ(0)`;
+                    });
+
+                    card.addEventListener('mouseleave', () => {
+                        card.style.transform = `perspective(800px) translateY(0) rotateX(0deg) rotateY(0deg) translateZ(0)`;
+                    });
+                } else {
+                    card.addEventListener('touchstart', (e) => {
+                        const touch = e.touches[0];
+                        const rect = card.getBoundingClientRect();
+                        const x = touch.clientX - rect.left;
+                        const y = touch.clientY - rect.top;
+
+                        card.style.setProperty('--mouse-x', `${x}px`);
+                        card.style.setProperty('--mouse-y', `${y}px`);
+                        card.classList.add('is-touched');
+                    }, { passive: true });
+
+                    card.addEventListener('touchend', () => {
+                        setTimeout(() => { card.classList.remove('is-touched'); }, 350);
+                    }, { passive: true });
+
+                    card.addEventListener('touchcancel', () => {
+                        card.classList.remove('is-touched');
+                    }, { passive: true });
+                }
+            });
+        }
+
+        /* ==========================================================================
+           RENDERIZADO VISUAL ELEVADO
+           ========================================================= */
         function renderCards(lang) {
             const container = document.getElementById('cardsListContainer');
             if (!container) return;
@@ -1388,7 +1681,7 @@
                 const nameColor = formatHexColor(item.textColor) || (item.isDark ? '#FFFFFF' : 'var(--text-main)');
                 const tagColor = formatHexColor(item.subColor) || (item.textColor ? formatHexColor(item.textColor) : (item.isDark ? '#CBD5E1' : 'var(--text-muted)'));
 
-                // CATEGORÍA (ESQUINA SUPERIOR DERECHA)
+                // CATEGORÍA
                 const catTextColor = formatHexColor(item.catColor) || hex;
                 const catBgBase = formatHexColor(item.catBg) || hex;
                 const catOpacity = parseOpacityValue(item.catOpacity, item.catBg ? 0.95 : (item.isDark ? 0.22 : 0.14));
@@ -1401,17 +1694,15 @@
                 const logoBoxBorderColor = formatHexColor(item.logoBorder) || applyAlphaToHex(hex, item.isDark ? 0.45 : 0.40);
                 const logoBoxBgFinal = logoBoxBgBase.startsWith('rgb') ? logoBoxBgBase : logoBoxBgBase;
 
-                // BOTÓN SUGESTIVO TÁCTIL (INFERIOR DERECHO)
+                // BOTÓN SUGESTIVO TÁCTIL
                 const btnIconColor = formatHexColor(item.btnColor) || hex;
                 const btnBgBase = formatHexColor(item.btnBg) || (item.isDark ? '#1C1F28' : '#FFFFFF');
                 const btnOpacity = parseOpacityValue(item.btnOpacity, item.isDark ? 0.35 : 0.95);
                 const btnBgFinal = applyAlphaToHex(btnBgBase, btnOpacity);
                 const btnBorderFinal = applyAlphaToHex(btnIconColor, 0.45);
 
-                // TRANSPARENCIA DEL FONDO DE LA TARJETA
+                // TRANSPARENCIAS Y BORDES
                 const bgOpacity = parseOpacityValue(item.bgOpacity, null);
-
-                // COLOR & OPACIDAD DEL BORDE (GARANTIZADO 100%)
                 const borderCustom = formatHexColor(item.borderColor);
                 const borderOpacity = parseOpacityValue(item.borderOpacity, 1);
                 
@@ -1433,7 +1724,7 @@
                         darkBg = `linear-gradient(135deg, rgba(12, 14, 18, ${bgOpacity}) 0%, rgba(23, 26, 34, ${bgOpacity}) 100%)`;
                         blurCss = `backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);`;
                     }
-                    cardStyle = `background: ${darkBg}; ${blurCss} border: 1.6px solid ${finalBorder}; border-left: 5px solid ${finalBorderLeft}; color: #FFFFFF; box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4), 0 0 12px rgba(${r}, ${g}, ${b}, 0.16);`;
+                    cardStyle = `--card-accent-rgb: ${r}, ${g}, ${b}; --card-index: ${index}; background: ${darkBg}; ${blurCss} border: 1.6px solid ${finalBorder}; border-left: 5px solid ${finalBorderLeft}; color: #FFFFFF; box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4), 0 0 12px rgba(${r}, ${g}, ${b}, 0.16);`;
                     logoBoxStyle = `background: ${logoBoxBgFinal}; border-color: ${logoBoxBorderColor};`;
                     catCornerStyle = `background: ${catBgFinal}; color: ${catTextColor}; border-color: ${catBorderFinal};`;
                     tagStyle = `color: ${tagColor};`;
@@ -1446,7 +1737,7 @@
                         lightBg = `linear-gradient(135deg, rgba(${r}, ${g}, ${b}, ${(bgOpacity * 0.4).toFixed(3)}) 0%, rgba(${r}, ${g}, ${b}, ${bgOpacity.toFixed(3)}) 100%)`;
                         blurCss = `backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);`;
                     }
-                    cardStyle = `background: ${lightBg}; ${blurCss} border: 1.6px solid ${finalBorder}; border-left: 5px solid ${finalBorderLeft};`;
+                    cardStyle = `--card-accent-rgb: ${r}, ${g}, ${b}; --card-index: ${index}; background: ${lightBg}; ${blurCss} border: 1.6px solid ${finalBorder}; border-left: 5px solid ${finalBorderLeft};`;
                     logoBoxStyle = `background: ${logoBoxBgFinal}; border-color: ${logoBoxBorderColor};`;
                     catCornerStyle = `background: ${catBgFinal}; color: ${catTextColor}; border-color: ${catBorderFinal};`;
                     tagStyle = `color: ${tagColor};`;
@@ -1472,7 +1763,7 @@
                         </div>
                     </div>
 
-                    <!-- Botón sugestivo táctil en la parte inferior derecha -->
+                    <!-- Botón sugestivo táctil -->
                     <span class="suggestive-touch-btn" style="${touchBtnStyle}" title="${t.view_web}">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M7 17L17 7M17 7H7M17 7V17"/>
@@ -1483,10 +1774,11 @@
             });
 
             container.innerHTML = html;
+            bindInteractiveVitality();
         }
 
         /* =========================================================
-           3. CONEXIÓN INTELIGENTE CON GOOGLE SHEETS (POR NOMBRE DE COLUMNA)
+           3. CONEXIÓN INTELIGENTE CON GOOGLE SHEETS
            ========================================================= */
         const SHEET_ID = '12WChaJERJOmnyB6K3IMgpB6lYxDrYBvWR9OToha6do4';
         const GID_MUSIC = '149458792';
@@ -1503,7 +1795,6 @@
                         const payload = JSON.parse(rawText.substring(jsonStart, jsonEnd + 1));
                         if (payload.table && payload.table.rows && payload.table.rows.length > 0) {
                             
-                            // Mapeo dinámico por nombres de encabezados de la fila 1
                             const colMap = {};
                             if (payload.table.cols) {
                                 payload.table.cols.forEach((colObj, idx) => {

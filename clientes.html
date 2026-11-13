@@ -90,7 +90,6 @@
             height: 650px;
             background: radial-gradient(ellipse at 50% 30%, rgba(233, 137, 183, 0.28) 0%, rgba(160, 209, 143, 0.22) 45%, transparent 75%);
             filter: blur(80px);
-            will-change: transform;
         }
 
         .summer-sun-glow {
@@ -101,7 +100,6 @@
             height: 480px;
             background: radial-gradient(circle, rgba(255, 237, 160, 0.32) 0%, rgba(160, 209, 143, 0.15) 50%, transparent 80%);
             filter: blur(85px);
-            will-change: transform;
         }
 
         .stencil-pattern {
@@ -113,15 +111,14 @@
             opacity: 0.12;
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='120' viewBox='0 0 220 120'%3E%3Cg fill='%23E989B7'%3E%3Cpath d='M25,60v-10c9-.1,12-2,14-7h13v40h-16v-23h-11Z'/%3E%3Cpath d='M60,60v-10c9-.1,12-2,14-7h13v40h-16v-23h-11Z'/%3E%3Cpath d='M95,60v-10c9-.1,12-2,14-7h13v40h-16v-23h-11Z'/%3E%3Cpath d='M130,60v-10c9-.1,12-2,14-7h13v40h-16v-23h-11Z'/%3E%3C/g%3E%3C/svg%3E");
             background-repeat: repeat;
-            background-size: 190px auto;
+            background-size: 176px 96px;
             transform: rotate(-14deg);
             animation: patternDrift 45s infinite linear;
-            will-change: background-position;
         }
 
         @keyframes patternDrift {
             0% { background-position: 0 0; }
-            100% { background-position: 600px 600px; }
+            100% { background-position: 528px 288px; }
         }
 
         .hub-container {
@@ -132,7 +129,6 @@
             gap: 15px;
             z-index: 2;
             min-width: 0;
-            perspective: 1000px;
         }
 
         /* BARRA DE IDIOMA & SOUNDTRACK */
@@ -147,7 +143,7 @@
             border-radius: 999px;
             padding: 3.5px 6px;
             box-shadow: 0 2px 10px rgba(60, 105, 45, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.9);
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
             gap: 5px;
             width: 100%;
         }
@@ -156,7 +152,7 @@
             display: flex;
             align-items: center;
             gap: 4px;
-            flex-wrap: wrap;
+            min-width: 0;
         }
 
         .lang-badge-hint {
@@ -400,7 +396,7 @@
         }
 
         /* ==========================================================================
-           TARJETAS DE ÉLITE CON ILUMINACIÓN REFINADA (GLOW SATINADO NO MOLESTO)
+           TARJETAS DE ÉLITE: HOVER SUTIL (APENAS SE LEVANTAN) Y CERO BLOQUEO 3D
            ========================================================================== */
         .software-cards-list {
             display: flex;
@@ -427,33 +423,14 @@
             cursor: pointer;
             min-height: 64px;
             width: 100%;
-            transform: perspective(800px) rotateX(0deg) rotateY(0deg) translateZ(0);
-            transition: transform 0.28s var(--spring), box-shadow 0.28s ease, border-color 0.2s ease;
-            will-change: transform, box-shadow;
-            opacity: 0;
-            animation: cardEnter 0.55s var(--spring) forwards;
-            animation-delay: calc(var(--card-index, 0) * 0.045s);
+            transition: transform 0.22s var(--spring), box-shadow 0.22s ease, border-color 0.2s ease;
         }
 
-        @keyframes cardEnter {
-            from {
-                opacity: 0;
-                transform: perspective(800px) translateY(14px) scale(0.98);
-            }
-            to {
-                opacity: 1;
-                transform: perspective(800px) translateY(0) scale(1);
-            }
-        }
-
-        /* FOCO SPOTLIGHT SEGUIDOR SUAVIZADO (SATINADO Y ELEGANTE) */
+        /* FOCO SPOTLIGHT SEGUIDOR SUAVIZADO */
         .software-card-item::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            inset: 0;
             background: radial-gradient(
                 210px circle at var(--mouse-x) var(--mouse-y),
                 rgba(var(--card-accent-rgb), 0.09),
@@ -461,7 +438,7 @@
             );
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.30s ease;
+            transition: opacity 0.25s ease;
             z-index: 1;
         }
 
@@ -471,12 +448,13 @@
         }
 
         .software-card-item:hover {
-            box-shadow: 0 8px 20px -3px rgba(60, 105, 45, 0.12), 0 0 10px rgba(var(--card-accent-rgb), 0.06);
+            transform: translateY(-2.5px);
+            box-shadow: 0 9px 22px -4px rgba(60, 105, 45, 0.14), 0 0 10px rgba(var(--card-accent-rgb), 0.08);
         }
 
         .software-card-item:active {
-            transform: scale(0.985) translateZ(0) !important;
-            transition: transform 0.1s ease;
+            transform: scale(0.985);
+            transition: transform 0.09s ease;
         }
 
         /* FICHA CATEGORÍA */
@@ -527,7 +505,7 @@
             min-width: 38px;
             border-radius: 10px;
             border: 1.3px solid;
-            transition: transform 0.26s var(--spring), box-shadow 0.26s ease;
+            transition: transform 0.24s var(--spring), box-shadow 0.24s ease;
             overflow: hidden;
             padding: 2px;
             position: relative;
@@ -536,8 +514,8 @@
         }
 
         .software-card-item:hover .project-logo-box {
-            transform: scale(1.08) rotate(-2deg);
-            box-shadow: 0 4px 10px rgba(var(--card-accent-rgb), 0.22);
+            transform: scale(1.06) rotate(-2deg);
+            box-shadow: 0 4px 10px rgba(var(--card-accent-rgb), 0.20);
         }
 
         .project-logo-box img {
@@ -623,7 +601,7 @@
             border-radius: 50%;
             border: 1.2px solid;
             box-shadow: 0 1.5px 5px rgba(0, 0, 0, 0.05);
-            transition: all 0.24s var(--spring);
+            transition: all 0.22s var(--spring);
             z-index: 2;
         }
 
@@ -631,11 +609,11 @@
             width: 12px;
             height: 12px;
             display: block;
-            transition: transform 0.24s var(--spring);
+            transition: transform 0.22s var(--spring);
         }
 
         .software-card-item:hover .suggestive-touch-btn {
-            transform: scale(1.15);
+            transform: scale(1.13);
         }
 
         .software-card-item:hover .suggestive-touch-btn svg {
@@ -654,7 +632,7 @@
             background: linear-gradient(135deg, var(--brand-pink) 0%, var(--brand-pink-deep) 100%);
             color: #FFFFFF;
             font-family: 'Outfit', sans-serif;
-            font-size: 0.95rem;
+            font-size: clamp(0.84rem, 3.6vw, 0.95rem);
             font-weight: 800;
             text-decoration: none;
             box-shadow: 0 8px 22px var(--brand-pink-glow), inset 0 1px 0 rgba(255, 255, 255, 0.4);
@@ -766,10 +744,13 @@
             font-weight: 600;
         }
 
+        @media (max-width: 395px) {
+            .lang-hint-text { display: none; }
+            .lang-badge-hint { padding-left: 4px; padding-right: 0; }
+            .lang-btn { padding: 3.5px 7px; font-size: 0.69rem; }
+        }
+
         @media (max-width: 350px) {
-            .lang-nav-bar { justify-content: center; gap: 4px; border-radius: 18px; }
-            .lang-group-left { justify-content: center; width: 100%; }
-            .soundtrack-wrap { margin-top: 2px; }
             .software-card-item { padding: 8px 8px; }
             .project-logo-box { width: 32px; height: 32px; min-width: 32px; padding: 2px; border-radius: 8px; }
             .project-index-num { font-size: 0.78rem; }
@@ -798,7 +779,7 @@
         <!-- BARRA DE IDIOMA & SOUNDTRACK -->
         <nav class="lang-nav-bar" aria-label="Idioma & Música">
             <div class="lang-group-left">
-                <span class="lang-badge-hint" id="uiLangHint">🌐 Idioma</span>
+                <span class="lang-badge-hint" id="uiLangHint"><span aria-hidden="true">🌐</span><span class="lang-hint-text" id="uiLangHintText">Idioma</span></span>
                 <div class="lang-switch-pills">
                     <button type="button" class="lang-btn active" onclick="setLanguage('es')" id="btnLangEs">ES</button>
                     <button type="button" class="lang-btn" onclick="setLanguage('pt')" id="btnLangPt">PT</button>
@@ -870,7 +851,7 @@
         </a>
 
         <!-- ENLACE DE REGRESO -->
-        <a href="./" class="btn-back-hub" id="uiBackHub" onclick="playClickSound()">
+        <a href="./" class="btn-back-hub" id="uiBackHub" onclick="markInternalNav(); playClickSound();">
             ← Ir a la página principal de 1111 Gráfica
         </a>
 
@@ -921,22 +902,23 @@
                     source.start(0);
                     return;
                 }
-            } catch(e) {}
+            } catch (e) {}
 
             try {
                 const click = fallbackAudio.cloneNode();
                 click.volume = 0.5;
                 click.play().catch(() => {});
-            } catch(e) {}
+            } catch (e) {}
         }
 
-        window.addEventListener('pointerdown', () => {
-            if (!audioCtx) initAudioEngine();
-            else if (audioCtx.state === 'suspended') audioCtx.resume();
-        }, { once: true });
+        function triggerHapticFeedback() {
+            if (typeof navigator !== 'undefined' && navigator.vibrate) {
+                try { navigator.vibrate(10); } catch (e) {}
+            }
+        }
 
         /* =========================================================
-           1.B MOTOR DE MÚSICA DE FONDO
+           1.B MOTOR DE MÚSICA DE FONDO (CONTINUIDAD INTERNA + FADE OUT AL SALIR)
            ========================================================= */
         const bgAudioPlayer = new Audio();
         bgAudioPlayer.preload = "auto";
@@ -944,19 +926,25 @@
         let isMusicActive = false;
         let isTrackTransitioning = false;
         let autoFadeOutTriggered = false;
+        let pendingAutoResume = false;
+        let pendingResumeSrc = '';
+        let pendingResumeTime = 0;
+        let isInternalNav = false;
         let musicFadeTimer = null;
         let currentTrackIndex = -1;
+        let playRequestId = 0;
 
         const DEFAULT_PLAYLIST = [
-            "./music/A Fistful Of Dollars - 01 - Titoli (Ennio Morricone).mp3",
+            "./music/A Fistful Of Dollars - 01 - Titoli (Ennio Morricone) (1).mp3",
             "./music/A Fistful Of Dollars - 07 - Doppi Giochi (1).mp3",
-            "./music/A Fistful Of Dollars - 10 - Cavalcata (Ennio Morricone).mp3",
-            "./music/A Fistful Of Dollars - 17 - Per Un Pugno Di Dollari (1).mp3"
+            "./music/A Fistful Of Dollars - 10 - Cavalcata (Ennio Morricone) (1).mp3",
+            "./music/A Fistful Of Dollars - 17 - Per Un Pugno Di Dollari (Finale) (1).mp3"
         ];
 
         function formatMusicUrl(url) {
             if (!url) return '';
             let cleaned = String(url).trim();
+            try { cleaned = decodeURI(cleaned); } catch (e) {}
             if (!cleaned.startsWith('http://') && !cleaned.startsWith('https://') && !cleaned.startsWith('./') && !cleaned.startsWith('/')) {
                 cleaned = './music/' + cleaned;
             }
@@ -968,34 +956,23 @@
                 const cached = localStorage.getItem('1111_cached_playlist');
                 if (cached) {
                     const parsed = JSON.parse(cached);
-                    if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+                    if (Array.isArray(parsed) && parsed.length > 0) {
+                        return [...new Set(parsed.map(formatMusicUrl).filter(Boolean))];
+                    }
                 }
-            } catch(e) {}
+            } catch (e) {}
             return DEFAULT_PLAYLIST.map(formatMusicUrl);
         })();
 
-        function triggerHapticFeedback() {
-            if (typeof navigator !== 'undefined' && navigator.vibrate) {
-                try { navigator.vibrate(10); } catch(e) {}
+        function markInternalNav() {
+            isInternalNav = true;
+            if (isMusicActive && !bgAudioPlayer.paused) {
+                try {
+                    sessionStorage.setItem('1111_music_on', 'true');
+                    sessionStorage.setItem('1111_music_src', bgAudioPlayer.src);
+                    sessionStorage.setItem('1111_music_time', String(bgAudioPlayer.currentTime));
+                } catch (e) {}
             }
-        }
-
-        async function loadMusicFromFolder() {
-            try {
-                const res = await fetch('https://api.github.com/repos/1111grafica/link/contents/music');
-                if (res.ok) {
-                    const files = await res.json();
-                    const tracks = files
-                        .filter(f => f.type === 'file' && f.name.toLowerCase().endsWith('.mp3'))
-                        .map(f => formatMusicUrl(f.name));
-                    if (tracks.length > 0) {
-                        playlist = [...new Set([...playlist, ...tracks])];
-                        try {
-                            localStorage.setItem('1111_cached_playlist', JSON.stringify(playlist));
-                        } catch(e) {}
-                    }
-                }
-            } catch(e) {}
         }
 
         function updateMusicUI(active) {
@@ -1015,63 +992,121 @@
             return nextIndex;
         }
 
-        function playTrackWithFadeIn(trackUrl, startSecond = 0, duration = 1000) {
+        function startVolumeFadeIn(duration) {
+            if (musicFadeTimer) { clearInterval(musicFadeTimer); musicFadeTimer = null; }
+            const steps = 20;
+            const stepTime = Math.max(15, duration / steps);
+            const volStep = MUSIC_TARGET_VOL / steps;
+
+            musicFadeTimer = setInterval(() => {
+                if (!isMusicActive) {
+                    clearInterval(musicFadeTimer);
+                    musicFadeTimer = null;
+                    return;
+                }
+                if (bgAudioPlayer.volume + volStep < MUSIC_TARGET_VOL) {
+                    bgAudioPlayer.volume += volStep;
+                } else {
+                    bgAudioPlayer.volume = MUSIC_TARGET_VOL;
+                    clearInterval(musicFadeTimer);
+                    musicFadeTimer = null;
+                    isTrackTransitioning = false;
+                }
+            }, stepTime);
+        }
+
+        function playTrackWithFadeIn(trackUrl, startSecond = 0, duration = 1000, isAutoResume = false) {
             if (musicFadeTimer) { clearInterval(musicFadeTimer); musicFadeTimer = null; }
             if (!trackUrl) { isTrackTransitioning = false; return; }
 
+            const reqId = ++playRequestId;
             autoFadeOutTriggered = false;
+            pendingAutoResume = false;
+
+            const normalizedSrc = formatMusicUrl(trackUrl);
+            const idxFound = playlist.indexOf(normalizedSrc);
+            if (idxFound !== -1) currentTrackIndex = idxFound;
+
             try {
-                bgAudioPlayer.src = formatMusicUrl(trackUrl);
-                bgAudioPlayer.currentTime = startSecond;
+                bgAudioPlayer.src = normalizedSrc;
                 bgAudioPlayer.volume = 0;
-                sessionStorage.setItem('1111_music_src', bgAudioPlayer.src);
-                sessionStorage.setItem('1111_music_on', 'true');
 
-                const playPromise = bgAudioPlayer.play();
-                if (playPromise !== undefined) {
-                    playPromise.then(() => {
-                        isMusicActive = true;
-                        updateMusicUI(true);
+                const seekAndPlay = () => {
+                    if (reqId !== playRequestId) return;
+                    if (startSecond > 0 && isFinite(bgAudioPlayer.duration) && startSecond < bgAudioPlayer.duration) {
+                        try { bgAudioPlayer.currentTime = startSecond; } catch (e) {}
+                    }
 
-                        const steps = 25;
-                        const stepTime = duration / steps;
-                        const volStep = MUSIC_TARGET_VOL / steps;
-
-                        musicFadeTimer = setInterval(() => {
-                            if (bgAudioPlayer.volume + volStep < MUSIC_TARGET_VOL) {
-                                bgAudioPlayer.volume += volStep;
-                            } else {
-                                bgAudioPlayer.volume = MUSIC_TARGET_VOL;
-                                clearInterval(musicFadeTimer);
-                                musicFadeTimer = null;
-                                isTrackTransitioning = false;
+                    const playPromise = bgAudioPlayer.play();
+                    if (playPromise !== undefined) {
+                        playPromise.then(() => {
+                            if (reqId !== playRequestId) {
+                                try { bgAudioPlayer.pause(); } catch (e) {}
+                                return;
                             }
-                        }, stepTime);
-                    }).catch(() => { isTrackTransitioning = false; });
+                            isMusicActive = true;
+                            updateMusicUI(true);
+                            try {
+                                sessionStorage.setItem('1111_music_src', bgAudioPlayer.src);
+                                sessionStorage.setItem('1111_music_on', 'true');
+                            } catch (e) {}
+                            startVolumeFadeIn(duration);
+                        }).catch(() => {
+                            if (reqId !== playRequestId) return;
+                            isTrackTransitioning = false;
+                            isMusicActive = false;
+                            updateMusicUI(false);
+                            if (isAutoResume) {
+                                pendingAutoResume = true;
+                                pendingResumeSrc = normalizedSrc;
+                                pendingResumeTime = startSecond;
+                            }
+                        });
+                    }
+                };
+
+                if (startSecond > 0) {
+                    const onMeta = () => {
+                        bgAudioPlayer.removeEventListener('loadedmetadata', onMeta);
+                        seekAndPlay();
+                    };
+                    bgAudioPlayer.addEventListener('loadedmetadata', onMeta, { once: true });
+                    bgAudioPlayer.load();
+                } else {
+                    seekAndPlay();
                 }
-            } catch(e) { isTrackTransitioning = false; }
+            } catch (e) {
+                isTrackTransitioning = false;
+                isMusicActive = false;
+                updateMusicUI(false);
+            }
         }
 
         function fadeOutMusic(duration = 400, onDone, isSwitchingTrack = false) {
             if (musicFadeTimer) { clearInterval(musicFadeTimer); musicFadeTimer = null; }
             if (!isSwitchingTrack) {
+                playRequestId++;
                 isMusicActive = false;
-                sessionStorage.setItem('1111_music_on', 'false');
+                pendingAutoResume = false;
+                try { sessionStorage.setItem('1111_music_on', 'false'); } catch (e) {}
                 updateMusicUI(false);
             }
-            if (bgAudioPlayer.paused) { if (onDone) onDone(); return; }
+            if (bgAudioPlayer.paused) {
+                if (onDone) onDone();
+                return;
+            }
 
-            const steps = 20;
-            const stepTime = duration / steps;
+            const steps = 18;
+            const stepTime = Math.max(15, duration / steps);
             const startVol = bgAudioPlayer.volume;
             const volStep = startVol / steps;
 
             musicFadeTimer = setInterval(() => {
-                if (bgAudioPlayer.volume - volStep > 0) {
+                if (bgAudioPlayer.volume - volStep > 0.005) {
                     bgAudioPlayer.volume -= volStep;
                 } else {
                     bgAudioPlayer.volume = 0;
-                    try { bgAudioPlayer.pause(); } catch(e) {}
+                    try { bgAudioPlayer.pause(); } catch (e) {}
                     clearInterval(musicFadeTimer);
                     musicFadeTimer = null;
                     if (onDone) onDone();
@@ -1082,13 +1117,13 @@
         function toggleMusic() {
             triggerHapticFeedback();
             playClickSound();
+            pendingAutoResume = false;
             if (!isMusicActive) {
                 if (playlist.length === 0) return;
                 isMusicActive = true;
                 updateMusicUI(true);
-                sessionStorage.setItem('1111_music_on', 'true');
                 currentTrackIndex = pickRandomTrackIndex();
-                if (playlist && playlist[currentTrackIndex]) {
+                if (playlist[currentTrackIndex]) {
                     playTrackWithFadeIn(playlist[currentTrackIndex], 0, 1000);
                 }
             } else {
@@ -1099,24 +1134,25 @@
         function skipMusic() {
             triggerHapticFeedback();
             playClickSound();
+            pendingAutoResume = false;
             if (playlist.length === 0) return;
+
             if (!isMusicActive) {
                 isMusicActive = true;
                 updateMusicUI(true);
-                sessionStorage.setItem('1111_music_on', 'true');
                 currentTrackIndex = pickRandomTrackIndex();
-                if (playlist && playlist[currentTrackIndex]) {
+                if (playlist[currentTrackIndex]) {
                     playTrackWithFadeIn(playlist[currentTrackIndex], 0, 900);
                 }
                 return;
             }
 
-            if (isTrackTransitioning) return;
             isTrackTransitioning = true;
-
-            fadeOutMusic(300, () => {
+            fadeOutMusic(280, () => {
+                isMusicActive = true;
+                updateMusicUI(true);
                 currentTrackIndex = pickRandomTrackIndex();
-                if (playlist && playlist[currentTrackIndex]) {
+                if (playlist[currentTrackIndex]) {
                     playTrackWithFadeIn(playlist[currentTrackIndex], 0, 900);
                 } else {
                     isTrackTransitioning = false;
@@ -1131,8 +1167,9 @@
                     autoFadeOutTriggered = true;
                     isTrackTransitioning = true;
                     fadeOutMusic(2600, () => {
+                        if (!isMusicActive) { isTrackTransitioning = false; return; }
                         currentTrackIndex = pickRandomTrackIndex();
-                        if (playlist && playlist[currentTrackIndex]) {
+                        if (playlist[currentTrackIndex]) {
                             playTrackWithFadeIn(playlist[currentTrackIndex], 0, 1200);
                         } else {
                             isTrackTransitioning = false;
@@ -1151,26 +1188,55 @@
         });
 
         bgAudioPlayer.addEventListener('error', () => {
-            if (isMusicActive) {
+            if (isMusicActive && playlist.length > 1) {
                 currentTrackIndex = pickRandomTrackIndex();
-                if (playlist && playlist.length > 1 && playlist[currentTrackIndex]) {
+                if (playlist[currentTrackIndex]) {
                     playTrackWithFadeIn(playlist[currentTrackIndex], 0, 800);
                 }
+            } else {
+                isTrackTransitioning = false;
             }
         });
 
         setInterval(() => {
             if (isMusicActive && !bgAudioPlayer.paused) {
-                sessionStorage.setItem('1111_music_src', bgAudioPlayer.src);
-                sessionStorage.setItem('1111_music_time', String(bgAudioPlayer.currentTime));
+                try {
+                    sessionStorage.setItem('1111_music_src', bgAudioPlayer.src);
+                    sessionStorage.setItem('1111_music_time', String(bgAudioPlayer.currentTime));
+                } catch (e) {}
             }
         }, 1000);
 
+        window.addEventListener('pointerdown', (e) => {
+            if (!audioCtx) initAudioEngine();
+            else if (audioCtx.state === 'suspended') audioCtx.resume();
+
+            if (pendingAutoResume && !e.target.closest('.soundtrack-wrap')) {
+                const src = pendingResumeSrc;
+                const time = pendingResumeTime;
+                pendingAutoResume = false;
+                isMusicActive = true;
+                updateMusicUI(true);
+                playTrackWithFadeIn(src, time, 750);
+            }
+        }, { capture: true });
+
+        document.addEventListener('visibilitychange', () => {
+            if (document.visibilityState === 'hidden' && !isInternalNav && isMusicActive) {
+                fadeOutMusic(700);
+            }
+        });
+
         window.addEventListener('pagehide', () => {
-            if (isMusicActive && !bgAudioPlayer.paused) {
-                sessionStorage.setItem('1111_music_on', 'true');
-                sessionStorage.setItem('1111_music_src', bgAudioPlayer.src);
-                sessionStorage.setItem('1111_music_time', String(bgAudioPlayer.currentTime));
+            if (isInternalNav && isMusicActive && !bgAudioPlayer.paused) {
+                try {
+                    sessionStorage.setItem('1111_music_on', 'true');
+                    sessionStorage.setItem('1111_music_src', bgAudioPlayer.src);
+                    sessionStorage.setItem('1111_music_time', String(bgAudioPlayer.currentTime));
+                } catch (e) {}
+            } else if (!isInternalNav) {
+                try { sessionStorage.setItem('1111_music_on', 'false'); } catch (e) {}
+                if (isMusicActive) fadeOutMusic(400);
             }
         });
 
@@ -1179,7 +1245,10 @@
             if (!link) return;
             const href = (link.getAttribute('href') || '').toLowerCase();
             const isInternal = href === './' || href === '../' || href === 'index.html' || href === 'web.html' || href.includes('clientes.html') || href.includes('1111grafica.github.io/link/') || href.endsWith('/link/') || href.endsWith('/link');
-            if (isInternal) return;
+            if (isInternal) {
+                markInternalNav();
+                return;
+            }
             if (isMusicActive) fadeOutMusic(1000);
         });
 
@@ -1188,7 +1257,7 @@
            ========================================================= */
         const TRANSLATIONS = {
             es: {
-                langHint: "🌐 Idioma",
+                langHint: "Idioma",
                 title_prefix: "Soluciones ",
                 title_highlight: "Digitales",
                 subtitle: "Reemplazamos tu <strong>Linktree</strong> con un link <span class=\"subtitle-dark\">100% tuyo y personalizado</span> a medida: <em>con tus propios colores, botones, fotos, WhatsApp directo, mapas, cartas / turnos / servicios, música, y todo lo que quieras poner, ¡sin límites!</em>",
@@ -1200,7 +1269,7 @@
                 wsp_msg: "¡Hola! Quiero reemplazar mi Linktree y crear mi link 100% personalizado."
             },
             pt: {
-                langHint: "🌐 Idioma",
+                langHint: "Idioma",
                 title_prefix: "Soluções ",
                 title_highlight: "Digitais",
                 subtitle: "Substituímos o seu <strong>Linktree</strong> com um link <span class=\"subtitle-dark\">100% seu e personalizado</span> sob medida: <em>com suas próprias cores, botões, fotos, WhatsApp direto, mapas, cardápios / agendamentos / serviços, música e tudo o que você quiser colocar, sem limites!</em>",
@@ -1212,7 +1281,7 @@
                 wsp_msg: "Olá! Quero substituir meu Linktree e criar meu link 100% personalizado."
             },
             en: {
-                langHint: "🌐 Language",
+                langHint: "Language",
                 title_prefix: "Digital ",
                 title_highlight: "Solutions",
                 subtitle: "We replace your <strong>Linktree</strong> with a link <span class=\"subtitle-dark\">100% custom and made for you</span>: <em>your brand colors, buttons, photos, direct WhatsApp, live maps, menus / bookings / services, music, and anything you want to feature, without limits!</em>",
@@ -1230,9 +1299,13 @@
                 "Gastronomía · Carta": "Gastronomia · Cardápio",
                 "Detailing · Vehículos": "Detailing · Veículos",
                 "Turismo": "Turismo",
+                "Café - Pastelería - Plantas": "Café · Confeitaria · Plantas",
                 "Fábrica de Ropa": "Confecção de Roupas",
+                "Servicios florales": "Serviços Florais",
                 "Fábrica de Ropa - Bebé": "Roupas Infantis · Bebê",
+                "Indumentaria - Deco & Home": "Moda · Casa & Decoração",
                 "Viandas caseras saludables": "Marmitas Caseiras Saudáveis",
+                "Fiambrería - Pastas": "Frios & Massas",
                 "Gimnasio profesional": "Academia Profissional",
                 "Peluquería · Turnos": "Salão · Agendamentos",
                 "Alfajores argentinos": "Alfajores Argentinos",
@@ -1245,9 +1318,13 @@
                 "Gastronomía · Carta": "Gastronomy · Menu",
                 "Detailing · Vehículos": "Detailing · Vehicles",
                 "Turismo": "Tourism",
+                "Café - Pastelería - Plantas": "Coffee · Pastry · Plants",
                 "Fábrica de Ropa": "Clothing Factory",
+                "Servicios florales": "Floral Services",
                 "Fábrica de Ropa - Bebé": "Baby Clothing Factory",
+                "Indumentaria - Deco & Home": "Fashion · Home & Decor",
                 "Viandas caseras saludables": "Healthy Homemade Meals",
+                "Fiambrería - Pastas": "Deli & Fresh Pasta",
                 "Gimnasio profesional": "Professional Gym",
                 "Peluquería · Turnos": "Hair Salon · Bookings",
                 "Alfajores argentinos": "Argentine Alfajores",
@@ -1258,6 +1335,15 @@
             }
         };
 
+        function normalizeCategoryKey(cat) {
+            return String(cat || '')
+                .trim()
+                .toLowerCase()
+                .normalize('NFD')
+                .replace(/[\u0300-\u036f]/g, '')
+                .replace(/\s+/g, ' ');
+        }
+
         function getLocalizedCategory(originalCat, lang) {
             if (!originalCat) return '';
             if (lang === 'es') return originalCat;
@@ -1265,316 +1351,65 @@
             if (!dict) return originalCat;
             const clean = originalCat.trim();
             if (dict[clean]) return dict[clean];
-            const key = Object.keys(dict).find(k => k.toLowerCase() === clean.toLowerCase());
+            const key = Object.keys(dict).find(k => normalizeCategoryKey(k) === normalizeCategoryKey(clean));
             return key ? dict[key] : originalCat;
         }
 
+        function escapeHtml(str) {
+            return String(str || '').replace(/[&<>"']/g, s => ({
+                '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+            })[s]);
+        }
+
         function getBrandLogoHtml(item, hexColor, index) {
-            if (item.logoUrl) {
-                return `<img src="${item.logoUrl}" alt="${item.title}" class="project-logo-img" />`;
-            }
             const numVal = item.num ? String(item.num).padStart(2, '0') : String((index !== undefined ? index + 1 : 1)).padStart(2, '0');
+            if (item.logoUrl) {
+                const safeTitle = escapeHtml(item.title);
+                return `<img src="${escapeHtml(item.logoUrl)}" alt="${safeTitle}" class="project-logo-img" onerror="this.outerHTML='<span class=\\'project-index-num\\' style=\\'color:${hexColor};\\'>${numVal}</span>'" />`;
+            }
             return `<span class="project-index-num" style="color:${hexColor};">${numVal}</span>`;
         }
 
-        /* LISTA COMPLETA DE PROYECTOS ACTUALIZADA CON ENLACES Y ESTILOS EXACTOS */
-        let currentProjects = [
-            {
-                num: "01",
-                title: "Baldoria Madrid",
-                cat: "Gastronomía · Carta",
-                sub_es: "Menú digital, datos de contacto y minijuego de beneficios",
-                sub_pt: "Menu digital, informações de contato e minijogo de benefícios.",
-                sub_en: "Digital menu, contact information, and benefits minigame",
-                url: "https://onceoncegrafica-1111.github.io/baldoriamadrid/",
-                color: "#FF4757",
-                isDark: false,
-                textColor: "#132010",
-                catColor: "#FFFFFF",
-                catBg: "#FF4757",
-                catOpacity: "35",
-                subColor: "#495C44",
-                numColor: "#FF4757",
-                logoBg: "#FFFFFF",
-                btnColor: "#FF4757",
-                btnBg: "#FFFFFF",
-                btnOpacity: "90",
-                bgOpacity: "15",
-                borderColor: "#FF4757",
-                borderOpacity: "50"
-            },
-            {
-                num: "02",
-                title: "Black Center Cars",
-                cat: "Detailing · Vehículos",
-                sub_es: "Mantenimiento estético vehícular, (música y contactos directos)",
-                sub_pt: "Manutenção estética do veículo (música e contatos diretos)",
-                sub_en: "Vehicle aesthetic maintenance (music and direct contacts)",
-                url: "http://www.blackcenter.com.ar/",
-                color: "#FFC700",
-                isDark: true,
-                textColor: "#FFFFFF",
-                catColor: "#FFC700",
-                catBg: "#FFC700",
-                catOpacity: "22",
-                subColor: "#CBD5E1",
-                numColor: "#FFC700",
-                logoBg: "#1A1C23",
-                btnColor: "#FFC700",
-                btnBg: "#232733",
-                btnOpacity: "80",
-                bgOpacity: "100",
-                borderColor: "#FFC700",
-                borderOpacity: "70"
-            },
-            {
-                num: "03",
-                title: "Flor de Buenos Aires",
-                cat: "Turismo",
-                sub_es: "Escapadas y turismo tradicional y de lujo, con contactos directos.",
-                sub_pt: "Escapadas turísticas e turismo tradicional e de luxo, com contatos diretos.",
-                sub_en: "Getaways and traditional and luxury tourism, with direct contacts.",
-                url: "https://www.flordebuenosaires.com.ar/link",
-                color: "#E2103F",
-                isDark: false,
-                textColor: "#132010",
-                catColor: "#FFFFFF",
-                catBg: "#E2103F",
-                catOpacity: "30",
-                subColor: "#495C44",
-                numColor: "#E2103F",
-                logoBg: "#FFFFFF",
-                btnColor: "#E2103F",
-                btnBg: "#FFFFFF",
-                btnOpacity: "90",
-                bgOpacity: "15",
-                borderColor: "#E2103F",
-                borderOpacity: "50"
-            },
-            {
-                num: "04",
-                title: "Taller de Costura Mabel (TDCM)",
-                cat: "Fábrica de Ropa",
-                sub_es: "Moldería, corte y confección de básicos en calidad premium.",
-                sub_pt: "Confecção de moldes, corte e costura de básicos em alta qualidade.",
-                sub_en: "Pattern making, cutting and sewing in premium quality.",
-                url: "https://www.tallerdecosturamabel.com.ar/link",
-                color: "#FFFFFF",
-                isDark: false,
-                textColor: "#000000",
-                catColor: "#000000",
-                catBg: "#EEEEF8",
-                catOpacity: "55",
-                subColor: "#2B2B2B",
-                numColor: "#37375A",
-                logoBg: "#FFFFFF",
-                btnColor: "#37375A",
-                btnBg: "#EEEEF8",
-                btnOpacity: "90",
-                bgOpacity: "90",
-                borderColor: "#000000",
-                borderOpacity: "100"
-            },
-            {
-                num: "05",
-                title: "Lalelí Bebés",
-                cat: "Fábrica de Ropa - Bebé",
-                sub_es: "Fabricamos ropa para bebés de 0 a 24 meses.",
-                sub_pt: "Fabricamos roupas para bebês de 0 a 24 meses.",
-                sub_en: "We manufacture clothing for babies from 0 to 24 months.",
-                url: "https://linkuniversal.github.io/laleli/",
-                color: "#FEF1D7",
-                isDark: false,
-                textColor: "#64676B",
-                catColor: "#FFFFFF",
-                catBg: "#F68634",
-                catOpacity: "",
-                subColor: "",
-                numColor: "#FEF1D7",
-                logoBg: "#F68634",
-                btnColor: "#F68634",
-                btnBg: "#FFFFFF",
-                btnOpacity: "",
-                bgOpacity: "90",
-                borderColor: "#F68634",
-                borderOpacity: ""
-            },
-            {
-                num: "06",
-                title: "Meal Plans",
-                cat: "Viandas caseras saludables",
-                sub_es: "Comida casera, rica y saludable, ¡lista para toda tu semana!",
-                sub_pt: "Comida caseira, deliciosa e saudável, pronta para a semana toda!",
-                sub_en: "Homemade, delicious and healthy food, ready for your whole week!",
-                url: "https://linkuniversal.github.io/mealplans/",
-                color: "#79A13C",
-                isDark: false,
-                textColor: "#FFFFFF",
-                catColor: "#79A13C",
-                catBg: "#FFFFFF",
-                catOpacity: "80",
-                subColor: "",
-                numColor: "",
-                logoBg: "",
-                btnColor: "#79A13C",
-                btnBg: "#FFFFFF",
-                btnOpacity: "",
-                bgOpacity: "100",
-                borderColor: "",
-                borderOpacity: ""
-            },
-            {
-                num: "07",
-                title: "Dinamyc Gym 2",
-                cat: "Gimnasio profesional",
-                sub_es: "Fuerza, rendimiento y discilpina, los pilares del coaching de Marisol Novi",
-                sub_pt: "Força, desempenho e disciplina: os pilares do método de treino de Marisol Novi.",
-                sub_en: "Strength, performance and discipline, the pillars of Marisol Novi's coaching",
-                url: "https://linkuniversal.github.io/dynamicgym2/",
-                color: "#FF4600",
-                isDark: false,
-                textColor: "#000000",
-                catColor: "#FFFFFF",
-                catBg: "#FF4600",
-                catOpacity: "",
-                subColor: "",
-                numColor: "",
-                logoBg: "",
-                btnColor: "",
-                btnBg: "",
-                btnOpacity: "",
-                bgOpacity: "",
-                borderColor: "",
-                borderOpacity: ""
-            },
-            {
-                num: "08",
-                title: "Peluquería Alvear",
-                cat: "Peluquería · Turnos",
-                sub_es: "Catálogo tradicional de servicios, galería interactiva y reservas.",
-                sub_pt: "Catálogo de serviços tradicional, galeria interativa e reservas.",
-                sub_en: "Traditional service catalog, interactive gallery and reservations.",
-                url: "https://onceoncegrafica-1111.github.io/peluqueriaalvear/",
-                color: "#8E6847",
-                isDark: false,
-                textColor: "#132010",
-                catColor: "#8E6847",
-                catBg: "#8E6847",
-                catOpacity: "16",
-                subColor: "#495C44",
-                numColor: "#8E6847",
-                logoBg: "#FFFFFF",
-                btnColor: "#8E6847",
-                btnBg: "#FFFFFF",
-                btnOpacity: "90",
-                bgOpacity: "15",
-                borderColor: "#8E6847",
-                borderOpacity: "50"
-            },
-            {
-                num: "09",
-                title: "Alfajores Orense",
-                cat: "Alfajores argentinos",
-                sub_es: "Enlaces directos, historia de la empresa y sabores emblemáticos",
-                sub_pt: "Links diretos, história da empresa e sabores icônicos",
-                sub_en: "Direct links, company history and iconic flavors",
-                url: "https://onceoncegrafica-1111.github.io/orense/",
-                color: "#E8C18C",
-                isDark: true,
-                textColor: "#FFFFFF",
-                catColor: "#E8C18C",
-                catBg: "#E8C18C",
-                catOpacity: "22",
-                subColor: "#CBD5E1",
-                numColor: "#E8C18C",
-                logoBg: "#1E1C1A",
-                btnColor: "#E8C18C",
-                btnBg: "#2A2622",
-                btnOpacity: "80",
-                bgOpacity: "100",
-                borderColor: "#E8C18C",
-                borderOpacity: "70"
-            },
-            {
-                num: "10",
-                title: "Frimaq Maquinarias",
-                cat: "Industria · Refrigeración",
-                sub_es: "Catálogo industrial de maquinaria y canal de presupuestos.",
-                sub_pt: "Catálogo de máquinas industriais e canal de cotação.",
-                sub_en: "Industrial machinery catalog and quotation channel.",
-                url: "https://onceoncegrafica-1111.github.io/frimaq/",
-                color: "#0284C7",
-                isDark: false,
-                textColor: "#132010",
-                catColor: "#0284C7",
-                catBg: "#0284C7",
-                catOpacity: "16",
-                subColor: "#495C44",
-                numColor: "#0284C7",
-                logoBg: "#FFFFFF",
-                btnColor: "#0284C7",
-                btnBg: "#FFFFFF",
-                btnOpacity: "90",
-                bgOpacity: "15",
-                borderColor: "#0284C7",
-                borderOpacity: "50"
-            },
-            {
-                num: "11",
-                title: "Four Seasons MX",
-                cat: "Hotelería",
-                sub_es: "Experiencia inmersiva para turismo premium y hotelería.",
-                sub_pt: "Experiência imersiva para turismo e hotelaria de alto padrão.",
-                sub_en: "Immersive experience for premium tourism and hospitality.",
-                url: "https://onceoncegrafica-1111.github.io/fourseasonsmx/",
-                color: "#244122",
-                isDark: false,
-                textColor: "#132010",
-                catColor: "#244122",
-                catBg: "#244122",
-                catOpacity: "16",
-                subColor: "#495C44",
-                numColor: "#244122",
-                logoBg: "#FFFFFF",
-                btnColor: "#244122",
-                btnBg: "#FFFFFF",
-                btnOpacity: "90",
-                bgOpacity: "15",
-                borderColor: "#244122",
-                borderOpacity: "50"
-            },
-            {
-                num: "12",
-                title: "Cristel Extensions",
-                cat: "Hair Studio · Extensiones",
-                sub_es: "Técnica rusa de nanocápsulas invisibles y cabello 100% virgen de origen eslavo.",
-                sub_pt: "Técnica russa de nanocápsulas invisíveis e cabelo 100% virgem de origem eslava.",
-                sub_en: "Russian technique of invisible nanocapsules and 100% virgin hair of Slavic origin.",
-                url: "https://cristelextensions.github.io/link/",
-                color: "#D4AF37",
-                isDark: true,
-                textColor: "#FFFFFF",
-                catColor: "#D4AF37",
-                catBg: "#D4AF37",
-                catOpacity: "22",
-                subColor: "#CBD5E1",
-                numColor: "#D4AF37",
-                logoBg: "#1F1D15",
-                btnColor: "#D4AF37",
-                btnBg: "#2A271C",
-                btnOpacity: "80",
-                bgOpacity: "100",
-                borderColor: "#D4AF37",
-                borderOpacity: "70"
-            }
+        /* LISTA COMPLETA DE 16 PROYECTOS SINCRONIZADA CON TU SHEETS (CARGA EN 0MS) */
+        const FALLBACK_PROJECTS = [
+            { num: "01", title: "Baldoria Madrid", cat: "Gastronomía · Carta", sub_es: "Menú digital, datos de contacto y minijuego de beneficios", sub_pt: "Menu digital, informações de contato e minijogo de benefícios.", sub_en: "Digital menu, contact information, and benefits minigame", url: "https://onceoncegrafica-1111.github.io/baldoriamadrid/", color: "#FF4757", isDark: false, textColor: "#132010", catColor: "#FFFFFF", catBg: "#FF4757", catOpacity: "35", subColor: "#495C44", numColor: "#FF4757", logoBg: "#FFFFFF", btnColor: "#FF4757", btnBg: "#FFFFFF", btnOpacity: "90", bgOpacity: "15", borderColor: "#FF4757", borderOpacity: "50", logoUrl: null },
+            { num: "02", title: "Black Center Cars", cat: "Detailing · Vehículos", sub_es: "Mantenimiento estético vehícular, (música y contactos directos)", sub_pt: "Manutenção estética do veículo (música e contatos diretos)", sub_en: "Vehicle aesthetic maintenance (music and direct contacts)", url: "http://www.blackcenter.com.ar/", color: "#FFC700", isDark: true, textColor: "#FFFFFF", catColor: "#FFC700", catBg: "#FFC700", catOpacity: "22", subColor: "#CBD5E1", numColor: "#FFC700", logoBg: "#1A1C23", btnColor: "#FFC700", btnBg: "#232733", btnOpacity: "80", bgOpacity: "100", borderColor: "#FFC700", borderOpacity: "70", logoUrl: null },
+            { num: "03", title: "Flor de Buenos Aires", cat: "Turismo", sub_es: "Escapadas y turismo tradicional y de lujo, con contactos directos.", sub_pt: "Escapadas turísticas e turismo tradicional e de luxo, com contatos diretos.", sub_en: "Getaways and traditional and luxury tourism, with direct contacts.", url: "https://www.flordebuenosaires.com.ar/link", color: "#E2103F", isDark: false, textColor: "#132010", catColor: "#FFFFFF", catBg: "#E2103F", catOpacity: "30", subColor: "#495C44", numColor: "#E2103F", logoBg: "#FFFFFF", btnColor: "#E2103F", btnBg: "#FFFFFF", btnOpacity: "90", bgOpacity: "15", borderColor: "#E2103F", borderOpacity: "50", logoUrl: null },
+            { num: "04", title: "La Planterería", cat: "Café - Pastelería - Plantas", sub_es: "La unión entre el café de especialidad, la pastelería y la naturaleza", sub_pt: "A união entre café especial, pastelaria e natureza.", sub_en: "The union between specialty coffee, pastry and nature", url: "https://linkuniversal.github.io/laplantereria", color: "#37671D", isDark: false, textColor: "#FFFFFF", catColor: "#FFFFFF", catBg: "#37671D", catOpacity: "80", subColor: null, numColor: null, logoBg: null, btnColor: null, btnBg: null, btnOpacity: null, bgOpacity: "80", borderColor: null, borderOpacity: null, logoUrl: null },
+            { num: "05", title: "Taller de Costura Mabel (TDCM)", cat: "Fábrica de Ropa", sub_es: "Moldería, corte y confección de básicos en calidad premium.", sub_pt: "Confecção de moldes, corte e costura de básicos em alta qualidade.", sub_en: "Pattern making, cutting and sewing in premium quality.", url: "https://www.tallerdecosturamabel.com.ar/link", color: "#FFFFFF", isDark: false, textColor: "#000000", catColor: "#000000", catBg: "#EEEEF8", catOpacity: "55", subColor: "#2B2B2B", numColor: "#37375A", logoBg: "#FFFFFF", btnColor: "#37375A", btnBg: "#EEEEF8", btnOpacity: "90", bgOpacity: "90", borderColor: "#000000", borderOpacity: "100", logoUrl: null },
+            { num: "06", title: "Amapola", cat: "Servicios florales", sub_es: "Espacios transformados con diseño floral, interiorismo y arquitectura verde", sub_pt: "Espaços transformados com design floral, design de interiores e arquitetura verde.", sub_en: "Spaces transformed with floral design, interior design and green architecture", url: "https://linkuniversal.github.io/amapola/", color: "#A55252", isDark: false, textColor: "#FFFFFF", catColor: null, catBg: "#FBEEEA", catOpacity: null, subColor: null, numColor: "#FBEEEA", logoBg: "#A55252", btnColor: "#FBEEEA", btnBg: "#A55252", btnOpacity: "90", bgOpacity: "95", borderColor: "#FBEEEA", borderOpacity: null, logoUrl: null },
+            { num: "07", title: "Lalelí Bebés", cat: "Fábrica de Ropa - Bebé", sub_es: "Fabricamos ropa para bebés de 0 a 24 meses.", sub_pt: "Fabricamos roupas para bebês de 0 a 24 meses.", sub_en: "We manufacture clothing for babies from 0 to 24 months.", url: "https://linkuniversal.github.io/laleli", color: "#FEF1D7", isDark: false, textColor: "#64676B", catColor: "#FFFFFF", catBg: "#F68634", catOpacity: null, subColor: null, numColor: "#FEF1D7", logoBg: "#F68634", btnColor: "#F68634", btnBg: "#FFFFFF", btnOpacity: null, bgOpacity: "90", borderColor: "#F68634", borderOpacity: null, logoUrl: null },
+            { num: "08", title: "Meraki", cat: "Indumentaria - Deco & Home", sub_es: "Moda, hogar y bienestar espiritual", sub_pt: "Moda, lar e bem-estar espiritual", sub_en: "Fashion, home and spiritual well-being", url: "https://linkuniversal.github.io/meraki/", color: "#C3D6FF", isDark: false, textColor: "#600000", catColor: "#600000", catBg: "#C3D6FF", catOpacity: "50", subColor: null, numColor: "#600000", logoBg: "#C3D6FF", btnColor: "#FFFFFF", btnBg: "#C3D6FF", btnOpacity: null, bgOpacity: "40", borderColor: "#600000", borderOpacity: null, logoUrl: null },
+            { num: "09", title: "Peluquería Alvear", cat: "Peluquería · Turnos", sub_es: "Catálogo tradicional de servicios, galería interactiva y reservas.", sub_pt: "Catálogo de serviços tradicional, galeria interativa e reservas.", sub_en: "Traditional service catalog, interactive gallery and reservations.", url: "https://onceoncegrafica-1111.github.io/peluqueriaalvear/", color: "#8E6847", isDark: false, textColor: "#132010", catColor: "#8E6847", catBg: "#8E6847", catOpacity: "16", subColor: "#495C44", numColor: "#8E6847", logoBg: "#FFFFFF", btnColor: "#8E6847", btnBg: "#FFFFFF", btnOpacity: "90", bgOpacity: "15", borderColor: "#8E6847", borderOpacity: "50", logoUrl: null },
+            { num: "10", title: "Meal Plans", cat: "Viandas caseras saludables", sub_es: "Comida casera, rica y saludable, ¡lista para toda tu semana!", sub_pt: "Comida caseira, deliciosa e saudável, pronta para a semana toda!", sub_en: "Homemade, delicious and healthy food, ready for your whole week!", url: "https://linkuniversal.github.io/mealplans", color: "#79A13C", isDark: false, textColor: "#FFFFFF", catColor: "#79A13C", catBg: "#FFFFFF", catOpacity: "80", subColor: null, numColor: null, logoBg: null, btnColor: "#79A13C", btnBg: "#FFFFFF", btnOpacity: null, bgOpacity: "100", borderColor: null, borderOpacity: null, logoUrl: null },
+            { num: "11", title: "Fiambrería La Morada", cat: "Fiambrería - Pastas", sub_es: "Para los amantes de las picadas y los quesos, sabores y combinaciones irresistibles", sub_pt: "Para os amantes de petiscos e queijos, sabores e combinações irresistíveis.", sub_en: "For lovers of snacks and cheeses, irresistible flavors and combinations", url: "https://linkuniversal.github.io/fiambrerialamorada/", color: "#40ACF4", isDark: false, textColor: null, catColor: null, catBg: "#FFFFFF", catOpacity: null, subColor: null, numColor: "#FFFFFF", logoBg: "#40ACF4", btnColor: "#FFFFFF", btnBg: "#40ACF4", btnOpacity: null, bgOpacity: null, borderColor: null, borderOpacity: null, logoUrl: null },
+            { num: "12", title: "Dinamyc Gym 2", cat: "Gimnasio profesional", sub_es: "Fuerza, rendimiento y disciplina, los pilares del coaching de Marisol Novi", sub_pt: "Força, desempenho e disciplina: os pilares do método de treino de Marisol Novi.", sub_en: "Strength, performance and discipline, the pillars of Marisol Novi's coaching", url: "https://linkuniversal.github.io/dynamicgym2", color: "#FF4600", isDark: false, textColor: "#000000", catColor: "#FFFFFF", catBg: "#FF4600", catOpacity: null, subColor: null, numColor: null, logoBg: null, btnColor: null, btnBg: null, btnOpacity: null, bgOpacity: null, borderColor: null, borderOpacity: null, logoUrl: null },
+            { num: "13", title: "Alfajores Orense", cat: "Alfajores argentinos", sub_es: "Enlaces directos, historia de la empresa y sabores emblemáticos", sub_pt: "Links diretos, história da empresa e sabores icônicos", sub_en: "Direct links, company history and iconic flavors", url: "https://onceoncegrafica-1111.github.io/orense/", color: "#E8C18C", isDark: true, textColor: "#FFFFFF", catColor: "#E8C18C", catBg: "#E8C18C", catOpacity: "22", subColor: "#CBD5E1", numColor: "#E8C18C", logoBg: "#1E1C1A", btnColor: "#E8C18C", btnBg: "#2A2622", btnOpacity: "80", bgOpacity: "100", borderColor: "#E8C18C", borderOpacity: "70", logoUrl: null },
+            { num: "14", title: "Frimaq Maquinarias", cat: "Industria · Refrigeración", sub_es: "Catálogo industrial de maquinaria y canal de presupuestos.", sub_pt: "Catálogo de máquinas industriais e canal de cotação.", sub_en: "Industrial machinery catalog and quotation channel.", url: "https://onceoncegrafica-1111.github.io/frimaq/", color: "#0284C7", isDark: false, textColor: "#132010", catColor: "#0284C7", catBg: "#0284C7", catOpacity: "16", subColor: "#495C44", numColor: "#0284C7", logoBg: "#FFFFFF", btnColor: "#0284C7", btnBg: "#FFFFFF", btnOpacity: "90", bgOpacity: "15", borderColor: "#0284C7", borderOpacity: "50", logoUrl: null },
+            { num: "15", title: "Four Seasons MX", cat: "Hotelería", sub_es: "Experiencia inmersiva para turismo premium y hotelería.", sub_pt: "Experiência imersiva para turismo e hotelaria de alto padrão.", sub_en: "Immersive experience for premium tourism and hospitality.", url: "https://onceoncegrafica-1111.github.io/fourseasonsmx/", color: "#244122", isDark: false, textColor: "#132010", catColor: "#244122", catBg: "#244122", catOpacity: "16", subColor: "#495C44", numColor: "#244122", logoBg: "#FFFFFF", btnColor: "#244122", btnBg: "#FFFFFF", btnOpacity: "90", bgOpacity: "15", borderColor: "#244122", borderOpacity: "50", logoUrl: null },
+            { num: "16", title: "Cristel Extensions", cat: "Hair Studio · Extensiones", sub_es: "Técnica rusa de nanocápsulas invisibles y cabello 100% virgen de origen eslavo.", sub_pt: "Técnica russa de nanocápsulas invisíveis e cabelo 100% virgem de origem eslava.", sub_en: "Russian technique of invisible nanocapsules and 100% virgin hair of Slavic origin.", url: "https://cristelextensions.github.io/link/", color: "#D4AF37", isDark: true, textColor: "#FFFFFF", catColor: "#D4AF37", catBg: "#D4AF37", catOpacity: "22", subColor: "#CBD5E1", numColor: "#D4AF37", logoBg: "#1F1D15", btnColor: "#D4AF37", btnBg: "#2A271C", btnOpacity: "80", bgOpacity: "100", borderColor: "#D4AF37", borderOpacity: "70", logoUrl: null }
         ];
+
+        const CLIENTS_CACHE_KEY = '1111_cached_clients_v4';
+        let currentProjects = (() => {
+            try {
+                const cached = localStorage.getItem(CLIENTS_CACHE_KEY);
+                if (cached) {
+                    const parsed = JSON.parse(cached);
+                    if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+                }
+            } catch (e) {}
+            return FALLBACK_PROJECTS;
+        })();
 
         let activeLang = 'es';
 
         function hexToRgb(hex) {
             let clean = (hex || '#A0D18F').replace('#', '').trim();
             if (clean.length === 3) clean = clean.split('').map(x => x + x).join('');
+            if (clean.length >= 6) clean = clean.substring(0, 6);
             const n = parseInt(clean, 16);
+            if (isNaN(n)) return { r: 160, g: 209, b: 143 };
             return {
                 r: (n >> 16) & 255,
                 g: (n >> 8) & 255,
@@ -1593,7 +1428,9 @@
 
         function parseOpacityValue(val, defaultVal = null) {
             if (val === null || val === undefined || val === '') return defaultVal;
-            let clean = String(val).replace('%', '').trim().replace(',', '.');
+            const raw = String(val).trim();
+            if (raw.startsWith('#')) return defaultVal;
+            let clean = raw.replace('%', '').trim().replace(',', '.');
             let parsed = parseFloat(clean);
             if (isNaN(parsed)) return defaultVal;
             if (parsed > 1) parsed = parsed / 100;
@@ -1603,12 +1440,19 @@
         function applyAlphaToHex(hexStr, alpha) {
             if (!hexStr) return `rgba(0, 0, 0, ${alpha})`;
             if (hexStr.startsWith('rgba') || hexStr.startsWith('hsla')) return hexStr;
+            if (hexStr.startsWith('rgb(')) return hexStr.replace('rgb(', 'rgba(').replace(')', `, ${alpha})`);
             const { r, g, b } = hexToRgb(hexStr);
             return `rgba(${r}, ${g}, ${b}, ${alpha})`;
         }
 
-        /* ==========================================================================
-           MOTOR DE ILUMINACIÓN Y TILT INTERACTIVO AWWWARDS (DESK & MOBILE)
+        function isWhiteColor(c) {
+            if (!c) return false;
+            const clean = String(c).trim().toLowerCase();
+            return clean === '#fff' || clean === '#ffffff' || clean === 'white';
+        }
+
+        /* =========================================================
+           SPOTLIGHT LIGERO SIN RECALCULAR LAYOUT NI FORZAR 3D
            ========================================================= */
         function bindInteractiveVitality() {
             const cards = document.querySelectorAll('.software-card-item');
@@ -1616,38 +1460,22 @@
 
             cards.forEach(card => {
                 if (!isTouch) {
-                    card.addEventListener('mousemove', (e) => {
+                    card.addEventListener('pointerenter', (e) => {
                         const rect = card.getBoundingClientRect();
-                        const x = e.clientX - rect.left;
-                        const y = e.clientY - rect.top;
-
-                        const centerX = rect.width / 2;
-                        const centerY = rect.height / 2;
-                        const rotateX = ((y - centerY) / centerY) * -3.2;
-                        const rotateY = ((x - centerX) / centerX) * 3.2;
-
-                        card.style.setProperty('--mouse-x', `${x}px`);
-                        card.style.setProperty('--mouse-y', `${y}px`);
-                        card.style.transform = `perspective(800px) translateY(-2.5px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateZ(0)`;
-                    });
-
-                    card.addEventListener('mouseleave', () => {
-                        card.style.transform = `perspective(800px) translateY(0) rotateX(0deg) rotateY(0deg) translateZ(0)`;
-                    });
+                        card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+                        card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+                    }, { passive: true });
                 } else {
                     card.addEventListener('touchstart', (e) => {
                         const touch = e.touches[0];
                         const rect = card.getBoundingClientRect();
-                        const x = touch.clientX - rect.left;
-                        const y = touch.clientY - rect.top;
-
-                        card.style.setProperty('--mouse-x', `${x}px`);
-                        card.style.setProperty('--mouse-y', `${y}px`);
+                        card.style.setProperty('--mouse-x', `${touch.clientX - rect.left}px`);
+                        card.style.setProperty('--mouse-y', `${touch.clientY - rect.top}px`);
                         card.classList.add('is-touched');
                     }, { passive: true });
 
                     card.addEventListener('touchend', () => {
-                        setTimeout(() => { card.classList.remove('is-touched'); }, 350);
+                        setTimeout(() => { card.classList.remove('is-touched'); }, 300);
                     }, { passive: true });
 
                     card.addEventListener('touchcancel', () => {
@@ -1657,7 +1485,7 @@
             });
         }
 
-        /* ==========================================================================
+        /* =========================================================
            RENDERIZADO VISUAL ELEVADO
            ========================================================= */
         function renderCards(lang) {
@@ -1677,9 +1505,18 @@
 
                 const categoryText = getLocalizedCategory(item.cat, lang);
 
-                // TIPOGRAFÍA
-                const nameColor = formatHexColor(item.textColor) || (item.isDark ? '#FFFFFF' : 'var(--text-main)');
-                const tagColor = formatHexColor(item.subColor) || (item.textColor ? formatHexColor(item.textColor) : (item.isDark ? '#CBD5E1' : 'var(--text-muted)'));
+                // TRANSPARENCIAS Y BORDES
+                const bgOpacity = parseOpacityValue(item.bgOpacity, null);
+                const borderCustom = formatHexColor(item.borderColor);
+                const borderOpacity = parseOpacityValue(item.borderOpacity, 1);
+
+                // TIPOGRAFÍA (con protección por si hay texto blanco sin fondo sólido)
+                let nameColor = formatHexColor(item.textColor) || (item.isDark ? '#FFFFFF' : 'var(--text-main)');
+                let tagColor = formatHexColor(item.subColor) || (item.textColor ? formatHexColor(item.textColor) : (item.isDark ? '#CBD5E1' : 'var(--text-muted)'));
+                if (!item.isDark && isWhiteColor(nameColor) && (bgOpacity === null || bgOpacity < 0.45)) {
+                    nameColor = '#132010';
+                    if (isWhiteColor(tagColor)) tagColor = '#495C44';
+                }
 
                 // CATEGORÍA
                 const catTextColor = formatHexColor(item.catColor) || hex;
@@ -1688,24 +1525,18 @@
                 const catBgFinal = applyAlphaToHex(catBgBase, catOpacity);
                 const catBorderFinal = formatHexColor(item.catColor) ? applyAlphaToHex(formatHexColor(item.catColor), 0.5) : applyAlphaToHex(hex, item.isDark ? 0.45 : 0.35);
 
-                // RECUADRO DE NÚMERO
+                // RECUADRO DE NÚMERO (protección contra blanco sobre blanco)
                 const logoBoxIconColor = formatHexColor(item.numColor) || hex;
-                const logoBoxBgBase = formatHexColor(item.logoBg) || (item.isDark ? '#14161E' : '#FFFFFF');
+                const logoBoxBgBase = formatHexColor(item.logoBg) || (item.isDark ? '#14161E' : (isWhiteColor(logoBoxIconColor) ? hex : '#FFFFFF'));
                 const logoBoxBorderColor = formatHexColor(item.logoBorder) || applyAlphaToHex(hex, item.isDark ? 0.45 : 0.40);
-                const logoBoxBgFinal = logoBoxBgBase.startsWith('rgb') ? logoBoxBgBase : logoBoxBgBase;
 
-                // BOTÓN SUGESTIVO TÁCTIL
+                // BOTÓN SUGESTIVO TÁCTIL (protección contra blanco sobre blanco)
                 const btnIconColor = formatHexColor(item.btnColor) || hex;
-                const btnBgBase = formatHexColor(item.btnBg) || (item.isDark ? '#1C1F28' : '#FFFFFF');
+                const btnBgBase = formatHexColor(item.btnBg) || (item.isDark ? '#1C1F28' : (isWhiteColor(btnIconColor) ? hex : '#FFFFFF'));
                 const btnOpacity = parseOpacityValue(item.btnOpacity, item.isDark ? 0.35 : 0.95);
                 const btnBgFinal = applyAlphaToHex(btnBgBase, btnOpacity);
                 const btnBorderFinal = applyAlphaToHex(btnIconColor, 0.45);
 
-                // TRANSPARENCIAS Y BORDES
-                const bgOpacity = parseOpacityValue(item.bgOpacity, null);
-                const borderCustom = formatHexColor(item.borderColor);
-                const borderOpacity = parseOpacityValue(item.borderOpacity, 1);
-                
                 let finalBorder, finalBorderLeft;
                 if (borderCustom) {
                     finalBorder = borderOpacity < 1 ? applyAlphaToHex(borderCustom, borderOpacity) : borderCustom;
@@ -1715,42 +1546,33 @@
                     finalBorderLeft = hex;
                 }
 
-                let cardStyle, logoBoxStyle, catCornerStyle, tagStyle, nameStyle, touchBtnStyle;
-
+                let cardStyle;
                 if (item.isDark) {
                     let darkBg = `linear-gradient(135deg, #0C0E12 0%, #171A22 100%)`;
-                    let blurCss = ``;
                     if (bgOpacity !== null) {
                         darkBg = `linear-gradient(135deg, rgba(12, 14, 18, ${bgOpacity}) 0%, rgba(23, 26, 34, ${bgOpacity}) 100%)`;
-                        blurCss = `backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);`;
                     }
-                    cardStyle = `--card-accent-rgb: ${r}, ${g}, ${b}; --card-index: ${index}; background: ${darkBg}; ${blurCss} border: 1.6px solid ${finalBorder}; border-left: 5px solid ${finalBorderLeft}; color: #FFFFFF; box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4), 0 0 12px rgba(${r}, ${g}, ${b}, 0.16);`;
-                    logoBoxStyle = `background: ${logoBoxBgFinal}; border-color: ${logoBoxBorderColor};`;
-                    catCornerStyle = `background: ${catBgFinal}; color: ${catTextColor}; border-color: ${catBorderFinal};`;
-                    tagStyle = `color: ${tagColor};`;
-                    nameStyle = `color: ${nameColor};`;
-                    touchBtnStyle = `color: ${btnIconColor}; background: ${btnBgFinal}; border-color: ${btnBorderFinal};`;
+                    cardStyle = `--card-accent-rgb: ${r}, ${g}, ${b}; background: ${darkBg}; border: 1.6px solid ${finalBorder}; border-left: 5px solid ${finalBorderLeft}; color: #FFFFFF; box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4), 0 0 12px rgba(${r}, ${g}, ${b}, 0.16);`;
                 } else {
                     let lightBg = `linear-gradient(135deg, rgba(${r}, ${g}, ${b}, 0.06) 0%, rgba(${r}, ${g}, ${b}, 0.15) 100%)`;
-                    let blurCss = ``;
                     if (bgOpacity !== null) {
                         lightBg = `linear-gradient(135deg, rgba(${r}, ${g}, ${b}, ${(bgOpacity * 0.4).toFixed(3)}) 0%, rgba(${r}, ${g}, ${b}, ${bgOpacity.toFixed(3)}) 100%)`;
-                        blurCss = `backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);`;
                     }
-                    cardStyle = `--card-accent-rgb: ${r}, ${g}, ${b}; --card-index: ${index}; background: ${lightBg}; ${blurCss} border: 1.6px solid ${finalBorder}; border-left: 5px solid ${finalBorderLeft};`;
-                    logoBoxStyle = `background: ${logoBoxBgFinal}; border-color: ${logoBoxBorderColor};`;
-                    catCornerStyle = `background: ${catBgFinal}; color: ${catTextColor}; border-color: ${catBorderFinal};`;
-                    tagStyle = `color: ${tagColor};`;
-                    nameStyle = `color: ${nameColor};`;
-                    touchBtnStyle = `color: ${btnIconColor}; background: ${btnBgFinal}; border-color: ${btnBorderFinal};`;
+                    cardStyle = `--card-accent-rgb: ${r}, ${g}, ${b}; background: ${lightBg}; border: 1.6px solid ${finalBorder}; border-left: 5px solid ${finalBorderLeft};`;
                 }
+
+                const logoBoxStyle = `background: ${logoBoxBgBase}; border-color: ${logoBoxBorderColor};`;
+                const catCornerStyle = `background: ${catBgFinal}; color: ${catTextColor}; border-color: ${catBorderFinal};`;
+                const tagStyle = `color: ${tagColor};`;
+                const nameStyle = `color: ${nameColor};`;
+                const touchBtnStyle = `color: ${btnIconColor}; background: ${btnBgFinal}; border-color: ${btnBorderFinal};`;
 
                 const brandLogoHtml = getBrandLogoHtml(item, logoBoxIconColor, index);
 
                 html += `
-                <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="software-card-item" style="${cardStyle}" onclick="playClickSound()">
+                <a href="${escapeHtml(item.url)}" target="_blank" rel="noopener noreferrer" class="software-card-item" style="${cardStyle}" onclick="playClickSound()">
                     <!-- Ficha categoría anclada al ángulo superior derecho -->
-                    <span class="soft-cat-badge-corner" style="${catCornerStyle}">${categoryText}</span>
+                    <span class="soft-cat-badge-corner" style="${catCornerStyle}">${escapeHtml(categoryText)}</span>
 
                     <div class="soft-left">
                         <!-- Recuadro Numérico de Precisión -->
@@ -1758,13 +1580,13 @@
                             ${brandLogoHtml}
                         </div>
                         <div class="soft-meta">
-                            <span class="soft-name" style="${nameStyle}">${item.title}</span>
-                            <span class="soft-tag" style="${tagStyle}">${subText}</span>
+                            <span class="soft-name" style="${nameStyle}">${escapeHtml(item.title)}</span>
+                            <span class="soft-tag" style="${tagStyle}">${escapeHtml(subText)}</span>
                         </div>
                     </div>
 
                     <!-- Botón sugestivo táctil -->
-                    <span class="suggestive-touch-btn" style="${touchBtnStyle}" title="${t.view_web}">
+                    <span class="suggestive-touch-btn" style="${touchBtnStyle}" title="${escapeHtml(t.view_web)}">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M7 17L17 7M17 7H7M17 7V17"/>
                         </svg>
@@ -1778,15 +1600,31 @@
         }
 
         /* =========================================================
-           3. CONEXIÓN INTELIGENTE CON GOOGLE SHEETS
+           3. CONEXIÓN INTELIGENTE CON GOOGLE SHEETS (SWR SIN PARPADEO)
            ========================================================= */
         const SHEET_ID = '12WChaJERJOmnyB6K3IMgpB6lYxDrYBvWR9OToha6do4';
         const GID_MUSIC = '149458792';
 
+        async function loadMusicFromFolderFallback() {
+            try {
+                const res = await fetch('https://api.github.com/repos/1111grafica/link/contents/music');
+                if (res.ok) {
+                    const files = await res.json();
+                    const tracks = files
+                        .filter(f => f.type === 'file' && f.name.toLowerCase().endsWith('.mp3'))
+                        .map(f => formatMusicUrl(f.name));
+                    if (tracks.length > 0) {
+                        playlist = [...new Set(tracks)];
+                        try { localStorage.setItem('1111_cached_playlist', JSON.stringify(playlist)); } catch (e) {}
+                    }
+                }
+            } catch (e) {}
+        }
+
         async function initGoogleSheetsConnection() {
             try {
                 const endpoint = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&gid=0&headers=1&t=${Date.now()}`;
-                const response = await fetch(endpoint);
+                const response = await fetch(endpoint, { cache: 'no-store' });
                 if (response.ok) {
                     const rawText = await response.text();
                     const jsonStart = rawText.indexOf('{');
@@ -1794,7 +1632,6 @@
                     if (jsonStart !== -1 && jsonEnd !== -1) {
                         const payload = JSON.parse(rawText.substring(jsonStart, jsonEnd + 1));
                         if (payload.table && payload.table.rows && payload.table.rows.length > 0) {
-                            
                             const colMap = {};
                             if (payload.table.cols) {
                                 payload.table.cols.forEach((colObj, idx) => {
@@ -1818,15 +1655,17 @@
 
                                 const getByHeader = (name, fallbackIdx) => {
                                     const cleanName = name.toLowerCase().trim();
-                                    if (colMap[cleanName] !== undefined) {
-                                        return getVal(colMap[cleanName]);
-                                    }
+                                    if (colMap[cleanName] !== undefined) return getVal(colMap[cleanName]);
                                     return getVal(fallbackIdx);
                                 };
 
                                 const num = getByHeader('numero', 0);
                                 const title = getByHeader('titulo', 1);
                                 if (!title) return;
+
+                                // Columna opcional Estado (col 23): si dice NO / INACTIVO se oculta sin borrar la fila
+                                const estadoVal = (colMap['estado'] !== undefined ? getVal(colMap['estado']) : getVal(23)).toUpperCase();
+                                if (estadoVal === 'NO' || estadoVal === 'INACTIVO') return;
 
                                 let urlVal = getByHeader('url', 6);
                                 const isRealUrl = urlVal && !urlVal.includes(' ') && (urlVal.startsWith('http://') || urlVal.startsWith('https://') || urlVal.includes('.'));
@@ -1836,7 +1675,7 @@
                                         urlVal = 'https://' + urlVal;
                                     }
                                 } else {
-                                    const fallbackItem = currentProjects.find(p => 
+                                    const fallbackItem = currentProjects.find(p =>
                                         p.title.toLowerCase().trim() === title.toLowerCase().trim() ||
                                         p.num === (num ? num.padStart(2, '0') : String(index + 1).padStart(2, '0'))
                                     );
@@ -1873,14 +1712,20 @@
                             });
 
                             if (loaded.length > 0) {
-                                currentProjects = loaded;
-                                renderCards(activeLang);
+                                const prevSig = JSON.stringify(currentProjects);
+                                const nextSig = JSON.stringify(loaded);
+                                if (prevSig !== nextSig) {
+                                    currentProjects = loaded;
+                                    try { localStorage.setItem(CLIENTS_CACHE_KEY, nextSig); } catch (e) {}
+                                    renderCards(activeLang);
+                                }
                             }
                         }
                     }
                 }
             } catch (err) {}
 
+            let sheetsMusicLoaded = false;
             try {
                 const endpointMusic = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&gid=${GID_MUSIC}&headers=1&t=${Date.now()}`;
                 const resMusic = await fetch(endpointMusic, { cache: 'no-store' });
@@ -1902,29 +1747,40 @@
                                 const url = getValM(row, 3);
                                 const status = getValM(row, 4).toUpperCase();
                                 if (url && (status === '' || status === 'ACTIVO' || status === 'SI')) {
-                                    fetchedUrls.push(formatMusicUrl(url));
+                                    const formatted = formatMusicUrl(url);
+                                    if (formatted && !formatted.includes('mine_gran_turismo_4_menu.mp3')) {
+                                        fetchedUrls.push(formatted);
+                                    }
                                 }
                             });
 
                             if (fetchedUrls.length > 0) {
-                                playlist = [...new Set([...playlist, ...fetchedUrls])].filter(u => !u.includes('mine_gran_turismo_4_menu.mp3'));
+                                playlist = [...new Set(fetchedUrls)];
+                                sheetsMusicLoaded = true;
                                 try {
                                     localStorage.setItem('1111_cached_playlist', JSON.stringify(playlist));
-                                } catch(e) {}
+                                } catch (e) {}
                             }
                         }
                     }
                 }
             } catch (err) {}
+
+            if (!sheetsMusicLoaded) {
+                loadMusicFromFolderFallback();
+            }
         }
 
         /* GESTOR DE IDIOMAS */
-        function setLanguage(lang) {
-            playClickSound();
+        function setLanguage(lang, silent = false) {
+            if (!silent) {
+                triggerHapticFeedback();
+                playClickSound();
+            }
             activeLang = lang;
             const data = TRANSLATIONS[lang] || TRANSLATIONS.es;
 
-            document.getElementById('uiLangHint').innerText = data.langHint;
+            document.getElementById('uiLangHintText').innerText = data.langHint;
             document.querySelector('.brand-title').innerHTML = `${data.title_prefix}<span>${data.title_highlight}</span>`;
             document.getElementById('uiSubtitle').innerHTML = data.subtitle;
             document.getElementById('t_sec_title').innerText = data.sec_title;
@@ -1945,7 +1801,7 @@
 
             try {
                 localStorage.setItem('1111_preferred_lang', lang);
-            } catch(e) {}
+            } catch (e) {}
         }
 
         /* INICIALIZACIÓN */
@@ -1953,12 +1809,11 @@
             let savedLang = 'es';
             try {
                 savedLang = localStorage.getItem('1111_preferred_lang') || 'es';
-            } catch(e) {}
+            } catch (e) {}
 
             activeLang = savedLang;
-            setLanguage(savedLang);
+            setLanguage(savedLang, true);
 
-            loadMusicFromFolder();
             initGoogleSheetsConnection();
 
             try {
@@ -1967,11 +1822,9 @@
                 const lastTime = parseFloat(sessionStorage.getItem('1111_music_time') || '0');
 
                 if (wasMusicOn === 'true' && lastSrc) {
-                    isMusicActive = true;
-                    updateMusicUI(true);
-                    playTrackWithFadeIn(lastSrc, isNaN(lastTime) ? 0 : lastTime, 1000);
+                    playTrackWithFadeIn(lastSrc, isNaN(lastTime) ? 0 : lastTime, 900, true);
                 }
-            } catch(e) {}
+            } catch (e) {}
         });
     </script>
 </body>

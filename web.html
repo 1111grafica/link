@@ -120,14 +120,14 @@
             opacity: 0.12;
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='120' viewBox='0 0 220 120'%3E%3Cg fill='%23E989B7'%3E%3Cpath d='M25,60v-10c9-.1,12-2,14-7h13v40h-16v-23h-11Z'/%3E%3Cpath d='M60,60v-10c9-.1,12-2,14-7h13v40h-16v-23h-11Z'/%3E%3Cpath d='M95,60v-10c9-.1,12-2,14-7h13v40h-16v-23h-11Z'/%3E%3Cpath d='M130,60v-10c9-.1,12-2,14-7h13v40h-16v-23h-11Z'/%3E%3C/g%3E%3C/svg%3E");
             background-repeat: repeat;
-            background-size: 190px auto;
+            background-size: 176px 96px;
             transform: rotate(-14deg);
             animation: patternDrift 45s infinite linear;
         }
 
         @keyframes patternDrift {
             0% { background-position: 0 0; }
-            100% { background-position: 600px 600px; }
+            100% { background-position: 528px 288px; }
         }
 
         .hub-container {
@@ -140,7 +140,7 @@
             min-width: 0;
         }
 
-        /* NAVEGACIÓN SUPERIOR CON BOTÓN VOLVER & SOUNDTRACK */
+        /* NAVEGACIÓN SUPERIOR CON BOTÓN VOLVER & SOUNDTRACK (SIEMPRE EN 1 FILA) */
         .top-nav-bar {
             display: flex;
             align-items: center;
@@ -152,8 +152,8 @@
             border-radius: 999px;
             padding: 3.5px 6px;
             box-shadow: 0 2px 10px rgba(60, 105, 45, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.9);
-            flex-wrap: wrap;
-            gap: 5px;
+            flex-wrap: nowrap;
+            gap: 4px;
             width: 100%;
         }
 
@@ -161,7 +161,8 @@
             display: flex;
             align-items: center;
             gap: 4px;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
+            min-width: 0;
         }
 
         .btn-back-hub {
@@ -407,7 +408,6 @@
 
         /* ==========================================================================
            TARJETAS DE SERVICIO: ILUMINACIÓN PERIMETRAL LÍQUIDA + ELEVACIÓN ELEGANTE
-           (CERO INCLINACIÓN FÍSICA PARA UNA LECTURA Y USO IMPECABLE)
            ========================================================================== */
         .digital-item-card {
             --card-accent-rgb: 160, 209, 143;
@@ -425,7 +425,6 @@
             transition: transform 0.24s var(--spring), box-shadow 0.24s ease, border-color 0.22s ease;
         }
 
-        /* HAZ DE LUZ LÍQUIDA SATINADA (NO MOLESTA, SATINADA Y ELEGANTE) */
         .digital-item-card::before {
             content: '';
             position: absolute;
@@ -449,7 +448,7 @@
         }
 
         .digital-item-card:hover {
-            transform: translateY(-2px);
+            transform: translateY(-2.5px);
             box-shadow: 0 10px 26px -3px rgba(60, 105, 45, 0.12), 0 0 10px rgba(var(--card-accent-rgb), 0.06);
         }
 
@@ -497,17 +496,17 @@
             border-color: #FED7AA;
         }
 
-        /* 4. SOFTWARE */
+        /* 4. SOFTWARE (UNIFICADO EN PALETA VERDE ESMERALDA) */
         .digital-item-card.card-software {
             --card-accent-rgb: 5, 150, 105;
-            border-color: rgba(124, 58, 237, 0.45);
+            border-color: rgba(5, 150, 105, 0.42);
             border-left: 5px solid #059669;
-            background: linear-gradient(135deg, #FFFFFF 0%, #F6F3FE 100%);
+            background: linear-gradient(135deg, #FFFFFF 0%, #ECFDF5 100%);
         }
         .card-software .digital-icon-badge {
-            background: #EDE9FE;
-            color: #059669;
-            border-color: #DDD6FE;
+            background: #D1FAE5;
+            color: #047857;
+            border-color: #A7F3D0;
         }
 
         /* FICHA DE CATEGORÍA ANCLADA AL BORDE SUPERIOR DERECHO */
@@ -551,9 +550,9 @@
             border-color: rgba(254, 215, 170, 0.85);
         }
         .badge-software {
-            background: rgba(237, 233, 254, 0.95);
-            color: #059669;
-            border-color: rgba(221, 214, 254, 0.85);
+            background: rgba(209, 250, 229, 0.95);
+            color: #047857;
+            border-color: rgba(167, 243, 208, 0.85);
         }
 
         /* HEADER DE LA TARJETA */
@@ -667,7 +666,7 @@
             display: inline-flex;
             align-items: center;
             gap: 3px;
-            transition: all 0.22s var(--spring-bounce);
+            transition: all 0.2s var(--spring-bounce);
             outline: none;
             user-select: none;
         }
@@ -676,12 +675,12 @@
             background: var(--brand-pink);
             color: #FFFFFF;
             border-color: var(--brand-pink);
-            transform: scale(1.06) rotate(180deg);
+            transform: scale(1.06);
             box-shadow: 0 2px 8px var(--brand-pink-glow);
         }
 
         .btn-cur-swap:active {
-            transform: scale(0.92) rotate(180deg);
+            transform: scale(0.94);
         }
 
         .digital-item-desc {
@@ -940,11 +939,13 @@
             font-weight: 600;
         }
 
-        /* REGLAS ULTRA-ANGOSTAS (<350px) */
+        @media (max-width: 420px) {
+            .lang-hint-text { display: none; }
+            .lang-badge-hint { padding-left: 2px; padding-right: 0; }
+            .lang-btn { padding: 3.5px 7px; font-size: 0.69rem; }
+        }
+
         @media (max-width: 350px) {
-            .top-nav-bar { justify-content: center; gap: 4px; border-radius: 18px; }
-            .top-nav-left { justify-content: center; width: 100%; }
-            .soundtrack-wrap { margin-top: 2px; }
             .digital-item-card { padding: 22px 10px 10px 10px; }
             .digital-icon-badge { width: 34px; height: 34px; min-width: 34px; }
             .digital-item-title { font-size: 0.86rem; }
@@ -967,7 +968,7 @@
         <!-- NAVEGACIÓN SUPERIOR CON BOTÓN VOLVER & SOUNDTRACK -->
         <nav class="top-nav-bar" aria-label="Navegación">
             <div class="top-nav-left">
-                <a href="https://1111grafica.github.io/link" class="btn-back-hub" id="btnBackHub" onclick="playClickSound()" title="Sobre Nosotros" aria-label="Volver">
+                <a href="./" class="btn-back-hub" id="btnBackHub" onclick="markInternalNav(); playClickSound();" title="Sobre Nosotros" aria-label="Volver">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
                         <line x1="19" y1="12" x2="5" y2="12"></line>
                         <polyline points="12 19 5 12 12 5"></polyline>
@@ -975,7 +976,7 @@
                     <span id="t_back_hub" style="display:none;">Sobre Nosotros</span>
                 </a>
 
-                <span class="lang-badge-hint" id="uiLangHint">🌐 Idioma</span>
+                <span class="lang-badge-hint" id="uiLangHint"><span aria-hidden="true">🌐</span><span class="lang-hint-text" id="uiLangHintText">Idioma</span></span>
                 <div class="lang-switch-pills">
                     <button type="button" class="lang-btn active" onclick="setLanguage('es')" id="btnLangEs">ES</button>
                     <button type="button" class="lang-btn" onclick="setLanguage('pt')" id="btnLangPt">PT</button>
@@ -1028,7 +1029,7 @@
             
             <!-- 1. LANDING ESTILO LINKTREE -->
             <article class="digital-item-card card-linktree">
-                <span class="service-corner-badge badge-linktree">✦ REEMPLAZO LINKTREE</span>
+                <span class="service-corner-badge badge-linktree" id="t_badge_opt1">✦ REEMPLAZO LINKTREE</span>
 
                 <div class="digital-item-header">
                     <div class="digital-title-wrap">
@@ -1048,7 +1049,7 @@
                     Reemplazá Linktree por una LandingPage interactiva propia, sin mensualidades, con tu dominio y diseño 100% a medida.
                 </p>
                 <div class="digital-actions-row" style="justify-content: flex-end;">
-                    <a href="https://1111grafica.github.io/link/clientes.html" class="digital-link-cta" id="t_opt1_btn" onclick="playClickSound()">
+                    <a href="clientes.html" class="digital-link-cta" id="t_opt1_btn" onclick="markInternalNav(); playClickSound();">
                         <span>Ver ejemplos de empresas variadas</span>
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:13px; height:13px;"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                     </a>
@@ -1057,7 +1058,7 @@
 
             <!-- 2. PÁGINA WEB COMPLETA -->
             <article class="digital-item-card card-institutional">
-                <span class="service-corner-badge badge-institutional">★ WEB INSTITUCIONAL</span>
+                <span class="service-corner-badge badge-institutional" id="t_badge_opt2">★ WEB INSTITUCIONAL</span>
 
                 <div class="digital-item-header">
                     <div class="digital-title-wrap">
@@ -1067,7 +1068,7 @@
                         <h2 class="digital-item-title" id="t_opt2_title">Página Web Completa (Institucional)</h2>
                     </div>
                     <div class="price-container">
-                        <span class="digital-price-pill" id="t_opt2_price">$70.000</span>
+                        <span class="digital-price-pill" id="t_opt2_price">$100.000</span>
                         <button type="button" class="btn-cur-swap" onclick="toggleEsCurrency()" title="Cambiar entre Pesos ($) y Euros (€)">
                             <span>$ ⇄ €</span>
                         </button>
@@ -1083,7 +1084,7 @@
                         <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="6 9 12 15 18 9"/></svg>
                     </button>
 
-                    <a href="https://wa.me/5491131933611?text=%C2%A1Hola!%20Me%20contacto%20desde%201111%20Gr%C3%A1fica%20y%20me%20interesa%20la%20P%C3%A1gina%20Web%20Completa%20($70.000)." target="_blank" rel="noopener noreferrer" class="btn-action-wsp" id="t_opt2_btn" onclick="playClickSound()">
+                    <a href="https://wa.me/5491131933611?text=%C2%A1Hola!%20Me%20contacto%20desde%201111%20Gr%C3%A1fica%20y%20me%20interesa%20la%20P%C3%A1gina%20Web%20Completa%20($100.000)." target="_blank" rel="noopener noreferrer" class="btn-action-wsp" id="t_opt2_btn" onclick="playClickSound()">
                         <span>Pedir por WhatsApp</span>
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
                     </a>
@@ -1106,7 +1107,7 @@
 
             <!-- 3. WEB E-COMMERCE CON CARRITO -->
             <article class="digital-item-card card-ecommerce">
-                <span class="service-corner-badge badge-ecommerce">🛒 TIENDA & RESERVAS</span>
+                <span class="service-corner-badge badge-ecommerce" id="t_badge_opt3">🛒 TIENDA & RESERVAS</span>
 
                 <div class="digital-item-header">
                     <div class="digital-title-wrap">
@@ -1155,7 +1156,7 @@
 
             <!-- 4. SOFTWARE A MEDIDA & AUTOMATIZACIONES -->
             <article class="digital-item-card card-software">
-                <span class="service-corner-badge badge-software">⚡ AUTOMATIZACIÓN</span>
+                <span class="service-corner-badge badge-software" id="t_badge_opt4">⚡ AUTOMATIZACIÓN</span>
 
                 <div class="digital-item-header">
                     <div class="digital-title-wrap">
@@ -1184,7 +1185,7 @@
             <div class="footer-badge">
                 <span>1111 GRÁFICA</span>
                 <span style="color: var(--brand-pink);">✦</span>
-                <span>DESARROLLO WEB & SOFTWARE</span>
+                <span id="t_footer_badge">DESARROLLO WEB & SOFTWARE</span>
             </div>
             <span class="footer-legal">© 2026 1111 Gráfica · Todos los derechos reservados</span>
         </footer>
@@ -1209,7 +1210,7 @@
                     const arrayBuffer = await res.arrayBuffer();
                     soundBuffer = await audioCtx.decodeAudioData(arrayBuffer);
                 }
-            } catch(e) {}
+            } catch (e) {}
         }
 
         function playClickSound() {
@@ -1225,40 +1226,48 @@
                     source.start(0);
                     return;
                 }
-            } catch(e) {}
+            } catch (e) {}
 
             try {
                 const click = fallbackAudio.cloneNode();
                 click.volume = 0.5;
                 click.play().catch(() => {});
-            } catch(e) {}
+            } catch (e) {}
         }
 
-        window.addEventListener('pointerdown', () => {
-            if (!audioCtx) initAudioEngine();
-            else if (audioCtx.state === 'suspended') audioCtx.resume();
-        }, { once: true });
+        function triggerHapticFeedback() {
+            if (typeof navigator !== 'undefined' && navigator.vibrate) {
+                try { navigator.vibrate(10); } catch (e) {}
+            }
+        }
 
-        /* 1.B MOTOR DE MÚSICA DE FONDO */
+        /* 1.B MOTOR DE MÚSICA DE FONDO (3 CAPAS DE RESPALDO + CONTINUIDAD INTERNA + FADE OUT AL SALIR) */
         const bgAudioPlayer = new Audio();
         bgAudioPlayer.preload = "auto";
         const MUSIC_TARGET_VOL = 0.25;
         let isMusicActive = false;
         let isTrackTransitioning = false;
         let autoFadeOutTriggered = false;
+        let pendingAutoResume = false;
+        let pendingResumeSrc = '';
+        let pendingResumeTime = 0;
+        let isInternalNav = false;
         let musicFadeTimer = null;
         let currentTrackIndex = -1;
+        let playRequestId = 0;
+        let consecutiveTrackErrors = 0;
 
         const DEFAULT_PLAYLIST = [
-            "./music/A Fistful Of Dollars - 01 - Titoli (Ennio Morricone).mp3",
+            "./music/A Fistful Of Dollars - 01 - Titoli (Ennio Morricone) (1).mp3",
             "./music/A Fistful Of Dollars - 07 - Doppi Giochi (1).mp3",
-            "./music/A Fistful Of Dollars - 10 - Cavalcata (Ennio Morricone).mp3",
-            "./music/A Fistful Of Dollars - 17 - Per Un Pugno Di Dollari (1).mp3"
+            "./music/A Fistful Of Dollars - 10 - Cavalcata (Ennio Morricone) (1).mp3",
+            "./music/A Fistful Of Dollars - 17 - Per Un Pugno Di Dollari (Finale) (1).mp3"
         ];
 
         function formatMusicUrl(url) {
             if (!url) return '';
             let cleaned = String(url).trim();
+            try { cleaned = decodeURI(cleaned); } catch (e) {}
             if (!cleaned.startsWith('http://') && !cleaned.startsWith('https://') && !cleaned.startsWith('./') && !cleaned.startsWith('/')) {
                 cleaned = './music/' + cleaned;
             }
@@ -1270,34 +1279,23 @@
                 const cached = localStorage.getItem('1111_cached_playlist');
                 if (cached) {
                     const parsed = JSON.parse(cached);
-                    if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+                    if (Array.isArray(parsed) && parsed.length > 0) {
+                        return [...new Set(parsed.map(formatMusicUrl).filter(Boolean))];
+                    }
                 }
-            } catch(e) {}
+            } catch (e) {}
             return DEFAULT_PLAYLIST.map(formatMusicUrl);
         })();
 
-        function triggerHapticFeedback() {
-            if (typeof navigator !== 'undefined' && navigator.vibrate) {
-                try { navigator.vibrate(10); } catch(e) {}
+        function markInternalNav() {
+            isInternalNav = true;
+            if (isMusicActive && !bgAudioPlayer.paused) {
+                try {
+                    sessionStorage.setItem('1111_music_on', 'true');
+                    sessionStorage.setItem('1111_music_src', bgAudioPlayer.src);
+                    sessionStorage.setItem('1111_music_time', String(bgAudioPlayer.currentTime));
+                } catch (e) {}
             }
-        }
-
-        async function loadMusicFromFolder() {
-            try {
-                const res = await fetch('https://api.github.com/repos/1111grafica/link/contents/music');
-                if (res.ok) {
-                    const files = await res.json();
-                    const tracks = files
-                        .filter(f => f.type === 'file' && f.name.toLowerCase().endsWith('.mp3'))
-                        .map(f => formatMusicUrl(f.name));
-                    if (tracks.length > 0) {
-                        playlist = [...new Set([...playlist, ...tracks])];
-                        try {
-                            localStorage.setItem('1111_cached_playlist', JSON.stringify(playlist));
-                        } catch(e) {}
-                    }
-                }
-            } catch(e) {}
         }
 
         function updateMusicUI(active) {
@@ -1317,82 +1315,122 @@
             return nextIndex;
         }
 
-        function playTrackWithFadeIn(trackUrl, startSecond = 0, duration = 1000) {
-            if (musicFadeTimer) {
-                clearInterval(musicFadeTimer);
-                musicFadeTimer = null;
-            }
-            if (!trackUrl) {
-                isTrackTransitioning = false;
-                return;
-            }
+        function startVolumeFadeIn(duration) {
+            if (musicFadeTimer) { clearInterval(musicFadeTimer); musicFadeTimer = null; }
+            const steps = 20;
+            const stepTime = Math.max(15, duration / steps);
+            const volStep = MUSIC_TARGET_VOL / steps;
 
+            musicFadeTimer = setInterval(() => {
+                if (!isMusicActive) {
+                    clearInterval(musicFadeTimer);
+                    musicFadeTimer = null;
+                    return;
+                }
+                if (bgAudioPlayer.volume + volStep < MUSIC_TARGET_VOL) {
+                    bgAudioPlayer.volume += volStep;
+                } else {
+                    bgAudioPlayer.volume = MUSIC_TARGET_VOL;
+                    clearInterval(musicFadeTimer);
+                    musicFadeTimer = null;
+                    isTrackTransitioning = false;
+                }
+            }, stepTime);
+        }
+
+        function playTrackWithFadeIn(trackUrl, startSecond = 0, duration = 1000, isAutoResume = false) {
+            if (musicFadeTimer) { clearInterval(musicFadeTimer); musicFadeTimer = null; }
+            if (!trackUrl) { isTrackTransitioning = false; return; }
+
+            const reqId = ++playRequestId;
             autoFadeOutTriggered = false;
+            pendingAutoResume = false;
+
+            const normalizedSrc = formatMusicUrl(trackUrl);
+            const idxFound = playlist.indexOf(normalizedSrc);
+            if (idxFound !== -1) currentTrackIndex = idxFound;
 
             try {
-                bgAudioPlayer.src = formatMusicUrl(trackUrl);
-                bgAudioPlayer.currentTime = startSecond;
+                bgAudioPlayer.src = normalizedSrc;
                 bgAudioPlayer.volume = 0;
-                sessionStorage.setItem('1111_music_src', bgAudioPlayer.src);
-                sessionStorage.setItem('1111_music_on', 'true');
 
-                const playPromise = bgAudioPlayer.play();
-                if (playPromise !== undefined) {
-                    playPromise.then(() => {
-                        isMusicActive = true;
-                        updateMusicUI(true);
+                const seekAndPlay = () => {
+                    if (reqId !== playRequestId) return;
+                    if (startSecond > 0 && isFinite(bgAudioPlayer.duration) && startSecond < bgAudioPlayer.duration) {
+                        try { bgAudioPlayer.currentTime = startSecond; } catch (e) {}
+                    }
 
-                        const steps = 25;
-                        const stepTime = duration / steps;
-                        const volStep = MUSIC_TARGET_VOL / steps;
-
-                        musicFadeTimer = setInterval(() => {
-                            if (bgAudioPlayer.volume + volStep < MUSIC_TARGET_VOL) {
-                                bgAudioPlayer.volume += volStep;
-                            } else {
-                                bgAudioPlayer.volume = MUSIC_TARGET_VOL;
-                                clearInterval(musicFadeTimer);
-                                musicFadeTimer = null;
-                                isTrackTransitioning = false;
+                    const playPromise = bgAudioPlayer.play();
+                    if (playPromise !== undefined) {
+                        playPromise.then(() => {
+                            if (reqId !== playRequestId) {
+                                try { bgAudioPlayer.pause(); } catch (e) {}
+                                return;
                             }
-                        }, stepTime);
-                    }).catch(() => {
-                        isTrackTransitioning = false;
-                    });
+                            consecutiveTrackErrors = 0;
+                            isMusicActive = true;
+                            updateMusicUI(true);
+                            try {
+                                sessionStorage.setItem('1111_music_src', bgAudioPlayer.src);
+                                sessionStorage.setItem('1111_music_on', 'true');
+                            } catch (e) {}
+                            startVolumeFadeIn(duration);
+                        }).catch(() => {
+                            if (reqId !== playRequestId) return;
+                            isTrackTransitioning = false;
+                            isMusicActive = false;
+                            updateMusicUI(false);
+                            if (isAutoResume) {
+                                pendingAutoResume = true;
+                                pendingResumeSrc = normalizedSrc;
+                                pendingResumeTime = startSecond;
+                            }
+                        });
+                    }
+                };
+
+                if (startSecond > 0) {
+                    const onMeta = () => {
+                        bgAudioPlayer.removeEventListener('loadedmetadata', onMeta);
+                        seekAndPlay();
+                    };
+                    bgAudioPlayer.addEventListener('loadedmetadata', onMeta, { once: true });
+                    bgAudioPlayer.load();
+                } else {
+                    seekAndPlay();
                 }
-            } catch(e) {
+            } catch (e) {
                 isTrackTransitioning = false;
+                isMusicActive = false;
+                updateMusicUI(false);
             }
         }
 
         function fadeOutMusic(duration = 400, onDone, isSwitchingTrack = false) {
-            if (musicFadeTimer) {
-                clearInterval(musicFadeTimer);
-                musicFadeTimer = null;
-            }
-
+            if (musicFadeTimer) { clearInterval(musicFadeTimer); musicFadeTimer = null; }
             if (!isSwitchingTrack) {
+                playRequestId++;
                 isMusicActive = false;
-                sessionStorage.setItem('1111_music_on', 'false');
+                pendingAutoResume = false;
+                try { sessionStorage.setItem('1111_music_on', 'false'); } catch (e) {}
                 updateMusicUI(false);
             }
-
             if (bgAudioPlayer.paused) {
                 if (onDone) onDone();
                 return;
             }
 
-            const steps = 20;
-            const stepTime = duration / steps;
+            const steps = 18;
+            const stepTime = Math.max(15, duration / steps);
             const startVol = bgAudioPlayer.volume;
             const volStep = startVol / steps;
 
             musicFadeTimer = setInterval(() => {
-                if (bgAudioPlayer.volume - volStep > 0) {
+                if (bgAudioPlayer.volume - volStep > 0.005) {
                     bgAudioPlayer.volume -= volStep;
                 } else {
                     bgAudioPlayer.volume = 0;
-                    try { bgAudioPlayer.pause(); } catch(e) {}
+                    try { bgAudioPlayer.pause(); } catch (e) {}
                     clearInterval(musicFadeTimer);
                     musicFadeTimer = null;
                     if (onDone) onDone();
@@ -1403,13 +1441,14 @@
         function toggleMusic() {
             triggerHapticFeedback();
             playClickSound();
+            pendingAutoResume = false;
+            consecutiveTrackErrors = 0;
             if (!isMusicActive) {
                 if (playlist.length === 0) return;
                 isMusicActive = true;
                 updateMusicUI(true);
-                sessionStorage.setItem('1111_music_on', 'true');
                 currentTrackIndex = pickRandomTrackIndex();
-                if (playlist && playlist.length > 0 && playlist[currentTrackIndex]) {
+                if (playlist[currentTrackIndex]) {
                     playTrackWithFadeIn(playlist[currentTrackIndex], 0, 1000);
                 }
             } else {
@@ -1420,24 +1459,26 @@
         function skipMusic() {
             triggerHapticFeedback();
             playClickSound();
+            pendingAutoResume = false;
+            consecutiveTrackErrors = 0;
             if (playlist.length === 0) return;
+
             if (!isMusicActive) {
                 isMusicActive = true;
                 updateMusicUI(true);
-                sessionStorage.setItem('1111_music_on', 'true');
                 currentTrackIndex = pickRandomTrackIndex();
-                if (playlist && playlist.length > 0 && playlist[currentTrackIndex]) {
+                if (playlist[currentTrackIndex]) {
                     playTrackWithFadeIn(playlist[currentTrackIndex], 0, 900);
                 }
                 return;
             }
 
-            if (isTrackTransitioning) return;
             isTrackTransitioning = true;
-
-            fadeOutMusic(300, () => {
+            fadeOutMusic(280, () => {
+                isMusicActive = true;
+                updateMusicUI(true);
                 currentTrackIndex = pickRandomTrackIndex();
-                if (playlist && playlist.length > 0 && playlist[currentTrackIndex]) {
+                if (playlist[currentTrackIndex]) {
                     playTrackWithFadeIn(playlist[currentTrackIndex], 0, 900);
                 } else {
                     isTrackTransitioning = false;
@@ -1452,8 +1493,9 @@
                     autoFadeOutTriggered = true;
                     isTrackTransitioning = true;
                     fadeOutMusic(2600, () => {
+                        if (!isMusicActive) { isTrackTransitioning = false; return; }
                         currentTrackIndex = pickRandomTrackIndex();
-                        if (playlist && playlist.length > 0 && playlist[currentTrackIndex]) {
+                        if (playlist[currentTrackIndex]) {
                             playTrackWithFadeIn(playlist[currentTrackIndex], 0, 1200);
                         } else {
                             isTrackTransitioning = false;
@@ -1467,33 +1509,63 @@
             if (isMusicActive && !isTrackTransitioning) {
                 isTrackTransitioning = true;
                 currentTrackIndex = pickRandomTrackIndex();
-                if (playlist[currentTrackIndex]) {
-                    playTrackWithFadeIn(playlist[currentTrackIndex], 0, 1000);
-                }
+                if (playlist[currentTrackIndex]) playTrackWithFadeIn(playlist[currentTrackIndex], 0, 1000);
             }
         });
 
         bgAudioPlayer.addEventListener('error', () => {
-            if (isMusicActive) {
+            consecutiveTrackErrors++;
+            if (isMusicActive && playlist.length > 1 && consecutiveTrackErrors < playlist.length) {
                 currentTrackIndex = pickRandomTrackIndex();
-                if (playlist && playlist.length > 1 && playlist[currentTrackIndex]) {
+                if (playlist[currentTrackIndex]) {
                     playTrackWithFadeIn(playlist[currentTrackIndex], 0, 800);
                 }
+            } else {
+                isTrackTransitioning = false;
+                isMusicActive = false;
+                updateMusicUI(false);
             }
         });
 
         setInterval(() => {
             if (isMusicActive && !bgAudioPlayer.paused) {
-                sessionStorage.setItem('1111_music_src', bgAudioPlayer.src);
-                sessionStorage.setItem('1111_music_time', String(bgAudioPlayer.currentTime));
+                try {
+                    sessionStorage.setItem('1111_music_src', bgAudioPlayer.src);
+                    sessionStorage.setItem('1111_music_time', String(bgAudioPlayer.currentTime));
+                } catch (e) {}
             }
         }, 1000);
 
+        window.addEventListener('pointerdown', (e) => {
+            if (!audioCtx) initAudioEngine();
+            else if (audioCtx.state === 'suspended') audioCtx.resume();
+
+            if (pendingAutoResume && !e.target.closest('.soundtrack-wrap')) {
+                const src = pendingResumeSrc;
+                const time = pendingResumeTime;
+                pendingAutoResume = false;
+                isMusicActive = true;
+                updateMusicUI(true);
+                playTrackWithFadeIn(src, time, 750);
+            }
+        }, { capture: true });
+
+        document.addEventListener('visibilitychange', () => {
+            if (document.visibilityState === 'hidden' && !isInternalNav && isMusicActive) {
+                fadeOutMusic(700);
+            }
+        });
+
         window.addEventListener('pagehide', () => {
-            if (isMusicActive && !bgAudioPlayer.paused) {
-                sessionStorage.setItem('1111_music_on', 'true');
-                sessionStorage.setItem('1111_music_src', bgAudioPlayer.src);
-                sessionStorage.setItem('1111_music_time', String(bgAudioPlayer.currentTime));
+            if (isInternalNav && isMusicActive && !bgAudioPlayer.paused) {
+                try {
+                    sessionStorage.setItem('1111_music_on', 'true');
+                    sessionStorage.setItem('1111_music_src', bgAudioPlayer.src);
+                    sessionStorage.setItem('1111_music_time', String(bgAudioPlayer.currentTime));
+                } catch (e) {}
+            } else if (!isInternalNav) {
+                try { sessionStorage.setItem('1111_music_on', 'false'); } catch (e) {}
+                if (isMusicActive) fadeOutMusic(400);
             }
         });
 
@@ -1501,12 +1573,15 @@
             const link = e.target.closest('a');
             if (!link) return;
             const href = (link.getAttribute('href') || '').toLowerCase();
-            const isInternal = href === './' || href === '../' || href === 'index.html' || 
-                               href.includes('1111grafica.github.io/link') ||
-                               href.endsWith('/link/') || href.endsWith('/link') ||
-                               href.includes('clientes.html') || href.includes('web.html');
-            if (isInternal) return;
-            if (isMusicActive) fadeOutMusic(1000);
+            const isInternal = href === './' || href === '../' || href === 'index.html' ||
+                               href === 'web.html' || href === 'clientes.html' ||
+                               href.includes('clientes.html') || href.includes('web.html') ||
+                               (href.includes('1111grafica.github.io/link') && link.target !== '_blank');
+            if (isInternal) {
+                markInternalNav();
+                return;
+            }
+            if (isMusicActive) fadeOutMusic(900);
         });
 
         /* ==========================================================================
@@ -1521,7 +1596,6 @@
             });
         }
 
-        /* TOGGLE FLUIDO DEL DESPLEGABLE EN CASCADA */
         function toggleDrawer(wrapperId, btnId) {
             const wrap = document.getElementById(wrapperId);
             const btn = document.getElementById(btnId);
@@ -1536,13 +1610,18 @@
             }
         }
 
-        /* 2. DICCIONARIO TRILINGÜE */
+        /* 2. DICCIONARIO TRILINGÜE + PRECIOS SINCRONIZADOS CON SHEETS */
         const TRANSLATIONS = {
             es: {
-                langHint: "🌐 Idioma",
+                langHint: "Idioma",
                 main_title: "Diseño Web <span>& Software</span>",
                 back_hub: "Sobre Nosotros",
                 sub: "Sitios web (institucionales, e-commerce, reservas) 100% interactivos & soluciones de software para potenciar tu empresa.",
+                badge_opt1: "✦ REEMPLAZO LINKTREE",
+                badge_opt2: "★ WEB INSTITUCIONAL",
+                badge_opt3: "🛒 TIENDA & RESERVAS",
+                badge_opt4: "⚡ AUTOMATIZACIÓN",
+                footer_badge: "DESARROLLO WEB & SOFTWARE",
                 opt1_title: "Landing Page (mejoramos a Linktree)",
                 opt1_desc: "Reemplazá Linktree por una LandingPage interactiva propia, sin mensualidades, con tu dominio y diseño 100% a medida.",
                 opt1_btn: "Ver ejemplos de empresas variadas",
@@ -1559,10 +1638,15 @@
                 btn_ex: "Ver ejemplos"
             },
             pt: {
-                langHint: "🌐 Idioma",
+                langHint: "Idioma",
                 main_title: "Web Design <span>& Software</span>",
                 back_hub: "Sobre nós",
                 sub: "Sites (institucionais, e-commerce, reservas) 100% interativos e soluções de software para impulsionar sua empresa.",
+                badge_opt1: "✦ SUBSTITUI O LINKTREE",
+                badge_opt2: "★ SITE INSTITUCIONAL",
+                badge_opt3: "🛒 LOJA & RESERVAS",
+                badge_opt4: "⚡ AUTOMAÇÃO",
+                footer_badge: "DESENVOLVIMENTO WEB & SOFTWARE",
                 opt1_title: "Página inicial (aprimoramos o Linktree)",
                 opt1_desc: "Substitua o Linktree pela sua própria Landing Page interativa, sem mensalidades, com o seu domínio e design 100% personalizado.",
                 opt1_btn: "Ver exemplos reais de clientes",
@@ -1576,13 +1660,18 @@
                 opt4_desc: "Conversão em massa de arquivos pesados, limpeza de banco de dados, ferramentas de produtividade, e muito mais!...",
                 opt4_price: "Sob Medida",
                 opt4_btn: "Solicitar orçamento sob medida pelo WhatsApp",
-                btn_ex: "Ver ejemplos"
+                btn_ex: "Ver exemplos"
             },
             en: {
-                langHint: "🌐 Language",
+                langHint: "Language",
                 main_title: "Web Design <span>& Software</span>",
                 back_hub: "About Us",
                 sub: "100% interactive websites (institutional, e-commerce, booking) and software solutions to boost your business.",
+                badge_opt1: "✦ LINKTREE REPLACEMENT",
+                badge_opt2: "★ FULL WEBSITE",
+                badge_opt3: "🛒 STORE & BOOKINGS",
+                badge_opt4: "⚡ AUTOMATION",
+                footer_badge: "WEB DEVELOPMENT & SOFTWARE",
                 opt1_title: "Homepage (we've improved Linktree)",
                 opt1_desc: "Replace Linktree with your own interactive Landing Page, without monthly fees, with your domain and 100% custom design.",
                 opt1_btn: "View real client examples",
@@ -1601,14 +1690,40 @@
         };
 
         const PRICES = {
-            opt1: { es: "$30.000", eu: "20 €", pt: "R$ 100", en: "$20" },
-            opt2: { es: "$70.000", eu: "40 €", pt: "R$ 250", en: "$40" },
-            opt3: { es: "$200.000", eu: "120 €", pt: "R$ 600", en: "$125" },
+            opt1: { es: "$30.000", eu: "25€", pt: "R$ 100", en: "$20" },
+            opt2: { es: "$100.000", eu: "60€", pt: "R$ 300", en: "$70" },
+            opt3: { es: "$200.000", eu: "120€", pt: "R$ 600", en: "$125" },
             opt4: { es: "A Medida", eu: "A Medida", pt: "Sob Medida", en: "Custom" }
         };
 
+        const WEB_CACHE_KEY = '1111_cached_web_v1';
         let activeLang = 'es';
         let esCurrency = 'ars';
+        let opt1CustomUrl = 'clientes.html';
+
+        function applyCachedWebData() {
+            try {
+                const raw = localStorage.getItem(WEB_CACHE_KEY);
+                if (!raw) return;
+                const cached = JSON.parse(raw);
+                if (!cached || typeof cached !== 'object') return;
+                if (cached.opt1Url) opt1CustomUrl = cached.opt1Url;
+                if (cached.prices) {
+                    Object.keys(cached.prices).forEach(k => {
+                        if (PRICES[k]) Object.assign(PRICES[k], cached.prices[k]);
+                    });
+                }
+                if (cached.translations) {
+                    ['es', 'pt', 'en'].forEach(l => {
+                        if (cached.translations[l]) Object.assign(TRANSLATIONS[l], cached.translations[l]);
+                    });
+                }
+                if (cached.examples) {
+                    if (cached.examples.opt2) updateExamplesFromRawString('drawerWebExamples', cached.examples.opt2);
+                    if (cached.examples.opt3) updateExamplesFromRawString('drawerCartExamples', cached.examples.opt3);
+                }
+            } catch (e) {}
+        }
 
         function toggleEsCurrency() {
             triggerHapticFeedback();
@@ -1617,7 +1732,6 @@
             updatePricesDisplay(true);
         }
 
-        /* ACTUALIZACIÓN CON EFECTO FLIP LÍQUIDO */
         function updatePricesDisplay(animate = false) {
             const isEs = (activeLang === 'es');
 
@@ -1694,13 +1808,16 @@
             }
         }
 
-        function setLanguage(lang) {
-            if (activeLang !== lang) playClickSound();
+        function setLanguage(lang, silent = false) {
+            if (!silent && activeLang !== lang) {
+                triggerHapticFeedback();
+                playClickSound();
+            }
             activeLang = lang;
             const data = TRANSLATIONS[lang] || TRANSLATIONS.es;
 
-            const langHint = document.getElementById('uiLangHint');
-            if (langHint && data.langHint) langHint.innerText = data.langHint;
+            const langHintText = document.getElementById('uiLangHintText');
+            if (langHintText && data.langHint) langHintText.innerText = data.langHint;
 
             const mainTitle = document.getElementById('t_main_title');
             if (mainTitle && data.main_title) mainTitle.innerHTML = data.main_title;
@@ -1712,9 +1829,21 @@
 
             document.getElementById('uiPageSub').innerText = data.sub;
 
+            ['opt1', 'opt2', 'opt3', 'opt4'].forEach(k => {
+                const b = document.getElementById(`t_badge_${k}`);
+                if (b && data[`badge_${k}`]) b.innerText = data[`badge_${k}`];
+            });
+
+            const footerBadge = document.getElementById('t_footer_badge');
+            if (footerBadge && data.footer_badge) footerBadge.innerText = data.footer_badge;
+
             document.getElementById('t_opt1_title').innerText = data.opt1_title;
             document.getElementById('t_opt1_desc').innerText = data.opt1_desc;
-            document.getElementById('t_opt1_btn').firstElementChild.innerText = data.opt1_btn;
+            const opt1Btn = document.getElementById('t_opt1_btn');
+            if (opt1Btn) {
+                if (opt1CustomUrl) opt1Btn.href = opt1CustomUrl;
+                if (opt1Btn.firstElementChild) opt1Btn.firstElementChild.innerText = data.opt1_btn;
+            }
 
             document.getElementById('t_opt2_title').innerText = data.opt2_title;
             document.getElementById('t_opt2_desc').innerText = data.opt2_desc;
@@ -1740,9 +1869,13 @@
             if (lang === 'en') document.getElementById('btnLangEn').classList.add('active');
 
             updatePricesDisplay(false);
+
+            try {
+                localStorage.setItem('1111_preferred_lang', lang);
+            } catch (e) {}
         }
 
-        /* 3. SINCRONIZACIÓN CON GOOGLE SHEETS */
+        /* 3. SINCRONIZACIÓN CON GOOGLE SHEETS (SWR CON RESPALDO AUTOMÁTICO) */
         const SHEET_ID = '12WChaJERJOmnyB6K3IMgpB6lYxDrYBvWR9OToha6do4';
         const GID_WEB = '70835229';
         const GID_MUSIC = '149458792';
@@ -1765,9 +1898,26 @@
                 a.className = 'example-badge-chip';
                 a.style.setProperty('--chip-idx', idx);
                 a.onclick = () => playClickSound();
-                a.innerHTML = `<span>${title}</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>`;
+                a.innerHTML = `<span></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>`;
+                a.firstElementChild.innerText = title;
                 drawer.appendChild(a);
             });
+        }
+
+        async function loadMusicFromFolderFallback() {
+            try {
+                const res = await fetch('https://api.github.com/repos/1111grafica/link/contents/music');
+                if (res.ok) {
+                    const files = await res.json();
+                    const tracks = files
+                        .filter(f => f.type === 'file' && f.name.toLowerCase().endsWith('.mp3'))
+                        .map(f => formatMusicUrl(f.name));
+                    if (tracks.length > 0) {
+                        playlist = [...new Set(tracks)];
+                        try { localStorage.setItem('1111_cached_playlist', JSON.stringify(playlist)); } catch (e) {}
+                    }
+                }
+            } catch (e) {}
         }
 
         async function initWebSheetsConnection() {
@@ -1781,7 +1931,6 @@
                     if (s !== -1 && e !== -1) {
                         const payloadWeb = JSON.parse(rawTextWeb.substring(s, e + 1));
                         if (payloadWeb.table && payloadWeb.table.rows && payloadWeb.table.rows.length > 0) {
-                            
                             const colMap = {};
                             if (payloadWeb.table.cols) {
                                 payloadWeb.table.cols.forEach((col, idx) => {
@@ -1797,8 +1946,9 @@
                             const colSubEs = getCol('subtitulo_es', 4);
                             const colSubPt = getCol('subtitulo_pt', 5);
                             const colSubEn = getCol('subtitulo_en', 6);
-                            
+                            const colUrl = getCol('url', 7);
                             const colBadgeEs = getCol('badge_es', 8);
+
                             let colBadgeEu = getCol('badge_eu', -1);
                             if (colBadgeEu === -1) colBadgeEu = getCol('badge_eur', -1);
                             if (colBadgeEu === -1) colBadgeEu = 9;
@@ -1808,11 +1958,18 @@
                             const colEjemplos = getCol('ejemplos', 12);
 
                             const getValW = (row, col) => {
-                                if (col === -1) return '';
+                                if (col === undefined || col < 0 || col >= row.c.length) return '';
                                 const cell = row.c[col];
                                 return (cell && cell.v !== null && cell.v !== undefined) ? String(cell.v).trim() : '';
                             };
-                            
+
+                            const cachePayload = {
+                                opt1Url: opt1CustomUrl,
+                                prices: {},
+                                translations: { es: {}, pt: {}, en: {} },
+                                examples: {}
+                            };
+
                             payloadWeb.table.rows.forEach(row => {
                                 if (!row || !row.c) return;
                                 const id = getValW(row, colId).toUpperCase();
@@ -1825,12 +1982,14 @@
                                 const sub_pt = getValW(row, colSubPt);
                                 const sub_en = getValW(row, colSubEn);
 
+                                const urlVal = getValW(row, colUrl);
+
                                 const price_es = getValW(row, colBadgeEs);
                                 let price_eu = getValW(row, colBadgeEu);
                                 const price_pt = getValW(row, colBadgePt);
                                 const price_en = getValW(row, colBadgeEn);
 
-                                if (price_eu && !price_eu.includes('€') && !price_eu.toLowerCase().includes('medida')) {
+                                if (price_eu && !price_eu.includes('€') && !price_eu.toLowerCase().includes('medida') && !price_eu.toLowerCase().includes('custom')) {
                                     price_eu = `${price_eu} €`;
                                 }
 
@@ -1842,30 +2001,44 @@
                                                (id === 'OPT4' || id === 'SOFTWARE') ? 'opt4' : null;
 
                                 if (mapKey) {
-                                    if (title_es) TRANSLATIONS.es[mapKey + '_title'] = title_es;
-                                    if (title_pt) TRANSLATIONS.pt[mapKey + '_title'] = title_pt;
-                                    if (title_en) TRANSLATIONS.en[mapKey + '_title'] = title_en;
+                                    if (mapKey === 'opt1' && urlVal) {
+                                        opt1CustomUrl = urlVal;
+                                        cachePayload.opt1Url = urlVal;
+                                    }
 
-                                    if (sub_es) TRANSLATIONS.es[mapKey + '_desc'] = sub_es;
-                                    if (sub_pt) TRANSLATIONS.pt[mapKey + '_desc'] = sub_pt;
-                                    if (sub_en) TRANSLATIONS.en[mapKey + '_desc'] = sub_en;
+                                    if (title_es) { TRANSLATIONS.es[mapKey + '_title'] = title_es; cachePayload.translations.es[mapKey + '_title'] = title_es; }
+                                    if (title_pt) { TRANSLATIONS.pt[mapKey + '_title'] = title_pt; cachePayload.translations.pt[mapKey + '_title'] = title_pt; }
+                                    if (title_en) { TRANSLATIONS.en[mapKey + '_title'] = title_en; cachePayload.translations.en[mapKey + '_title'] = title_en; }
 
-                                    if (price_es) PRICES[mapKey].es = price_es;
-                                    if (price_eu) PRICES[mapKey].eu = price_eu;
-                                    if (price_pt) PRICES[mapKey].pt = price_pt;
-                                    if (price_en) PRICES[mapKey].en = price_en;
+                                    if (sub_es) { TRANSLATIONS.es[mapKey + '_desc'] = sub_es; cachePayload.translations.es[mapKey + '_desc'] = sub_es; }
+                                    if (sub_pt) { TRANSLATIONS.pt[mapKey + '_desc'] = sub_pt; cachePayload.translations.pt[mapKey + '_desc'] = sub_pt; }
+                                    if (sub_en) { TRANSLATIONS.en[mapKey + '_desc'] = sub_en; cachePayload.translations.en[mapKey + '_desc'] = sub_en; }
 
-                                    if (mapKey === 'opt2' && examples) updateExamplesFromRawString('drawerWebExamples', examples);
-                                    if (mapKey === 'opt3' && examples) updateExamplesFromRawString('drawerCartExamples', examples);
+                                    cachePayload.prices[mapKey] = {};
+                                    if (price_es) { PRICES[mapKey].es = price_es; cachePayload.prices[mapKey].es = price_es; }
+                                    if (price_eu) { PRICES[mapKey].eu = price_eu; cachePayload.prices[mapKey].eu = price_eu; }
+                                    if (price_pt) { PRICES[mapKey].pt = price_pt; cachePayload.prices[mapKey].pt = price_pt; }
+                                    if (price_en) { PRICES[mapKey].en = price_en; cachePayload.prices[mapKey].en = price_en; }
+
+                                    if (mapKey === 'opt2' && examples) {
+                                        updateExamplesFromRawString('drawerWebExamples', examples);
+                                        cachePayload.examples.opt2 = examples;
+                                    }
+                                    if (mapKey === 'opt3' && examples) {
+                                        updateExamplesFromRawString('drawerCartExamples', examples);
+                                        cachePayload.examples.opt3 = examples;
+                                    }
                                 }
                             });
 
-                            updatePricesDisplay(false);
+                            try { localStorage.setItem(WEB_CACHE_KEY, JSON.stringify(cachePayload)); } catch (e) {}
+                            setLanguage(activeLang, true);
                         }
                     }
                 }
             } catch (err) {}
 
+            let sheetsMusicLoaded = false;
             try {
                 const endpointMusic = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&gid=${GID_MUSIC}&headers=1&t=${Date.now()}`;
                 const resMusic = await fetch(endpointMusic, { cache: 'no-store' });
@@ -1887,26 +2060,41 @@
                                 const url = getValM(row, 3);
                                 const status = getValM(row, 4).toUpperCase();
                                 if (url && (status === '' || status === 'ACTIVO' || status === 'SI')) {
-                                    fetchedUrls.push(formatMusicUrl(url));
+                                    const formatted = formatMusicUrl(url);
+                                    if (formatted && !formatted.includes('mine_gran_turismo_4_menu.mp3')) {
+                                        fetchedUrls.push(formatted);
+                                    }
                                 }
                             });
 
                             if (fetchedUrls.length > 0) {
-                                playlist = [...new Set([...playlist, ...fetchedUrls])].filter(u => !u.includes('mine_gran_turismo_4_menu.mp3'));
+                                playlist = [...new Set(fetchedUrls)];
+                                sheetsMusicLoaded = true;
                                 try {
                                     localStorage.setItem('1111_cached_playlist', JSON.stringify(playlist));
-                                } catch(e) {}
+                                } catch (e) {}
                             }
                         }
                     }
                 }
             } catch (err) {}
+
+            if (!sheetsMusicLoaded) {
+                loadMusicFromFolderFallback();
+            }
         }
 
         window.addEventListener('DOMContentLoaded', () => {
             requestAnimationFrame(() => document.body.classList.remove('preload'));
-            setLanguage('es');
-            loadMusicFromFolder();
+
+            applyCachedWebData();
+
+            let savedLang = 'es';
+            try {
+                savedLang = localStorage.getItem('1111_preferred_lang') || 'es';
+            } catch (e) {}
+
+            setLanguage(savedLang, true);
             initWebSheetsConnection();
             bindTouchCards();
 
@@ -1916,11 +2104,9 @@
                 const lastTime = parseFloat(sessionStorage.getItem('1111_music_time') || '0');
 
                 if (wasMusicOn === 'true' && lastSrc) {
-                    isMusicActive = true;
-                    updateMusicUI(true);
-                    playTrackWithFadeIn(lastSrc, isNaN(lastTime) ? 0 : lastTime, 1000);
+                    playTrackWithFadeIn(lastSrc, isNaN(lastTime) ? 0 : lastTime, 900, true);
                 }
-            } catch(e) {}
+            } catch (e) {}
         });
     </script>
 </body>

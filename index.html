@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -120,14 +119,14 @@
             opacity: 0.12;
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='120' viewBox='0 0 220 120'%3E%3Cg fill='%23E989B7'%3E%3Cpath d='M25,60v-10c9-.1,12-2,14-7h13v40h-16v-23h-11Z'/%3E%3Cpath d='M60,60v-10c9-.1,12-2,14-7h13v40h-16v-23h-11Z'/%3E%3Cpath d='M95,60v-10c9-.1,12-2,14-7h13v40h-16v-23h-11Z'/%3E%3Cpath d='M130,60v-10c9-.1,12-2,14-7h13v40h-16v-23h-11Z'/%3E%3C/g%3E%3C/svg%3E");
             background-repeat: repeat;
-            background-size: 190px auto;
+            background-size: 176px 96px;
             transform: rotate(-14deg);
             animation: patternDrift 45s infinite linear;
         }
 
         @keyframes patternDrift {
             0% { background-position: 0 0; }
-            100% { background-position: 600px 600px; }
+            100% { background-position: 528px 288px; }
         }
 
         .hub-container {
@@ -138,7 +137,6 @@
             gap: 10px;
             z-index: 2;
             min-width: 0;
-            perspective: 1000px;
         }
 
         /* BARRA SUPERIOR */
@@ -153,7 +151,7 @@
             border-radius: 999px;
             padding: 3.5px 6px;
             box-shadow: 0 2px 10px rgba(60, 105, 45, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.9);
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
             gap: 5px;
             width: 100%;
         }
@@ -162,7 +160,7 @@
             display: flex;
             align-items: center;
             gap: 4px;
-            flex-wrap: wrap;
+            min-width: 0;
         }
 
         .lang-badge-hint {
@@ -396,7 +394,7 @@
         .social-btn svg { width: 18px; height: 18px; display: block; }
 
         /* ==========================================================================
-           TARJETAS BOTONES HUB: ELEVACIÓN LIMPIA Y ELEGANTE (SIN ANIMACIÓN DE BORDE)
+           TARJETAS BOTONES HUB: ELEVACIÓN LIMPIA Y ELEGANTE
            ========================================================================== */
         .btn-card {
             display: flex;
@@ -415,17 +413,17 @@
             cursor: pointer;
             min-height: 64px;
             width: 100%;
-            transition: transform 0.20s var(--spring), box-shadow 0.20s ease, border-color 0.18s ease;
+            transition: transform 0.22s var(--spring), box-shadow 0.22s ease, border-color 0.18s ease;
         }
 
         .btn-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 22px -2px rgba(60, 105, 45, 0.15);
+            transform: translateY(-2.5px);
+            box-shadow: 0 9px 22px -3px rgba(60, 105, 45, 0.15);
         }
 
         .btn-card:active {
             transform: scale(0.985);
-            transition: transform 0.1s ease;
+            transition: transform 0.09s ease;
         }
 
         /* FICHA CATEGORÍA ANCLADA EN LA ESQUINA SUPERIOR DERECHA */
@@ -1006,7 +1004,6 @@
             object-fit: contain;
             box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55);
             transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.18s ease;
-            will-change: transform, opacity;
         }
 
         .lightbox-img-full.slide-next {
@@ -1125,10 +1122,13 @@
             font-weight: 600;
         }
 
+        @media (max-width: 395px) {
+            .lang-hint-text { display: none; }
+            .lang-badge-hint { padding-left: 4px; padding-right: 0; }
+            .lang-btn { padding: 3.5px 7px; font-size: 0.69rem; }
+        }
+
         @media (max-width: 350px) {
-            .lang-nav-bar { justify-content: center; gap: 4px; border-radius: 18px; }
-            .lang-group-left { justify-content: center; width: 100%; }
-            .soundtrack-wrap { margin-top: 2px; }
             .btn-card { padding: 8px 8px; gap: 8px; }
             .icon-box { width: 34px; height: 34px; min-width: 34px; border-radius: 8px; }
             .btn-title { font-size: 0.86rem; }
@@ -1154,7 +1154,7 @@
         <!-- BARRA SUPERIOR: IDIOMA & SOUNDTRACK -->
         <nav class="lang-nav-bar" aria-label="Language & Music Controls">
             <div class="lang-group-left">
-                <span class="lang-badge-hint" id="uiLangHint">🌐 Idioma</span>
+                <span class="lang-badge-hint" id="uiLangHint"><span aria-hidden="true">🌐</span><span class="lang-hint-text" id="uiLangHintText">Idioma</span></span>
                 <div class="lang-switch-pills">
                     <button type="button" class="lang-btn active" onclick="setLanguage('es')" id="btnLangEs">ES</button>
                     <button type="button" class="lang-btn" onclick="setLanguage('pt')" id="btnLangPt">PT</button>
@@ -1241,6 +1241,8 @@
 
         <!-- BOTÓN 2: INSTAGRAM -->
         <a href="https://www.instagram.com/1111.grafica" target="_blank" rel="noopener noreferrer" class="btn-card card-insta" id="btnCard2" onclick="playClickSound()">
+            <span class="hub-cat-badge-corner" id="t_btn2_badge" style="display:none;"></span>
+
             <div class="icon-box" id="iconBoxBtn2">
                 <svg viewBox="0 0 24 24" style="width: 24px; height: 24px; display: block;" xmlns="http://www.w3.org/2000/svg">
                     <defs>
@@ -1308,7 +1310,7 @@
         </a>
 
         <!-- BOTÓN 5: SOLUCIONES DIGITALES & WEB -->
-        <a href="web.html" class="btn-card card-soft" id="btnCard5" onclick="playClickSound()">
+        <a href="web.html" class="btn-card card-soft" id="btnCard5" onclick="markInternalNav(); playClickSound();">
             <span class="hub-cat-badge-corner" id="t_btn5_badge">Servicios</span>
 
             <div class="icon-box" id="iconBoxBtn5">
@@ -1333,6 +1335,8 @@
 
         <!-- BOTÓN 6: EMAIL -->
         <a href="mailto:onceonce.grafica@gmail.com" class="btn-card card-mail" id="btnCard6" onclick="playClickSound()">
+            <span class="hub-cat-badge-corner" id="t_btn6_badge" style="display:none;"></span>
+
             <div class="icon-box" id="iconBoxBtn6">
                 <svg viewBox="0 0 24 24" style="width: 20px; height: 20px; display: block;" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                     <rect x="2.5" y="4.5" width="19" height="15" rx="3.5"/>
@@ -1388,7 +1392,7 @@
                         Reemplazá Linktree por un Hub interactivo propio, sin mensualidades, con tu dominio y diseño 100% a medida.
                     </p>
                     <div class="digital-actions-row" style="justify-content: flex-end;">
-                        <a href="https://1111grafica.github.io/link/clientes.html" class="digital-link-cta" id="t_opt1_btn" onclick="playClickSound()">
+                        <a href="https://1111grafica.github.io/link/clientes.html" class="digital-link-cta" id="t_opt1_btn" onclick="markInternalNav(); playClickSound();">
                             <span>Ver ejemplos de clientes reales</span>
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:13px; height:13px;"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                         </a>
@@ -1553,7 +1557,7 @@
                     const arrayBuffer = await res.arrayBuffer();
                     soundBuffer = await audioCtx.decodeAudioData(arrayBuffer);
                 }
-            } catch(e) {}
+            } catch (e) {}
         }
 
         function playClickSound() {
@@ -1569,38 +1573,48 @@
                     source.start(0);
                     return;
                 }
-            } catch(e) {}
+            } catch (e) {}
 
             try {
                 const click = fallbackAudio.cloneNode();
                 click.volume = 0.5;
                 click.play().catch(() => {});
-            } catch(e) {}
+            } catch (e) {}
         }
 
-        window.addEventListener('pointerdown', () => {
-            if (!audioCtx) initAudioEngine();
-            else if (audioCtx.state === 'suspended') audioCtx.resume();
-        }, { once: true });
+        function triggerHapticFeedback() {
+            if (typeof navigator !== 'undefined' && navigator.vibrate) {
+                try { navigator.vibrate(10); } catch (e) {}
+            }
+        }
 
-        /* 1.B MOTOR DE MÚSICA DE FONDO */
+        /* 1.B MOTOR DE MÚSICA DE FONDO (3 CAPAS DE RESPALDO + CONTINUIDAD INTERNA + FADE OUT AL SALIR) */
         const bgAudioPlayer = new Audio();
         bgAudioPlayer.preload = "auto";
         const MUSIC_TARGET_VOL = 0.25;
         let isMusicActive = false;
+        let isTrackTransitioning = false;
+        let autoFadeOutTriggered = false;
+        let pendingAutoResume = false;
+        let pendingResumeSrc = '';
+        let pendingResumeTime = 0;
+        let isInternalNav = false;
         let musicFadeTimer = null;
         let currentTrackIndex = -1;
+        let playRequestId = 0;
+        let consecutiveTrackErrors = 0;
 
         const DEFAULT_PLAYLIST = [
-            "./music/A Fistful Of Dollars - 01 - Titoli (Ennio Morricone).mp3",
+            "./music/A Fistful Of Dollars - 01 - Titoli (Ennio Morricone) (1).mp3",
             "./music/A Fistful Of Dollars - 07 - Doppi Giochi (1).mp3",
-            "./music/A Fistful Of Dollars - 10 - Cavalcata (Ennio Morricone).mp3",
-            "./music/A Fistful Of Dollars - 17 - Per Un Pugno Di Dollari (1).mp3"
+            "./music/A Fistful Of Dollars - 10 - Cavalcata (Ennio Morricone) (1).mp3",
+            "./music/A Fistful Of Dollars - 17 - Per Un Pugno Di Dollari (Finale) (1).mp3"
         ];
 
         function formatMusicUrl(url) {
             if (!url) return '';
             let cleaned = String(url).trim();
+            try { cleaned = decodeURI(cleaned); } catch (e) {}
             if (!cleaned.startsWith('http://') && !cleaned.startsWith('https://') && !cleaned.startsWith('./') && !cleaned.startsWith('/')) {
                 cleaned = './music/' + cleaned;
             }
@@ -1612,47 +1626,30 @@
                 const cached = localStorage.getItem('1111_cached_playlist');
                 if (cached) {
                     const parsed = JSON.parse(cached);
-                    if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+                    if (Array.isArray(parsed) && parsed.length > 0) {
+                        return [...new Set(parsed.map(formatMusicUrl).filter(Boolean))];
+                    }
                 }
-            } catch(e) {}
+            } catch (e) {}
             return DEFAULT_PLAYLIST.map(formatMusicUrl);
         })();
 
-        async function loadMusicFromFolder() {
-            try {
-                const res = await fetch('https://api.github.com/repos/1111grafica/link/contents/music');
-                if (res.ok) {
-                    const files = await res.json();
-                    const tracks = files
-                        .filter(f => f.type === 'file' && f.name.toLowerCase().endsWith('.mp3'))
-                        .map(f => formatMusicUrl(f.name));
-                    if (tracks.length > 0) {
-                        playlist = [...new Set([...playlist, ...tracks])];
-                        try {
-                            localStorage.setItem('1111_cached_playlist', JSON.stringify(playlist));
-                        } catch(e) {}
-                    }
-                }
-            } catch(e) {}
-        }
-
-        bgAudioPlayer.addEventListener('error', () => {
-            if (isMusicActive && playlist.length > 1) {
-                setTimeout(() => {
-                    currentTrackIndex = pickRandomTrackIndex();
-                    playTrackWithFadeIn(playlist[currentTrackIndex], 0);
-                }, 200);
+        function markInternalNav() {
+            isInternalNav = true;
+            if (isMusicActive && !bgAudioPlayer.paused) {
+                try {
+                    sessionStorage.setItem('1111_music_on', 'true');
+                    sessionStorage.setItem('1111_music_src', bgAudioPlayer.src);
+                    sessionStorage.setItem('1111_music_time', String(bgAudioPlayer.currentTime));
+                } catch (e) {}
             }
-        });
+        }
 
         function updateMusicUI(active) {
             const btnToggle = document.getElementById('btnMusicToggle');
             if (btnToggle) {
-                if (active) {
-                    btnToggle.classList.add('active');
-                } else {
-                    btnToggle.classList.remove('active');
-                }
+                if (active) btnToggle.classList.add('active');
+                else btnToggle.classList.remove('active');
             }
         }
 
@@ -1665,59 +1662,122 @@
             return nextIndex;
         }
 
-        function playTrackWithFadeIn(trackUrl, startSecond = 0) {
-            if (musicFadeTimer) clearInterval(musicFadeTimer);
-            if (!trackUrl) return;
+        function startVolumeFadeIn(duration) {
+            if (musicFadeTimer) { clearInterval(musicFadeTimer); musicFadeTimer = null; }
+            const steps = 20;
+            const stepTime = Math.max(15, duration / steps);
+            const volStep = MUSIC_TARGET_VOL / steps;
 
-            try {
-                bgAudioPlayer.src = formatMusicUrl(trackUrl);
-                bgAudioPlayer.currentTime = startSecond;
-                bgAudioPlayer.volume = 0;
-                sessionStorage.setItem('1111_music_src', bgAudioPlayer.src);
-
-                const playPromise = bgAudioPlayer.play();
-                if (playPromise !== undefined) {
-                    playPromise.then(() => {
-                        const steps = 20;
-                        const stepTime = 1000 / steps;
-                        const volStep = MUSIC_TARGET_VOL / steps;
-
-                        musicFadeTimer = setInterval(() => {
-                            if (bgAudioPlayer.volume + volStep < MUSIC_TARGET_VOL) {
-                                bgAudioPlayer.volume += volStep;
-                            } else {
-                                bgAudioPlayer.volume = MUSIC_TARGET_VOL;
-                                clearInterval(musicFadeTimer);
-                                musicFadeTimer = null;
-                            }
-                        }, stepTime);
-                    }).catch(() => {});
+            musicFadeTimer = setInterval(() => {
+                if (!isMusicActive) {
+                    clearInterval(musicFadeTimer);
+                    musicFadeTimer = null;
+                    return;
                 }
-            } catch(e) {}
+                if (bgAudioPlayer.volume + volStep < MUSIC_TARGET_VOL) {
+                    bgAudioPlayer.volume += volStep;
+                } else {
+                    bgAudioPlayer.volume = MUSIC_TARGET_VOL;
+                    clearInterval(musicFadeTimer);
+                    musicFadeTimer = null;
+                    isTrackTransitioning = false;
+                }
+            }, stepTime);
         }
 
-        function fadeOutMusic(duration = 400, onDone) {
-            if (musicFadeTimer) clearInterval(musicFadeTimer);
-            isMusicActive = false;
-            sessionStorage.setItem('1111_music_on', 'false');
-            updateMusicUI(false);
+        function playTrackWithFadeIn(trackUrl, startSecond = 0, duration = 1000, isAutoResume = false) {
+            if (musicFadeTimer) { clearInterval(musicFadeTimer); musicFadeTimer = null; }
+            if (!trackUrl) { isTrackTransitioning = false; return; }
 
+            const reqId = ++playRequestId;
+            autoFadeOutTriggered = false;
+            pendingAutoResume = false;
+
+            const normalizedSrc = formatMusicUrl(trackUrl);
+            const idxFound = playlist.indexOf(normalizedSrc);
+            if (idxFound !== -1) currentTrackIndex = idxFound;
+
+            try {
+                bgAudioPlayer.src = normalizedSrc;
+                bgAudioPlayer.volume = 0;
+
+                const seekAndPlay = () => {
+                    if (reqId !== playRequestId) return;
+                    if (startSecond > 0 && isFinite(bgAudioPlayer.duration) && startSecond < bgAudioPlayer.duration) {
+                        try { bgAudioPlayer.currentTime = startSecond; } catch (e) {}
+                    }
+
+                    const playPromise = bgAudioPlayer.play();
+                    if (playPromise !== undefined) {
+                        playPromise.then(() => {
+                            if (reqId !== playRequestId) {
+                                try { bgAudioPlayer.pause(); } catch (e) {}
+                                return;
+                            }
+                            consecutiveTrackErrors = 0;
+                            isMusicActive = true;
+                            updateMusicUI(true);
+                            try {
+                                sessionStorage.setItem('1111_music_src', bgAudioPlayer.src);
+                                sessionStorage.setItem('1111_music_on', 'true');
+                            } catch (e) {}
+                            startVolumeFadeIn(duration);
+                        }).catch(() => {
+                            if (reqId !== playRequestId) return;
+                            isTrackTransitioning = false;
+                            isMusicActive = false;
+                            updateMusicUI(false);
+                            if (isAutoResume) {
+                                pendingAutoResume = true;
+                                pendingResumeSrc = normalizedSrc;
+                                pendingResumeTime = startSecond;
+                            }
+                        });
+                    }
+                };
+
+                if (startSecond > 0) {
+                    const onMeta = () => {
+                        bgAudioPlayer.removeEventListener('loadedmetadata', onMeta);
+                        seekAndPlay();
+                    };
+                    bgAudioPlayer.addEventListener('loadedmetadata', onMeta, { once: true });
+                    bgAudioPlayer.load();
+                } else {
+                    seekAndPlay();
+                }
+            } catch (e) {
+                isTrackTransitioning = false;
+                isMusicActive = false;
+                updateMusicUI(false);
+            }
+        }
+
+        function fadeOutMusic(duration = 400, onDone, isSwitchingTrack = false) {
+            if (musicFadeTimer) { clearInterval(musicFadeTimer); musicFadeTimer = null; }
+            if (!isSwitchingTrack) {
+                playRequestId++;
+                isMusicActive = false;
+                pendingAutoResume = false;
+                try { sessionStorage.setItem('1111_music_on', 'false'); } catch (e) {}
+                updateMusicUI(false);
+            }
             if (bgAudioPlayer.paused) {
                 if (onDone) onDone();
                 return;
             }
 
-            const steps = 15;
-            const stepTime = duration / steps;
+            const steps = 18;
+            const stepTime = Math.max(15, duration / steps);
             const startVol = bgAudioPlayer.volume;
             const volStep = startVol / steps;
 
             musicFadeTimer = setInterval(() => {
-                if (bgAudioPlayer.volume - volStep > 0) {
+                if (bgAudioPlayer.volume - volStep > 0.005) {
                     bgAudioPlayer.volume -= volStep;
                 } else {
                     bgAudioPlayer.volume = 0;
-                    try { bgAudioPlayer.pause(); } catch(e) {}
+                    try { bgAudioPlayer.pause(); } catch (e) {}
                     clearInterval(musicFadeTimer);
                     musicFadeTimer = null;
                     if (onDone) onDone();
@@ -1726,14 +1786,17 @@
         }
 
         function toggleMusic() {
+            triggerHapticFeedback();
             playClickSound();
+            pendingAutoResume = false;
+            consecutiveTrackErrors = 0;
             if (!isMusicActive) {
+                if (playlist.length === 0) return;
                 isMusicActive = true;
                 updateMusicUI(true);
-                sessionStorage.setItem('1111_music_on', 'true');
                 currentTrackIndex = pickRandomTrackIndex();
-                if (playlist && playlist.length > 0 && playlist[currentTrackIndex]) {
-                    playTrackWithFadeIn(playlist[currentTrackIndex], 0);
+                if (playlist[currentTrackIndex]) {
+                    playTrackWithFadeIn(playlist[currentTrackIndex], 0, 1000);
                 }
             } else {
                 fadeOutMusic(400);
@@ -1741,45 +1804,115 @@
         }
 
         function skipMusic() {
+            triggerHapticFeedback();
             playClickSound();
+            pendingAutoResume = false;
+            consecutiveTrackErrors = 0;
+            if (playlist.length === 0) return;
+
             if (!isMusicActive) {
                 isMusicActive = true;
                 updateMusicUI(true);
-                sessionStorage.setItem('1111_music_on', 'true');
                 currentTrackIndex = pickRandomTrackIndex();
-                if (playlist && playlist.length > 0 && playlist[currentTrackIndex]) {
-                    playTrackWithFadeIn(playlist[currentTrackIndex], 0);
+                if (playlist[currentTrackIndex]) {
+                    playTrackWithFadeIn(playlist[currentTrackIndex], 0, 900);
                 }
                 return;
             }
-            fadeOutMusic(250, () => {
+
+            isTrackTransitioning = true;
+            fadeOutMusic(280, () => {
                 isMusicActive = true;
                 updateMusicUI(true);
-                sessionStorage.setItem('1111_music_on', 'true');
                 currentTrackIndex = pickRandomTrackIndex();
-                if (playlist && playlist.length > 0 && playlist[currentTrackIndex]) {
-                    playTrackWithFadeIn(playlist[currentTrackIndex], 0);
+                if (playlist[currentTrackIndex]) {
+                    playTrackWithFadeIn(playlist[currentTrackIndex], 0, 900);
+                } else {
+                    isTrackTransitioning = false;
                 }
-            });
+            }, true);
         }
 
+        bgAudioPlayer.addEventListener('timeupdate', () => {
+            if (isMusicActive && !bgAudioPlayer.paused && bgAudioPlayer.duration) {
+                const timeLeft = bgAudioPlayer.duration - bgAudioPlayer.currentTime;
+                if (timeLeft <= 2.8 && !autoFadeOutTriggered && !isTrackTransitioning) {
+                    autoFadeOutTriggered = true;
+                    isTrackTransitioning = true;
+                    fadeOutMusic(2600, () => {
+                        if (!isMusicActive) { isTrackTransitioning = false; return; }
+                        currentTrackIndex = pickRandomTrackIndex();
+                        if (playlist[currentTrackIndex]) {
+                            playTrackWithFadeIn(playlist[currentTrackIndex], 0, 1200);
+                        } else {
+                            isTrackTransitioning = false;
+                        }
+                    }, true);
+                }
+            }
+        });
+
         bgAudioPlayer.addEventListener('ended', () => {
-            currentTrackIndex = pickRandomTrackIndex();
-            playTrackWithFadeIn(playlist[currentTrackIndex], 0);
+            if (isMusicActive && !isTrackTransitioning) {
+                isTrackTransitioning = true;
+                currentTrackIndex = pickRandomTrackIndex();
+                if (playlist[currentTrackIndex]) playTrackWithFadeIn(playlist[currentTrackIndex], 0, 1000);
+            }
+        });
+
+        bgAudioPlayer.addEventListener('error', () => {
+            consecutiveTrackErrors++;
+            if (isMusicActive && playlist.length > 1 && consecutiveTrackErrors < playlist.length) {
+                currentTrackIndex = pickRandomTrackIndex();
+                if (playlist[currentTrackIndex]) {
+                    playTrackWithFadeIn(playlist[currentTrackIndex], 0, 800);
+                }
+            } else {
+                isTrackTransitioning = false;
+                isMusicActive = false;
+                updateMusicUI(false);
+            }
         });
 
         setInterval(() => {
             if (isMusicActive && !bgAudioPlayer.paused) {
-                sessionStorage.setItem('1111_music_src', bgAudioPlayer.src);
-                sessionStorage.setItem('1111_music_time', String(bgAudioPlayer.currentTime));
+                try {
+                    sessionStorage.setItem('1111_music_src', bgAudioPlayer.src);
+                    sessionStorage.setItem('1111_music_time', String(bgAudioPlayer.currentTime));
+                } catch (e) {}
             }
         }, 1000);
 
+        window.addEventListener('pointerdown', (e) => {
+            if (!audioCtx) initAudioEngine();
+            else if (audioCtx.state === 'suspended') audioCtx.resume();
+
+            if (pendingAutoResume && !e.target.closest('.soundtrack-wrap')) {
+                const src = pendingResumeSrc;
+                const time = pendingResumeTime;
+                pendingAutoResume = false;
+                isMusicActive = true;
+                updateMusicUI(true);
+                playTrackWithFadeIn(src, time, 750);
+            }
+        }, { capture: true });
+
+        document.addEventListener('visibilitychange', () => {
+            if (document.visibilityState === 'hidden' && !isInternalNav && isMusicActive) {
+                fadeOutMusic(700);
+            }
+        });
+
         window.addEventListener('pagehide', () => {
-            if (isMusicActive && !bgAudioPlayer.paused) {
-                sessionStorage.setItem('1111_music_on', 'true');
-                sessionStorage.setItem('1111_music_src', bgAudioPlayer.src);
-                sessionStorage.setItem('1111_music_time', String(bgAudioPlayer.currentTime));
+            if (isInternalNav && isMusicActive && !bgAudioPlayer.paused) {
+                try {
+                    sessionStorage.setItem('1111_music_on', 'true');
+                    sessionStorage.setItem('1111_music_src', bgAudioPlayer.src);
+                    sessionStorage.setItem('1111_music_time', String(bgAudioPlayer.currentTime));
+                } catch (e) {}
+            } else if (!isInternalNav) {
+                try { sessionStorage.setItem('1111_music_on', 'false'); } catch (e) {}
+                if (isMusicActive) fadeOutMusic(400);
             }
         });
 
@@ -1787,16 +1920,15 @@
             const link = e.target.closest('a');
             if (!link) return;
             const href = (link.getAttribute('href') || '').toLowerCase();
-            
-            const isExternal = href.includes('wa.me') || 
-                               href.includes('mailto:') || 
-                               href.includes('instagram.com') || 
-                               href.includes('.pdf') ||
-                               (link.target === '_blank' && !href.includes('1111grafica.github.io'));
-
-            if (isExternal && isMusicActive) {
-                fadeOutMusic(650);
+            const isInternal = href === './' || href === '../' || href === 'index.html' ||
+                               href === 'web.html' || href === 'clientes.html' ||
+                               href.includes('clientes.html') || href.includes('web.html') ||
+                               (href.includes('1111grafica.github.io/link') && link.target !== '_blank');
+            if (isInternal) {
+                markInternalNav();
+                return;
             }
+            if (isMusicActive) fadeOutMusic(900);
         });
 
         /* ==========================================================================
@@ -1829,6 +1961,7 @@
                 img.loading = 'lazy';
                 img.decoding = 'async';
                 img.onload = () => wrap.classList.add('loaded');
+                img.onerror = () => { wrap.style.display = 'none'; };
                 img.src = item.thumb;
 
                 wrap.appendChild(img);
@@ -1846,7 +1979,6 @@
             populateGalleryGrid(activeShuffledPhotos);
         }
 
-        /* LIGHTBOX CON CARGA INSTANTÁNEA (USA MINIATURA INMEDIATA EN 0ms) */
         function openLightbox(index) {
             currentPhotoIndex = index;
             updateLightboxContent();
@@ -1905,17 +2037,22 @@
             if (event.target.id === 'lightboxView') closeLightbox();
         }
 
-        // CONTROL POR TECLADO
         window.addEventListener('keydown', (e) => {
             const lb = document.getElementById('lightboxView');
             if (lb.classList.contains('active')) {
                 if (e.key === 'Escape') closeLightbox();
                 if (e.key === 'ArrowLeft') { navLightbox(-1); playClickSound(); }
                 if (e.key === 'ArrowRight') { navLightbox(1); playClickSound(); }
+                return;
+            }
+            if (e.key === 'Escape') {
+                ['galleryModal', 'digitalModal'].forEach(id => {
+                    const m = document.getElementById(id);
+                    if (m && m.classList.contains('active')) closeModal(id);
+                });
             }
         });
 
-        // SOPORTE TÁCTIL (SWIPE GESTURE EN MÓVIL)
         let touchStartX = 0;
         let touchEndX = 0;
         const lbOverlay = document.getElementById('lightboxView');
@@ -1978,15 +2115,16 @@
             }
         }
 
-        /* 3. TRADUCCIONES */
+        /* 3. TRADUCCIONES BASE + CACHÉ SWR DE GOOGLE SHEETS */
         const TRANSLATIONS = {
             es: {
-                langHint: "🌐 Idioma",
+                langHint: "Idioma",
                 bio: "Servicios de Gráfica, Imprenta y Cartelería, Diseño Gráfico y Herramientas digitales para potenciar tu negocio.",
                 btn1_title: "Atención por WhatsApp",
                 btn1_badge: "Respuesta Rápida",
                 btn1_desc: "Cotizaciones, pedidos y asesoramiento directo",
                 btn2_title: "Instagram Oficial",
+                btn2_badge: "",
                 btn2_desc: "¡Seguinos y mirá nuestros trabajos!",
                 btn3_title: "Trabajos de Gráfica",
                 btn3_badge: "Fotos",
@@ -1998,19 +2136,41 @@
                 btn5_badge: "Servicios",
                 btn5_desc: "Páginas web completas, sitios estilo Linktree y software para PyMEs",
                 btn6_title: "Correo Electrónico",
+                btn6_badge: "",
+                btn6_desc: "onceonce.grafica@gmail.com",
                 footer_badge: "CREATIVIDAD & TECNOLOGÍA",
                 modal_title: "Galería de Trabajos",
                 modal_desc: "Conocé nuestros proyectos reales de cartelería, impresiones y rotulación. Tocá cualquier foto para ampliar.",
                 modal_btn: "Ver más en Instagram ↗",
-                wsp_main_msg: "¡Hola! Me contacto desde la web de 1111 Gráfica y quisiera hacer una consulta."
+                wsp_main_msg: "¡Hola! Me contacto desde la web de 1111 Gráfica y quisiera hacer una consulta.",
+                modal_web_title: "Web & Soluciones Digitales",
+                modal_web_desc: "Elegí el servicio que necesitás para ver ejemplos reales o cotizar al instante por WhatsApp:",
+                opt1_title: "Landing Page (Estilo Linktree)",
+                opt1_desc: "Reemplazá Linktree por un Hub interactivo propio, sin mensualidades, con tu dominio y diseño 100% a medida.",
+                opt1_price: "$30.000",
+                opt1_btn: "Ver ejemplos de clientes reales",
+                opt2_title: "Página Web Completa (Institucional)",
+                opt2_desc: "Sitio web profesional responsivo, catálogo de servicios, galería interactiva y contacto directo optimizado para Google.",
+                opt2_price: "$70.000",
+                opt2_btn: "Pedir por WhatsApp",
+                opt3_title: "Web E-Commerce con Carrito",
+                opt3_desc: "Tienda online completa con catálogo administrable de productos y pedidos directos a WhatsApp o pasarela de pago.",
+                opt3_price: "$200.000",
+                opt3_btn: "Pedir por WhatsApp",
+                opt4_title: "Software Ligero & Automatizaciones",
+                opt4_desc: "Conversión masiva de archivos pesados, orden y limpieza de bases de datos completas, y herramientas para ahorrar horas de trabajo.",
+                opt4_price: "A Medida",
+                opt4_btn: "Cotizar solución por WhatsApp",
+                btn_examples: "Ver ejemplos"
             },
             pt: {
-                langHint: "🌐 Idioma",
+                langHint: "Idioma",
                 bio: "Serviços de Comunicação Visual, Gráfica e Fachadas, Design Gráfico e Ferramentas digitais para potencializar o seu negócio.",
                 btn1_title: "Atendimento por WhatsApp",
                 btn1_badge: "Resposta Rápida",
                 btn1_desc: "Orçamentos, pedidos e assessoria direta",
                 btn2_title: "Instagram Oficial",
+                btn2_badge: "",
                 btn2_desc: "Siga-nos e veja nossos trabalhos!",
                 btn3_title: "Trabalhos Gráficos",
                 btn3_badge: "Fotos",
@@ -2022,19 +2182,41 @@
                 btn5_badge: "Serviços",
                 btn5_desc: "Páginas web completas, estilo Linktree e software para PMEs",
                 btn6_title: "E-mail",
+                btn6_badge: "",
+                btn6_desc: "onceonce.grafica@gmail.com",
                 footer_badge: "CRIATIVIDADE & TECNOLOGIA",
                 modal_title: "Galeria de Trabalhos",
                 modal_desc: "Conheça nossos projetos reais de fachadas, impressões e adesivação.",
                 modal_btn: "Ver mais no Instagram ↗",
-                wsp_main_msg: "Olá! Entro em contato pelo site da 1111 Gráfica e gostaria de fazer uma consulta."
+                wsp_main_msg: "Olá! Entro em contato pelo site da 1111 Gráfica e gostaria de fazer uma consulta.",
+                modal_web_title: "Web & Soluções Digitais",
+                modal_web_desc: "Escolha o serviço que você precisa para ver exemplos reais ou solicitar orçamento pelo WhatsApp:",
+                opt1_title: "Landing Page (Estilo Linktree)",
+                opt1_desc: "Substitua o Linktree pela sua própria Landing Page interativa, sem mensalidades, com o seu domínio e design 100% personalizado.",
+                opt1_price: "R$ 100",
+                opt1_btn: "Ver exemplos reais de clientes",
+                opt2_title: "Página Web Completa",
+                opt2_desc: "Site completo, 100% responsivo (informações, fotos, catálogo de serviços, galeria interativa e contatos diretos); otimizado para o Google.",
+                opt2_price: "R$ 300",
+                opt2_btn: "Pedir pelo WhatsApp",
+                opt3_title: "Site E-Commerce com Carrinho",
+                opt3_desc: "Loja online completa com catálogo gerenciável e pedidos diretos pelo WhatsApp ou sistema de pagamento.",
+                opt3_price: "R$ 600",
+                opt3_btn: "Pedir pelo WhatsApp",
+                opt4_title: "Software Leve & Automações",
+                opt4_desc: "Conversão em massa de arquivos pesados, limpeza de banco de dados e ferramentas para economizar horas de trabalho.",
+                opt4_price: "Sob Medida",
+                opt4_btn: "Solicitar orçamento pelo WhatsApp",
+                btn_examples: "Ver exemplos"
             },
             en: {
-                langHint: "🌐 Language",
+                langHint: "Language",
                 bio: "Printing, Signage and Graphic Services, Graphic Design, and Digital Tools to empower your business.",
                 btn1_title: "WhatsApp Support",
                 btn1_badge: "Fast Reply",
                 btn1_desc: "Quotes, orders, and direct advice",
                 btn2_title: "Official Instagram",
+                btn2_badge: "",
                 btn2_desc: "Follow us and see our work!",
                 btn3_title: "Graphic & Print Work",
                 btn3_badge: "Photos",
@@ -2046,66 +2228,232 @@
                 btn5_badge: "Services",
                 btn5_desc: "Complete websites, Linktree-style sites, and custom software for SMBs",
                 btn6_title: "Email",
+                btn6_badge: "",
+                btn6_desc: "onceonce.grafica@gmail.com",
                 footer_badge: "CREATIVITY & TECHNOLOGY",
                 modal_title: "Work Gallery",
                 modal_desc: "Explore our real signage, printing, and lettering projects.",
                 modal_btn: "See more on Instagram ↗",
-                wsp_main_msg: "Hello! I am reaching out from the 1111 Gráfica website and would like to ask a question."
+                wsp_main_msg: "Hello! I am reaching out from the 1111 Gráfica website and would like to ask a question.",
+                modal_web_title: "Web & Digital Solutions",
+                modal_web_desc: "Choose the service you need to see real examples or request a quote via WhatsApp:",
+                opt1_title: "Landing Page (Linktree Style)",
+                opt1_desc: "Replace Linktree with your own interactive Landing Page, without monthly fees, with your domain and 100% custom design.",
+                opt1_price: "$20",
+                opt1_btn: "View real client examples",
+                opt2_title: "Full Website",
+                opt2_desc: "Complete responsive website, service catalog, interactive gallery, and direct contacts optimized for Google.",
+                opt2_price: "$70",
+                opt2_btn: "Order via WhatsApp",
+                opt3_title: "E-Commerce Website with Cart",
+                opt3_desc: "Complete online store with manageable product catalog and direct orders via WhatsApp or payment gateway.",
+                opt3_price: "$125",
+                opt3_btn: "Order via WhatsApp",
+                opt4_title: "Lightweight Software & Automations",
+                opt4_desc: "Bulk heavy file conversion, database cleaning and formatting, and custom tools to save hours of work.",
+                opt4_price: "Custom",
+                opt4_btn: "Request quote via WhatsApp",
+                btn_examples: "See examples"
             }
         };
 
+        const HUB_CACHE_KEY = '1111_cached_hub_v1';
         let activeLang = 'es';
-        let hubCustomData = {};
+        let hubCustomData = (() => {
+            try {
+                const cached = localStorage.getItem(HUB_CACHE_KEY);
+                if (cached) {
+                    const parsed = JSON.parse(cached);
+                    if (parsed && typeof parsed === 'object') return parsed;
+                }
+            } catch (e) {}
+            return {};
+        })();
 
-        function setLanguage(lang) {
-            playClickSound();
+        let webModalCustomData = {};
+
+        const HUB_BUTTON_MAP = {
+            BTN1: { cardId: 'btnWspMain', titleId: 't_btn1_title', descId: 't_btn1_desc', badgeId: 't_btn1_badge', iconBoxId: 'iconBoxBtn1', fallbackKey: 'btn1' },
+            BTN2: { cardId: 'btnCard2', titleId: 't_btn2_title', descId: 't_btn2_desc', badgeId: 't_btn2_badge', iconBoxId: 'iconBoxBtn2', fallbackKey: 'btn2' },
+            BTN3: { cardId: 'btnCard3', titleId: 't_btn3_title', descId: 't_btn3_desc', badgeId: 't_btn3_badge', iconBoxId: 'iconBoxBtn3', fallbackKey: 'btn3' },
+            BTN4: { cardId: 'btnPortfolioPdf', titleId: 't_btn4_title', descId: 't_btn4_desc', badgeId: 't_btn4_badge', iconBoxId: 'iconBoxBtn4', fallbackKey: 'btn4' },
+            BTN5: { cardId: 'btnCard5', titleId: 't_btn5_title', descId: 't_btn5_desc', badgeId: 't_btn5_badge', iconBoxId: 'iconBoxBtn5', fallbackKey: 'btn5' },
+            BTN6: { cardId: 'btnCard6', titleId: 't_btn6_title', descId: 't_btn6_desc', badgeId: 't_btn6_badge', iconBoxId: 'iconBoxBtn6', fallbackKey: 'btn6' }
+        };
+
+        function normalizeColorValue(val) {
+            if (!val) return null;
+            let c = String(val).trim();
+            if (!c.startsWith('#') && !c.startsWith('rgb') && !c.startsWith('hsl')) {
+                if (/^[0-9A-Fa-f]{3,8}$/.test(c)) c = '#' + c;
+            }
+            return c;
+        }
+
+        function hexToRgbHub(hex) {
+            let clean = String(hex || '').replace('#', '').trim();
+            if (clean.length === 3) clean = clean.split('').map(x => x + x).join('');
+            if (clean.length >= 6) clean = clean.substring(0, 6);
+            const n = parseInt(clean, 16);
+            if (isNaN(n)) return null;
+            return { r: (n >> 16) & 255, g: (n >> 8) & 255, b: n & 255 };
+        }
+
+        function isWhiteColorValue(val) {
+            if (!val) return false;
+            const c = String(val).trim().toLowerCase();
+            return c === '#fff' || c === '#ffffff' || c === 'white' || c === 'rgb(255,255,255)' || c === 'rgb(255, 255, 255)';
+        }
+
+        function normalizeUrlValue(rawUrl) {
+            if (!rawUrl) return '';
+            const u = String(rawUrl).trim();
+            if (!u) return '';
+            if (u.startsWith('http://') || u.startsWith('https://') || u.startsWith('mailto:') || u.startsWith('#') || u.startsWith('./') || u.startsWith('/') || u.endsWith('.html')) {
+                return u;
+            }
+            return 'https://' + u;
+        }
+
+        function applyHubDataToUI(lang) {
+            const data = TRANSLATIONS[lang] || TRANSLATIONS.es;
+
+            // BIO (Sheets si existe, si no fallback del idioma)
+            const bioSheet = hubCustomData.BIO ? (hubCustomData.BIO[`sub_${lang}`] || hubCustomData.BIO.sub_es) : '';
+            document.getElementById('uiBio').innerText = bioSheet || data.bio;
+
+            // BTN1 - BTN6
+            Object.keys(HUB_BUTTON_MAP).forEach(btnKey => {
+                const cfg = HUB_BUTTON_MAP[btnKey];
+                const sheetRow = hubCustomData[btnKey] || {};
+
+                const titleEl = document.getElementById(cfg.titleId);
+                const descEl = document.getElementById(cfg.descId);
+                const badgeEl = document.getElementById(cfg.badgeId);
+                const cardEl = document.getElementById(cfg.cardId);
+                const iconBoxEl = document.getElementById(cfg.iconBoxId);
+
+                const finalTitle = sheetRow[`title_${lang}`] || sheetRow.title_es || data[`${cfg.fallbackKey}_title`] || '';
+                const finalDesc = sheetRow[`sub_${lang}`] || sheetRow.sub_es || data[`${cfg.fallbackKey}_desc`] || '';
+                const finalBadge = sheetRow[`badge_${lang}`] || sheetRow.badge_es || data[`${cfg.fallbackKey}_badge`] || '';
+
+                if (titleEl && finalTitle) titleEl.innerText = finalTitle;
+                if (descEl && finalDesc) descEl.innerText = finalDesc;
+
+                if (badgeEl) {
+                    if (finalBadge) {
+                        badgeEl.innerText = finalBadge;
+                        badgeEl.style.display = '';
+                    } else {
+                        badgeEl.style.display = 'none';
+                    }
+                }
+
+                // URL segura (solo en enlaces <a>, nunca pisa el onclick de galería de BTN3)
+                if (cardEl && cardEl.tagName === 'A' && sheetRow.url) {
+                    let targetUrl = normalizeUrlValue(sheetRow.url);
+                    if (btnKey === 'BTN1' && targetUrl.includes('wa.me') && !targetUrl.includes('?')) {
+                        targetUrl += `?text=${encodeURIComponent(data.wsp_main_msg)}`;
+                    }
+                    if (targetUrl) cardEl.href = targetUrl;
+                }
+
+                // Sincronizar barra social superior con BTN1 / BTN2 / BTN6 si se modifican en Sheets
+                if (btnKey === 'BTN1') {
+                    const baseWsp = normalizeUrlValue(sheetRow.url) || 'https://wa.me/5491131933611';
+                    const wspHref = baseWsp.includes('?') ? baseWsp : `${baseWsp}?text=${encodeURIComponent(data.wsp_main_msg)}`;
+                    if (cardEl) cardEl.href = wspHref;
+                    const topWsp = document.getElementById('socialWspTop');
+                    if (topWsp) topWsp.href = wspHref;
+                }
+                if (btnKey === 'BTN2' && sheetRow.url) {
+                    const topInsta = document.getElementById('socialInstaTop');
+                    if (topInsta) topInsta.href = normalizeUrlValue(sheetRow.url);
+                }
+                if (btnKey === 'BTN6' && sheetRow.url) {
+                    const topMail = document.getElementById('socialMailTop');
+                    if (topMail) topMail.href = normalizeUrlValue(sheetRow.url);
+                }
+
+                // Colores opcionales desde Sheets (preservando degradados originales si Color_Fondo es #FFFFFF)
+                const borderCol = normalizeColorValue(sheetRow.borderColor);
+                const bgCol = normalizeColorValue(sheetRow.bgColor);
+                const iconCol = normalizeColorValue(sheetRow.iconColor);
+                const textCol = normalizeColorValue(sheetRow.textColor);
+
+                if (cardEl && borderCol) {
+                    const rgb = hexToRgbHub(borderCol);
+                    cardEl.style.borderColor = rgb ? `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0.42)` : borderCol;
+                    cardEl.style.borderLeftColor = borderCol;
+                }
+                if (cardEl && bgCol) {
+                    if (isWhiteColorValue(bgCol)) {
+                        cardEl.style.background = '';
+                    } else {
+                        cardEl.style.background = bgCol;
+                    }
+                }
+                if (iconBoxEl && iconCol) {
+                    iconBoxEl.style.color = iconCol;
+                }
+                if (titleEl && textCol) {
+                    titleEl.style.color = textCol;
+                }
+            });
+
+            // Modal Digital (#digitalModal)
+            const webTitle = document.getElementById('t_modal_web_title');
+            const webDesc = document.getElementById('t_modal_web_desc');
+            if (webTitle) webTitle.innerText = data.modal_web_title;
+            if (webDesc) webDesc.innerText = data.modal_web_desc;
+
+            ['opt1', 'opt2', 'opt3', 'opt4'].forEach(k => {
+                const custom = webModalCustomData[k] || {};
+                const tEl = document.getElementById(`t_${k}_title`);
+                const dEl = document.getElementById(`t_${k}_desc`);
+                const pEl = document.getElementById(`t_${k}_price`);
+                const bEl = document.getElementById(`t_${k}_btn`);
+
+                if (tEl) tEl.innerText = custom[`title_${lang}`] || custom.title_es || data[`${k}_title`];
+                if (dEl) dEl.innerText = custom[`sub_${lang}`] || custom.sub_es || data[`${k}_desc`];
+                if (pEl) pEl.innerText = custom[`price_${lang}`] || custom.price_es || data[`${k}_price`];
+                if (bEl && bEl.firstElementChild) bEl.firstElementChild.innerText = data[`${k}_btn`];
+            });
+
+            ['btnToggleWeb', 'btnToggleCart'].forEach(id => {
+                const b = document.getElementById(id);
+                if (b && b.firstElementChild) b.firstElementChild.innerText = data.btn_examples;
+            });
+        }
+
+        function setLanguage(lang, silent = false) {
+            if (!silent) {
+                triggerHapticFeedback();
+                playClickSound();
+            }
             activeLang = lang;
             const data = TRANSLATIONS[lang] || TRANSLATIONS.es;
 
-            document.getElementById('uiLangHint').innerText = data.langHint;
-            document.getElementById('uiBio').innerText = data.bio;
-
-            document.getElementById('t_btn1_title').innerText = data.btn1_title;
-            const b1 = document.getElementById('t_btn1_badge');
-            if (b1) b1.innerText = data.btn1_badge;
-            document.getElementById('t_btn1_desc').innerText = data.btn1_desc;
-
-            document.getElementById('t_btn2_title').innerText = data.btn2_title;
-            document.getElementById('t_btn2_desc').innerText = data.btn2_desc;
-
-            document.getElementById('t_btn3_title').innerText = data.btn3_title;
-            const b3 = document.getElementById('t_btn3_badge');
-            if (b3) b3.innerText = data.btn3_badge;
-            document.getElementById('t_btn3_desc').innerText = data.btn3_desc;
-
-            document.getElementById('t_btn4_title').innerText = data.btn4_title;
-            const b4 = document.getElementById('t_btn4_badge');
-            if (b4) b4.innerText = data.btn4_badge;
-            document.getElementById('t_btn4_desc').innerText = data.btn4_desc;
-
-            document.getElementById('t_btn5_title').innerText = data.btn5_title;
-            const b5 = document.getElementById('t_btn5_badge');
-            if (b5) b5.innerText = data.btn5_badge;
-            document.getElementById('t_btn5_desc').innerText = data.btn5_desc;
-
-            document.getElementById('t_btn6_title').innerText = data.btn6_title;
+            document.getElementById('uiLangHintText').innerText = data.langHint;
             document.getElementById('t_footer_badge').innerText = data.footer_badge;
 
             document.getElementById('t_modal_title').innerText = data.modal_title;
             document.getElementById('t_modal_desc').innerText = data.modal_desc;
             document.getElementById('t_modal_btn').innerText = data.modal_btn;
 
-            const wspBase = "https://wa.me/5491131933611?text=";
-            document.getElementById('btnWspMain').href = wspBase + encodeURIComponent(data.wsp_main_msg);
-            document.getElementById('socialWspTop').href = wspBase + encodeURIComponent(data.wsp_main_msg);
-
             document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
             if (lang === 'es') document.getElementById('btnLangEs').classList.add('active');
             if (lang === 'pt') document.getElementById('btnLangPt').classList.add('active');
             if (lang === 'en') document.getElementById('btnLangEn').classList.add('active');
+
+            applyHubDataToUI(lang);
+
+            try {
+                localStorage.setItem('1111_preferred_lang', lang);
+            } catch (e) {}
         }
 
-        /* 4. GOOGLE SHEETS SYNC */
+        /* 4. GOOGLE SHEETS SYNC (SWR CON RESPALDO AUTOMÁTICO) */
         const SHEET_ID = '12WChaJERJOmnyB6K3IMgpB6lYxDrYBvWR9OToha6do4';
         const GID_LINK = '972224574';
         const GID_WEB = '70835229';
@@ -2128,9 +2476,26 @@
                 a.rel = 'noopener noreferrer';
                 a.className = 'example-badge-chip';
                 a.onclick = () => playClickSound();
-                a.innerHTML = `<span>${title}</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>`;
+                a.innerHTML = `<span></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>`;
+                a.firstElementChild.innerText = title;
                 drawer.appendChild(a);
             });
+        }
+
+        async function loadMusicFromFolderFallback() {
+            try {
+                const res = await fetch('https://api.github.com/repos/1111grafica/link/contents/music');
+                if (res.ok) {
+                    const files = await res.json();
+                    const tracks = files
+                        .filter(f => f.type === 'file' && f.name.toLowerCase().endsWith('.mp3'))
+                        .map(f => formatMusicUrl(f.name));
+                    if (tracks.length > 0) {
+                        playlist = [...new Set(tracks)];
+                        try { localStorage.setItem('1111_cached_playlist', JSON.stringify(playlist)); } catch (e) {}
+                    }
+                }
+            } catch (e) {}
         }
 
         async function initHubSheetsConnection() {
@@ -2143,31 +2508,56 @@
                     const jsonEnd = rawText.lastIndexOf('}');
                     if (jsonStart !== -1 && jsonEnd !== -1) {
                         const payload = JSON.parse(rawText.substring(jsonStart, jsonEnd + 1));
-                        if (payload.table && payload.table.rows) {
+                        if (payload.table && payload.table.rows && payload.table.rows.length > 0) {
+                            const colMap = {};
+                            if (payload.table.cols) {
+                                payload.table.cols.forEach((colObj, idx) => {
+                                    if (colObj && colObj.label) colMap[colObj.label.toLowerCase().trim()] = idx;
+                                });
+                            }
+
                             const getVal = (row, col) => {
+                                if (col === undefined || col < 0 || col >= row.c.length) return '';
                                 const cell = row.c[col];
                                 return (cell && cell.v !== null && cell.v !== undefined) ? String(cell.v).trim() : '';
                             };
+                            const getCol = (row, name, fallbackIdx) => {
+                                const k = name.toLowerCase().trim();
+                                return colMap[k] !== undefined ? getVal(row, colMap[k]) : getVal(row, fallbackIdx);
+                            };
 
+                            const parsedHub = {};
                             payload.table.rows.forEach((row) => {
                                 if (!row || !row.c) return;
-                                const id = getVal(row, 0).toUpperCase();
+                                const id = getCol(row, 'id', 0).toUpperCase();
                                 if (id.startsWith('BTN') || id === 'BIO') {
-                                    hubCustomData[id] = {
-                                        title_es: getVal(row, 1),
-                                        title_pt: getVal(row, 2),
-                                        title_en: getVal(row, 3),
-                                        sub_es: getVal(row, 4),
-                                        sub_pt: getVal(row, 5),
-                                        sub_en: getVal(row, 6),
-                                        url: getVal(row, 7)
+                                    parsedHub[id] = {
+                                        title_es: getCol(row, 'titulo_es', 1),
+                                        title_pt: getCol(row, 'titulo_pt', 2),
+                                        title_en: getCol(row, 'titulo_en', 3),
+                                        sub_es: getCol(row, 'subtitulo_es', 4),
+                                        sub_pt: getCol(row, 'subtitulo_pt', 5),
+                                        sub_en: getCol(row, 'subtitulo_en', 6),
+                                        url: getCol(row, 'url', 7),
+                                        badge_es: getCol(row, 'badge_es', 8),
+                                        badge_pt: getCol(row, 'badge_pt', 9),
+                                        badge_en: getCol(row, 'badge_en', 10),
+                                        borderColor: getCol(row, 'color_borde', 11),
+                                        bgColor: getCol(row, 'color_fondo', 12),
+                                        iconColor: getCol(row, 'color_icono', 13),
+                                        textColor: getCol(row, 'color_texto', 14)
                                     };
                                 }
                             });
 
-                            if (hubCustomData.BIO) {
-                                const bioCustom = hubCustomData.BIO[`sub_${activeLang}`] || hubCustomData.BIO.sub_es;
-                                if (bioCustom) document.getElementById('uiBio').innerText = bioCustom;
+                            if (Object.keys(parsedHub).length > 0) {
+                                const prevSig = JSON.stringify(hubCustomData);
+                                const nextSig = JSON.stringify(parsedHub);
+                                if (prevSig !== nextSig) {
+                                    hubCustomData = parsedHub;
+                                    try { localStorage.setItem(HUB_CACHE_KEY, nextSig); } catch (e) {}
+                                    applyHubDataToUI(activeLang);
+                                }
                             }
                         }
                     }
@@ -2184,47 +2574,55 @@
                     if (s !== -1 && e !== -1) {
                         const payloadWeb = JSON.parse(rawTextWeb.substring(s, e + 1));
                         if (payloadWeb.table && payloadWeb.table.rows && payloadWeb.table.rows.length > 0) {
+                            const colMapW = {};
+                            if (payloadWeb.table.cols) {
+                                payloadWeb.table.cols.forEach((col, idx) => {
+                                    if (col && col.label) colMapW[col.label.trim().toLowerCase()] = idx;
+                                });
+                            }
                             const getValW = (row, col) => {
+                                if (col === undefined || col < 0 || col >= row.c.length) return '';
                                 const cell = row.c[col];
                                 return (cell && cell.v !== null && cell.v !== undefined) ? String(cell.v).trim() : '';
                             };
-                            
+                            const getColW = (row, name, fallback) => {
+                                const k = name.toLowerCase();
+                                return colMapW[k] !== undefined ? getValW(row, colMapW[k]) : getValW(row, fallback);
+                            };
+
                             payloadWeb.table.rows.forEach(row => {
                                 if (!row || !row.c) return;
-                                const id = getValW(row, 0).toUpperCase();
-                                const title = getValW(row, 1);
-                                const sub = getValW(row, 4);
-                                const price = getValW(row, 8);
-                                const examples = getValW(row, 11);
+                                const id = getColW(row, 'id', 0).toUpperCase();
+                                const mapKey = (id === 'OPT1' || id === 'LINKTREE') ? 'opt1' :
+                                               (id === 'OPT2' || id === 'WEB') ? 'opt2' :
+                                               (id === 'OPT3' || id === 'ECOMMERCE') ? 'opt3' :
+                                               (id === 'OPT4' || id === 'SOFTWARE') ? 'opt4' : null;
+                                if (!mapKey) return;
 
-                                if (id === 'OPT1' || id === 'LINKTREE') {
-                                    if (title) document.getElementById('t_opt1_title').innerText = title;
-                                    if (sub) document.getElementById('t_opt1_desc').innerText = sub;
-                                    if (price) document.getElementById('t_opt1_price').innerText = price;
-                                }
-                                if (id === 'OPT2' || id === 'WEB') {
-                                    if (title) document.getElementById('t_opt2_title').innerText = title;
-                                    if (sub) document.getElementById('t_opt2_desc').innerText = sub;
-                                    if (price) document.getElementById('t_opt2_price').innerText = price;
-                                    if (examples) updateExamplesFromRawString('drawerWebExamples', examples);
-                                }
-                                if (id === 'OPT3' || id === 'ECOMMERCE') {
-                                    if (title) document.getElementById('t_opt3_title').innerText = title;
-                                    if (sub) document.getElementById('t_opt3_desc').innerText = sub;
-                                    if (price) document.getElementById('t_opt3_price').innerText = price;
-                                    if (examples) updateExamplesFromRawString('drawerCartExamples', examples);
-                                }
-                                if (id === 'OPT4' || id === 'SOFTWARE') {
-                                    if (title) document.getElementById('t_opt4_title').innerText = title;
-                                    if (sub) document.getElementById('t_opt4_desc').innerText = sub;
-                                    if (price) document.getElementById('t_opt4_price').innerText = price;
-                                }
+                                webModalCustomData[mapKey] = {
+                                    title_es: getColW(row, 'titulo_es', 1),
+                                    title_pt: getColW(row, 'titulo_pt', 2),
+                                    title_en: getColW(row, 'titulo_en', 3),
+                                    sub_es: getColW(row, 'subtitulo_es', 4),
+                                    sub_pt: getColW(row, 'subtitulo_pt', 5),
+                                    sub_en: getColW(row, 'subtitulo_en', 6),
+                                    price_es: getColW(row, 'badge_es', 8),
+                                    price_pt: getColW(row, 'badge_pt', 10),
+                                    price_en: getColW(row, 'badge_en', 11)
+                                };
+
+                                const examples = getColW(row, 'ejemplos', 12);
+                                if (mapKey === 'opt2' && examples) updateExamplesFromRawString('drawerWebExamples', examples);
+                                if (mapKey === 'opt3' && examples) updateExamplesFromRawString('drawerCartExamples', examples);
                             });
+
+                            applyHubDataToUI(activeLang);
                         }
                     }
                 }
             } catch (err) {}
 
+            let sheetsMusicLoaded = false;
             try {
                 const endpointMusic = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&gid=${GID_MUSIC}&headers=1&t=${Date.now()}`;
                 const resMusic = await fetch(endpointMusic, { cache: 'no-store' });
@@ -2246,27 +2644,40 @@
                                 const url = getValM(row, 3);
                                 const status = getValM(row, 4).toUpperCase();
                                 if (url && (status === '' || status === 'ACTIVO' || status === 'SI')) {
-                                    fetchedUrls.push(formatMusicUrl(url));
+                                    const formatted = formatMusicUrl(url);
+                                    if (formatted && !formatted.includes('mine_gran_turismo_4_menu.mp3')) {
+                                        fetchedUrls.push(formatted);
+                                    }
                                 }
                             });
 
                             if (fetchedUrls.length > 0) {
-                                playlist = fetchedUrls;
+                                playlist = [...new Set(fetchedUrls)];
+                                sheetsMusicLoaded = true;
                                 try {
-                                    localStorage.setItem('1111_cached_playlist', JSON.stringify(fetchedUrls));
-                                } catch(e) {}
+                                    localStorage.setItem('1111_cached_playlist', JSON.stringify(playlist));
+                                } catch (e) {}
                             }
                         }
                     }
                 }
             } catch (err) {}
+
+            if (!sheetsMusicLoaded) {
+                loadMusicFromFolderFallback();
+            }
         }
 
         /* INICIALIZACIÓN */
         window.addEventListener('DOMContentLoaded', () => {
             requestAnimationFrame(() => document.body.classList.remove('preload'));
-            setLanguage('es');
-            loadMusicFromFolder();
+
+            let savedLang = 'es';
+            try {
+                savedLang = localStorage.getItem('1111_preferred_lang') || 'es';
+            } catch (e) {}
+
+            setLanguage(savedLang, true);
             initHubSheetsConnection();
 
             try {
@@ -2275,11 +2686,9 @@
                 const lastTime = parseFloat(sessionStorage.getItem('1111_music_time') || '0');
 
                 if (wasMusicOn === 'true' && lastSrc) {
-                    isMusicActive = true;
-                    updateMusicUI(true);
-                    playTrackWithFadeIn(lastSrc, isNaN(lastTime) ? 0 : lastTime);
+                    playTrackWithFadeIn(lastSrc, isNaN(lastTime) ? 0 : lastTime, 900, true);
                 }
-            } catch(e) {}
+            } catch (e) {}
 
             if (window.location.hash === '#digital' || window.location.search.includes('digital')) {
                 setTimeout(() => openDigitalModal(), 350);

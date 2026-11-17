@@ -1049,7 +1049,7 @@
                     Reemplazá Linktree por una LandingPage interactiva propia, sin mensualidades, con tu dominio y diseño 100% a medida.
                 </p>
                 <div class="digital-actions-row" style="justify-content: flex-end;">
-                    <a href="clientes.html" class="digital-link-cta" id="t_opt1_btn" onclick="markInternalNav(); playClickSound();">
+                    <a href="clientes" class="digital-link-cta" id="t_opt1_btn" onclick="markInternalNav(); playClickSound();">
                         <span>Ver ejemplos de empresas variadas</span>
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:13px; height:13px;"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                     </a>
@@ -1574,8 +1574,8 @@
             if (!link) return;
             const href = (link.getAttribute('href') || '').toLowerCase();
             const isInternal = href === './' || href === '../' || href === 'index.html' ||
-                               href === 'web.html' || href === 'clientes.html' ||
-                               href.includes('clientes.html') || href.includes('web.html') ||
+                               href === 'web.html' || href === 'clientes' ||
+                               href.includes('clientes') || href.includes('web.html') ||
                                (href.includes('1111grafica.github.io/link') && link.target !== '_blank');
             if (isInternal) {
                 markInternalNav();
@@ -1699,7 +1699,7 @@
         const WEB_CACHE_KEY = '1111_cached_web_v1';
         let activeLang = 'es';
         let esCurrency = 'ars';
-        let opt1CustomUrl = 'clientes.html';
+        let opt1CustomUrl = 'clientes';
 
         function applyCachedWebData() {
             try {
